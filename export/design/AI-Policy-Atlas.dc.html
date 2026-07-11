@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet data-dc-atomics>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+/* ============ resets ============ */
+*{box-sizing:border-box}
+body{margin:0;background:#d9d5cc;font-family:'Public Sans',system-ui,sans-serif;color:#23211c;-webkit-font-smoothing:antialiased}
+a{color:#1e3a8a;text-decoration:none}a:hover{text-decoration:underline}
+button{font-family:inherit}
+h1,h2,h3,h4{margin:0}
+/* ============ app frame (desktop-first ~1440) ============ */
+.app{width:1440px;margin:22px auto;background:#f7f5ef;border:1px solid #cdc7b8;border-radius:12px;overflow:hidden;box-shadow:0 10px 40px -12px rgba(60,50,30,.3)}
+/* fixture banner — first-class, persistent, unmissable */
+.fixbar{display:flex;align-items:center;gap:9px;padding:6px 20px;background:repeating-linear-gradient(135deg,#fef3c7,#fef3c7 12px,#fde9a8 12px,#fde9a8 24px);border-bottom:1px solid #d9b64a;font:700 10.5px 'IBM Plex Mono',monospace;letter-spacing:.1em;color:#78500a}
+.fixbar::before{content:"";width:9px;height:9px;background:#b8860b;transform:rotate(45deg);flex:none}
+.fixbar .n{font-weight:500;letter-spacing:.01em;color:#8a5a0a;text-transform:none}
+/* disclaimer bar */
+.disc{padding:5px 20px;background:#20242b;color:#c3cbd6;font:500 10.5px/1.4 'Public Sans',sans-serif}
+.disc b{color:#eef1f5}
+/* header */
+.hdr{display:flex;align-items:center;gap:18px;padding:12px 20px;background:#fdfcf9;border-bottom:1px solid #e3ddd0}
+.brand{display:flex;align-items:baseline;gap:8px}
+.brand .mk{font:700 15px 'Public Sans';letter-spacing:.01em;color:#23211c}
+.brand .sub{font:500 10px 'IBM Plex Mono';color:#a08b63;letter-spacing:.04em}
+.legend{margin-left:auto;display:flex;gap:8px;align-items:center;font-size:11px;color:#6b6350}
+.legend .lbl{font:600 9.5px 'IBM Plex Mono';color:#a08b63;letter-spacing:.05em;text-transform:uppercase}
+/* nav */
+.nav{display:flex;gap:2px;padding:0 14px;background:#efece3;border-bottom:1px solid #e3ddd0;overflow-x:auto}
+.nav button{border:0;background:none;padding:10px 13px;font:600 12px 'Public Sans';color:#6b6350;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}
+.nav button:hover{color:#23211c}
+.nav button.on{color:#23211c;border-bottom-color:#334155}
+.nav .sep{width:1px;background:#d8d2c4;margin:7px 6px;flex:none}
+/* screen area */
+.stage{height:760px;overflow:auto;background:#f7f5ef}
+.screen{display:none}
+.screen.on{display:block}
+.pad{padding:22px 30px}
+/* footer */
+.ftr{display:flex;gap:16px;align-items:center;padding:9px 20px;background:#efece3;border-top:1px solid #e3ddd0;font:500 10.5px 'IBM Plex Mono';color:#8a7c5f;flex-wrap:wrap}
+.ftr a{color:#6b6350}
+/* ============ typography helpers ============ */
+.eyebrow{font:600 10px 'IBM Plex Mono';color:#a08b63;letter-spacing:.08em;text-transform:uppercase}
+.serif{font-family:'Source Serif 4',Georgia,serif}
+.h-screen{font-family:'Source Serif 4',serif;font-weight:600;font-size:24px;color:#23211c;letter-spacing:-.01em}
+.mono{font-family:'IBM Plex Mono',monospace}
+.muted{color:#6b6350}
+.tiny{font-size:11px}
+/* ============ EPISTEMIC (ink/blue · violet · teal) ============ */
+.ep{display:inline-flex;align-items:center;gap:5px;font-weight:600;font-size:10.5px;line-height:1;padding:3px 7px;border-radius:4px;border:1px solid;white-space:nowrap;vertical-align:1px}
+.ep-fact{color:#1e3a8a;border-color:rgba(30,58,138,.28);background:rgba(30,58,138,.07)}
+.ep-inf{color:#6d28d9;border-color:rgba(109,40,217,.28);background:rgba(109,40,217,.07)}
+.ep-rec{color:#0f766e;border-color:rgba(15,118,110,.28);background:rgba(15,118,110,.07)}
+.gl{font-weight:800;font-size:11px}
+/* epistemic block accents */
+.epb{border:1px solid #e3ddd0;border-radius:8px;padding:13px 15px;background:#fdfcf9}
+.epb-fact{border-left:3px solid #1e3a8a}
+.epb-inf{border-left:3px solid #6d28d9}
+.epb-rec{border-left:3px solid #0f766e}
+/* ============ LIFECYCLE (neutral→amber→green ramp) ============ */
+.lc{display:inline-flex;align-items:center;gap:5px;font-weight:600;font-size:10.5px;padding:3px 8px;border-radius:20px;white-space:nowrap}
+.lc-dot{width:7px;height:7px;border-radius:50%;display:inline-block;flex:none}
+.lc-prop{background:#eef1f4;color:#475569}.lc-prop .lc-dot{background:#64748b}
+.lc-adopt{background:#fdf1dd;color:#92600b}.lc-adopt .lc-dot{background:#c17d0a}
+.lc-partial{background:#eef6e6;color:#4d6b1e}.lc-partial .lc-dot{background:#6f9c2e}
+.lc-full{background:#e3f2e4;color:#1f6b34}.lc-full .lc-dot{background:#1f8a43}
+.lc-hist{background:#f1f1f2;color:#71717a}.lc-hist .lc-dot{background:#a1a1aa}
+.lc-hist .lct{text-decoration:line-through}
+/* ============ BINDINGNESS (shape/weight, NOT hue) ============ */
+.bind{display:inline-flex;align-items:center;gap:5px;font-weight:600;font-size:10.5px;padding:3px 8px;border-radius:4px;white-space:nowrap}
+.bind-b{background:#20242b;color:#fff}
+.bind-c{background:#fff;color:#374151;border:1px dashed #6b7280}
+.bind-n{background:#f4f4f5;color:#6b7280;border:1px solid #d4d4d8}
+/* obligation type */
+.obl{font-weight:600;font-size:10px;padding:2px 6px;border-radius:3px;background:#eef2ff;color:#3730a3;text-transform:uppercase;letter-spacing:.03em;white-space:nowrap}
+.obl.prohib{background:#fbe9e7;color:#9a2f28}.obl.right{background:#e8f3ee;color:#1f6b47}.obl.def{background:#f0eef6;color:#5b3a99}.obl.enf{background:#fdf1dd;color:#92600b}.obl.scope{background:#eef1f4;color:#475569}
+/* instrument type chip */
+.itype{font-weight:600;font-size:10px;padding:2px 7px;border-radius:4px;background:#efece3;color:#5a5245;border:1px solid #ddd6c7;white-space:nowrap}
+/* approach tag */
+.appr{font-weight:500;font-size:10px;padding:2px 7px;border-radius:20px;background:#f2f0ea;color:#6b6350;border:1px solid #e3ddd0}
+/* ============ CONFIDENCE (fill density, not hue) ============ */
+.conf{display:inline-flex;align-items:center;gap:4px;font-weight:600;font-size:10px;padding:2px 7px;border-radius:4px;border:1px solid #cbd0d6;color:#3f3f46;white-space:nowrap}
+.conf i{width:22px;height:6px;border-radius:2px;display:inline-block;background:linear-gradient(90deg,#3f3f46 var(--f),#e4e4e7 var(--f))}
+/* ============ SOURCE TIER ============ */
+.tier-s{font-weight:700;font-size:9.5px;padding:2px 5px;border-radius:3px;letter-spacing:.03em;white-space:nowrap}
+.t1{background:#0f172a;color:#fff}.t2{background:#e2e8f0;color:#334155}.t3{background:#fff;color:#64748b;border:1px solid #cbd5e1}
+/* ============ ADRS TIER (green→yellow→orange→red) ============ */
+.tierbadge{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:12px;padding:4px 11px;border-radius:6px;white-space:nowrap}
+.tier-low{background:#e3f2e4;color:#1f6b34}
+.tier-mod{background:#fbf0cf;color:#8a6d0a}
+.tier-high{background:#fbe4d2;color:#b4530f}
+.tier-crit{background:#f8d7d2;color:#a52a1f}
+/* review / staleness */
+.rev{display:inline-flex;align-items:center;gap:5px;font:600 10.5px 'Public Sans';color:#1f6b34;white-space:nowrap}
+.rev::before{content:"✓";font-weight:800}
+.stale{display:inline-flex;align-items:center;gap:4px;font:600 10.5px 'Public Sans';color:#92600b;white-space:nowrap}
+.stale::before{content:"⚠"}
+.draft{font:600 10px 'IBM Plex Mono';color:#8a7c5f}
+/* capability / risk tags */
+.captag{font:600 10px 'IBM Plex Mono';padding:2px 6px;border-radius:4px;background:#eef2ff;color:#3730a3;white-space:nowrap}
+.risktag{font:600 10px 'IBM Plex Mono';padding:2px 6px;border-radius:4px;background:#fbe9e7;color:#9a2f28;white-space:nowrap}
+.hypo{font:600 10px 'IBM Plex Mono';background:#fef3c7;color:#78500a;padding:3px 8px;border-radius:5px;letter-spacing:.05em;white-space:nowrap}
+/* mapping strength / relation */
+.mstr{font:600 9.5px 'IBM Plex Mono';padding:3px 6px;border-radius:4px;white-space:nowrap}
+.mstr.direct{background:#e8f3ee;color:#1f6b47}.mstr.derived{background:#eef2ff;color:#3730a3}.mstr.prud{background:#f0eef6;color:#5b3a99}
+.mrel{font:600 9.5px 'IBM Plex Mono';background:#eef1f4;color:#475569;padding:3px 6px;border-radius:4px;white-space:nowrap}
+/* ============ cards ============ */
+.card{background:#fdfcf9;border:1px solid #e3ddd0;border-radius:10px}
+.card-p{padding:15px 17px}
+/* source citation block */
+.cite{background:#f1f5f9;border:1px solid #e2e8f0;border-left:3px solid #1e3a8a;border-radius:7px;padding:11px 13px;font-size:11.5px;display:flex;gap:10px;align-items:flex-start}
+.cite .meta{font:500 10.5px 'IBM Plex Mono';color:#64748b}
+/* ============ tables ============ */
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.tbl th{text-align:left;font-weight:700;font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;color:#6b6350;padding:8px 10px;border-bottom:2px solid #e3ddd0;white-space:nowrap;background:#f4f1e8;position:sticky;top:0}
+.tbl th.sortable{cursor:pointer;user-select:none}
+.tbl th.sortable:hover{color:#23211c}
+.tbl th .arr{opacity:.4;font-size:9px}
+.tbl th[aria-sort] .arr{opacity:1}
+.tbl td{padding:9px 10px;border-bottom:1px solid #ededed;vertical-align:top}
+.tbl tbody tr:hover{background:#faf8f2}
+.tbl .num{text-align:right;font-family:'IBM Plex Mono',monospace}
+.tbl .rowlink{cursor:pointer}
+.tblwrap{border:1px solid #e3ddd0;border-radius:8px;overflow:auto}
+/* ============ filter bar ============ */
+.filters{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+.fchip{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border:1px solid #d8d2c4;border-radius:7px;background:#fdfcf9;cursor:pointer;font:500 11.5px 'Public Sans';color:#5a5245}
+.fchip.on{border-color:#334155;background:#eef1f4;color:#23211c}
+.fchip .x{opacity:.5;font-size:10px}
+.fcount{font:600 11px 'IBM Plex Mono';color:#8a7c5f;margin-left:4px}
+/* ============ ADRS calculator controls ============ */
+.seg{display:inline-flex;border:1px solid #cfcabb;border-radius:7px;overflow:hidden}
+.seg button{border:0;background:#fdfcf9;padding:6px 0;width:34px;font:600 12px 'IBM Plex Mono';color:#6b6350;cursor:pointer;border-right:1px solid #e3ddd0}
+.seg button:last-child{border-right:0}
+.seg button.on{background:#20242b;color:#fff}
+.seg button:focus-visible{outline:2px solid #1e3a8a;outline-offset:-2px}
+.mtog,.jtog{display:inline-flex;align-items:center;gap:8px;padding:8px 11px;border:1px solid #d8d2c4;border-radius:7px;background:#fdfcf9;cursor:pointer;font:500 11.5px 'Public Sans';color:#4a4335;text-align:left;width:100%}
+.mtog .box,.jtog .box{width:15px;height:15px;border-radius:4px;border:1.5px solid #a99f88;flex:none;position:relative}
+.mtog.on,.jtog.on{border-color:#20242b;background:#f4f1e8}
+.mtog.on .box,.jtog.on .box{background:#20242b;border-color:#20242b}
+.mtog.on .box::after,.jtog.on .box::after{content:"✓";color:#fff;font-size:10px;position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.mtog:focus-visible,.jtog:focus-visible{outline:2px solid #1e3a8a;outline-offset:1px}
+/* btn */
+.btn{border:1px solid #c9bfa6;background:#fdfcf9;border-radius:7px;padding:8px 13px;font:600 12px 'Public Sans';color:#4a4335;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{background:#f2efe7}
+.btn-p{border:0;background:#0f766e;color:#fff}.btn-p:hover{background:#0c5f59}
+.btn-d{border:0;background:#20242b;color:#fff}.btn-d:hover{background:#333a45}
+/* pipeline strip (1a heritage) */
+.strip{display:flex;background:#20242b;color:#dbe2ea;font:500 11px 'IBM Plex Mono';border-radius:8px;overflow:hidden}
+.strip .cell{padding:9px 15px;border-right:1px solid #333a45}
+.strip .cell .k{color:#8b95a3}
+.strip .cell:last-child{border-right:0}
+/* callout */
+.note{border-radius:8px;padding:10px 13px;font-size:11.5px;line-height:1.5;display:flex;gap:9px;align-items:flex-start}
+.note-inf{background:#f8fafc;border:1px solid #e2e8f0;color:#475569}
+.note-open{background:#fbf3dd;border:1px solid #e9d9a8;color:#6b5518}
+.note-caveat{background:#20242b;color:#c3cbd6;font-family:'IBM Plex Mono';font-size:10.5px}
+/* doc prose */
+.prose{max-width:70ch;font-size:14px;line-height:1.6;color:#2b2820}
+.prose p{margin:0 0 12px}
+.prose h3{font-family:'Source Serif 4',serif;font-size:16px;margin:20px 0 6px}
+.prose code{font:500 12px 'IBM Plex Mono';background:#efece3;padding:1px 5px;border-radius:4px;color:#5a4a1a}
+.sw{display:inline-block;width:13px;height:13px;border-radius:3px;vertical-align:-2px;margin-right:4px;border:1px solid rgba(0,0,0,.12)}
+/* three-pane reader */
+.reader{display:flex;min-height:0}
+.reader .outline{width:196px;flex:none;border-right:1px solid #e3ddd0;padding:14px;overflow:auto}
+.reader .col{flex:1;min-width:0;overflow:auto;padding:22px 32px;background:#fdfcf9}
+.reader .evi{width:296px;flex:none;border-left:1px solid #e3ddd0;background:#f4f1e8;overflow:auto;padding:16px}
+.olink{display:block;font-size:12px;padding:5px 7px;border-radius:5px;color:#5a5245}
+.olink.on{background:#efe9db;color:#23211c;font-weight:600}
+.olink:hover{background:#f0ece0;text-decoration:none}
+sup.fn{color:#1e3a8a;font-weight:700;cursor:pointer}
+/* skeleton */
+.sk{background:linear-gradient(90deg,#eceada 25%,#f4f2ea 50%,#eceada 75%);background-size:200% 100%;border-radius:6px}
+@media (prefers-reduced-motion:no-preference){.sk{animation:shim 1.3s infinite}}
+@keyframes shim{to{background-position:-200% 0}}
+</style>
+</helmet>
+
+<div class="app" role="application" aria-label="AI Policy Atlas">
+  <div class="fixbar" role="status">FIXTURE DATA — ILLUSTRATIVE ONLY<span class="n">· all instruments, cites, dates &amp; scores are fictional placeholders for design review — not verified policy facts</span></div>
+  <div class="disc"><b>Not legal advice.</b> A governance-intelligence aid; nothing here is a compliance determination. No affiliation with any company. Content version <span class="mono">v0.fixtures</span>.</div>
+
+  <header class="hdr">
+    <div class="brand"><span class="mk">AI Policy Atlas</span><span class="sub">Agentic AI Governance Intelligence</span></div>
+    <div class="legend" role="note" aria-label="Epistemic legend">
+      <span class="lbl">Legend</span>
+      <span class="ep ep-fact"><span class="gl">■</span>Fact</span>
+      <span class="ep ep-inf"><span class="gl">▲</span>Inference</span>
+      <span class="ep ep-rec"><span class="gl">●</span>Recommendation</span>
+    </div>
+  </header>
+
+  <nav class="nav" role="tablist" aria-label="Primary">
+    <button data-go="dash" class="on" role="tab">Dashboard</button>
+    <button data-go="tracker" role="tab">Policy Tracker</button>
+    <button data-go="instrument" role="tab">Instrument</button>
+    <button data-go="provision" role="tab">Provision · Evidence</button>
+    <button data-go="compare" role="tab">Compare</button>
+    <span class="sep"></span>
+    <button data-go="scenario" role="tab">Scenario</button>
+    <button data-go="calc" role="tab">ADRS Calculator</button>
+    <button data-go="mapper" role="tab">Control Mapper</button>
+    <span class="sep"></span>
+    <button data-go="brief" role="tab">Exec Brief</button>
+    <button data-go="method" role="tab">Methodology</button>
+    <button data-go="changelog" role="tab">Changelog</button>
+    <span class="sep"></span>
+    <button data-go="system" role="tab">Design System</button>
+  </nav>
+
+  <div class="stage" id="stage">
+
+  <!-- ============================= 1 · EXECUTIVE DASHBOARD ============================= -->
+  <section class="screen on" data-screen="dash" data-screen-label="Executive dashboard" role="tabpanel">
+    <div class="pad">
+      <div class="eyebrow">Executive dashboard · as_of 2026-07-10</div>
+      <h1 class="h-screen" style="margin:4px 0 3px">Agentic-AI regulatory exposure at a glance</h1>
+      <p class="serif muted" style="max-width:74ch;font-size:14px;line-height:1.55;margin:0 0 16px">Four jurisdictions, three hypothetical agent deployments, one epistemic discipline. Every figure below traces to a primary source and is typed <span class="ep ep-fact"><span class="gl">■</span></span> fact, <span class="ep ep-inf"><span class="gl">▲</span></span> inference, or <span class="ep ep-rec"><span class="gl">●</span></span> recommendation. Nothing here is a compliance determination.</p>
+
+      <!-- 1a-heritage status strip: monitoring, not KPI cards -->
+      <div class="strip" style="margin-bottom:8px" role="group" aria-label="Corpus status">
+        <div class="cell"><span class="k">TRACKED INSTRUMENTS</span> 42</div>
+        <div class="cell"><span class="k">JURISDICTIONS</span> US · EU · SG · CN</div>
+        <div class="cell"><span class="k">STATUS CHANGES · 30d</span> 3</div>
+        <div class="cell"><span class="k">VERIFICATION STALE &gt;180d</span> <span style="color:#f0b866">2</span></div>
+        <div class="cell" style="margin-left:auto"><span class="k">CORPUS VERIFIED</span> 2026-06-30</div>
+      </div>
+      <div class="note note-inf" style="margin-bottom:18px"><span class="ep ep-inf"><span class="gl">▲</span></span><div>These counts describe the corpus we maintain, not a risk verdict. "Stale" flags instruments whose <code style="font-family:'IBM Plex Mono'">last_verified</code> is &gt; 180 days — a data-freshness signal, not a policy change.</div></div>
+
+      <div style="display:grid;grid-template-columns:1.15fr .85fr;gap:18px">
+        <!-- scenarios: worst-of-four rollup -->
+        <div>
+          <div class="eyebrow" style="margin-bottom:8px">Hypothetical deployments — worst-of-four tier</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <div class="card card-p rowlink" data-go="scenario" style="cursor:pointer;display:flex;gap:13px;align-items:flex-start">
+              <div style="flex:1"><div style="display:flex;gap:8px;align-items:center"><span class="hypo">HYPOTHETICAL</span><b class="serif" style="font-size:15px">Aria — customer-support agent</b></div>
+              <p class="muted" style="font-size:12px;margin:6px 0 8px;line-height:1.5">Sends replies, executes refunds ≤ $100 autonomously; touches sensitive data, possible minors.</p>
+              <div style="display:flex;gap:4px;flex-wrap:wrap"><span class="captag">C1·2</span><span class="captag">C3·3</span><span class="captag">C5·2</span><span class="captag">C6·3</span></div></div>
+              <div style="text-align:right"><span class="tierbadge tier-high">High</span><div class="mono muted" style="font-size:10px;margin-top:5px">varies by jurisdiction<br>EU/CN 56.4 · US/SG 51.7</div></div>
+            </div>
+            <div class="card card-p rowlink" data-go="scenario" style="cursor:pointer;display:flex;gap:13px;align-items:flex-start">
+              <div style="flex:1"><div style="display:flex;gap:8px;align-items:center"><span class="hypo">HYPOTHETICAL</span><b class="serif" style="font-size:15px">Sentinel — autonomous SOC responder</b></div>
+              <p class="muted" style="font-size:12px;margin:6px 0 8px;line-height:1.5">Executes containment actions on production infrastructure with high autonomy.</p>
+              <div style="display:flex;gap:4px;flex-wrap:wrap"><span class="captag">C2·3</span><span class="captag">C4·3</span><span class="captag">C5·3</span><span class="captag">C7·3</span></div></div>
+              <div style="text-align:right"><span class="tierbadge tier-crit">Critical</span><div class="mono muted" style="font-size:10px;margin-top:5px">varies by jurisdiction<br>illustrative</div></div>
+            </div>
+            <div class="card card-p rowlink" data-go="scenario" style="cursor:pointer;display:flex;gap:13px;align-items:flex-start">
+              <div style="flex:1"><div style="display:flex;gap:8px;align-items:center"><span class="hypo">HYPOTHETICAL</span><b class="serif" style="font-size:15px">Mira — marketing content agent</b></div>
+              <p class="muted" style="font-size:12px;margin:6px 0 8px;line-height:1.5">Generates &amp; publishes public content at scale across markets.</p>
+              <div style="display:flex;gap:4px;flex-wrap:wrap"><span class="captag">C1·4</span><span class="captag">C3·3</span><span class="captag">C6·3</span><span class="captag">C9·3</span></div></div>
+              <div style="text-align:right"><span class="tierbadge tier-high">High</span><div class="mono muted" style="font-size:10px;margin-top:5px">varies by jurisdiction<br>EU &amp; CN High — diff. reasons</div></div>
+            </div>
+          </div>
+          <div class="note note-inf" style="margin-top:10px"><span class="ep ep-inf"><span class="gl">▲</span></span><div>Rolled-up badge = <b>worst of four</b> jurisdictions (risk-conservative, MD-5). Per-jurisdiction scores are the authoritative detail — open a scenario to see them.</div></div>
+        </div>
+
+        <!-- jurisdiction snapshot + recent changes -->
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div>
+            <div class="eyebrow" style="margin-bottom:8px">Jurisdictions</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">
+              <div class="card card-p rowlink" data-go="compare" style="cursor:pointer"><b>🇪🇺 EU</b> <span class="bind bind-b" style="font-size:9px">Binding</span><div class="mono muted" style="font-size:10.5px;margin-top:5px">14 instruments · 5 in force</div></div>
+              <div class="card card-p rowlink" data-go="compare" style="cursor:pointer"><b>🇺🇸 US</b> <span class="bind bind-c" style="font-size:9px">Mixed</span><div class="mono muted" style="font-size:10.5px;margin-top:5px">11 instruments · sectoral</div></div>
+              <div class="card card-p rowlink" data-go="compare" style="cursor:pointer"><b>🇸🇬 SG</b> <span class="bind bind-n" style="font-size:9px">Non-bind</span><div class="mono muted" style="font-size:10.5px;margin-top:5px">7 instruments · advisory</div></div>
+              <div class="card card-p rowlink" data-go="compare" style="cursor:pointer"><b>🇨🇳 CN</b> <span class="bind bind-b" style="font-size:9px">Binding</span><div class="mono muted" style="font-size:10.5px;margin-top:5px">10 instruments · 6 in force</div></div>
+            </div>
+          </div>
+          <div>
+            <div class="eyebrow" style="margin-bottom:8px">Recent status changes <span class="muted" style="text-transform:none;letter-spacing:0">→ <a data-go="changelog" style="cursor:pointer">full changelog</a></span></div>
+            <div class="card" style="overflow:hidden">
+              <div style="padding:9px 13px;border-bottom:1px solid #ededed;font-size:12px"><span class="mono muted">2026-06-28</span> · EU AI Act <span class="lc lc-adopt" style="font-size:9px"><span class="lc-dot"></span>→ partial</span><div class="muted" style="font-size:11px;margin-top:2px">adopted_not_yet_applicable → in_force_partially_applicable · A. Rivera</div></div>
+              <div style="padding:9px 13px;border-bottom:1px solid #ededed;font-size:12px"><span class="mono muted">2026-06-15</span> · CN Deep Synthesis <span class="lc lc-full" style="font-size:9px"><span class="lc-dot"></span>fully applicable</span><div class="muted" style="font-size:11px;margin-top:2px">verified re-check · L. Chen</div></div>
+              <div style="padding:9px 13px;font-size:12px"><span class="mono muted">2026-06-02</span> · US draft guidance <span class="lc lc-prop" style="font-size:9px"><span class="lc-dot"></span>proposed</span><div class="muted" style="font-size:11px;margin-top:2px">new instrument added · A. Rivera</div></div>
+            </div>
+          </div>
+          <button class="btn btn-d" data-go="brief" style="align-self:flex-start">Open executive brief →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= 2 · POLICY TRACKER ============================= -->
+  <section class="screen" data-screen="tracker" data-screen-label="Policy tracker" role="tabpanel">
+    <div class="pad">
+      <div class="eyebrow">Policy tracker</div>
+      <h1 class="h-screen" style="margin:4px 0 3px">Instrument corpus</h1>
+      <p class="serif muted" style="font-size:13.5px;margin:0 0 16px">Filterable, sortable list of tracked instruments. Bindingness (Axis B) and lifecycle (Axis C) are independent — never inferred from one another.</p>
+
+      <div class="filters" id="trk-filters">
+        <span class="eyebrow" style="align-self:center">Jurisdiction</span>
+        <button class="fchip" data-filter="j" data-val="EU">EU</button>
+        <button class="fchip" data-filter="j" data-val="US">US</button>
+        <button class="fchip" data-filter="j" data-val="SG">SG</button>
+        <button class="fchip" data-filter="j" data-val="CN">CN</button>
+        <span style="width:1px;height:20px;background:#d8d2c4;margin:0 4px"></span>
+        <span class="eyebrow" style="align-self:center">Bindingness</span>
+        <button class="fchip" data-filter="b" data-val="binding">Binding</button>
+        <button class="fchip" data-filter="b" data-val="cond">Conditional</button>
+        <button class="fchip" data-filter="b" data-val="non">Non-binding</button>
+        <button class="btn" id="trk-clear" style="margin-left:auto;padding:5px 10px">Clear all</button>
+        <span class="fcount" id="trk-count">6 of 6</span>
+      </div>
+
+      <div class="tblwrap" style="max-height:560px">
+        <table class="tbl" id="trk-tbl">
+          <thead><tr>
+            <th class="sortable" data-sort="title">Instrument <span class="arr">▲▼</span></th>
+            <th class="sortable" data-sort="j">Juris. <span class="arr">▲▼</span></th>
+            <th>Type</th>
+            <th>Bindingness</th>
+            <th class="sortable" data-sort="lc">Lifecycle + date <span class="arr">▲▼</span></th>
+            <th class="sortable" data-sort="ver">Last verified <span class="arr">▲▼</span></th>
+          </tr></thead>
+          <tbody id="trk-body"><!-- rows injected --></tbody>
+        </table>
+      </div>
+      <div id="trk-empty" style="display:none;padding:30px;text-align:center" class="muted">
+        <b>No records match these filters.</b><div class="tiny" style="margin-top:4px">Adjust or <a id="trk-clear2" style="cursor:pointer">clear filters</a>.</div>
+      </div>
+      <div class="note note-inf" style="margin-top:12px"><span class="ep ep-inf"><span class="gl">▲</span></span><div>No full-text primary-source search (out of scope). This is an in-list filter over already-loaded records. Rows link to the instrument detail; "last verified" &gt; 180 days shows a staleness marker.</div></div>
+    </div>
+  </section>
+
+  <!-- ============================= 3 · POLICY INSTRUMENT DETAIL ============================= -->
+  <section class="screen" data-screen="instrument" data-screen-label="Policy instrument detail" role="tabpanel">
+    <div class="pad">
+      <div class="eyebrow">Instrument detail · EUR-Lex · CELEX 32024R1689</div>
+      <h1 class="h-screen" style="margin:4px 0 1px">EU Artificial Intelligence Act</h1>
+      <div class="serif muted" lang="de" style="font-size:14px">Verordnung (EU) 2024/1689 — Gesetz über künstliche Intelligenz</div>
+
+      <!-- classification chips -->
+      <div style="display:flex;gap:7px;flex-wrap:wrap;margin:12px 0 14px;align-items:center">
+        <span class="itype">Regulation</span>
+        <span class="bind bind-b">Bindingness: Binding</span>
+        <span class="lc lc-partial"><span class="lc-dot"></span><span class="lct">In force — partially applicable</span></span>
+        <span class="mono muted" style="font-size:10.5px">attained 2025-08-02</span>
+        <span class="appr">amended 2026-02-11</span>
+        <span class="rev">Human-reviewed 2026-07-02 · A. Rivera</span>
+      </div>
+
+      <!-- source citation block + dates -->
+      <div class="cite" style="margin-bottom:8px">
+        <span class="tier-s t1">TIER 1</span>
+        <div style="flex:1"><b>EUR-Lex — Official Journal of the EU</b> — <i>Regulation (EU) 2024/1689</i>, CELEX 32024R1689.
+        <div class="meta" style="margin-top:3px">publication <b>2024-07-12</b> · effective (phased) <b>2025-02 / 2025-08 / 2026-08 / 2027-08</b> · last verified <b>2026-06-30</b> · accessed 2026-06-30</div>
+        <div style="margin-top:5px;display:flex;gap:12px"><a href="#" target="_blank" rel="noopener">↗ Official source</a><a href="#" target="_blank" rel="noopener">🗄 Archived copy (2026-06-30)</a></div></div>
+      </div>
+      <div class="note note-caveat" style="margin-bottom:16px">Placeholder citation — dummy identifiers for design review. Bindingness (Axis B = <b>binding</b>) is independent of lifecycle (Axis C = <b>in force, partial</b>); neither implies the other.</div>
+
+      <!-- epistemic summary + provision table -->
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
+        <h2 class="eyebrow" style="font-size:11px">Agentic-relevant provisions</h2>
+        <span class="mono muted" style="font-size:10.5px;margin-left:auto">Page epistemic summary: <b style="color:#1e3a8a">12 ■ facts</b> · <b style="color:#6d28d9">5 ▲ inferences</b> · <b style="color:#0f766e">3 ● recommendations</b></span>
+      </div>
+      <div class="tblwrap">
+        <table class="tbl">
+          <thead><tr><th style="width:74px">Pin cite</th><th>Obligation type</th><th>Paraphrase snippet</th><th>Capabilities</th><th>Risks</th><th style="width:96px">Confidence</th></tr></thead>
+          <tbody>
+            <tr class="rowlink" data-go="provision"><td class="mono"><b>Art. 14</b></td><td><span class="obl">Obligation</span></td><td>Human oversight of high-risk AI systems <span class="muted">· illustrative</span></td><td><span class="captag">C5</span> <span class="captag">C7</span></td><td><span class="risktag">R6</span></td><td><span class="conf"><i style="--f:100%"></i>High</span></td></tr>
+            <tr class="rowlink" data-go="provision"><td class="mono"><b>Art. 50</b></td><td><span class="obl">Obligation</span></td><td>Transparency &amp; disclosure of AI interaction / synthetic content <span class="muted">· illustrative</span></td><td><span class="captag">C1</span> <span class="captag">C6</span></td><td><span class="risktag">R4</span></td><td><span class="conf"><i style="--f:100%"></i>High</span></td></tr>
+            <tr class="rowlink" data-go="provision"><td class="mono"><b>Art. 5</b></td><td><span class="obl prohib">Prohibition</span></td><td>Prohibited AI practices <span class="muted">· illustrative</span></td><td><span class="captag">C8</span></td><td><span class="risktag">R3</span></td><td><span class="conf"><i style="--f:100%"></i>High</span></td></tr>
+            <tr class="rowlink" data-go="provision"><td class="mono"><b>Art. 52</b></td><td><span class="obl def">Definition</span></td><td>GPAI model transparency obligations <span class="muted">· illustrative</span></td><td><span class="captag">C1</span></td><td><span class="risktag">R12</span></td><td><span class="conf"><i style="--f:55%"></i>Medium</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px">
+        <div>
+          <h3 class="eyebrow" style="margin-bottom:7px">Supersession</h3>
+          <div class="card card-p" style="font-size:12.5px"><div class="muted">Supersedes ← <b>none</b></div><div class="muted" style="margin-top:3px">Superseded by → <b>none</b></div><div class="mono muted" style="font-size:10.5px;margin-top:6px">amendment is an event, not a status — shown on the timeline, no status color</div></div>
+        </div>
+        <div>
+          <h3 class="eyebrow" style="margin-bottom:7px">Change history</h3>
+          <div class="card" style="overflow:hidden;font-size:12px">
+            <div style="padding:8px 12px;border-bottom:1px solid #ededed"><span class="mono muted">2026-06-28</span> lifecycle → in force, partial <span class="muted">· A. Rivera</span></div>
+            <div style="padding:8px 12px;border-bottom:1px solid #ededed"><span class="mono muted">2026-02-11</span> amended (event marker) <span class="muted">· A. Rivera</span></div>
+            <div style="padding:8px 12px"><span class="mono muted">2024-07-12</span> published in OJEU</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="note note-open" style="margin-top:14px"><div><b>Analyst note (Tier-3, orientation only):</b> secondary commentary suggests phased applicability creates a transitional gap for GPAI providers. Not cited as fact; see bibliography.</div></div>
+    </div>
+  </section>
+
+  <!-- ============================= 4 · PROVISION / SOURCE EVIDENCE PANEL ============================= -->
+  <section class="screen" data-screen="provision" data-screen-label="Provision and source evidence panel" role="tabpanel">
+    <div class="reader" style="height:760px">
+      <!-- outline -->
+      <nav class="outline" aria-label="Instrument outline">
+        <div class="eyebrow">Instrument</div>
+        <div class="serif" style="font-weight:600;font-size:13px;margin:3px 0 1px">EU AI Act</div>
+        <div class="mono muted" style="font-size:10px">Reg (EU) 2024/1689</div>
+        <div style="margin:12px 0;border-top:1px solid #e3ddd0"></div>
+        <div class="eyebrow" style="margin-bottom:5px">Provisions</div>
+        <a class="olink">Art. 5 · Prohibited practices</a>
+        <a class="olink on">Art. 14 · Human oversight</a>
+        <a class="olink">Art. 50 · Transparency</a>
+        <a class="olink">Art. 52 · GPAI transparency</a>
+        <div style="margin:12px 0;border-top:1px solid #e3ddd0"></div>
+        <div class="eyebrow" style="margin-bottom:5px">Lifecycle</div>
+        <span class="lc lc-partial"><span class="lc-dot"></span><span class="lct">In force — partial</span></span>
+        <div class="mono muted" style="font-size:10px;margin-top:6px">last verified 2026-06-30</div>
+      </nav>
+
+      <!-- reading column: typed mapping chain (the star element) -->
+      <article class="col">
+        <div class="mono" style="font-size:11px;color:#a08b63">EUR-LEX · CELEX 32024R1689 · ARTICLE 14</div>
+        <h1 class="serif" style="font-weight:600;font-size:26px;margin:6px 0 3px">Human oversight</h1>
+        <div style="display:flex;gap:7px;flex-wrap:wrap;margin:10px 0 6px;align-items:center">
+          <span class="bind bind-b">Binding</span><span class="obl">Obligation</span><span class="conf"><i style="--f:100%"></i>Confidence: High</span>
+        </div>
+
+        <!-- verbatim quote block (visually distinct) -->
+        <div style="background:#f1f5f9;border-left:3px solid #1e3a8a;border-radius:0 7px 7px 0;padding:12px 15px;margin:12px 0">
+          <div class="eyebrow" style="color:#1e3a8a;margin-bottom:5px">Verbatim quote <span class="tier-s t1" style="margin-left:4px">TIER 1</span> <sup class="fn" data-evi="1">[1]</sup></div>
+          <p class="serif" style="font-size:15px;line-height:1.55;font-style:italic;margin:0;color:#2b2820">"High-risk AI systems shall be designed and developed … so that they can be effectively overseen by natural persons during the period in which they are in use."</p>
+          <div class="mono muted" style="font-size:10px;margin-top:6px">≤50-word verbatim excerpt · illustrative paraphrase for design review</div>
+        </div>
+
+        <!-- FACT -->
+        <div class="epb epb-fact" style="margin:10px 0">
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:6px"><span class="ep ep-fact"><span class="gl">■</span>Fact</span><span class="conf"><i style="--f:100%"></i>High</span><span class="tier-s t1" style="margin-left:auto">TIER 1</span></div>
+          <div class="serif" style="font-size:14.5px;line-height:1.5">Article 14 requires high-risk AI systems to be designed for <b>effective human oversight</b> during use. <sup class="fn" data-evi="1">[1]</sup></div>
+        </div>
+        <div style="text-align:center;color:#c2b89e;font-size:16px">↓ based on</div>
+        <!-- INFERENCE -->
+        <div class="epb epb-inf" style="margin:10px 0">
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:6px"><span class="ep ep-inf"><span class="gl">▲</span>Inference</span><span class="conf"><i style="--f:55%"></i>Medium</span><span class="mono" style="margin-left:auto;font-size:10px;color:#6d28d9">scope inference</span></div>
+          <div class="serif" style="font-size:14.5px;line-height:1.5">For an agentic system, "effective oversight" plausibly requires an intervention point <i>before</i> an effectful action executes — reaching capabilities <span class="captag">C5</span> state-changing tools and <span class="captag">C7</span> autonomous planning.</div>
+          <div class="mono muted" style="font-size:10px;margin-top:5px">based_on: Art. 14 (Fact) · confidence ≤ min(based_on) · mapping confidence recorded separately (MD-7)</div>
+        </div>
+        <div style="text-align:center;color:#c2b89e;font-size:16px">↓ therefore</div>
+        <!-- RECOMMENDATION -->
+        <div class="epb epb-rec" style="margin:10px 0">
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:6px;flex-wrap:wrap"><span class="ep ep-rec"><span class="gl">●</span>Recommendation</span><span class="mstr direct">STRENGTH: DIRECT</span><span class="mrel">RELATION: SATISFIES_IN_PART</span><span class="captag" style="margin-left:auto">M1</span></div>
+          <div class="serif" style="font-size:14.5px;line-height:1.5"><b>Approval gate</b> — enforce human approval architecturally at the tool-execution boundary for state-changing actions, with anti-rubber-stamping (approval rate limits, sampling audits).</div>
+          <div class="mono muted" style="font-size:10px;margin-top:5px">Generic to a system class · never "makes you compliant" · no confidence chip on recommendations (§20)</div>
+        </div>
+
+        <div style="display:flex;gap:8px;margin-top:16px">
+          <button class="btn btn-d" data-go="mapper">Open in control mapper →</button>
+          <button class="btn">Export to brief ↗</button>
+        </div>
+      </article>
+
+      <!-- persistent evidence pane -->
+      <aside class="evi" aria-label="Source evidence">
+        <div data-evipanel="1" style="display:block">
+          <div class="eyebrow" style="margin-bottom:9px">Source evidence · footnote [1]</div>
+          <div class="card card-p">
+            <div style="display:flex;gap:6px;align-items:center;margin-bottom:7px"><span class="tier-s t1">TIER 1</span><span class="rev" style="margin-left:auto">Verified 2026-06-30</span></div>
+            <b style="font-size:12.5px">EUR-Lex — Official Journal</b>
+            <div class="mono muted" style="font-size:10.5px;margin:2px 0 9px">CELEX 32024R1689 · Art. 14</div>
+            <div class="serif" style="font-size:13px;line-height:1.5;color:#3a352b;border-left:2px solid #1e3a8a;padding-left:10px;font-style:italic">"…effectively overseen by natural persons during the period in which the AI system is in use."</div>
+            <div class="mono muted" style="font-size:9.5px;margin-top:5px">verbatim ≤50 words · illustrative</div>
+            <div style="margin-top:10px;display:flex;flex-direction:column;gap:4px;font-size:11.5px">
+              <a href="#" target="_blank" rel="noopener">↗ Official source (EUR-Lex)</a>
+              <a href="#" target="_blank" rel="noopener">🗄 Archived copy (2026-06-30)</a>
+              <div class="mono muted" style="font-size:10px;margin-top:2px">accessed 2026-06-30 · publication 2024-07-12</div>
+            </div>
+          </div>
+          <div class="eyebrow" style="margin:14px 0 8px">Claim worklist &amp; review status</div>
+          <div style="display:flex;flex-direction:column;gap:6px;font-size:11.5px">
+            <div class="card card-p" style="padding:7px 9px;display:flex;gap:6px;align-items:center"><span class="ep ep-fact"><span class="gl">■</span></span>Oversight requirement <span class="rev" style="margin-left:auto">reviewed</span></div>
+            <div class="card card-p" style="padding:7px 9px;display:flex;gap:6px;align-items:center"><span class="ep ep-inf"><span class="gl">▲</span></span>Pre-action point <span class="stale" style="margin-left:auto">recheck</span></div>
+            <div class="card card-p" style="padding:7px 9px;display:flex;gap:6px;align-items:center"><span class="ep ep-rec"><span class="gl">●</span></span>Approval gate (M1) <span class="draft" style="margin-left:auto">draft</span></div>
+          </div>
+          <div class="note note-open" style="margin-top:14px"><div><b>Unresolved question</b><br>Does Art. 14 "oversight" require <i>pre-action</i> gating, or is post-action audit sufficient? Open — tracked in methodology.</div></div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============================= 5 · JURISDICTION COMPARISON ============================= -->
+  <section class="screen" data-screen="compare" data-screen-label="Jurisdiction comparison" role="tabpanel">
+    <div class="pad">
+      <div class="eyebrow">Compare matrix · reference date = build date (2026-07-11)</div>
+      <h1 class="h-screen" style="margin:4px 0 3px">Cross-jurisdiction comparison</h1>
+      <p class="serif muted" style="font-size:13.5px;max-width:76ch;margin:0 0 12px">Cells count <b>currently-applicable binding provisions</b> per capability — effective bindingness = binding, lifecycle ∈ {fully / partially applicable}, <code style="font-family:'IBM Plex Mono';font-size:11px">applies_from</code> ≤ reference date. <b>No capability-intensity threshold</b> (the matrix describes jurisdictions, not an agent — MD-11).</p>
+
+      <div class="filters">
+        <span class="eyebrow" style="align-self:center">Rows</span>
+        <button class="fchip on">Capabilities</button>
+        <button class="fchip">Risks</button>
+        <span class="ep ep-inf" style="margin-left:auto"><span class="gl">▲</span>Whole matrix = analytical inference</span>
+      </div>
+
+      <div class="tblwrap">
+        <table class="tbl">
+          <thead><tr><th style="position:sticky;left:0;z-index:2;background:#f4f1e8">Capability</th><th class="num">🇺🇸 US</th><th class="num">🇪🇺 EU</th><th class="num">🇸🇬 SG</th><th class="num">🇨🇳 CN</th><th>Drill</th></tr></thead>
+          <tbody>
+            <tr><td style="position:sticky;left:0;background:#fdfcf9"><span class="captag">C1</span> Content generation</td><td class="num">1</td><td class="num" style="font-weight:700;background:#eef6e6">3</td><td class="num muted" title="0 currently-applicable binding provisions">0</td><td class="num" style="font-weight:700;background:#e3f2e4">4</td><td><a data-go="instrument" style="cursor:pointer">view →</a></td></tr>
+            <tr><td style="position:sticky;left:0;background:#fdfcf9"><span class="captag">C3</span> Personal / sensitive data</td><td class="num">2</td><td class="num" style="font-weight:700;background:#e3f2e4">5</td><td class="num">3</td><td class="num">3</td><td><a data-go="instrument" style="cursor:pointer">view →</a></td></tr>
+            <tr><td style="position:sticky;left:0;background:#fdfcf9"><span class="captag">C5</span> State-changing tools</td><td class="num">1</td><td class="num" style="font-weight:700;background:#eef6e6">2</td><td class="num">1</td><td class="num">2</td><td><a data-go="instrument" style="cursor:pointer">view →</a></td></tr>
+            <tr><td style="position:sticky;left:0;background:#fdfcf9"><span class="captag">C6</span> External communication</td><td class="num">1</td><td class="num">2</td><td class="num">1</td><td class="num" style="font-weight:700;background:#eef6e6">3</td><td><a data-go="instrument" style="cursor:pointer">view →</a></td></tr>
+            <tr><td style="position:sticky;left:0;background:#fdfcf9"><span class="captag">C8</span> Consequential decisions</td><td class="num">2</td><td class="num" style="font-weight:700;background:#eef6e6">4</td><td class="num">1</td><td class="num">2</td><td><a data-go="instrument" style="cursor:pointer">view →</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px">
+        <div class="note note-inf"><span class="ep ep-inf"><span class="gl">▲</span></span><div>A <b>0-cell</b> means "no currently-applicable binding provision maps here," not "unregulated" — drill down for the empty-list view. Counts change only when lifecycle or applicability changes, never from analyst opinion.</div></div>
+        <div class="note note-caveat">Equivalence across legal systems is <b>typed inference</b>, never fact — texts are not directly commensurable. Per-cell drill-downs resolve to Tier-1 primary sources with pin cites.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= 6 · AGENT SCENARIO DETAIL ============================= -->
+  <section class="screen" data-screen="scenario" data-screen-label="Agent scenario detail" role="tabpanel">
+    <div class="pad">
+      <div style="display:flex;gap:9px;align-items:center"><span class="hypo">HYPOTHETICAL SCENARIO</span><div class="eyebrow" style="letter-spacing:.05em">Fictional composite — no real company or product</div></div>
+      <h1 class="h-screen" style="margin:6px 0 2px">Aria — customer-support agent</h1>
+      <p class="serif" style="font-size:14.5px;line-height:1.6;max-width:76ch;margin:6px 0 14px;color:#2b2820">Reads account &amp; ticket data, drafts and <b>sends</b> customer replies, and executes refunds ≤ $100 without per-action approval. Deployed across all four jurisdictions; some users may be minors.</p>
+
+      <!-- capability profile -->
+      <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin-bottom:16px">
+        <span class="eyebrow" style="margin-right:4px">Capability profile (intensity 0–4)</span>
+        <span class="captag">C1 gen · 2</span><span class="captag">C2 code · 3</span><span class="captag">C3 data · 3</span><span class="captag">C5 tools · 2</span><span class="captag">C6 comms · 3</span><span class="captag">C7 auto · 2</span><span class="captag">C9 persist · 2</span>
+      </div>
+
+      <!-- per-jurisdiction scorecards -->
+      <div class="eyebrow" style="margin-bottom:8px">Per-jurisdiction ADRS · current published assessment (v3, reviewed 2026-06-18)</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:11px;margin-bottom:8px">
+        <div class="card card-p"><div class="mono muted" style="font-size:11px">🇺🇸 US <span class="bind bind-c" style="font-size:8.5px">Mixed</span></div><div class="mono" style="font-size:26px;font-weight:600;margin:3px 0">51.7</div><span class="tierbadge tier-high">High</span><div class="mono muted" style="font-size:9.5px;margin-top:6px">J 1.10 · resid 47.0</div></div>
+        <div class="card card-p" style="border-color:#c9a54a;background:#fffdf6"><div class="mono" style="font-size:11px;color:#8a6d0a">🇪🇺 EU <span class="bind bind-b" style="font-size:8.5px">Binding</span></div><div class="mono" style="font-size:26px;font-weight:600;margin:3px 0;color:#b4530f">56.4</div><span class="tierbadge tier-high">High</span><div class="mono muted" style="font-size:9.5px;margin-top:6px">J 1.20 · resid 47.0</div></div>
+        <div class="card card-p"><div class="mono muted" style="font-size:11px">🇸🇬 SG <span class="bind bind-n" style="font-size:8.5px">Non-bind</span></div><div class="mono" style="font-size:26px;font-weight:600;margin:3px 0">51.7</div><span class="tierbadge tier-high">High</span><div class="mono muted" style="font-size:9.5px;margin-top:6px">J 1.10 · resid 47.0</div></div>
+        <div class="card card-p"><div class="mono muted" style="font-size:11px">🇨🇳 CN <span class="bind bind-b" style="font-size:8.5px">Binding</span></div><div class="mono" style="font-size:26px;font-weight:600;margin:3px 0;color:#b4530f">56.4</div><span class="tierbadge tier-high">High</span><div class="mono muted" style="font-size:9.5px;margin-top:6px">J 1.20 · resid 47.0</div></div>
+      </div>
+      <div class="note note-inf" style="margin-bottom:16px"><span class="ep ep-inf"><span class="gl">▲</span></span><div>A, T, R are <b>identical across jurisdictions</b> (they describe the system, MD-12); only J diverges here (EU/CN carry a binding+prohibition posture US/SG do not). Δ is regulatory exposure, not a different system. Not a compliance determination.</div></div>
+
+      <div style="display:grid;grid-template-columns:1.4fr 1fr;gap:16px">
+        <!-- read-only ADRS worksheet -->
+        <div>
+          <div class="eyebrow" style="margin-bottom:8px">Stored ADRS worksheet — EU (read-only)</div>
+          <div class="tblwrap">
+            <table class="tbl">
+              <thead><tr><th>Dimension</th><th class="num" style="width:52px">Score</th><th>Anchor</th><th class="num" style="width:64px">w·d·25</th></tr></thead>
+              <tbody>
+                <tr><td><b>A</b> Autonomy <span class="mono muted">.25</span></td><td class="num">3</td><td class="tiny muted">Autonomous within hard policy limits; async review</td><td class="num">18.75</td></tr>
+                <tr><td><b>T</b> Action surface <span class="mono muted">.20</span></td><td class="num">3</td><td class="tiny muted">State-changing tools on customer-facing state</td><td class="num">15.00</td></tr>
+                <tr><td><b>D</b> Data sensitivity <span class="mono muted">.20</span></td><td class="num">3</td><td class="tiny muted">Sensitive categories / minors' data</td><td class="num">15.00</td></tr>
+                <tr><td><b>E</b> External reach <span class="mono muted">.15</span></td><td class="num">2</td><td class="tiny muted">1:1 outbound to external parties</td><td class="num">7.50</td></tr>
+                <tr><td><b>R</b> Irreversibility <span class="mono muted">.20</span></td><td class="num">2</td><td class="tiny muted">Reversible with significant effort/cost</td><td class="num">10.00</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="strip" style="margin-top:10px;font-size:11px"><div class="cell"><span class="k">INHERENT</span> 66.25</div><div class="cell"><span class="k">CREDIT</span> 0.29</div><div class="cell"><span class="k">RESIDUAL</span> 47.0</div><div class="cell"><span class="k">J</span> 1.20</div><div class="cell" style="margin-left:auto"><span class="k">FINAL</span> <b style="color:#f0b866">56.4 High</b></div></div>
+          <div style="margin-top:10px"><button class="btn btn-d" data-go="calc">Open in calculator (prefilled) →</button> <span class="tiny muted">worksheet is read-only; calculator is interactive</span></div>
+        </div>
+        <!-- top provisions + controls + unresolved -->
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div>
+            <div class="eyebrow" style="margin-bottom:7px">Top driving provisions</div>
+            <div class="card" style="overflow:hidden;font-size:12px">
+              <div class="rowlink" data-go="provision" style="padding:8px 12px;border-bottom:1px solid #ededed;cursor:pointer;display:flex;gap:6px;align-items:center"><span class="ep ep-fact"><span class="gl">■</span></span>EU Art. 14 oversight <span class="tier-s t1" style="margin-left:auto">T1</span></div>
+              <div class="rowlink" data-go="provision" style="padding:8px 12px;border-bottom:1px solid #ededed;cursor:pointer;display:flex;gap:6px;align-items:center"><span class="ep ep-fact"><span class="gl">■</span></span>EU Art. 50 transparency <span class="tier-s t1" style="margin-left:auto">T1</span></div>
+              <div class="rowlink" data-go="provision" style="padding:8px 12px;cursor:pointer;display:flex;gap:6px;align-items:center"><span class="ep ep-fact"><span class="gl">■</span></span>CN manual-review duty <span class="tier-s t1" style="margin-left:auto">T1</span></div>
+            </div>
+          </div>
+          <div>
+            <div class="eyebrow" style="margin-bottom:7px">Recommended controls</div>
+            <div style="display:flex;gap:5px;flex-wrap:wrap"><span class="captag">M1 approval gate</span><span class="captag">M2 tool scoping</span><span class="captag">M4 rate limits</span><span class="captag">M5 kill switch</span></div>
+            <button class="btn" data-go="mapper" style="margin-top:8px">See policy→control mapping →</button>
+          </div>
+          <div class="note note-open"><div><b>Unresolved:</b> minors in user base — does the DSA add obligations beyond GDPR here? Open; assessment flagged for re-score if resolved.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= 7 · ADRS CALCULATOR (LIVE) ============================= -->
+  <section class="screen adrs" data-screen="calc" data-screen-label="ADRS calculator" role="tabpanel">
+    <div class="note note-caveat" style="border-radius:0;padding:7px 30px">Not a compliance determination. ADRS is an <b>▲ inference</b> — a structured judgment aid, not a legal conclusion. Prefilled from Aria · EU (published assessment v3); every input is user-editable.</div>
+    <div style="display:flex;height:713px">
+      <!-- inputs -->
+      <div style="flex:1;overflow:auto;padding:20px 26px">
+        <div class="eyebrow">ADRS calculator · Aria (EU)</div>
+        <h1 class="h-screen" style="margin:3px 0 2px">Agent-Deployment Risk Score</h1>
+        <div class="mono muted" style="font-size:11.5px;margin-bottom:16px">inherent = Σ(weightᵢ · scoreᵢ · 25) · integer anchors only (no sliders) · <span class="ep ep-inf"><span class="gl">▲</span>whole score is inference</span></div>
+
+        <!-- dimensions -->
+        <div style="display:flex;flex-direction:column;gap:9px">
+          <!-- A -->
+          <div class="card card-p">
+            <div style="display:flex;align-items:center;gap:11px"><div style="width:158px;flex:none"><b>A · Autonomy</b><div class="mono muted" style="font-size:10px">weight 0.25 · jurisdiction-invariant</div></div>
+            <div class="seg" role="group" aria-label="Autonomy 0 to 4"><button data-dim="A" data-val="0" data-anchor="Suggests only; a human executes every action">0</button><button data-dim="A" data-val="1" data-anchor="Acts only on explicit per-action human approval">1</button><button data-dim="A" data-val="2" data-anchor="Acts within a narrow pre-approved scope">2</button><button data-dim="A" data-val="3" data-anchor="Autonomous within hard policy limits; async human review" class="on" aria-pressed="true">3</button><button data-dim="A" data-val="4" data-anchor="Fully autonomous; may set its own sub-goals">4</button></div>
+            <div style="margin-left:auto;text-align:right"><div class="mono" data-out="dimA" style="font-size:15px;font-weight:600">18.75</div><div class="mono muted" style="font-size:9px">.25·s·25</div></div></div>
+            <div class="tiny muted" data-anchor="A" style="margin-top:6px">Autonomous within hard policy limits; async human review</div>
+          </div>
+          <!-- T -->
+          <div class="card card-p">
+            <div style="display:flex;align-items:center;gap:11px"><div style="width:158px;flex:none"><b>T · Action surface</b><div class="mono muted" style="font-size:10px">weight 0.20 · jurisdiction-invariant</div></div>
+            <div class="seg" role="group" aria-label="Action surface 0 to 4"><button data-dim="T" data-val="0" data-anchor="Read-only / sandbox; no external effect">0</button><button data-dim="T" data-val="1" data-anchor="Writes to internal, non-critical state">1</button><button data-dim="T" data-val="2" data-anchor="Writes to important internal systems">2</button><button data-dim="T" data-val="3" data-anchor="State-changing tools on customer-facing production state" class="on" aria-pressed="true">3</button><button data-dim="T" data-val="4" data-anchor="Critical infrastructure / financial / safety systems">4</button></div>
+            <div style="margin-left:auto;text-align:right"><div class="mono" data-out="dimT" style="font-size:15px;font-weight:600">15.00</div><div class="mono muted" style="font-size:9px">.20·s·25</div></div></div>
+            <div class="tiny muted" data-anchor="T" style="margin-top:6px">State-changing tools on customer-facing production state</div>
+          </div>
+          <!-- D -->
+          <div class="card card-p">
+            <div style="display:flex;align-items:center;gap:11px"><div style="width:158px;flex:none"><b>D · Data sensitivity</b><div class="mono muted" style="font-size:10px">weight 0.20 · may diverge (D/E)</div></div>
+            <div class="seg" role="group" aria-label="Data sensitivity 0 to 4"><button data-dim="D" data-val="0" data-anchor="Public / non-personal data only">0</button><button data-dim="D" data-val="1" data-anchor="Internal business data">1</button><button data-dim="D" data-val="2" data-anchor="Personal data (non-sensitive)">2</button><button data-dim="D" data-val="3" data-anchor="Sensitive categories and/or minors' data" class="on" aria-pressed="true">3</button><button data-dim="D" data-val="4" data-anchor="Special-category data at scale">4</button></div>
+            <div style="margin-left:auto;text-align:right"><div class="mono" data-out="dimD" style="font-size:15px;font-weight:600">15.00</div><div class="mono muted" style="font-size:9px">.20·s·25</div></div></div>
+            <div class="tiny muted" data-anchor="D" style="margin-top:6px">Sensitive categories and/or minors' data</div>
+          </div>
+          <!-- E -->
+          <div class="card card-p">
+            <div style="display:flex;align-items:center;gap:11px"><div style="width:158px;flex:none"><b>E · External reach</b><div class="mono muted" style="font-size:10px">weight 0.15 · may diverge (D/E)</div></div>
+            <div class="seg" role="group" aria-label="External reach 0 to 4"><button data-dim="E" data-val="0" data-anchor="No external-facing effects">0</button><button data-dim="E" data-val="1" data-anchor="Internal-only outputs">1</button><button data-dim="E" data-val="2" data-anchor="1:1 outbound to external parties" class="on" aria-pressed="true">2</button><button data-dim="E" data-val="3" data-anchor="Broadcast to many external recipients">3</button><button data-dim="E" data-val="4" data-anchor="Public, irreversible publication">4</button></div>
+            <div style="margin-left:auto;text-align:right"><div class="mono" data-out="dimE" style="font-size:15px;font-weight:600">7.50</div><div class="mono muted" style="font-size:9px">.15·s·25</div></div></div>
+            <div class="tiny muted" data-anchor="E" style="margin-top:6px">1:1 outbound to external parties</div>
+          </div>
+          <!-- R -->
+          <div class="card card-p">
+            <div style="display:flex;align-items:center;gap:11px"><div style="width:158px;flex:none"><b>R · Irreversibility</b><div class="mono muted" style="font-size:10px">weight 0.20 · jurisdiction-invariant</div></div>
+            <div class="seg" role="group" aria-label="Irreversibility 0 to 4"><button data-dim="R" data-val="0" data-anchor="Trivially reversible">0</button><button data-dim="R" data-val="1" data-anchor="Reversible with modest effort">1</button><button data-dim="R" data-val="2" data-anchor="Reversible with significant effort / cost" class="on" aria-pressed="true">2</button><button data-dim="R" data-val="3" data-anchor="Largely irreversible">3</button><button data-dim="R" data-val="4" data-anchor="Irreversible / safety-critical">4</button></div>
+            <div style="margin-left:auto;text-align:right"><div class="mono" data-out="dimR" style="font-size:15px;font-weight:600">10.00</div><div class="mono muted" style="font-size:9px">.20·s·25</div></div></div>
+            <div class="tiny muted" data-anchor="R" style="margin-top:6px">Reversible with significant effort / cost</div>
+          </div>
+        </div>
+
+        <!-- mitigations -->
+        <div style="display:flex;align-items:center;gap:8px;margin:16px 0 8px"><div class="eyebrow">Implemented mitigations — credit capped at 0.40</div><span class="tiny muted">only implemented + evidenced controls earn credit (MD-6)</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px">
+          <button class="mtog on" data-mit="M2" aria-pressed="true"><span class="box"></span>M2 Tool scoping <span class="mono" style="margin-left:auto;font-size:10px">.08</span></button>
+          <button class="mtog on" data-mit="M3" aria-pressed="true"><span class="box"></span>M3 Immutable action log <span class="mono" style="margin-left:auto;font-size:10px">.07</span></button>
+          <button class="mtog on" data-mit="M4" aria-pressed="true"><span class="box"></span>M4 Spend / rate limits <span class="mono" style="margin-left:auto;font-size:10px">.06</span></button>
+          <button class="mtog on" data-mit="M5" aria-pressed="true"><span class="box"></span>M5 Kill switch <span class="mono" style="margin-left:auto;font-size:10px">.05</span></button>
+          <button class="mtog on" data-mit="M8" aria-pressed="true"><span class="box"></span>M8 Pre-deploy eval gating <span class="mono" style="margin-left:auto;font-size:10px">.03</span></button>
+          <button class="mtog" data-mit="M1" aria-pressed="false"><span class="box"></span>M1 Approval gate <span class="mono" style="margin-left:auto;font-size:10px">.10</span></button>
+          <button class="mtog" data-mit="M6" aria-pressed="false"><span class="box"></span>M6 Sandbox / isolation <span class="mono" style="margin-left:auto;font-size:10px">.04</span></button>
+          <button class="mtog" data-mit="M7" aria-pressed="false"><span class="box"></span>M7 Output content filter <span class="mono" style="margin-left:auto;font-size:10px">.04</span></button>
+        </div>
+
+        <!-- jurisdiction selector (does NOT auto-set J) + J toggles -->
+        <div class="eyebrow" style="margin:18px 0 8px">Jurisdiction — selects reference material only (does <u>not</u> auto-set J)</div>
+        <div style="display:flex;gap:6px;margin-bottom:10px">
+          <button class="fchip on" data-jur="EU">🇪🇺 EU</button>
+          <button class="fchip" data-jur="US">🇺🇸 US</button>
+          <button class="fchip" data-jur="SG">🇸🇬 SG</button>
+          <button class="fchip" data-jur="CN">🇨🇳 CN</button>
+        </div>
+        <div data-jurref="EU" style="display:block" class="note note-inf" ><span class="ep ep-inf"><span class="gl">▲</span></span><div><b>EU reference:</b> binding AI Act + GDPR in force; near-term GPAI duties; active enforcement regime; Art. 5 prohibitions adjacent. You decide each toggle below — these are user judgments, not an automatic constant.</div></div>
+        <div data-jurref="US" style="display:none" class="note note-inf"><span class="ep ep-inf"><span class="gl">▲</span></span><div><b>US reference:</b> sectoral, mostly conditional; no general horizontal binding duty; enforcement varies by sector.</div></div>
+        <div data-jurref="SG" style="display:none" class="note note-inf"><span class="ep ep-inf"><span class="gl">▲</span></span><div><b>SG reference:</b> advisory framework, non-binding; strong guidance, no binding hit by default.</div></div>
+        <div data-jurref="CN" style="display:none" class="note note-inf"><span class="ep ep-inf"><span class="gl">▲</span></span><div><b>CN reference:</b> binding Deep Synthesis / algorithm rules in force; registration + manual-review duties; enforcement active.</div></div>
+
+        <div class="eyebrow" style="margin:12px 0 8px">J components — J = 1 + Σ (max 1.30) · set manually</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px">
+          <button class="jtog on" data-j="binding" aria-pressed="true"><span class="box"></span>binding_hit <span class="mono" style="margin-left:auto;font-size:10px">+.10</span></button>
+          <button class="jtog on" data-j="near" aria-pressed="true"><span class="box"></span>near_term_hit <span class="mono" style="margin-left:auto;font-size:10px">+.05</span></button>
+          <button class="jtog on" data-j="enf" aria-pressed="true"><span class="box"></span>enforcement_posture <span class="mono" style="margin-left:auto;font-size:10px">+.05</span></button>
+          <button class="jtog" data-j="proh" aria-pressed="false"><span class="box"></span>prohibition_adjacent <span class="mono" style="margin-left:auto;font-size:10px">+.10</span></button>
+        </div>
+        <div class="mono muted" style="font-size:10px;margin-top:6px">from Aria·EU assessment: binding · near-term · enforcement prefilled. <span class="ep ep-inf" style="font-size:9px"><span class="gl">▲</span></span> enforcement &amp; prohibition readings are always inference, never fact (MD-3).</div>
+      </div>
+
+      <!-- live arithmetic panel (visual climax) -->
+      <aside style="width:320px;flex:none;border-left:1px solid #e3ddd0;background:#fdfcf9;padding:18px;overflow:auto;display:flex;flex-direction:column;gap:13px">
+        <div aria-live="polite" style="text-align:center;border:1px solid #e3ddd0;border-radius:11px;padding:16px 12px;background:#f4f1e8">
+          <div class="eyebrow">Final ADRS · EU</div>
+          <div class="mono" data-out="final" style="font-size:46px;font-weight:600;line-height:1.05;color:#b4530f">56.4</div>
+          <span class="tierbadge tier-high" data-out="tier" title="tier from full-precision score">High</span>
+          <div class="mono muted" style="font-size:9.5px;margin-top:8px">tier from full-precision score · displays 1 dp</div>
+        </div>
+        <div class="mono" style="font-size:12.5px;line-height:1.9;background:#f4f1e8;border:1px solid #e3ddd0;border-radius:9px;padding:12px 13px;color:#3a352b">
+          <div style="display:flex;justify-content:space-between">Inherent <b data-out="inherent">66.25</b></div>
+          <div style="display:flex;justify-content:space-between">Mitigation credit <b data-out="credit">0.29</b></div>
+          <div data-out="cap" style="display:none;align-items:center;gap:5px;color:#b4530f;font-size:10px">⚠ Mitigation credit capped at 0.40</div>
+          <div style="display:flex;justify-content:space-between;border-top:1px dashed #cbc3af;padding-top:5px;margin-top:5px">Residual <b data-out="residual">47.0</b></div>
+          <div style="display:flex;justify-content:space-between">× Jurisdiction J <b data-out="j">1.20</b></div>
+          <div style="display:flex;justify-content:space-between;border-top:1.5px solid #3a352b;padding-top:5px;margin-top:5px;font-size:14px">Final ADRS <b data-out="final">56.4</b></div>
+        </div>
+        <div class="tiny" style="line-height:1.55;color:#5a5245">Residual = inherent × (1 − capped credit); it can never fall below <b>60%</b> of inherent — controls reduce likelihood, not the ceiling of harm (MD-9). J (≤1.30) can only <i>raise</i> the score.</div>
+        <div class="tiny mono muted">Tiers · Low [0,25) · Moderate [25,50) · High [50,75) · Critical [75,100]</div>
+        <div style="display:flex;gap:7px"><button class="btn" style="flex:1">Copy permalink</button><button class="btn btn-p" data-go="brief" style="flex:1">Export ↗</button></div>
+        <div class="tiny muted" data-out="live" style="border-top:1px solid #e3ddd0;padding-top:9px">ADRS 56.4 — High</div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============================= 8 · POLICY-TO-CONTROL MAPPER ============================= -->
+  <section class="screen" data-screen="mapper" data-screen-label="Policy-to-control mapper" role="tabpanel">
+    <div class="pad">
+      <div class="eyebrow">Policy-to-control mapper · Aria</div>
+      <h1 class="h-screen" style="margin:4px 0 3px">Provision → capability → control</h1>
+      <p class="serif muted" style="font-size:13.5px;max-width:76ch;margin:0 0 16px">No link may be skipped; each control cites the provisions it addresses, its <b>strength</b> (direct/derived/prudential) and <b>relation</b> (satisfies/supports/implements). <span class="ep ep-rec"><span class="gl">●</span>Recommendations are generic to the system class — not legal advice.</span></p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="card card-p">
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:7px;flex-wrap:wrap"><b class="serif" style="font-size:15px">M1 · Approval gate</b><span class="mstr direct" style="margin-left:auto">DIRECT</span><span class="mrel">SATISFIES_IN_PART</span></div>
+          <p class="serif" style="font-size:13px;line-height:1.5;margin:0 0 9px;color:#2b2820">Human approval enforced at the tool-execution boundary for state-changing actions; anti-rubber-stamping via rate limits &amp; sampling audit.</p>
+          <div class="tiny" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><span class="muted">addresses</span><a class="rowlink" data-go="provision" style="cursor:pointer">EU Art. 14 <span class="tier-s t1">T1</span></a><a class="rowlink" data-go="provision" style="cursor:pointer">CN manual-review <span class="tier-s t1">T1</span></a></div>
+        </div>
+        <div class="card card-p">
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:7px;flex-wrap:wrap"><b class="serif" style="font-size:15px">M4 · Spend / rate limits</b><span class="mstr direct" style="margin-left:auto">DIRECT</span><span class="mrel">SUPPORTS_EVIDENCE</span></div>
+          <p class="serif" style="font-size:13px;line-height:1.5;margin:0 0 9px;color:#2b2820">Hard caps on refund value/frequency bound action surface (T) and irreversibility (R); reduces inherent risk at source.</p>
+          <div class="tiny" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><span class="muted">addresses</span><a class="rowlink" data-go="provision" style="cursor:pointer">EU Art. 5 <span class="tier-s t1">T1</span></a></div>
+        </div>
+        <div class="card card-p">
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:7px;flex-wrap:wrap"><b class="serif" style="font-size:15px">M2 · Tool scoping</b><span class="mstr derived" style="margin-left:auto">DERIVED</span><span class="mrel">IMPLEMENTS_GENERAL_DUTY</span></div>
+          <p class="serif" style="font-size:13px;line-height:1.5;margin:0 0 9px;color:#2b2820">Least-privilege tool grants; no capability beyond the support task. Constrains C5 / C6 exposure.</p>
+          <div class="tiny" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><span class="muted">addresses</span><a class="rowlink" data-go="provision" style="cursor:pointer">SG MGF <span class="tier-s t3">T3</span></a> <span class="muted">(orientation only)</span></div>
+        </div>
+        <div class="card card-p" style="border-color:#f0d3c9;background:#fdf6f2">
+          <div style="display:flex;gap:8px;align-items:center;margin-bottom:7px;flex-wrap:wrap"><b class="serif" style="font-size:15px">M3 · Immutable action log</b><span class="mstr" style="margin-left:auto;background:#fbe4d2;color:#b4530f">⚠ CONFLICT</span></div>
+          <p class="serif" style="font-size:13px;line-height:1.5;margin:0 0 9px;color:#2b2820">Centralized immutable log conflicts with CN data-localization (PIPL cross-border). Options: regional log planes / per-jurisdiction retention.</p>
+          <div class="tiny" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center"><span class="muted">tension</span><a class="rowlink" data-go="provision" style="cursor:pointer">EU logging ↔ CN PIPL <span class="tier-s t2">T2</span></a></div>
+        </div>
+      </div>
+
+      <div class="epb epb-rec" style="margin-top:14px">
+        <div style="display:flex;gap:8px;align-items:center;margin-bottom:5px"><span class="ep ep-rec"><span class="gl">●</span>Mapping conflict — options analysis</span></div>
+        <div class="serif" style="font-size:14px;line-height:1.5">CN data-localization vs. a single immutable action log (M3): regionalize log storage <b>or</b> maintain per-jurisdiction log planes. Both provisions cited; decision deferred to architecture review. Neither option is presented as "compliant."</div>
+      </div>
+      <div style="margin-top:14px"><button class="btn btn-p" data-go="brief">Export controls to executive brief ↗</button></div>
+    </div>
+  </section>
+
+  <!-- ============================= 9 · EXECUTIVE BRIEF ============================= -->
+  <section class="screen" data-screen="brief" data-screen-label="Executive brief" role="tabpanel">
+    <div class="pad">
+      <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:14px">
+        <div><div class="eyebrow">Executive brief · generated 2026-07-10</div>
+        <h1 class="h-screen" style="margin:4px 0 2px">Aria support agent — governance readiness</h1>
+        <div class="serif muted" style="font-size:13px">One-page decision brief · <span class="hypo">HYPOTHETICAL</span> · not a compliance determination</div></div>
+        <div style="margin-left:auto;display:flex;gap:7px"><button class="btn">Print / PDF</button><button class="btn btn-d">Copy brief link</button></div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:18px">
+        <div>
+          <!-- bottom line -->
+          <div class="epb epb-rec">
+            <div style="display:flex;gap:8px;align-items:center;margin-bottom:6px"><span class="ep ep-rec"><span class="gl">●</span>Bottom line</span></div>
+            <div class="serif" style="font-size:15px;line-height:1.55;color:#2b2820">Aria is <b>launch-ready in the US and Singapore</b> on baseline controls. <b>EU and China require a human-approval gate (M1)</b> at the tool-execution boundary before launch; China additionally forces a log-architecture decision (data localization). Residual risk is <b>High</b> in all four markets — driven by inherent action surface, not by missing controls.</div>
+          </div>
+
+          <!-- key facts -->
+          <div class="eyebrow" style="margin:16px 0 8px">Key findings — typed</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div class="epb epb-fact" style="padding:10px 13px"><div style="display:flex;gap:7px;align-items:center;margin-bottom:3px"><span class="ep ep-fact"><span class="gl">■</span>Fact</span><span class="tier-s t1" style="margin-left:auto">T1</span></div><div class="serif" style="font-size:13.5px;line-height:1.45">EU AI Act Art. 14 (binding, in force) requires effective human oversight of high-risk systems. <a class="rowlink" data-go="provision" style="cursor:pointer">source →</a></div></div>
+            <div class="epb epb-inf" style="padding:10px 13px"><div style="display:flex;gap:7px;align-items:center;margin-bottom:3px"><span class="ep ep-inf"><span class="gl">▲</span>Inference</span><span class="conf" style="margin-left:auto"><i style="--f:55%"></i>Medium</span></div><div class="serif" style="font-size:13.5px;line-height:1.45">"Effective oversight" for an agent that sends messages &amp; moves money likely requires a pre-action gate, not post-hoc audit.</div></div>
+            <div class="epb epb-rec" style="padding:10px 13px"><div style="display:flex;gap:7px;align-items:center;margin-bottom:3px"><span class="ep ep-rec"><span class="gl">●</span>Recommendation</span><span class="mstr direct" style="margin-left:auto">DIRECT</span></div><div class="serif" style="font-size:13.5px;line-height:1.45">Ship M1 (approval gate) + M4 (rate limits) before EU/CN launch; resolve M3 log-localization conflict in architecture review.</div></div>
+          </div>
+
+          <div class="note note-open" style="margin-top:14px"><div><b>Open questions carried into the decision:</b> (1) minors → DSA obligations beyond GDPR? (2) Does Art. 14 mandate pre-action gating? Both unresolved; brief will be re-issued if they resolve.</div></div>
+        </div>
+
+        <!-- scorecard sidebar -->
+        <div style="display:flex;flex-direction:column;gap:13px">
+          <div class="card card-p">
+            <div class="eyebrow" style="margin-bottom:9px">ADRS by market</div>
+            <table class="tbl" style="font-size:12px"><tbody>
+              <tr><td>🇪🇺 EU</td><td class="num" style="color:#b4530f;font-weight:700">56.4</td><td><span class="tierbadge tier-high" style="font-size:10px;padding:2px 7px">High</span></td></tr>
+              <tr><td>🇨🇳 CN</td><td class="num" style="color:#b4530f;font-weight:700">56.4</td><td><span class="tierbadge tier-high" style="font-size:10px;padding:2px 7px">High</span></td></tr>
+              <tr><td>🇺🇸 US</td><td class="num">51.7</td><td><span class="tierbadge tier-high" style="font-size:10px;padding:2px 7px">High</span></td></tr>
+              <tr><td>🇸🇬 SG</td><td class="num">51.7</td><td><span class="tierbadge tier-high" style="font-size:10px;padding:2px 7px">High</span></td></tr>
+            </tbody></table>
+            <div class="tiny muted" style="margin-top:6px">Assessment v3 · <span class="rev">reviewed 2026-06-18</span></div>
+          </div>
+          <div class="card card-p">
+            <div class="eyebrow" style="margin-bottom:8px">Required before launch</div>
+            <div style="display:flex;flex-direction:column;gap:6px;font-size:12px">
+              <div>🇪🇺 EU — <span class="captag">M1</span> approval gate</div>
+              <div>🇨🇳 CN — <span class="captag">M1</span> + <span class="captag">M3*</span> log localization</div>
+              <div>🇺🇸 US — baseline (no add'l)</div>
+              <div>🇸🇬 SG — baseline (no add'l)</div>
+            </div>
+          </div>
+          <div class="note note-caveat">Print keeps ■▲● glyphs, tiers, dates &amp; the "not a compliance determination" caveat — color is never the sole carrier.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= 10 · METHODOLOGY ============================= -->
+  <section class="screen" data-screen="method" data-screen-label="Methodology" role="tabpanel">
+    <div class="pad">
+      <div class="eyebrow">Methodology</div>
+      <h1 class="h-screen" style="margin:4px 0 10px">How the numbers mean what they mean</h1>
+      <div style="display:grid;grid-template-columns:1.3fr 1fr;gap:26px">
+        <div class="prose">
+          <h3>The ADRS formula</h3>
+          <p><code>Inherent = Σ (weightᵢ · scoreᵢ · 25)</code> over A(.25) T(.20) D(.20) E(.15) R(.20), each scored 0–4 against fixed anchors.</p>
+          <p><code>Residual = Inherent × (1 − MitigationCredit)</code>, where <code>MitigationCredit = min(0.40, Σ credits)</code>. Residual can never fall below 60% of inherent — the anti-gaming property (MD-9).</p>
+          <p><code>Final = min(100, Residual × J)</code>, where <code>J = 1 + Σ components</code>, capped at 1.30. J only ever <i>raises</i> the score.</p>
+          <h3>Half-open tiers, tier-from-raw</h3>
+          <p>Low <code>[0,25)</code> · Moderate <code>[25,50)</code> · High <code>[50,75)</code> · Critical <code>[75,100]</code>. Full precision internally; display 1 dp; <b>tier derived from the unrounded score</b> — a badge may read "50.0 · High" (MD-8).</p>
+          <h3>Jurisdiction is separate from J</h3>
+          <p>Selecting a jurisdiction reveals <i>reference material</i> only. The four J components — <code>binding_hit</code>, <code>near_term_hit</code>, <code>enforcement_posture</code>, <code>prohibition_adjacent</code> — are <b>set by the analyst</b>, not auto-applied. <code>enforcement_posture</code> and <code>prohibition_adjacent</code> are always <span class="ep ep-inf"><span class="gl">▲</span></span> inference (MD-3).</p>
+          <h3>Epistemic discipline</h3>
+          <p>Every claim is exactly one kind: <span class="ep ep-fact"><span class="gl">■</span>Fact</span> (cited, confidence), <span class="ep ep-inf"><span class="gl">▲</span>Inference</span> (based_on chain, confidence ≤ min of sources), <span class="ep ep-rec"><span class="gl">●</span>Recommendation</span> (rests on a chain, no confidence chip, never "makes you compliant"). Mixed-kind blocks are forbidden. Fact confidence and mapping confidence are recorded separately (MD-7).</p>
+          <h3>Jurisdiction-invariance</h3>
+          <p>A, T, R are identical across a scenario's four assessments (they describe the system); only D and E may diverge, and only with a written justification (MD-12).</p>
+        </div>
+        <div>
+          <div class="eyebrow" style="margin-bottom:8px">Settled decisions (MD-1 – MD-12)</div>
+          <div class="card" style="overflow:hidden;font-size:11.5px">
+            <div style="padding:7px 11px;border-bottom:1px solid #ededed"><b>MD-5</b> rolled-up badge = worst-of-four</div>
+            <div style="padding:7px 11px;border-bottom:1px solid #ededed"><b>MD-6</b> only implemented mitigations earn credit</div>
+            <div style="padding:7px 11px;border-bottom:1px solid #ededed"><b>MD-8</b> half-open tiers · tier-from-raw</div>
+            <div style="padding:7px 11px;border-bottom:1px solid #ededed"><b>MD-9</b> credit capped at 0.40</div>
+            <div style="padding:7px 11px;border-bottom:1px solid #ededed"><b>MD-10</b> near-term anchored to assessed_date</div>
+            <div style="padding:7px 11px;border-bottom:1px solid #ededed"><b>MD-11</b> "currently-applicable binding" defined; compare uses no intensity</div>
+            <div style="padding:7px 11px"><b>MD-12</b> A/T/R invariant; D/E may diverge</div>
+          </div>
+          <div class="eyebrow" style="margin:16px 0 8px">Source tiers</div>
+          <div style="display:flex;flex-direction:column;gap:6px;font-size:12px">
+            <div><span class="tier-s t1">TIER 1</span> primary / official (may cite as fact)</div>
+            <div><span class="tier-s t2">TIER 2</span> authoritative secondary</div>
+            <div><span class="tier-s t3">TIER 3</span> orientation only — never a fact's citation</div>
+          </div>
+          <div class="note note-open" style="margin-top:16px"><div><b>Unresolved questions register</b><br>· Art. 14 pre-action vs. post-hoc oversight<br>· minors → DSA interaction<br>· CN localization vs. immutable log<br>Each blocks a claim from promotion to "reviewed."</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= 11 · CHANGELOG ============================= -->
+  <section class="screen" data-screen="changelog" data-screen-label="Changelog" role="tabpanel">
+    <div class="pad">
+      <div class="eyebrow">Changelog · reverse-chronological</div>
+      <h1 class="h-screen" style="margin:4px 0 3px">Policy status changes</h1>
+      <p class="serif muted" style="font-size:13.5px;max-width:74ch;margin:0 0 16px">Policy moves; we correct in public. Every status change records the source and the analyst who verified it. Re-scoring an assessment creates a new version — history is retained, never overwritten (MD-4).</p>
+      <div class="tblwrap">
+        <table class="tbl">
+          <thead><tr><th style="width:104px">Date</th><th>Instrument</th><th>Change (old → new)</th><th>Source</th><th style="width:110px">Analyst</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">2026-06-28</td><td><b>EU AI Act</b></td><td><span class="lc lc-adopt" style="font-size:9px"><span class="lc-dot"></span>adopted</span> → <span class="lc lc-partial" style="font-size:9px"><span class="lc-dot"></span>in force, partial</span></td><td><a href="#" target="_blank" rel="noopener">EUR-Lex <span class="tier-s t1">T1</span></a></td><td>A. Rivera</td></tr>
+            <tr><td class="mono">2026-06-15</td><td><b>CN Deep Synthesis</b></td><td><span class="rev">verified re-check</span> · no status change</td><td><a href="#" target="_blank" rel="noopener">Gazette <span class="tier-s t1">T1</span></a></td><td>L. Chen</td></tr>
+            <tr><td class="mono">2026-06-02</td><td><b>US draft accountability bill</b></td><td>new instrument → <span class="lc lc-prop" style="font-size:9px"><span class="lc-dot"></span>proposed</span></td><td><a href="#" target="_blank" rel="noopener">Congress <span class="tier-s t2">T2</span></a></td><td>A. Rivera</td></tr>
+            <tr><td class="mono">2026-02-11</td><td><b>EU AI Act</b></td><td>amendment event (no status color)</td><td><a href="#" target="_blank" rel="noopener">EUR-Lex <span class="tier-s t1">T1</span></a></td><td>A. Rivera</td></tr>
+            <tr><td class="mono">2025-11-20</td><td><b>SG MGF</b></td><td><span class="rev">verified</span> · <span class="lc lc-full" style="font-size:9px"><span class="lc-dot"></span>fully applicable</span></td><td><a href="#" target="_blank" rel="noopener">IMDA <span class="tier-s t2">T2</span></a></td><td>L. Chen</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="note note-inf" style="margin-top:12px"><span class="ep ep-inf"><span class="gl">▲</span></span><div>Empty periods show an explicit "no changes in this period" message rather than a blank table. Assessment re-scores appear here with a version bump and link to the superseded version.</div></div>
+    </div>
+  </section>
+
+  <!-- ============================= DESIGN SYSTEM / DOCS ============================= -->
+  <section class="screen" data-screen="system" data-screen-label="Design system and documentation" role="tabpanel">
+    <div class="pad">
+      <div class="eyebrow">Unified design system · reference</div>
+      <h1 class="h-screen" style="margin:4px 0 3px">System, components &amp; behavior</h1>
+      <p class="serif muted" style="font-size:13.5px;max-width:80ch;margin:0 0 18px">Hybrid direction: <b>1b Research Workspace</b> shell (serif reading surface, three-pane evidence layout) + <b>1c Decision Studio</b> workbench (live ADRS, control cards) + <b>1a</b> compact status strips on the dashboard only.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px">
+        <!-- tokens -->
+        <div>
+          <div class="eyebrow" style="margin-bottom:8px">Design tokens</div>
+          <div class="card card-p" style="font-size:12px">
+            <div style="margin-bottom:8px"><b>Surfaces</b><br><span class="sw" style="background:#f7f5ef"></span>paper #f7f5ef · <span class="sw" style="background:#fdfcf9"></span>page #fdfcf9 · <span class="sw" style="background:#f4f1e8"></span>panel #f4f1e8 · <span class="sw" style="background:#20242b"></span>ink-surface #20242b</div>
+            <div style="margin-bottom:8px"><b>Text</b> #23211c ink · #6b6350 muted · #a08b63 eyebrow</div>
+            <div><b>Grid &amp; radius</b> 8px grid · card radius 10px · hairline rules #e3ddd0 over shadows · one soft app-level shadow only</div>
+          </div>
+          <div class="eyebrow" style="margin:14px 0 8px">Five disjoint semantic systems</div>
+          <div class="card card-p" style="font-size:11.5px;line-height:1.9">
+            <div><b>Epistemic</b> (hue+glyph) <span class="ep ep-fact"><span class="gl">■</span>fact</span> <span class="ep ep-inf"><span class="gl">▲</span>inf</span> <span class="ep ep-rec"><span class="gl">●</span>rec</span></div>
+            <div><b>Lifecycle</b> (neutral→green ramp) <span class="lc lc-prop"><span class="lc-dot"></span>proposed</span> <span class="lc lc-partial"><span class="lc-dot"></span>partial</span> <span class="lc lc-full"><span class="lc-dot"></span>full</span></div>
+            <div><b>Bindingness</b> (shape/weight, no hue) <span class="bind bind-b">binding</span> <span class="bind bind-c">cond.</span> <span class="bind bind-n">non</span></div>
+            <div><b>Source tier</b> <span class="tier-s t1">T1</span> <span class="tier-s t2">T2</span> <span class="tier-s t3">T3</span></div>
+            <div><b>ADRS tier</b> (green→red) <span class="tierbadge tier-low" style="font-size:10px;padding:2px 7px">Low</span> <span class="tierbadge tier-mod" style="font-size:10px;padding:2px 7px">Mod</span> <span class="tierbadge tier-high" style="font-size:10px;padding:2px 7px">High</span> <span class="tierbadge tier-crit" style="font-size:10px;padding:2px 7px">Crit</span></div>
+            <div class="note note-caveat" style="margin-top:8px">These five palettes never share a hue. Confidence uses fill-density (neutral), not color — so it cannot be confused with risk.</div>
+          </div>
+          <div class="eyebrow" style="margin:14px 0 8px">Typography</div>
+          <div class="card card-p" style="font-size:12px;line-height:1.7">
+            <div class="serif" style="font-size:18px">Source Serif 4 — provision prose, headings, quotes</div>
+            <div style="font-family:'Public Sans'">Public Sans — UI chrome, labels, body</div>
+            <div class="mono">IBM Plex Mono — cites, dates, all numerics &amp; math</div>
+          </div>
+        </div>
+
+        <!-- component inventory + behavior -->
+        <div>
+          <div class="eyebrow" style="margin-bottom:8px">Reusable component inventory</div>
+          <div class="card card-p" style="font-size:11.5px;line-height:1.65;columns:2;column-gap:18px">
+            EpistemicBadge · EpistemicBlock · LifecycleChip · BindingnessTag · ObligationTag · ConfidenceMeter · SourceTierTag · CitationBlock · EvidencePanel · ADRSTierBadge · ADRSWorksheet · ADRSCalculator · JComponentToggle · MitigationToggle · ControlCard · MappingChain · CompareMatrix · StatusStrip · FilterChip · SortableTable · Reader (3-pane) · ReviewStamp · StalenessFlag · HypotheticalTag · FixtureBanner · Callout(inf/open/caveat)
+          </div>
+
+          <div class="eyebrow" style="margin:14px 0 8px">Behavior specs</div>
+          <div class="card" style="overflow:hidden;font-size:12px">
+            <div style="padding:9px 12px;border-bottom:1px solid #ededed"><b>Tables</b> — sticky header + sticky first column; <code style="font-family:'IBM Plex Mono';font-size:10.5px">aria-sort</code> on active header; monospace right-aligned numerics; row-hover; whole row is the link; horizontal scroll inside <code style="font-family:'IBM Plex Mono';font-size:10.5px">.tblwrap</code>, never the page.</div>
+            <div style="padding:9px 12px;border-bottom:1px solid #ededed"><b>Badges</b> — always glyph/shape + text, never color alone; lifecycle carries its dated basis; tier badge shows label; confidence is density not hue.</div>
+            <div style="padding:9px 12px"><b>Evidence panel</b> — persistent right pane (not a transient popover); footnote markers scroll the matching source in; verbatim ≤50-word quote, T-tag, official + archived links, accessed/verified dates always visible; keyboard-reachable, inline fallback for AT.</div>
+          </div>
+
+          <div class="eyebrow" style="margin:14px 0 8px">Empty · loading · error states</div>
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div class="card card-p" style="display:flex;gap:10px;align-items:center"><div style="flex:none;width:78px" class="eyebrow">Loading</div><div style="flex:1;display:flex;flex-direction:column;gap:5px"><div class="sk" style="height:10px;width:70%"></div><div class="sk" style="height:10px;width:45%"></div></div></div>
+            <div class="card card-p" style="display:flex;gap:10px;align-items:center"><div style="flex:none;width:78px" class="eyebrow">Empty</div><div class="tiny muted">"No currently-applicable binding provision maps here" — explicit sentence, never a blank cell. 0-cells link to the empty-list view.</div></div>
+            <div class="card card-p" style="display:flex;gap:10px;align-items:center;border-color:#f0d3c9;background:#fdf6f2"><div style="flex:none;width:78px" class="eyebrow" style="color:#b4530f">Error</div><div class="tiny" style="color:#7a2f22">"Source unreachable — showing last verified copy (2026-06-30). Live link may be stale." Archived copy always offered as fallback.</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- responsive + a11y -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:22px">
+        <div>
+          <div class="eyebrow" style="margin-bottom:8px">Responsive &amp; mobile adaptation</div>
+          <div class="prose" style="font-size:12.5px;max-width:none">
+            <p style="margin:0 0 8px"><b>≥1280px (primary):</b> full three-pane reader, calculator inputs + live panel side-by-side, multi-column matrices.</p>
+            <p style="margin:0 0 8px"><b>768–1279px:</b> evidence pane collapses to a toggle drawer; calculator panel docks below inputs; nav scrolls horizontally; tables keep sticky header + first column.</p>
+            <p style="margin:0 0 8px"><b>&lt;768px (mobile):</b> reader panes stack (document → provision → evidence accordion); footnote markers become tap-to-expand; segmented ADRS scorers go full-width; a <b>sticky bottom bar</b> pins the live ADRS score; matrices scroll horizontally with a frozen capability column; fixture banner &amp; disclaimer remain pinned.</p>
+          </div>
+        </div>
+        <div>
+          <div class="eyebrow" style="margin-bottom:8px">Accessibility notes</div>
+          <div class="prose" style="font-size:12.5px;max-width:none">
+            <p style="margin:0 0 8px">Semantics never carried by color alone — glyphs (■▲●), shape (bindingness), and text labels back every palette; verified for protan/deuteran/tritan.</p>
+            <p style="margin:0 0 8px">Body text ≥ 4.5:1, large text/UI ≥ 3:1 on paper surfaces. Live ADRS panel is an <code>aria-live="polite"</code> region. Segmented controls are real buttons with <code>aria-pressed</code>; tables expose <code>aria-sort</code>.</p>
+            <p style="margin:0">Full keyboard path; visible focus rings; evidence panel focus-trapped when drawered, dismiss on Esc; <code>prefers-reduced-motion</code> disables skeleton shimmer.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3-minute walkthrough -->
+      <div class="eyebrow" style="margin:22px 0 8px">Three-minute interview walkthrough</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:11px">
+        <div class="card card-p"><div class="mono muted" style="font-size:10px">0:00 – 0:45</div><b class="serif" style="font-size:14px">Inspect &amp; trace</b><p class="tiny muted" style="margin:5px 0 0;line-height:1.5">Open <a class="rowlink" data-go="provision" style="cursor:pointer">Art. 14</a>. Show the verbatim Tier-1 quote, the fact→inference→recommendation chain, confidence, last-verified &amp; review status in the evidence pane.</p></div>
+        <div class="card card-p"><div class="mono muted" style="font-size:10px">0:45 – 1:30</div><b class="serif" style="font-size:14px">Compare jurisdictions</b><p class="tiny muted" style="margin:5px 0 0;line-height:1.5">Jump to <a class="rowlink" data-go="compare" style="cursor:pointer">Compare</a>. Explain "currently-applicable binding," why a 0-cell isn't "unregulated," and that equivalence is inference.</p></div>
+        <div class="card card-p"><div class="mono muted" style="font-size:10px">1:30 – 2:20</div><b class="serif" style="font-size:14px">Evaluate the agent</b><p class="tiny muted" style="margin:5px 0 0;line-height:1.5">Open <a class="rowlink" data-go="calc" style="cursor:pointer">ADRS calculator</a>. Toggle M1 on → watch residual &amp; final drop live; flip a J component to show jurisdiction ≠ J.</p></div>
+        <div class="card card-p"><div class="mono muted" style="font-size:10px">2:20 – 3:00</div><b class="serif" style="font-size:14px">Translate &amp; decide</b><p class="tiny muted" style="margin:5px 0 0;line-height:1.5">Finish on <a class="rowlink" data-go="mapper" style="cursor:pointer">Mapper</a> → <a class="rowlink" data-go="brief" style="cursor:pointer">Exec brief</a>: provision→control mapping, the CN log conflict, and the one-line launch decision.</p></div>
+      </div>
+    </div>
+  </section>
+
+  </div><!-- /stage -->
+
+  <footer class="ftr">
+    <span>AI Policy Atlas · fixtures build</span>
+    <a data-go="method" style="cursor:pointer">Methodology</a>
+    <a data-go="changelog" style="cursor:pointer">Changelog</a>
+    <span style="margin-left:auto">page as_of <b>2026-07-10</b></span>
+    <span>build <b>2026-07-11</b></span>
+    <span>content <b>v0.fixtures</b></span>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  componentDidMount(){
+    const root = document.querySelector('.app');
+    /* ---------- router ---------- */
+    const go = (id)=>{
+      root.querySelectorAll('.screen').forEach(s=>s.classList.toggle('on', s.dataset.screen===id));
+      root.querySelectorAll('.nav button').forEach(b=>{
+        const on = b.dataset.go===id; b.classList.toggle('on',on); if(on)b.setAttribute('aria-selected','true'); else b.removeAttribute('aria-selected');
+      });
+      document.getElementById('stage').scrollTop=0;
+    };
+    root.addEventListener('click',e=>{
+      const nav=e.target.closest('[data-go]'); if(nav){go(nav.dataset.go); if(nav.dataset.dl){/* deep link handled per screen */}}
+    });
+
+    /* ---------- policy tracker: filter + sort ---------- */
+    const INSTR = [
+      {title:'EU Artificial Intelligence Act', native:'Reg (EU) 2024/1689', j:'EU', type:'Regulation', b:'binding', bl:'Binding', bc:'bind-b', lc:'partial', lcl:'In force — partial', lcd:'2025-08-02', ver:'2026-06-30'},
+      {title:'GDPR — automated decisions (Art. 22)', native:'Reg (EU) 2016/679', j:'EU', type:'Regulation', b:'binding', bl:'Binding', bc:'bind-b', lc:'full', lcl:'Fully applicable', lcd:'2018-05-25', ver:'2026-05-04'},
+      {title:'US sectoral AI guidance (composite)', native:'Agency guidance', j:'US', type:'Regulator guidance', b:'cond', bl:'Conditional', bc:'bind-c', lc:'partial', lcl:'In force — partial', lcd:'2025-01-15', ver:'2026-06-18'},
+      {title:'US draft algorithmic accountability bill', native:'Proposed', j:'US', type:'Proposed legislation', b:'non', bl:'Non-binding', bc:'bind-n', lc:'prop', lcl:'Proposed', lcd:'2026-05-20', ver:'2026-06-02'},
+      {title:'SG Model AI Governance Framework', native:'MGF 2nd ed.', j:'SG', type:'Voluntary framework', b:'non', bl:'Non-binding', bc:'bind-n', lc:'full', lcl:'Fully applicable', lcd:'2024-05-30', ver:'2025-11-20'},
+      {title:'CN Deep Synthesis Provisions', native:'深度合成规定', j:'CN', type:'Regulation', b:'binding', bl:'Binding', bc:'bind-b', lc:'full', lcl:'Fully applicable', lcd:'2023-01-10', ver:'2026-06-15'},
+    ];
+    const lcClass={prop:'lc-prop',adopt:'lc-adopt',partial:'lc-partial',full:'lc-full',hist:'lc-hist'};
+    const lcOrder={prop:0,adopt:1,partial:2,full:3,hist:-1};
+    const state={j:new Set(),b:new Set(),sort:'ver',dir:-1};
+    const stale=(d)=>{const days=(new Date('2026-07-11')-new Date(d))/864e5;return days>180;};
+    const body=document.getElementById('trk-body');
+    const render=()=>{
+      let rows=INSTR.filter(r=>(!state.j.size||state.j.has(r.j))&&(!state.b.size||state.b.has(r.b)));
+      rows.sort((a,z)=>{let x,y; if(state.sort==='lc'){x=lcOrder[a.lc];y=lcOrder[z.lc];} else if(state.sort==='ver'){x=a.ver;y=z.ver;} else {x=(a[state.sort]||'').toString().toLowerCase();y=(z[state.sort]||'').toString().toLowerCase();} return (x<y?-1:x>y?1:0)*state.dir;});
+      body.innerHTML = rows.map(r=>`<tr class="rowlink" data-go="instrument"><td><b>${r.title}</b><div class="mono muted" style="font-size:10.5px">${r.native}</div></td><td>${r.j}</td><td><span class="itype">${r.type}</span></td><td><span class="bind ${r.bc}">${r.bl}</span></td><td><span class="lc ${lcClass[r.lc]}"><span class="lc-dot"></span><span class="lct">${r.lcl}</span></span> <span class="mono muted" style="font-size:10px">${r.lcd}</span></td><td><span class="mono">${r.ver}</span> ${stale(r.ver)?'<span class="stale" style="font-size:9.5px">stale</span>':''}</td></tr>`).join('');
+      document.getElementById('trk-count').textContent = rows.length+' of '+INSTR.length;
+      document.getElementById('trk-empty').style.display = rows.length? 'none':'block';
+      document.getElementById('trk-tbl').style.display = rows.length? '':'none';
+      document.querySelectorAll('#trk-tbl th[data-sort]').forEach(th=>{th.removeAttribute('aria-sort'); if(th.dataset.sort===state.sort)th.setAttribute('aria-sort',state.dir>0?'ascending':'descending');});
+    };
+    document.getElementById('trk-filters').addEventListener('click',e=>{
+      const f=e.target.closest('[data-filter]'); if(!f)return; const s=state[f.dataset.filter]; s.has(f.dataset.val)?s.delete(f.dataset.val):s.add(f.dataset.val); f.classList.toggle('on'); render();
+    });
+    const clearAll=()=>{state.j.clear();state.b.clear();document.querySelectorAll('#trk-filters .fchip').forEach(c=>c.classList.remove('on'));render();};
+    document.getElementById('trk-clear').addEventListener('click',clearAll);
+    document.getElementById('trk-clear2').addEventListener('click',clearAll);
+    document.querySelectorAll('#trk-tbl th[data-sort]').forEach(th=>th.addEventListener('click',()=>{ if(state.sort===th.dataset.sort)state.dir*=-1; else {state.sort=th.dataset.sort;state.dir=1;} render(); }));
+    render();
+
+    /* ---------- ADRS calculator (live) ---------- */
+    const W={A:.25,T:.20,D:.20,E:.15,R:.20};
+    const MC={M1:.10,M2:.08,M3:.07,M4:.06,M5:.05,M6:.04,M7:.04,M8:.03,M9:.03};
+    const JC={binding:.10,near:.05,enf:.05,proh:.10};
+    const tierOf=(s)=> s<25?['Low','low']: s<50?['Moderate','mod']: s<75?['High','high']:['Critical','crit'];
+    const recompute=(cal)=>{
+      let inh=0;
+      ['A','T','D','E','R'].forEach(d=>{
+        const b=cal.querySelector('[data-dim="'+d+'"].on'); const v=b?+b.dataset.val:0;
+        const c=W[d]*v*25; inh+=c;
+        const o=cal.querySelector('[data-out="dim'+d+'"]'); if(o)o.textContent=c.toFixed(2);
+        const at=cal.querySelector('[data-anchor="'+d+'"]'); if(at&&b)at.textContent=b.dataset.anchor||'';
+      });
+      let credit=0; cal.querySelectorAll('[data-mit].on').forEach(m=>credit+=MC[m.dataset.mit]);
+      const capped=credit>0.4001; credit=Math.min(0.40,credit);
+      let j=1; cal.querySelectorAll('[data-j].on').forEach(x=>j+=JC[x.dataset.j]); j=Math.min(1.30,j);
+      const resid=inh*(1-credit); const final=Math.min(100,resid*j);
+      const set=(k,v)=>cal.querySelectorAll('[data-out="'+k+'"]').forEach(o=>o.textContent=v);
+      set('inherent',inh.toFixed(1)); set('credit',credit.toFixed(2)); set('residual',resid.toFixed(1)); set('j',j.toFixed(2)); set('final',final.toFixed(1));
+      const capEl=cal.querySelector('[data-out="cap"]'); if(capEl)capEl.style.display=capped?'flex':'none';
+      const [tl,tc]=tierOf(final);
+      cal.querySelectorAll('[data-out="tier"]').forEach(t=>{t.textContent=tl;t.className='tierbadge tier-'+tc;t.setAttribute('title','tier from full-precision score');});
+      const live=cal.querySelector('[data-out="live"]'); if(live)live.textContent='ADRS '+final.toFixed(1)+' — '+tl;
+    };
+    root.addEventListener('click',e=>{
+      const cal=e.target.closest('.adrs'); if(!cal)return;
+      const dim=e.target.closest('[data-dim]');
+      if(dim){cal.querySelectorAll('[data-dim="'+dim.dataset.dim+'"]').forEach(b=>{b.classList.remove('on');b.removeAttribute('aria-pressed');});dim.classList.add('on');dim.setAttribute('aria-pressed','true');recompute(cal);return;}
+      const mit=e.target.closest('[data-mit]'); if(mit){mit.classList.toggle('on');mit.setAttribute('aria-pressed',mit.classList.contains('on'));recompute(cal);return;}
+      const jt=e.target.closest('[data-j]'); if(jt){jt.classList.toggle('on');jt.setAttribute('aria-pressed',jt.classList.contains('on'));recompute(cal);return;}
+      const jur=e.target.closest('[data-jur]'); if(jur){cal.querySelectorAll('[data-jur]').forEach(b=>b.classList.remove('on'));jur.classList.add('on');cal.querySelectorAll('[data-jurref]').forEach(r=>r.style.display=r.dataset.jurref===jur.dataset.jur?'block':'none');return;}
+    });
+    document.querySelectorAll('.adrs').forEach(recompute);
+
+    /* ---------- provision evidence panel ---------- */
+    root.addEventListener('click',e=>{
+      const fn=e.target.closest('[data-evi]'); if(!fn)return;
+      const reader=fn.closest('[data-screen]'); if(!reader)return;
+      reader.querySelectorAll('[data-evipanel]').forEach(p=>p.style.display=p.dataset.evipanel===fn.dataset.evi?'block':'none');
+      reader.querySelectorAll('[data-evi]').forEach(x=>x.classList.remove('on')); fn.classList.add('on');
+    });
+    /* ---------- outline links within readers ---------- */
+    root.addEventListener('click',e=>{
+      const ol=e.target.closest('.olink'); if(!ol)return; e.preventDefault();
+      ol.parentElement.querySelectorAll('.olink').forEach(x=>x.classList.remove('on')); ol.classList.add('on');
+    });
+  }
+}
+</script>
+</body>
+</html>

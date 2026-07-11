@@ -47,5 +47,31 @@
     "is_translation": false,
     "accessed_date": "2026-07-12",
     "manual_verification_date": "2026-07-12"
+  },
+  {
+    "id": "us-src-sb24205-leg",
+    "tier": 1,
+    "publisher": "Colorado General Assembly",
+    "title": "SB24-205 Consumer Protections for Artificial Intelligence (bill page)",
+    "url": "https://leg.colorado.gov/bills/sb24-205",
+    "stable_ref": "SB24-205 (Colo. 2024)",
+    "pub_date": "2024-05-17",
+    "language": "en",
+    "is_translation": false,
+    "accessed_date": "2026-07-12",
+    "manual_verification_date": "2026-07-12"
+  },
+  {
+    "id": "us-src-sb26189-leg",
+    "tier": 1,
+    "publisher": "Colorado General Assembly",
+    "title": "SB26-189 Automated Decision-Making Technology (bill page)",
+    "url": "https://leg.colorado.gov/bills/sb26-189",
+    "stable_ref": "SB26-189 (Colo. 2026)",
+    "pub_date": "2026-05-14",
+    "language": "en",
+    "is_translation": false,
+    "accessed_date": "2026-07-12",
+    "manual_verification_date": "2026-07-12"
   }
 ]

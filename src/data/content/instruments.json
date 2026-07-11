@@ -171,5 +171,72 @@
     "source_ids": [
       "us-src-sb26189-leg"
     ]
+  },
+  {
+    "id": "cn-ai-labeling-measures",
+    "jurisdiction_id": "cn",
+    "title_original": "人工智能生成合成内容标识办法",
+    "title_en": "Measures for Labeling AI-Generated Synthetic Content",
+    "instrument_type": "regulation",
+    "bindingness": "binding",
+    "lifecycle_status": "fully_applicable",
+    "status_date": "2025-09-01",
+    "approach_tags": [
+      "technology_specific",
+      "content_governance"
+    ],
+    "issuing_body": "国家互联网信息办公室 · 工业和信息化部 · 公安部 · 国家广播电视总局 (CAC, MIIT, MPS, NRTA)",
+    "adopted_date": "2025-03-07",
+    "key_dates": [
+      {
+        "date": "2025-03-07",
+        "event": "issued by four departments (国信办通字〔2025〕2号)",
+        "source_id": "cn-src-labeling-cac"
+      },
+      {
+        "date": "2025-09-01",
+        "event": "came into effect (施行)",
+        "source_id": "cn-src-labeling-cac"
+      }
+    ],
+    "summary_md": "■ FACT: Four-department departmental rules (classified regulation + binding per SPEC §8 rule 3) requiring explicit (显式) and implicit (隐式) labeling of AI-generated synthetic content; issued 2025-03-07, in effect since 2025-09-01. ▲ INFERENCE (medium): together with the deep-synthesis and generative-AI interim measures it forms the content-governance stack that drives prohibition_adjacent readings for public-content agents (C1/C6) in CN assessments — the Mira scenario's China story.",
+    "analyst_notes": "Pass 1 (authoring) 2026-07-12. Verified by direct fetch of the CAC notice (Tier 1, Chinese authoritative text; verbatim definitions captured). Official Q&A (答记者问) states coordination with 深度合成规定 and 生成式人工智能服务管理暂行办法 — those two instruments to be added with their own Tier 1 verification in the next CN pass rather than cited second-hand here. English renderings in this record are the analyst's own translation — confidence capped per §7.5.",
+    "review_status": "in_review",
+    "as_of_date": "2026-07-12",
+    "last_verified": "2026-07-12",
+    "source_ids": [
+      "cn-src-labeling-cac"
+    ]
+  },
+  {
+    "id": "sg-mgf-genai",
+    "jurisdiction_id": "sg",
+    "title_original": "Model AI Governance Framework for Generative AI — Fostering a Trusted Ecosystem",
+    "title_en": "Singapore Model AI Governance Framework for Generative AI (2024)",
+    "instrument_type": "voluntary_framework",
+    "bindingness": "non_binding",
+    "lifecycle_status": "fully_applicable",
+    "status_date": "2024-05-30",
+    "approach_tags": [
+      "technology_specific",
+      "standards_assurance"
+    ],
+    "issuing_body": "AI Verify Foundation & IMDA",
+    "adopted_date": "2024-05-30",
+    "key_dates": [
+      {
+        "date": "2024-05-30",
+        "event": "published (PDF verified by direct fetch this session)",
+        "source_id": "sg-src-mgf-genai"
+      }
+    ],
+    "summary_md": "■ FACT: Voluntary governance framework for generative AI issued by the AI Verify Foundation and IMDA on 2024-05-30 (title, issuers, and date verified against the official PDF this session). ▲ INFERENCE (medium): as a voluntary_framework it is non_binding (§8 Axis B independent of Axis C: 'fully_applicable' here means published-and-operative as guidance); it typifies Singapore's assurance-first approach — market-expected adoption without legal mandate, so it never drives binding_hit but shapes enforcement_posture readings.",
+    "analyst_notes": "Pass 1 (authoring) 2026-07-12. PDF text extraction was limited (compressed); the framework's nine governance dimensions and any agent-relevant sections are a Pass 2 full-text item — deliberately NOT asserted as fact here. PDPA and its 2020 amendment (MJ-4 amendment-as-event exemplar) queued for the next SG pass.",
+    "review_status": "in_review",
+    "as_of_date": "2026-07-12",
+    "last_verified": "2026-07-12",
+    "source_ids": [
+      "sg-src-mgf-genai"
+    ]
   }
 ]

@@ -311,5 +311,80 @@
     "review_status": "in_review",
     "as_of_date": "2026-07-12",
     "last_verified": "2026-07-12"
+  },
+  {
+    "id": "cn-ai-labeling-measures:explicit-def",
+    "instrument_id": "cn-ai-labeling-measures",
+    "pin_cite": "定义条款 (article number pending full-text pass)",
+    "quote_verbatim": "在生成合成内容或者交互场景界面中添加的，以文字、声音、图形等方式呈现并可以被用户明显感知到的标识。",
+    "paraphrase_en": "Defines an 'explicit label' (显式标识): a label added to generated synthetic content or the interaction interface, presented as text, sound, or graphics, clearly perceptible to users. A companion definition covers implicit labels (隐式标识) embedded technically in file data. Applies to all AI-generated text, images, audio, and video since 2025-09-01.",
+    "obligation_type": "definition",
+    "applies_from": "2025-09-01",
+    "source_id": "cn-src-labeling-cac",
+    "confidence": "medium",
+    "confidence_rationale": "Chinese original quoted verbatim from the Tier 1 CAC text fetched this session (authoritative language per §6.4). Capped medium because the English paraphrase is the analyst's own translation (§7.5 cap) and the article number awaits the full-text pass.",
+    "epistemic_blocks": [
+      {
+        "id": "b1",
+        "kind": "fact",
+        "text_md": "The Measures define explicit labels (显式标识) as user-perceptible text/sound/graphic marks on generated synthetic content or its interaction interface, and implicit labels (隐式标识) as technically embedded marks in content file data.",
+        "citations": [
+          {
+            "tier": 1,
+            "publisher": "CAC (cac.gov.cn)",
+            "title": "人工智能生成合成内容标识办法",
+            "url": "https://www.cac.gov.cn/2025-03/14/c_1743654684782215.htm",
+            "stable_ref": "国信办通字〔2025〕2号",
+            "pin_cite": "定义条款",
+            "pub_date": "2025-03-07",
+            "language": "zh",
+            "accessed_date": "2026-07-12"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "id": "b2",
+        "kind": "inference",
+        "text_md": "A generative agent serving CN users (C1) that posts publicly (C6) must emit BOTH label layers: explicit marks in the rendered content/UI and implicit marks in file metadata — a concrete engineering requirement on the content pipeline, currently applicable (binding_hit driver for CN assessments of C1≥2 agents).",
+        "confidence": "medium",
+        "based_on": [
+          "b1"
+        ]
+      },
+      {
+        "id": "b3",
+        "kind": "recommendation",
+        "text_md": "Operators of content-generating agents in CN could implement the synthetic-content watermark/label-injection control (M8 class) at the rendering layer AND the file-metadata layer, and log label application per output (M3) as compliance evidence.",
+        "based_on": [
+          "b2"
+        ]
+      }
+    ],
+    "capability_map": [
+      {
+        "capability_id": "C1",
+        "rationale": "Labeling duty attaches to generated synthetic content.",
+        "confidence": "high"
+      },
+      {
+        "capability_id": "C6",
+        "rationale": "Interaction-interface and publicly distributed content are expressly covered.",
+        "confidence": "medium"
+      }
+    ],
+    "risk_map": [
+      {
+        "risk_id": "R4",
+        "rationale": "Explicit labels target deceptive interaction."
+      },
+      {
+        "risk_id": "R9",
+        "rationale": "Part of the CN content-governance stack."
+      }
+    ],
+    "review_status": "in_review",
+    "as_of_date": "2026-07-12",
+    "last_verified": "2026-07-12"
   }
 ]

@@ -73,5 +73,31 @@
     "is_translation": false,
     "accessed_date": "2026-07-12",
     "manual_verification_date": "2026-07-12"
+  },
+  {
+    "id": "cn-src-labeling-cac",
+    "tier": 1,
+    "publisher": "国家互联网信息办公室 (Cyberspace Administration of China) — cac.gov.cn",
+    "title": "关于印发《人工智能生成合成内容标识办法》的通知 (Measures for Labeling AI-Generated Synthetic Content)",
+    "url": "https://www.cac.gov.cn/2025-03/14/c_1743654684782215.htm",
+    "stable_ref": "国信办通字〔2025〕2号",
+    "pub_date": "2025-03-07",
+    "language": "zh",
+    "is_translation": false,
+    "accessed_date": "2026-07-12",
+    "manual_verification_date": "2026-07-12"
+  },
+  {
+    "id": "sg-src-mgf-genai",
+    "tier": 1,
+    "publisher": "AI Verify Foundation & Infocomm Media Development Authority (IMDA)",
+    "title": "Model AI Governance Framework for Generative AI — Fostering a Trusted Ecosystem",
+    "url": "https://aiverifyfoundation.sg/wp-content/uploads/2024/05/Model-AI-Governance-Framework-for-Generative-AI-May-2024-1-1.pdf",
+    "stable_ref": "MGF-GenAI (May 2024)",
+    "pub_date": "2024-05-30",
+    "language": "en",
+    "is_translation": false,
+    "accessed_date": "2026-07-12",
+    "manual_verification_date": "2026-07-12"
   }
 ]

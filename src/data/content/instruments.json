@@ -238,5 +238,80 @@
     "source_ids": [
       "sg-src-mgf-genai"
     ]
+  },
+  {
+    "id": "us-eo-14179",
+    "jurisdiction_id": "us",
+    "title_original": "Executive Order 14179 of January 23, 2025 — Removing Barriers to American Leadership in Artificial Intelligence",
+    "title_en": "EO 14179 — Removing Barriers to American Leadership in AI",
+    "instrument_type": "executive_action",
+    "bindingness": "conditionally_binding",
+    "lifecycle_status": "fully_applicable",
+    "status_date": "2025-01-23",
+    "approach_tags": [
+      "procurement_internal_government",
+      "horizontal_comprehensive"
+    ],
+    "issuing_body": "The White House (President of the United States)",
+    "adopted_date": "2025-01-23",
+    "supersedes_id": "us-eo-14110",
+    "key_dates": [
+      {
+        "date": "2025-01-23",
+        "event": "signed",
+        "source_id": "us-src-eo14179-govinfo"
+      },
+      {
+        "date": "2025-01-31",
+        "event": "published in the Federal Register (90 FR 8741)",
+        "source_id": "us-src-eo14179-govinfo"
+      }
+    ],
+    "summary_md": "■ FACT (high): Signed 2025-01-23, published 90 FR 8741; sets the replacement federal AI policy ('sustain and enhance America's global AI dominance', Sec 2), directs an AI Action Plan (Sec 4), and orders agencies to suspend/revise/rescind actions taken under 'the revoked Executive Order 14110' (Sec 5(a)) and to revise OMB M-24-10/M-24-18 (Sec 5(b)). Full Tier 1 text read this session. ▲ INFERENCE (medium): conditionally_binding per SPEC §8 rule 4 — binds the executive branch, not private parties; for the Atlas its main effect is on enforcement_posture readings and the federal-procurement channel, not direct obligations on agent operators.",
+    "analyst_notes": "Pass 1 (authoring) 2026-07-12. Full FR text read from the govinfo PDF. PRECISION NOTE vs SPEC Appendix A: EO 14179 does not itself revoke EO 14110 — Sec 5(a) refers to 'the revoked Executive Order 14110', i.e. revocation had already occurred (EO 14148 of 2025-01-20, §2 — to be independently verified Pass 2). Supersession links kept at the policy-replacement level. OMB M-24-10/M-24-18 revision status = Pass 2 item.",
+    "review_status": "in_review",
+    "as_of_date": "2026-07-12",
+    "last_verified": "2026-07-12",
+    "source_ids": [
+      "us-src-eo14179-govinfo"
+    ]
+  },
+  {
+    "id": "us-eo-14110",
+    "jurisdiction_id": "us",
+    "title_original": "Executive Order 14110 of October 30, 2023 — Safe, Secure, and Trustworthy Development and Use of Artificial Intelligence",
+    "title_en": "EO 14110 — Safe, Secure, and Trustworthy AI (rescinded)",
+    "instrument_type": "executive_action",
+    "bindingness": "conditionally_binding",
+    "lifecycle_status": "rescinded",
+    "status_date": "2025-01-20",
+    "approach_tags": [
+      "horizontal_comprehensive",
+      "safety_security",
+      "procurement_internal_government"
+    ],
+    "issuing_body": "The White House (President of the United States)",
+    "adopted_date": "2023-10-30",
+    "superseded_by_id": "us-eo-14179",
+    "key_dates": [
+      {
+        "date": "2023-10-30",
+        "event": "signed",
+        "source_id": "us-src-eo14179-govinfo"
+      },
+      {
+        "date": "2025-01-20",
+        "event": "revoked (vehicle: EO 14148 §2 — date/vehicle pending independent Pass 2 verification; revoked STATUS itself is Tier-1-verified via EO 14179 Sec 5(a))",
+        "source_id": "us-src-eo14179-govinfo"
+      }
+    ],
+    "summary_md": "■ FACT (high): Revoked — EO 14179 Sec 5(a) refers in Tier 1 text to 'the revoked Executive Order 14110 of October 30, 2023 (Safe, Secure, and Trustworthy Development and Use of Artificial Intelligence)'. ▲ INFERENCE (medium): retained in the corpus per SPEC §9 edge-case (b) — a rescinded executive action stays visible for historical mapping with supersession links; the 14110→14179 pair is the taxonomy's executive-action supersession exemplar alongside Colorado's statutory one.",
+    "analyst_notes": "Pass 1 (authoring) 2026-07-12. Original FR citation for 14110 (88 FR 75191) and the revoking instrument EO 14148 to be added with their own Tier 1 verification in Pass 2; not cited from memory here. status_date 2025-01-20 carries medium confidence pending that verification.",
+    "review_status": "in_review",
+    "as_of_date": "2026-07-12",
+    "last_verified": "2026-07-12",
+    "source_ids": [
+      "us-src-eo14179-govinfo"
+    ]
   }
 ]

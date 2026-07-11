@@ -15,11 +15,11 @@ export function getPageDataset() {
     return {
       profile,
       instruments: [], provisions: [], sources: [], scenarios: [], changelog: [],
-      assessments: [] as Assessment[],
+      assessments: [] as Assessment[], controls: [],
     };
   }
-  const { dataset } = loadAndValidate(profile);
-  return { profile, ...dataset, assessments: currentVersions(dataset.assessments) };
+  const { dataset, controls } = loadAndValidate(profile);
+  return { profile, ...dataset, controls, assessments: currentVersions(dataset.assessments) };
 }
 
 export function scoreAssessment(a: Assessment) {

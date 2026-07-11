@@ -5,6 +5,7 @@
  */
 import assessmentsJson from '../../data/fixtures/assessments.json';
 import contentChangelogJson from '../../data/content/changelog.json';
+import contentControlsJson from '../../data/content/controls.json';
 import contentInstrumentsJson from '../../data/content/instruments.json';
 import contentProvisionsJson from '../../data/content/provisions.json';
 import contentSourcesJson from '../../data/content/sources.json';
@@ -18,6 +19,7 @@ import { z } from 'zod';
 import {
   AssessmentSchema,
   ChangelogSchema,
+  ControlSchema,
   CapabilitySeedSchema,
   InstrumentSchema,
   ProvisionSchema,
@@ -25,6 +27,7 @@ import {
   ScenarioSchema,
   SourceSchema,
 } from '../schemas';
+import type { Control } from '../schemas';
 import type { BuildProfile } from './buildProfile';
 import { runIntegrity, type Dataset, type IntegrityError } from './integrity';
 
@@ -52,7 +55,7 @@ function validateArray<S extends z.ZodTypeAny>(
 }
 
 /** Validate seeds + content for the given profile. Seeds render in both profiles; fixture content only in `fixtures`. */
-export function loadAndValidate(profile: BuildProfile): ValidationReport & { dataset: Dataset } {
+export function loadAndValidate(profile: BuildProfile): ValidationReport & { dataset: Dataset; controls: Control[] } {
   const schemaErrors: ValidationReport['schemaErrors'] = [];
 
   validateArray('seeds/capabilities.json', CapabilitySeedSchema, capabilitiesJson, schemaErrors);
@@ -79,6 +82,7 @@ export function loadAndValidate(profile: BuildProfile): ValidationReport & { dat
     changelog: validateArray('content/changelog.json', ChangelogSchema, contentChangelogJson, schemaErrors),
   };
 
+  const controls = validateArray('content/controls.json', ControlSchema, contentControlsJson, schemaErrors);
   const integrityErrors = runIntegrity(dataset, profile);
 
   return {
@@ -94,8 +98,10 @@ export function loadAndValidate(profile: BuildProfile): ValidationReport & { dat
       scenarios: dataset.scenarios.length,
       assessments: dataset.assessments.length,
       changelog: dataset.changelog.length,
+      controls: controls.length,
     },
     ok: schemaErrors.length === 0 && integrityErrors.length === 0,
     dataset,
+    controls,
   };
 }

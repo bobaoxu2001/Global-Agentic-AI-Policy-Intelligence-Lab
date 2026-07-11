@@ -314,5 +314,77 @@
       "us-src-eo14148-govinfo",
       "us-src-eo14179-govinfo"
     ]
+  },
+  {
+    "id": "cn-genai-interim-measures",
+    "jurisdiction_id": "cn",
+    "title_original": "生成式人工智能服务管理暂行办法",
+    "title_en": "Interim Measures for the Management of Generative AI Services",
+    "instrument_type": "regulation",
+    "bindingness": "binding",
+    "lifecycle_status": "fully_applicable",
+    "status_date": "2023-08-15",
+    "approach_tags": [
+      "technology_specific",
+      "content_governance"
+    ],
+    "issuing_body": "七部门:国家互联网信息办公室、国家发展改革委、教育部、科技部、工业和信息化部、公安部、国家广播电视总局",
+    "adopted_date": "2023-07-10",
+    "key_dates": [
+      {
+        "date": "2023-07-10",
+        "event": "公布 (国家互联网信息办公室令第15号, seven departments)",
+        "source_id": "cn-src-genai-interim-cac"
+      },
+      {
+        "date": "2023-08-15",
+        "event": "施行 (came into effect)",
+        "source_id": "cn-src-genai-interim-cac"
+      }
+    ],
+    "summary_md": "■ FACT (medium, translation cap): Seven-department interim measures for generative AI services (Order No. 15), published 2023-07-10, in effect since 2023-08-15; classified regulation + binding per SPEC §8 rule 3. ▲ INFERENCE (medium): Article 9 places network content-producer responsibility on the service PROVIDER — for agent operators this locates accountability at the operator, not the model vendor or the user, which is the pivotal allocation question for agentic deployments in CN.",
+    "analyst_notes": "Pass 1 (authoring) 2026-07-12. Verified by direct CAC fetch (issuing departments, dates, 文号, Art 9 verbatim). English renderings are analyst translations (§7.5 cap). Algorithm/GenAI filing (备案) linkage and Art 17 labeling cross-reference to be detailed in a later pass.",
+    "review_status": "in_review",
+    "as_of_date": "2026-07-12",
+    "last_verified": "2026-07-12",
+    "source_ids": [
+      "cn-src-genai-interim-cac"
+    ]
+  },
+  {
+    "id": "cn-deep-synthesis-provisions",
+    "jurisdiction_id": "cn",
+    "title_original": "互联网信息服务深度合成管理规定",
+    "title_en": "Provisions on the Administration of Deep Synthesis of Internet Information Services",
+    "instrument_type": "regulation",
+    "bindingness": "binding",
+    "lifecycle_status": "fully_applicable",
+    "status_date": "2023-01-10",
+    "approach_tags": [
+      "technology_specific",
+      "content_governance"
+    ],
+    "issuing_body": "三部门:国家互联网信息办公室、工业和信息化部、公安部 (CAC, MIIT, MPS)",
+    "adopted_date": "2022-12-11",
+    "key_dates": [
+      {
+        "date": "2022-12-11",
+        "event": "公布 (three departments)",
+        "source_id": "cn-src-deepsynthesis-cac"
+      },
+      {
+        "date": "2023-01-10",
+        "event": "施行 (came into effect)",
+        "source_id": "cn-src-deepsynthesis-cac"
+      }
+    ],
+    "summary_md": "■ FACT (medium, translation cap): Three-department deep-synthesis provisions, published 2022-12-11, in effect since 2023-01-10 — the earliest binding layer of the CN synthetic-content stack. ▲ INFERENCE (medium): Article 17's conspicuous-labeling duty names 智能对话 (intelligent dialogue) and 合成人声 (synthetic voice) among the functions requiring prominent marks — i.e., a conversational agent's interaction surface is EXPRESSLY within scope, not an interpretive stretch.",
+    "analyst_notes": "Pass 1 (authoring) 2026-07-12. Verified by direct CAC fetch (departments, dates, Art 17 verbatim). Order number (令) not shown on the publication page — record and backfill in Pass 2. English renderings are analyst translations (§7.5 cap).",
+    "review_status": "in_review",
+    "as_of_date": "2026-07-12",
+    "last_verified": "2026-07-12",
+    "source_ids": [
+      "cn-src-deepsynthesis-cac"
+    ]
   }
 ]

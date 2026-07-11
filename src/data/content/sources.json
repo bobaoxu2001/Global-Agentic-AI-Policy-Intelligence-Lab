@@ -125,5 +125,31 @@
     "is_translation": false,
     "accessed_date": "2026-07-12",
     "manual_verification_date": "2026-07-12"
+  },
+  {
+    "id": "cn-src-genai-interim-cac",
+    "tier": 1,
+    "publisher": "国家互联网信息办公室 (CAC) — cac.gov.cn",
+    "title": "生成式人工智能服务管理暂行办法 (Interim Measures for the Management of Generative AI Services)",
+    "url": "https://www.cac.gov.cn/2023-07/13/c_1690898327029107.htm",
+    "stable_ref": "国家互联网信息办公室令第15号",
+    "pub_date": "2023-07-10",
+    "language": "zh",
+    "is_translation": false,
+    "accessed_date": "2026-07-12",
+    "manual_verification_date": "2026-07-12"
+  },
+  {
+    "id": "cn-src-deepsynthesis-cac",
+    "tier": 1,
+    "publisher": "国家互联网信息办公室 (CAC) — cac.gov.cn",
+    "title": "互联网信息服务深度合成管理规定 (Provisions on the Administration of Deep Synthesis of Internet Information Services)",
+    "url": "https://www.cac.gov.cn/2022-12/11/c_1672221949318230.htm",
+    "stable_ref": "三部门规定 (2022-12-11 公布; 文号未见于发布页 — Pass 2 补录)",
+    "pub_date": "2022-12-11",
+    "language": "zh",
+    "is_translation": false,
+    "accessed_date": "2026-07-12",
+    "manual_verification_date": "2026-07-12"
   }
 ]

@@ -386,5 +386,141 @@
     "review_status": "in_review",
     "as_of_date": "2026-07-12",
     "last_verified": "2026-07-12"
+  },
+  {
+    "id": "cn-genai-interim-measures:art9",
+    "instrument_id": "cn-genai-interim-measures",
+    "pin_cite": "第九条 (Article 9)",
+    "quote_verbatim": "提供者应当依法承担网络信息内容生产者责任，履行网络信息安全义务。",
+    "paraphrase_en": "Generative-AI service providers bear network content-producer responsibility in accordance with law and must fulfil network information security obligations — the provider, not the model vendor or end user, is the accountable party for what the service generates.",
+    "obligation_type": "obligation",
+    "applies_from": "2023-08-15",
+    "source_id": "cn-src-genai-interim-cac",
+    "confidence": "medium",
+    "confidence_rationale": "Chinese original quoted verbatim from the Tier 1 CAC text fetched this session; English paraphrase is the analyst's own translation (§7.5 cap → medium).",
+    "epistemic_blocks": [
+      {
+        "id": "b1",
+        "kind": "fact",
+        "text_md": "Article 9 of the Interim Measures places content-producer responsibility (网络信息内容生产者责任) and information-security obligations on the generative-AI service provider.",
+        "citations": [
+          {
+            "tier": 1,
+            "publisher": "CAC (cac.gov.cn)",
+            "title": "生成式人工智能服务管理暂行办法",
+            "url": "https://www.cac.gov.cn/2023-07/13/c_1690898327029107.htm",
+            "stable_ref": "国家互联网信息办公室令第15号",
+            "pin_cite": "第九条",
+            "pub_date": "2023-07-10",
+            "language": "zh",
+            "accessed_date": "2026-07-12"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "id": "b2",
+        "kind": "inference",
+        "text_md": "For an agent that generates content toward CN users (C1), accountability sits with the deploying operator as 'provider' — an agent architecture cannot delegate content responsibility to the upstream model; this is a currently-applicable binding_hit driver for C1-bearing agents in CN.",
+        "confidence": "medium",
+        "based_on": [
+          "b1"
+        ]
+      },
+      {
+        "id": "b3",
+        "kind": "recommendation",
+        "text_md": "Operators of CN-facing generative agents could pair output moderation with the immutable action log (M3) so content-producer responsibility is dischargeable with evidence, and treat provider-side filing/labeling duties as launch gates.",
+        "based_on": [
+          "b2"
+        ]
+      }
+    ],
+    "capability_map": [
+      {
+        "capability_id": "C1",
+        "rationale": "Duty attaches to the provider of content generation services.",
+        "confidence": "high"
+      }
+    ],
+    "risk_map": [
+      {
+        "risk_id": "R9",
+        "rationale": "Provider responsibility is the enforcement anchor of CN content governance."
+      }
+    ],
+    "review_status": "in_review",
+    "as_of_date": "2026-07-12",
+    "last_verified": "2026-07-12"
+  },
+  {
+    "id": "cn-deep-synthesis-provisions:art17",
+    "instrument_id": "cn-deep-synthesis-provisions",
+    "pin_cite": "第十七条 (Article 17)",
+    "quote_verbatim": "提供智能对话、合成人声、人脸生成、沉浸式拟真场景等生成或显著改变信息内容功能的服务的，应当进行显著标识。",
+    "paraphrase_en": "Services providing intelligent dialogue, synthetic voice, face generation, immersive simulated scenes, or other functions that generate or significantly alter information content must apply conspicuous labels. Conversational agents (智能对话) are named expressly — an agent's chat surface is within scope by enumeration, not interpretation.",
+    "obligation_type": "obligation",
+    "applies_from": "2023-01-10",
+    "source_id": "cn-src-deepsynthesis-cac",
+    "confidence": "medium",
+    "confidence_rationale": "Chinese original quoted verbatim from the Tier 1 CAC text fetched this session; English paraphrase is the analyst's own translation (§7.5 cap → medium).",
+    "epistemic_blocks": [
+      {
+        "id": "b1",
+        "kind": "fact",
+        "text_md": "Article 17 requires conspicuous labeling (显著标识) for services providing intelligent dialogue, synthetic voice, face generation, immersive simulated scenes, and other functions that generate or significantly alter information content.",
+        "citations": [
+          {
+            "tier": 1,
+            "publisher": "CAC (cac.gov.cn)",
+            "title": "互联网信息服务深度合成管理规定",
+            "url": "https://www.cac.gov.cn/2022-12/11/c_1672221949318230.htm",
+            "pin_cite": "第十七条",
+            "pub_date": "2022-12-11",
+            "language": "zh",
+            "accessed_date": "2026-07-12"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "id": "b2",
+        "kind": "inference",
+        "text_md": "智能对话 (intelligent dialogue) in the enumeration means a conversational agent's interface in CN has carried a binding conspicuous-labeling duty since 2023-01-10 — predating both the EU Art 50 disclosure duty and the 2025 Labeling Measures, and layering with the latter's explicit/implicit dual marks.",
+        "confidence": "medium",
+        "based_on": [
+          "b1"
+        ]
+      },
+      {
+        "id": "b3",
+        "kind": "recommendation",
+        "text_md": "Operators could implement one disclosure/labeling control surface (M8) satisfying the strictest layer of the CN stack (Art 17 conspicuous label + 2025 explicit/implicit marks) and reuse it for the EU Art 50(1) duty — one control, three obligations.",
+        "based_on": [
+          "b2"
+        ]
+      }
+    ],
+    "capability_map": [
+      {
+        "capability_id": "C1",
+        "rationale": "Generation/alteration functions are the trigger.",
+        "confidence": "high"
+      },
+      {
+        "capability_id": "C6",
+        "rationale": "Dialogue interfaces with users are expressly enumerated.",
+        "confidence": "high"
+      }
+    ],
+    "risk_map": [
+      {
+        "risk_id": "R4",
+        "rationale": "Conspicuous labels target deceptive interaction."
+      }
+    ],
+    "review_status": "in_review",
+    "as_of_date": "2026-07-12",
+    "last_verified": "2026-07-12"
   }
 ]

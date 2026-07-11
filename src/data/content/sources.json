@@ -112,5 +112,18 @@
     "is_translation": false,
     "accessed_date": "2026-07-12",
     "manual_verification_date": "2026-07-12"
+  },
+  {
+    "id": "us-src-eo14148-govinfo",
+    "tier": 1,
+    "publisher": "U.S. Government Publishing Office (govinfo.gov) — Federal Register",
+    "title": "Executive Order 14148 — Initial Rescissions of Harmful Executive Orders and Actions",
+    "url": "https://www.govinfo.gov/content/pkg/FR-2025-01-28/pdf/2025-01901.pdf",
+    "stable_ref": "90 FR 8237 · FR Doc. 2025-01901",
+    "pub_date": "2025-01-28",
+    "language": "en",
+    "is_translation": false,
+    "accessed_date": "2026-07-12",
+    "manual_verification_date": "2026-07-12"
   }
 ]

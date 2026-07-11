@@ -297,20 +297,21 @@
       {
         "date": "2023-10-30",
         "event": "signed",
-        "source_id": "us-src-eo14179-govinfo"
+        "source_id": "us-src-eo14148-govinfo"
       },
       {
         "date": "2025-01-20",
-        "event": "revoked (vehicle: EO 14148 §2 — date/vehicle pending independent Pass 2 verification; revoked STATUS itself is Tier-1-verified via EO 14179 Sec 5(a))",
-        "source_id": "us-src-eo14179-govinfo"
+        "event": "revoked by EO 14148 §2(ggg) — 'Executive Order 14110 of October 30, 2023 (Safe, Secure, and Trustworthy Development and Use of Artificial Intelligence)' listed among revocations (Tier 1 text read this session)",
+        "source_id": "us-src-eo14148-govinfo"
       }
     ],
-    "summary_md": "■ FACT (high): Revoked — EO 14179 Sec 5(a) refers in Tier 1 text to 'the revoked Executive Order 14110 of October 30, 2023 (Safe, Secure, and Trustworthy Development and Use of Artificial Intelligence)'. ▲ INFERENCE (medium): retained in the corpus per SPEC §9 edge-case (b) — a rescinded executive action stays visible for historical mapping with supersession links; the 14110→14179 pair is the taxonomy's executive-action supersession exemplar alongside Colorado's statutory one.",
-    "analyst_notes": "Pass 1 (authoring) 2026-07-12. Original FR citation for 14110 (88 FR 75191) and the revoking instrument EO 14148 to be added with their own Tier 1 verification in Pass 2; not cited from memory here. status_date 2025-01-20 carries medium confidence pending that verification.",
+    "summary_md": "■ FACT (high): Revoked on 2025-01-20 by EO 14148 §2(ggg) (90 FR 8237; full Tier 1 text read this session), and referenced as 'the revoked Executive Order 14110' in EO 14179 Sec 5(a). ▲ INFERENCE (medium): retained in the corpus per SPEC §9 edge-case (b) — a rescinded executive action stays visible for historical mapping with supersession links; the 14110→14148→14179 chain is the taxonomy's executive-action supersession exemplar (revocation vehicle and replacement policy are DIFFERENT instruments — a precision most trackers collapse).",
+    "analyst_notes": "Pass 1 (authoring) 2026-07-12, updated same day: revocation vehicle VERIFIED — EO 14148 §2(ggg), signed 2025-01-20, published 90 FR 8237. Former open item closed with Tier 1 evidence; status_date confidence now high. Original 14110 FR citation (88 FR 75191) still to be added from its own FR document in a later pass (not cited from memory).",
     "review_status": "in_review",
     "as_of_date": "2026-07-12",
     "last_verified": "2026-07-12",
     "source_ids": [
+      "us-src-eo14148-govinfo",
       "us-src-eo14179-govinfo"
     ]
   }

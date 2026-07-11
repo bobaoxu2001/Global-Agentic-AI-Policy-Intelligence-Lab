@@ -70,3 +70,27 @@ test('calculator permalink round-trips state (AC-ADRS-8) and anchor text updates
   await expect(page.getByTestId('out-inherent')).toHaveText('0.00');
   await expect(page.getByTestId('out-credit')).toHaveText('0.08');
 });
+
+test('tracker filters: OR within axis, AND across axes, URL state, empty state (AC-TRK-2/3/4)', async ({ page }) => {
+  await page.goto('/instruments');
+  const total = await page.locator('tbody tr').count();
+  expect(total).toBeGreaterThanOrEqual(9);
+  // AND across axes: jurisdiction=eu AND type=enacted_law
+  await page.getByTestId('f-jur-eu').check();
+  await page.getByTestId('f-type-enacted_law').check();
+  await expect(page.getByTestId('result-count')).toContainText('3 of'); // eu-ai-act, eu-gdpr + the fictional EU fixture
+  expect(page.url()).toContain('jur=eu');
+  expect(page.url()).toContain('type=enacted_law');
+  // OR within axis: add jurisdiction=us → grows
+  await page.getByTestId('f-jur-us').check();
+  await expect(page.getByTestId('result-count')).toContainText('5 of'); // + Colorado pair
+  // impossible combo → empty state
+  await page.getByTestId('f-lifecycle-withdrawn').check();
+  await expect(page.getByTestId('empty-state')).toBeVisible();
+  // clear all restores
+  await page.getByTestId('clear-filters').click();
+  await expect(page.locator('tbody tr')).toHaveCount(total);
+  // URL round-trip: direct load with params applies filters
+  await page.goto('/instruments?jur=cn');
+  await expect(page.getByTestId('result-count')).toContainText('1 of');
+});

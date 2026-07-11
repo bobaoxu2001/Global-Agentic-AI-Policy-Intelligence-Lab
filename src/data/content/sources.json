@@ -1,0 +1,51 @@
+[
+  {
+    "id": "eu-src-aiact-eurlex",
+    "tier": 1,
+    "publisher": "EUR-Lex (Official Journal of the European Union)",
+    "title": "Regulation (EU) 2024/1689 (Artificial Intelligence Act)",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689",
+    "stable_ref": "CELEX:32024R1689 · OJ L, 2024/1689, 12.7.2024",
+    "pub_date": "2024-07-12",
+    "language": "en",
+    "is_translation": false,
+    "accessed_date": "2026-07-12",
+    "manual_verification_date": "2026-07-12"
+  },
+  {
+    "id": "eu-src-aiact-servicedesk",
+    "tier": 2,
+    "publisher": "European Commission — AI Act Service Desk",
+    "title": "AI Act article texts (official Commission information platform)",
+    "url": "https://ai-act-service-desk.ec.europa.eu/en/ai-act",
+    "pub_date": "2025-10-08",
+    "language": "en",
+    "is_translation": false,
+    "accessed_date": "2026-07-12",
+    "manual_verification_date": "2026-07-12"
+  },
+  {
+    "id": "eu-src-omnibus-consilium",
+    "tier": 2,
+    "publisher": "Council of the European Union (Consilium press office)",
+    "title": "Artificial intelligence: Council gives final green light to simplify and streamline rules",
+    "url": "https://www.consilium.europa.eu/en/press/press-releases/2026/06/29/artificial-intelligence-council-gives-final-green-light-to-simplify-and-streamline-rules/",
+    "pub_date": "2026-06-29",
+    "language": "en",
+    "is_translation": false,
+    "accessed_date": "2026-07-12"
+  },
+  {
+    "id": "eu-src-gdpr-eurlex",
+    "tier": 1,
+    "publisher": "EUR-Lex (Official Journal of the European Union)",
+    "title": "Regulation (EU) 2016/679 (General Data Protection Regulation)",
+    "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679",
+    "stable_ref": "CELEX:32016R0679 · OJ L 119, 4.5.2016",
+    "pub_date": "2016-05-04",
+    "language": "en",
+    "is_translation": false,
+    "accessed_date": "2026-07-12",
+    "manual_verification_date": "2026-07-12"
+  }
+]

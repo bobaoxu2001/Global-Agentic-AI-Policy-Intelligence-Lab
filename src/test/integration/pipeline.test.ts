@@ -68,10 +68,12 @@ describe('production profile rejections (CB-4, rules 7–8)', () => {
   it('rejects every fixture:true record in production', () => {
     const r = good();
     const errors = checkNoFixturesInProduction(r.dataset, 'production');
-    const fixtureCount =
-      r.dataset.instruments.length + r.dataset.provisions.length + r.dataset.sources.length +
-      r.dataset.scenarios.length + r.dataset.assessments.length;
-    expect(errors.length).toBe(fixtureCount); // every shipped content record is a fixture in Phase 0
+    const fixtureCount = [
+      ...r.dataset.instruments, ...r.dataset.provisions, ...r.dataset.sources,
+      ...r.dataset.scenarios, ...r.dataset.assessments,
+    ].filter((x) => (x as { fixture?: boolean }).fixture === true).length;
+    expect(fixtureCount).toBe(20); // the Phase 0 fictional corpus
+    expect(errors.length).toBe(fixtureCount); // real (non-fixture) research content is NOT R7-rejected
     expect(errors.every((e) => e.rule === 'R7-no-fixtures-in-prod')).toBe(true);
   });
   it('full production pipeline fails on the shipped fixture corpus', () => {

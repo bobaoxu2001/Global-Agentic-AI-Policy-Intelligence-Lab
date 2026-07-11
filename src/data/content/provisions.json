@@ -1,0 +1,158 @@
+[
+  {
+    "id": "eu-ai-act:art14",
+    "instrument_id": "eu-ai-act",
+    "pin_cite": "Article 14(1)",
+    "quote_verbatim": "High-risk AI systems shall be designed and developed in such a way, including with appropriate human-machine interface tools, that they can be effectively overseen by natural persons during the period in which they are in use.",
+    "paraphrase_en": "High-risk AI systems must be designed for effective human oversight while in use, including appropriate human-machine interface tools. A high-risk agentic system executing consequential actions autonomously would need architecturally real oversight, not nominal review.",
+    "obligation_type": "obligation",
+    "applies_from": "2026-08-02",
+    "source_id": "eu-src-aiact-eurlex",
+    "confidence": "medium",
+    "confidence_rationale": "Text verified verbatim this session via the Commission's AI Act Service Desk (Tier 2 official mirror of the Tier 1 EUR-Lex text). Confidence capped at medium per SPEC §22: a known adopted-but-unpublished amendment (2026 omnibus) defers this provision's application date from 2026-08-02 to 2027-12-02 (Annex III).",
+    "epistemic_blocks": [
+      {
+        "id": "b1",
+        "kind": "fact",
+        "text_md": "Article 14(1) AI Act requires high-risk AI systems to be designed and developed so that natural persons can effectively oversee them during use.",
+        "citations": [
+          { "tier": 1, "publisher": "EUR-Lex", "title": "Regulation (EU) 2024/1689", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689", "stable_ref": "CELEX:32024R1689", "pin_cite": "Article 14(1)", "pub_date": "2024-07-12", "accessed_date": "2026-07-12" }
+        ],
+        "confidence": "high"
+      },
+      {
+        "id": "b2",
+        "kind": "fact",
+        "text_md": "On 2026-06-29 the Council gave final approval to the omnibus amendment deferring Annex III high-risk obligations (which include Art 14 for such systems) to 2027-12-02; the amending act awaited Official Journal publication as of 2026-07-12.",
+        "citations": [
+          { "tier": 2, "publisher": "Council of the EU (Consilium)", "title": "AI: Council gives final green light to simplify and streamline rules", "url": "https://www.consilium.europa.eu/en/press/press-releases/2026/06/29/artificial-intelligence-council-gives-final-green-light-to-simplify-and-streamline-rules/", "pin_cite": "(press release, whole document)", "pub_date": "2026-06-29", "accessed_date": "2026-07-12" }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "id": "b3",
+        "kind": "inference",
+        "text_md": "For an agentic system that is (or is embedded in) a high-risk system, Art 14 reaches autonomous state-changing execution (C5) and multi-step planning (C7): oversight must be effective during use, which post-hoc review alone may not satisfy at anchor A=3+.",
+        "confidence": "medium",
+        "based_on": ["b1"]
+      },
+      {
+        "id": "b4",
+        "kind": "recommendation",
+        "text_md": "Operators of high-risk-class agentic systems could place the approval gate at the tool-execution boundary (control class M1) and instrument it with the §18.5 action log so oversight is demonstrably effective, not nominal.",
+        "based_on": ["b3"]
+      }
+    ],
+    "capability_map": [
+      { "capability_id": "C5", "rationale": "Oversight duty attaches to state-changing execution in high-risk contexts.", "confidence": "medium" },
+      { "capability_id": "C7", "rationale": "Effective oversight during use constrains autonomous multi-step operation.", "confidence": "medium" },
+      { "capability_id": "C8", "rationale": "High-risk classification frequently coincides with consequential decision-making.", "confidence": "medium" }
+    ],
+    "risk_map": [
+      { "risk_id": "R6", "rationale": "Provision directly targets oversight failure." }
+    ],
+    "review_status": "in_review",
+    "as_of_date": "2026-07-12",
+    "last_verified": "2026-07-12"
+  },
+  {
+    "id": "eu-ai-act:art50-1",
+    "instrument_id": "eu-ai-act",
+    "pin_cite": "Article 50(1)",
+    "quote_verbatim": "Providers shall ensure that AI systems intended to interact directly with natural persons are designed and developed in such a way that the natural persons concerned are informed that they are interacting with an AI system",
+    "paraphrase_en": "AI systems that interact directly with people must be designed so users know they are dealing with AI, unless that is obvious to a reasonably informed person in context. Applies from 2026-08-02 and was NOT deferred by the 2026 omnibus.",
+    "obligation_type": "obligation",
+    "applies_from": "2026-08-02",
+    "source_id": "eu-src-aiact-eurlex",
+    "confidence": "medium",
+    "confidence_rationale": "First-clause text verified verbatim this session (Commission AI Act Service Desk; quote truncated to ≤50 words per §21.3 — the full sentence adds a reasonableness qualifier). Not-deferred status corroborated by the Council press release (fetch blocked, 403) and multiple independent secondary reports; capped medium until the omnibus text is checked in the OJ.",
+    "epistemic_blocks": [
+      {
+        "id": "b1",
+        "kind": "fact",
+        "text_md": "Article 50(1) AI Act requires providers to design direct-interaction AI systems so the persons concerned are informed they are interacting with an AI system (subject to an obviousness qualifier).",
+        "citations": [
+          { "tier": 1, "publisher": "EUR-Lex", "title": "Regulation (EU) 2024/1689", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689", "stable_ref": "CELEX:32024R1689", "pin_cite": "Article 50(1)", "pub_date": "2024-07-12", "accessed_date": "2026-07-12" }
+        ],
+        "confidence": "high"
+      },
+      {
+        "id": "b2",
+        "kind": "fact",
+        "text_md": "Art 50 transparency obligations apply from 2026-08-02; the 2026 omnibus deferral of high-risk deadlines did not defer Art 50(1) (Art 50(2) watermarking gains a limited extension to 2026-12-02 for systems already on the market).",
+        "citations": [
+          { "tier": 2, "publisher": "Council of the EU (Consilium)", "title": "AI: Council gives final green light to simplify and streamline rules", "url": "https://www.consilium.europa.eu/en/press/press-releases/2026/06/29/artificial-intelligence-council-gives-final-green-light-to-simplify-and-streamline-rules/", "pin_cite": "(press release, whole document)", "pub_date": "2026-06-29", "accessed_date": "2026-07-12" }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "id": "b3",
+        "kind": "inference",
+        "text_md": "This reaches customer-facing agents (C1 generation + C6 external communication) directly: a support or companion agent interacting with EU users needs AI disclosure from 2026-08-02 — three weeks from this record's last_verified date — regardless of the high-risk deferral.",
+        "confidence": "medium",
+        "based_on": ["b1", "b2"]
+      },
+      {
+        "id": "b4",
+        "kind": "recommendation",
+        "text_md": "Operators of user-facing agents could treat AI-disclosure (control class M8) as a launch-blocking control for EU deployments now, since this obligation's date held while the high-risk dates moved.",
+        "based_on": ["b3"]
+      }
+    ],
+    "capability_map": [
+      { "capability_id": "C1", "rationale": "Disclosure duty attaches to systems generating interaction with humans.", "confidence": "high" },
+      { "capability_id": "C6", "rationale": "Direct interaction with natural persons is the operative trigger.", "confidence": "high" }
+    ],
+    "risk_map": [
+      { "risk_id": "R4", "rationale": "Provision directly targets deceptive interaction (humans unaware they face AI)." }
+    ],
+    "review_status": "in_review",
+    "as_of_date": "2026-07-12",
+    "last_verified": "2026-07-12"
+  },
+  {
+    "id": "eu-gdpr:art22",
+    "instrument_id": "eu-gdpr",
+    "pin_cite": "Article 22(1)",
+    "paraphrase_en": "Data subjects have the right not to be subject to decisions based solely on automated processing, including profiling, that produce legal effects or similarly significantly affect them — the core EU constraint on fully automated consequential decisions by agents (C8).",
+    "obligation_type": "right",
+    "applies_from": "2018-05-25",
+    "source_id": "eu-src-gdpr-eurlex",
+    "confidence": "medium",
+    "confidence_rationale": "Paraphrase-only record: instrument metadata verified against the EUR-Lex CELEX record this session, but Art 22's verbatim wording was not re-fetched; per the project's verification discipline no quote is included and confidence is capped at medium until the text is re-verified in a review pass.",
+    "epistemic_blocks": [
+      {
+        "id": "b1",
+        "kind": "fact",
+        "text_md": "GDPR Article 22(1) grants the right not to be subject to a decision based solely on automated processing, including profiling, which produces legal effects or similarly significantly affects the data subject.",
+        "citations": [
+          { "tier": 1, "publisher": "EUR-Lex", "title": "Regulation (EU) 2016/679 (GDPR)", "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679", "stable_ref": "CELEX:32016R0679", "pin_cite": "Article 22(1)", "pub_date": "2016-05-04", "accessed_date": "2026-07-12" }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "id": "b2",
+        "kind": "inference",
+        "text_md": "An agent that finalizes consequential outcomes without independent human judgment (C8 at intensity ≥2) operates in Art 22 territory; a genuine human-in-the-loop (M1) is the classic path out of 'solely automated'.",
+        "confidence": "medium",
+        "based_on": ["b1"]
+      },
+      {
+        "id": "b3",
+        "kind": "recommendation",
+        "text_md": "Operators of consequential-decision agents in the EU could route Art-22-relevant outcomes through a meaningful human decision point (M1) and log the human's role (M3) as evidence the decision was not solely automated.",
+        "based_on": ["b2"]
+      }
+    ],
+    "capability_map": [
+      { "capability_id": "C8", "rationale": "Art 22 is the paradigmatic consequential-automated-decision provision.", "confidence": "high" },
+      { "capability_id": "C9", "rationale": "Profiling is expressly within scope.", "confidence": "high" }
+    ],
+    "risk_map": [
+      { "risk_id": "R3", "rationale": "Provision targets consequential-decision harm from solely automated processing." }
+    ],
+    "review_status": "in_review",
+    "as_of_date": "2026-07-12",
+    "last_verified": "2026-07-12"
+  }
+]

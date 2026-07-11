@@ -4,6 +4,9 @@
  * Fails with a collected, readable error report — never fail-fast (ENG §16).
  */
 import assessmentsJson from '../../data/fixtures/assessments.json';
+import contentInstrumentsJson from '../../data/content/instruments.json';
+import contentProvisionsJson from '../../data/content/provisions.json';
+import contentSourcesJson from '../../data/content/sources.json';
 import instrumentsJson from '../../data/fixtures/instruments.json';
 import provisionsJson from '../../data/fixtures/provisions.json';
 import scenariosJson from '../../data/fixtures/scenarios.json';
@@ -53,10 +56,22 @@ export function loadAndValidate(profile: BuildProfile): ValidationReport & { dat
   validateArray('seeds/capabilities.json', CapabilitySeedSchema, capabilitiesJson, schemaErrors);
   validateArray('seeds/risks.json', RiskSeedSchema, risksJson, schemaErrors);
 
+  // Real research content (src/data/content/, non-fixture) is loaded in BOTH
+  // profiles: production admits it subject to R8 (published-only); fixtures
+  // profile previews in_review drafts (CB-4 relaxation).
   const dataset: Dataset = {
-    sources: validateArray('fixtures/sources.json', SourceSchema, sourcesJson, schemaErrors),
-    instruments: validateArray('fixtures/instruments.json', InstrumentSchema, instrumentsJson, schemaErrors),
-    provisions: validateArray('fixtures/provisions.json', ProvisionSchema, provisionsJson, schemaErrors),
+    sources: [
+      ...validateArray('fixtures/sources.json', SourceSchema, sourcesJson, schemaErrors),
+      ...validateArray('content/sources.json', SourceSchema, contentSourcesJson, schemaErrors),
+    ],
+    instruments: [
+      ...validateArray('fixtures/instruments.json', InstrumentSchema, instrumentsJson, schemaErrors),
+      ...validateArray('content/instruments.json', InstrumentSchema, contentInstrumentsJson, schemaErrors),
+    ],
+    provisions: [
+      ...validateArray('fixtures/provisions.json', ProvisionSchema, provisionsJson, schemaErrors),
+      ...validateArray('content/provisions.json', ProvisionSchema, contentProvisionsJson, schemaErrors),
+    ],
     scenarios: validateArray('fixtures/scenarios.json', ScenarioSchema, scenariosJson, schemaErrors),
     assessments: validateArray('fixtures/assessments.json', AssessmentSchema, assessmentsJson, schemaErrors),
   };

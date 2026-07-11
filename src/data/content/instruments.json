@@ -1,0 +1,52 @@
+[
+  {
+    "id": "eu-ai-act",
+    "jurisdiction_id": "eu",
+    "title_original": "Regulation (EU) 2024/1689 laying down harmonised rules on artificial intelligence (Artificial Intelligence Act)",
+    "title_en": "EU Artificial Intelligence Act (Regulation (EU) 2024/1689)",
+    "instrument_type": "enacted_law",
+    "bindingness": "binding",
+    "lifecycle_status": "in_force_partially_applicable",
+    "status_date": "2024-08-01",
+    "approach_tags": ["horizontal_comprehensive"],
+    "issuing_body": "European Parliament and Council of the European Union",
+    "adopted_date": "2024-06-13",
+    "key_dates": [
+      { "date": "2024-07-12", "event": "published in the Official Journal (OJ L, 2024/1689)", "source_id": "eu-src-aiact-eurlex" },
+      { "date": "2024-08-01", "event": "entered into force (Art 113)", "source_id": "eu-src-aiact-eurlex" },
+      { "date": "2025-02-02", "event": "prohibitions (Art 5) and AI-literacy obligations began to apply", "source_id": "eu-src-aiact-eurlex" },
+      { "date": "2025-08-02", "event": "GPAI-model obligations began to apply", "source_id": "eu-src-aiact-eurlex" },
+      { "date": "2026-06-29", "event": "Council final approval of the digital-omnibus amendment deferring high-risk obligations (Annex III to 2027-12-02; Annex I-embedded to 2028-08-02); amending act pending OJ publication as of last_verified — Art 50(1) transparency NOT deferred", "source_id": "eu-src-omnibus-consilium" },
+      { "date": "2026-08-02", "event": "Art 50 transparency obligations apply (unchanged by omnibus for 50(1); 50(2) watermarking deferred to 2026-12-02 for systems already on market)", "source_id": "eu-src-omnibus-consilium" }
+    ],
+    "summary_md": "■ FACT: Adopted 2024, in force since 2024-08-01, applying in stages; classified enacted_law per SPEC §9.3 (primary legislation despite the EU-law label 'Regulation'). ■ FACT: A June 2026 omnibus amendment — finally approved by the Council on 2026-06-29 and pending Official Journal publication as of 2026-07-12 — defers the Annex III high-risk obligations to 2027-12-02 and Annex I-embedded to 2028-08-02, while leaving Art 50(1) transparency applying from 2026-08-02. ▲ INFERENCE (medium): until the amending act is published, the dates on the books remain those of Reg 2024/1689; records here therefore carry the original applies_from with the deferral documented in key_dates.",
+    "analyst_notes": "Pass 1 (authoring) 2026-07-12. Consilium press-release URL returned HTTP 403 to automated fetch (known bot-blocking host, MJ-7 allowlist); existence and content corroborated via multiple independent Tier-3 law-firm alerts and the Parliament endorsement of 2026-06-16. Re-verify OJ publication of the amending act before Pass 2 review; when published, update key_dates with the new CELEX and re-score any affected assessments (§19.5).",
+    "review_status": "in_review",
+    "as_of_date": "2026-07-12",
+    "last_verified": "2026-07-12",
+    "source_ids": ["eu-src-aiact-eurlex", "eu-src-aiact-servicedesk", "eu-src-omnibus-consilium"]
+  },
+  {
+    "id": "eu-gdpr",
+    "jurisdiction_id": "eu",
+    "title_original": "Regulation (EU) 2016/679 (General Data Protection Regulation)",
+    "title_en": "General Data Protection Regulation (GDPR)",
+    "instrument_type": "enacted_law",
+    "bindingness": "binding",
+    "lifecycle_status": "fully_applicable",
+    "status_date": "2018-05-25",
+    "approach_tags": ["data_protection_derived", "horizontal_comprehensive"],
+    "issuing_body": "European Parliament and Council of the European Union",
+    "adopted_date": "2016-04-27",
+    "key_dates": [
+      { "date": "2016-05-04", "event": "published in the Official Journal (OJ L 119)", "source_id": "eu-src-gdpr-eurlex" },
+      { "date": "2018-05-25", "event": "became fully applicable (Art 99(2))", "source_id": "eu-src-gdpr-eurlex" }
+    ],
+    "summary_md": "■ FACT: Fully applicable since 2018-05-25; the EU's horizontal data-protection regime. Amendment history does not change its live status (amendment = event, not status — SPEC §8/MJ-4). ▲ INFERENCE (medium): Art 22's automated-decision-making right is the primary GDPR hook for agentic systems making consequential decisions (C8).",
+    "analyst_notes": "Pass 1 (authoring) 2026-07-12. Instrument metadata verified against EUR-Lex CELEX record this session; Art 22 verbatim wording not re-fetched this session (paraphrase-only provision, confidence capped accordingly).",
+    "review_status": "in_review",
+    "as_of_date": "2026-07-12",
+    "last_verified": "2026-07-12",
+    "source_ids": ["eu-src-gdpr-eurlex"]
+  }
+]

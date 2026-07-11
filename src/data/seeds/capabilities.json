@@ -1,0 +1,14 @@
+[
+  { "id": "C1", "name": "Content generation", "definition": "Produces text/image/audio/video presented to humans", "indicators": "Generative model in the serving path; output rendered to users" },
+  { "id": "C2", "name": "Data access — internal", "definition": "Reads organizational or user data (files, CRM, tickets, telemetry)", "indicators": "Data-store connectors, retrieval pipelines, scoped credentials" },
+  { "id": "C3", "name": "Data access — personal/sensitive", "definition": "Processes personal data or special categories (health, minors, biometrics)", "indicators": "PII in prompts/retrieval; user-profile joins" },
+  { "id": "C4", "name": "Tool invocation — read-only", "definition": "Calls tools/APIs that observe but do not change state", "indicators": "Tool registry entries with read scopes" },
+  { "id": "C5", "name": "Tool invocation — state-changing", "definition": "Executes actions that modify systems (write DB, change configs, issue refunds, quarantine hosts)", "indicators": "Write/execute-scoped credentials; effectful API calls" },
+  { "id": "C6", "name": "External communication", "definition": "Sends messages to parties outside the operator (emails, chats, posts, tickets to third parties)", "indicators": "Outbound channels; third-party recipients" },
+  { "id": "C7", "name": "Autonomous multi-step planning", "definition": "Decomposes goals and sequences actions without per-step human approval", "indicators": "Planner/orchestrator loop; step budget > 1 without HITL gate" },
+  { "id": "C8", "name": "Consequential decision-making", "definition": "Makes or materially influences decisions with legal or similarly significant effects on persons", "indicators": "Decision output consumed without independent human judgment" },
+  { "id": "C9", "name": "Memory & profiling", "definition": "Persists information about users/entities across sessions to shape future behavior", "indicators": "Long-term memory stores keyed to identity" },
+  { "id": "C10", "name": "Delegation / multi-agent orchestration", "definition": "Spawns or tasks other agents; accepts tasks from other agents", "indicators": "Agent-to-agent protocols; sub-agent spawning" },
+  { "id": "C11", "name": "Self-modification of scope", "definition": "Acquires new tools, permissions, or data sources at runtime", "indicators": "Dynamic tool discovery; credential brokering" },
+  { "id": "C12", "name": "Financial/transactional execution", "definition": "Moves money or commits the operator contractually", "indicators": "Payment/commerce API scopes" }
+]

@@ -1,0 +1,43 @@
+[
+  {
+    "id": "aria",
+    "name": "Aria — Customer Support Agent (S1)",
+    "narrative_md": "HYPOTHETICAL SCENARIO (fictional composite, SPEC §14.1). A consumer-app support agent that reads customer account data and ticket history, drafts and sends replies, and can execute refunds up to $100 without approval (larger refunds require human sign-off). Deployed in all four jurisdictions; interacts directly with end users, some of whom may be minors.",
+    "capability_profile": [
+      { "capability_id": "C1", "intensity": 2, "note": "Drafts replies — routine use in normal operation (§10 anchor 2)." },
+      { "capability_id": "C2", "intensity": 3, "note": "Reads account/ticket data — central to the support function (§10 anchor 3)." },
+      { "capability_id": "C3", "intensity": 3, "note": "Personal data incl. possible minors — central to the function (§10 anchor 3)." },
+      { "capability_id": "C5", "intensity": 2, "note": "Refunds within hard limits — routine, bounded (§10 anchor 2)." },
+      { "capability_id": "C6", "intensity": 3, "note": "Sends replies to customers — central to the function (§10 anchor 3)." },
+      { "capability_id": "C7", "intensity": 2, "note": "Bounded multi-step handling — routine (§10 anchor 2)." },
+      { "capability_id": "C9", "intensity": 2, "note": "Customer memory across sessions — routine (§10 anchor 2)." }
+    ],
+    "fixture": true
+  },
+  {
+    "id": "sentinel",
+    "name": "Sentinel — Cloud Security Remediation Agent (S2)",
+    "narrative_md": "HYPOTHETICAL SCENARIO (fictional composite, SPEC §14.2). An internal agent for a cloud provider's security operations: ingests alerts, investigates across telemetry, and autonomously executes containment (isolate VMs, revoke credentials, block IPs) on customer-impacting infrastructure, with human review within 30 minutes after action.",
+    "capability_profile": [
+      { "capability_id": "C2", "intensity": 3, "note": "Ingests telemetry — central to the investigation function (§10 anchor 3)." },
+      { "capability_id": "C4", "intensity": 3, "note": "Read-only investigation tooling — central (§10 anchor 3)." },
+      { "capability_id": "C5", "intensity": 3, "note": "High-potency containment actions — central (§10 anchor 3)." },
+      { "capability_id": "C7", "intensity": 3, "note": "Autonomous sequencing of containment steps — central (§10 anchor 3)." },
+      { "capability_id": "C10", "intensity": 2, "note": "Delegates tasks to sub-agents — routine (§10 anchor 2)." },
+      { "capability_id": "C11", "intensity": 1, "note": "Limited runtime scope acquisition — constrained/exceptional (§10 anchor 1)." }
+    ],
+    "fixture": true
+  },
+  {
+    "id": "mira",
+    "name": "Mira — Gaming/Social Content Agent (S3)",
+    "narrative_md": "HYPOTHETICAL SCENARIO (fictional composite, SPEC §14.3). An in-game companion NPC/social agent for a global game: generates dialogue and images, remembers player relationships across sessions, posts highlights to the game's public community feed, and nudges re-engagement. Player base includes minors; live in all four jurisdictions.",
+    "capability_profile": [
+      { "capability_id": "C1", "intensity": 4, "note": "Heavy generation at scale across the player base (§10 anchor 4)." },
+      { "capability_id": "C3", "intensity": 3, "note": "Minors' data — central to personalization (§10 anchor 3)." },
+      { "capability_id": "C6", "intensity": 3, "note": "Public posts to the community feed — central (§10 anchor 3)." },
+      { "capability_id": "C9", "intensity": 3, "note": "Deep cross-session profiling — central (§10 anchor 3)." }
+    ],
+    "fixture": true
+  }
+]

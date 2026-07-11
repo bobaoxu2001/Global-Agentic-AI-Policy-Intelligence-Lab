@@ -1,0 +1,214 @@
+/**
+ * Integration tests — validation + integrity pipeline (ENG §12.2).
+ * Good fixtures pass under the fixtures profile; crafted-bad records fail
+ * with the right rule; production profile rejects fixtures and non-published.
+ * Scenario expectations are READ FROM FIXTURE FILES, never hardcoded (MJ-10).
+ */
+import { describe, expect, it } from 'vitest';
+import assessmentsJson from '../../data/fixtures/assessments.json';
+import { computeAdrs, displayScore, type Dims, type JComponents, type MitigationClass } from '../../lib/adrs';
+import { AssessmentSchema, InstrumentSchema, ProvisionSchema } from '../../lib/schemas';
+import { assertNotFixtureDeploy, FIXTURE_BANNER_TEXT, getBuildProfile } from '../../lib/validation/buildProfile';
+import {
+  checkDimensionInvariance,
+  checkNoFixturesInProduction,
+  checkPublishedOnlyInProduction,
+  runIntegrity,
+  type Dataset,
+} from '../../lib/validation/integrity';
+import { loadAndValidate } from '../../lib/validation/loadDataset';
+
+const good = () => loadAndValidate('fixtures');
+
+describe('pipeline over shipped fixtures (BUILD_PROFILE=fixtures)', () => {
+  it('validates clean: zero schema errors, zero integrity errors', () => {
+    const r = good();
+    expect(r.schemaErrors).toEqual([]);
+    expect(r.integrityErrors).toEqual([]);
+    expect(r.ok).toBe(true);
+  });
+  it('has the expected corpus counts (12 seeds ×2, 3 scenarios, 12 assessments)', () => {
+    const r = good();
+    expect(r.counts.capabilities).toBe(12);
+    expect(r.counts.risks).toBe(12);
+    expect(r.counts.scenarios).toBe(3);
+    expect(r.counts.assessments).toBe(12);
+  });
+  it('every scenario has all four jurisdictions assessed', () => {
+    const r = good();
+    for (const s of r.dataset.scenarios) {
+      const jur = r.dataset.assessments.filter((a) => a.scenario_id === s.id).map((a) => a.jurisdiction_id);
+      expect(new Set(jur)).toEqual(new Set(['us', 'eu', 'sg', 'cn']));
+    }
+  });
+});
+
+describe('ADRS recompute over fixtures — expectations derived from fixture data (MJ-10)', () => {
+  it('recomputes every fixture assessment without error; caps hold; tiers valid', () => {
+    for (const a of assessmentsJson) {
+      const result = computeAdrs({
+        dims: Object.fromEntries(
+          (['A', 'T', 'D', 'E', 'R'] as const).map((d) => [d, a.dims[d].score]),
+        ) as Dims,
+        mitigations: a.mitigations.map((m) => m.class) as MitigationClass[],
+        j: Object.fromEntries(Object.entries(a.j_components).map(([k, v]) => [k, v.value])) as unknown as JComponents,
+      });
+      expect(result.credit).toBeLessThanOrEqual(0.4 + 1e-12);
+      expect(result.j).toBeLessThanOrEqual(1.3 + 1e-12);
+      expect(result.final).toBeLessThanOrEqual(100);
+      expect(['low', 'moderate', 'high', 'critical']).toContain(result.tier);
+      expect(Number.isFinite(displayScore(result.final))).toBe(true);
+    }
+  });
+});
+
+describe('production profile rejections (CB-4, rules 7–8)', () => {
+  it('rejects every fixture:true record in production', () => {
+    const r = good();
+    const errors = checkNoFixturesInProduction(r.dataset, 'production');
+    const fixtureCount =
+      r.dataset.instruments.length + r.dataset.provisions.length + r.dataset.sources.length +
+      r.dataset.scenarios.length + r.dataset.assessments.length;
+    expect(errors.length).toBe(fixtureCount); // every shipped content record is a fixture in Phase 0
+    expect(errors.every((e) => e.rule === 'R7-no-fixtures-in-prod')).toBe(true);
+  });
+  it('full production pipeline fails on the shipped fixture corpus', () => {
+    const r = loadAndValidate('production');
+    expect(r.ok).toBe(false);
+    expect(r.integrityErrors.some((e) => e.rule === 'R7-no-fixtures-in-prod')).toBe(true);
+  });
+  it('rejects non-published records in production', () => {
+    const r = good();
+    const ds: Dataset = {
+      ...r.dataset,
+      assessments: r.dataset.assessments.map((a, i) =>
+        i === 0 ? { ...a, review_status: 'draft' as const } : a,
+      ),
+    };
+    const errors = checkPublishedOnlyInProduction(ds, 'production');
+    expect(errors.some((e) => e.rule === 'R8-published-only')).toBe(true);
+    expect(checkPublishedOnlyInProduction(ds, 'fixtures')).toEqual([]);
+  });
+});
+
+describe('integrity rule 13 — A/T/R invariance, D/E divergence (ENG §12.2.13)', () => {
+  it('rejects a scenario whose A differs across jurisdictions', () => {
+    const r = good();
+    const ds: Dataset = {
+      ...r.dataset,
+      assessments: r.dataset.assessments.map((a) =>
+        a.id === 'aria-eu-v1' ? { ...a, dims: { ...a.dims, A: { ...a.dims.A, score: 4 as const } } } : a,
+      ),
+    };
+    const errors = checkDimensionInvariance(ds);
+    expect(errors.some((e) => e.rule === 'R5-ATR-invariance' && e.entity === 'aria')).toBe(true);
+  });
+  it('accepts D divergence WITH justification; rejects it WITHOUT', () => {
+    const r = good();
+    const diverge = (justified: boolean): Dataset => ({
+      ...r.dataset,
+      assessments: r.dataset.assessments.map((a) =>
+        a.id === 'aria-eu-v1'
+          ? {
+              ...a,
+              dims: {
+                ...a.dims,
+                D: {
+                  score: 2 as const,
+                  justification: a.dims.D.justification,
+                  ...(justified
+                    ? { divergence_justification: 'EU deployment localizes data and strips minors profiles, lowering D.' }
+                    : {}),
+                },
+              },
+            }
+          : justified
+            ? { ...a, dims: { ...a.dims, D: { ...a.dims.D, divergence_justification: 'Non-EU deployments retain the full data scope described in the scenario narrative.' } } }
+            : a,
+      ),
+    });
+    expect(checkDimensionInvariance(diverge(true)).filter((e) => e.rule === 'R6-DE-divergence')).toEqual([]);
+    expect(checkDimensionInvariance(diverge(false)).some((e) => e.rule === 'R6-DE-divergence')).toBe(true);
+  });
+});
+
+describe('crafted-bad records fail schema validation (ENG §12.2)', () => {
+  const baseAssessment = assessmentsJson[0]!;
+  it('rejects author-supplied computed fields (final/tier) — §18.3', () => {
+    expect(AssessmentSchema.safeParse({ ...baseAssessment, final: 56.4 }).success).toBe(false);
+    expect(AssessmentSchema.safeParse({ ...baseAssessment, tier: 'high' }).success).toBe(false);
+  });
+  it('rejects a blank dimension justification (<40 chars)', () => {
+    const bad = structuredClone(baseAssessment) as Record<string, unknown>;
+    (bad.dims as Record<string, { justification: string }>).A!.justification = 'too short';
+    expect(AssessmentSchema.safeParse(bad).success).toBe(false);
+  });
+  it('rejects a provision quote over 50 words even under 350 chars (OD-3)', () => {
+    const words = Array.from({ length: 60 }, (_, i) => `w${i}`).join(' '); // 60 words, <350 chars
+    const p = {
+      id: 'fx:bad', instrument_id: 'fx-fictional-agentic-act', pin_cite: 'Art 1',
+      quote_verbatim: words, paraphrase_en: 'x'.repeat(50), obligation_type: 'obligation',
+      source_id: 'fx-src-001', confidence: 'low', confidence_rationale: 'fixture',
+      epistemic_blocks: [{ id: 'b1', kind: 'fact', text_md: 'f', confidence: 'low',
+        citations: [{ tier: 1, publisher: 'p', title: 't', url: 'https://example.invalid/x', pin_cite: 'Art 1', accessed_date: '2026-07-11' }] }],
+      capability_map: [{ capability_id: 'C1', rationale: 'r', confidence: 'low' }],
+      risk_map: [], review_status: 'draft', as_of_date: '2026-07-11', last_verified: '2026-07-11',
+    };
+    expect(ProvisionSchema.safeParse(p).success).toBe(false);
+  });
+  it('rejects quote_translated without translation_source_id (OD-4)', () => {
+    const p = {
+      id: 'fx:bad2', instrument_id: 'fx-fictional-agentic-act', pin_cite: 'Art 2',
+      quote_translated: 'translated text', paraphrase_en: 'x'.repeat(50), obligation_type: 'obligation',
+      source_id: 'fx-src-001', confidence: 'low', confidence_rationale: 'fixture',
+      epistemic_blocks: [{ id: 'b1', kind: 'fact', text_md: 'f', confidence: 'low',
+        citations: [{ tier: 1, publisher: 'p', title: 't', url: 'https://example.invalid/x', pin_cite: 'Art 2', accessed_date: '2026-07-11' }] }],
+      capability_map: [{ capability_id: 'C1', rationale: 'r', confidence: 'low' }],
+      risk_map: [], review_status: 'draft', as_of_date: '2026-07-11', last_verified: '2026-07-11',
+    };
+    expect(ProvisionSchema.safeParse(p).success).toBe(false);
+  });
+  it('rejects a fact block cited only by Tier 3 (§21.5) and a confident recommendation (§20.1)', () => {
+    const mk = (blocks: unknown[]) => ({
+      id: 'fx:bad3', instrument_id: 'fx-fictional-agentic-act', pin_cite: 'Art 3',
+      paraphrase_en: 'x'.repeat(50), obligation_type: 'obligation',
+      source_id: 'fx-src-001', confidence: 'low', confidence_rationale: 'fixture',
+      epistemic_blocks: blocks,
+      capability_map: [{ capability_id: 'C1', rationale: 'r', confidence: 'low' }],
+      risk_map: [], review_status: 'draft', as_of_date: '2026-07-11', last_verified: '2026-07-11',
+    });
+    const tier3Fact = mk([{ id: 'b1', kind: 'fact', text_md: 'f', confidence: 'low',
+      citations: [{ tier: 3, publisher: 'blog', title: 't', url: 'https://example.invalid/x', pin_cite: 'n/a', accessed_date: '2026-07-11' }] }]);
+    expect(ProvisionSchema.safeParse(tier3Fact).success).toBe(false);
+    const confidentRec = mk([
+      { id: 'b1', kind: 'fact', text_md: 'f', confidence: 'low',
+        citations: [{ tier: 1, publisher: 'p', title: 't', url: 'https://example.invalid/x', pin_cite: 'Art 3', accessed_date: '2026-07-11' }] },
+      { id: 'b2', kind: 'recommendation', text_md: 'r', confidence: 'high', based_on: ['b1'] },
+    ]);
+    expect(ProvisionSchema.safeParse(confidentRec).success).toBe(false);
+  });
+  it('rejects unknown enum values (instrument_type "law")', () => {
+    const r = good();
+    expect(runIntegrity(r.dataset, 'fixtures')).toEqual([]); // sanity: base is clean
+    const inst = { ...r.dataset.instruments[0]!, instrument_type: 'law' };
+    expect(InstrumentSchema.safeParse(inst).success).toBe(false);
+  });
+});
+
+describe('build profile guards (CB-4, rule 10)', () => {
+  it('banner constant is exactly the approved text', () => {
+    expect(FIXTURE_BANNER_TEXT).toBe('FIXTURE DATA — ILLUSTRATIVE ONLY');
+  });
+  it('defaults to production (fail-closed) and rejects unknown profiles', () => {
+    expect(getBuildProfile({} as unknown as NodeJS.ProcessEnv)).toBe('production');
+    expect(() => getBuildProfile({ BUILD_PROFILE: 'staging' } as unknown as NodeJS.ProcessEnv)).toThrow();
+  });
+  it('fixture profile cannot be deployed to production (DEPLOY_ENV guard)', () => {
+    expect(() =>
+      assertNotFixtureDeploy({ BUILD_PROFILE: 'fixtures', DEPLOY_ENV: 'production' } as unknown as NodeJS.ProcessEnv),
+    ).toThrow(/cannot be deployed/);
+    expect(() =>
+      assertNotFixtureDeploy({ BUILD_PROFILE: 'production', DEPLOY_ENV: 'production' } as unknown as NodeJS.ProcessEnv),
+    ).not.toThrow();
+  });
+});

@@ -1,0 +1,328 @@
+{
+  "$ref": "#/definitions/assessment",
+  "definitions": {
+    "assessment": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scenario_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "jurisdiction_id": {
+          "type": "string",
+          "enum": [
+            "us",
+            "eu",
+            "sg",
+            "cn"
+          ]
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "dims": {
+          "type": "object",
+          "properties": {
+            "A": {
+              "type": "object",
+              "properties": {
+                "score": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 4
+                },
+                "justification": {
+                  "type": "string",
+                  "minLength": 40
+                },
+                "divergence_justification": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "score",
+                "justification"
+              ],
+              "additionalProperties": false
+            },
+            "T": {
+              "type": "object",
+              "properties": {
+                "score": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 4
+                },
+                "justification": {
+                  "type": "string",
+                  "minLength": 40
+                },
+                "divergence_justification": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "score",
+                "justification"
+              ],
+              "additionalProperties": false
+            },
+            "D": {
+              "type": "object",
+              "properties": {
+                "score": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 4
+                },
+                "justification": {
+                  "type": "string",
+                  "minLength": 40
+                },
+                "divergence_justification": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "score",
+                "justification"
+              ],
+              "additionalProperties": false
+            },
+            "E": {
+              "type": "object",
+              "properties": {
+                "score": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 4
+                },
+                "justification": {
+                  "type": "string",
+                  "minLength": 40
+                },
+                "divergence_justification": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "score",
+                "justification"
+              ],
+              "additionalProperties": false
+            },
+            "R": {
+              "type": "object",
+              "properties": {
+                "score": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 4
+                },
+                "justification": {
+                  "type": "string",
+                  "minLength": 40
+                },
+                "divergence_justification": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "score",
+                "justification"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "A",
+            "T",
+            "D",
+            "E",
+            "R"
+          ],
+          "additionalProperties": false
+        },
+        "mitigations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "class": {
+                "type": "string",
+                "enum": [
+                  "M1",
+                  "M2",
+                  "M3",
+                  "M4",
+                  "M5",
+                  "M6",
+                  "M7",
+                  "M8",
+                  "M9"
+                ]
+              },
+              "evidence": {
+                "type": "string",
+                "minLength": 40
+              }
+            },
+            "required": [
+              "class",
+              "evidence"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "j_components": {
+          "type": "object",
+          "properties": {
+            "binding_hit": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "number",
+                  "enum": [
+                    0,
+                    1
+                  ]
+                },
+                "note": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "provision_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "value",
+                "note"
+              ],
+              "additionalProperties": false
+            },
+            "near_term_hit": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "number",
+                  "enum": [
+                    0,
+                    1
+                  ]
+                },
+                "note": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "provision_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "value",
+                "note"
+              ],
+              "additionalProperties": false
+            },
+            "enforcement_posture": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "number",
+                  "enum": [
+                    0,
+                    1
+                  ]
+                },
+                "note": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "value",
+                "note"
+              ],
+              "additionalProperties": false
+            },
+            "prohibition_adjacent": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "number",
+                  "enum": [
+                    0,
+                    1
+                  ]
+                },
+                "note": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "required": [
+                "value",
+                "note"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "required": [
+            "binding_hit",
+            "near_term_hit",
+            "enforcement_posture",
+            "prohibition_adjacent"
+          ],
+          "additionalProperties": false
+        },
+        "assessed_by": {
+          "type": "string",
+          "minLength": 1
+        },
+        "assessed_date": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "review_status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "in_review",
+            "published"
+          ]
+        },
+        "fixture": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "scenario_id",
+        "jurisdiction_id",
+        "version",
+        "dims",
+        "mitigations",
+        "j_components",
+        "assessed_by",
+        "assessed_date",
+        "review_status"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "atlas/assessment",
+  "$comment": "GENERATED from src/lib/schemas (Zod is normative — ENG §8/MN-15). Do not edit by hand."
+}

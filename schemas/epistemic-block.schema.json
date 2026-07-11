@@ -1,0 +1,115 @@
+{
+  "$ref": "#/definitions/epistemic-block",
+  "definitions": {
+    "epistemic-block": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "fact",
+            "inference",
+            "recommendation"
+          ]
+        },
+        "text_md": {
+          "type": "string",
+          "minLength": 1
+        },
+        "citations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "tier": {
+                "type": "number",
+                "enum": [
+                  1,
+                  2,
+                  3
+                ]
+              },
+              "publisher": {
+                "type": "string",
+                "minLength": 1
+              },
+              "title": {
+                "type": "string",
+                "minLength": 1
+              },
+              "url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "stable_ref": {
+                "type": "string"
+              },
+              "pin_cite": {
+                "type": "string",
+                "minLength": 1
+              },
+              "pub_date": {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              },
+              "version_date": {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              },
+              "language": {
+                "type": "string"
+              },
+              "is_translation": {
+                "type": "boolean"
+              },
+              "archived_url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "accessed_date": {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              }
+            },
+            "required": [
+              "tier",
+              "publisher",
+              "title",
+              "url",
+              "pin_cite",
+              "accessed_date"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "confidence": {
+          "type": "string",
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "based_on": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "text_md"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "atlas/epistemic-block",
+  "$comment": "GENERATED from src/lib/schemas (Zod is normative — ENG §8/MN-15). Do not edit by hand."
+}

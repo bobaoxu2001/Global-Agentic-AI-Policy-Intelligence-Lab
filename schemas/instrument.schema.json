@@ -1,0 +1,184 @@
+{
+  "$ref": "#/definitions/instrument",
+  "definitions": {
+    "instrument": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "jurisdiction_id": {
+          "type": "string",
+          "enum": [
+            "us",
+            "eu",
+            "sg",
+            "cn"
+          ]
+        },
+        "title_original": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title_en": {
+          "type": "string",
+          "minLength": 1
+        },
+        "instrument_type": {
+          "type": "string",
+          "enum": [
+            "enacted_law",
+            "proposed_legislation",
+            "regulation",
+            "executive_action",
+            "regulator_guidance",
+            "voluntary_framework",
+            "technical_standard"
+          ]
+        },
+        "bindingness": {
+          "type": "string",
+          "enum": [
+            "binding",
+            "conditionally_binding",
+            "non_binding"
+          ]
+        },
+        "lifecycle_status": {
+          "type": "string",
+          "enum": [
+            "proposed",
+            "adopted_not_yet_applicable",
+            "in_force_partially_applicable",
+            "fully_applicable",
+            "amended",
+            "superseded",
+            "rescinded",
+            "expired",
+            "withdrawn"
+          ]
+        },
+        "status_date": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "approach_tags": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "horizontal_comprehensive",
+              "sector_specific",
+              "technology_specific",
+              "data_protection_derived",
+              "content_governance",
+              "safety_security",
+              "procurement_internal_government",
+              "standards_assurance"
+            ]
+          },
+          "minItems": 1
+        },
+        "issuing_body": {
+          "type": "string",
+          "minLength": 1
+        },
+        "adopted_date": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "key_dates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "date": {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+              },
+              "event": {
+                "type": "string",
+                "minLength": 1
+              },
+              "provision_ref": {
+                "type": "string"
+              },
+              "source_id": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "date",
+              "event",
+              "source_id"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "supersedes_id": {
+          "type": "string"
+        },
+        "superseded_by_id": {
+          "type": "string"
+        },
+        "summary_md": {
+          "type": "string",
+          "minLength": 1
+        },
+        "analyst_notes": {
+          "type": "string"
+        },
+        "review_status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "in_review",
+            "published"
+          ]
+        },
+        "as_of_date": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "last_verified": {
+          "type": "string",
+          "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+        },
+        "source_ids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        },
+        "fixture": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "jurisdiction_id",
+        "title_original",
+        "title_en",
+        "instrument_type",
+        "bindingness",
+        "lifecycle_status",
+        "status_date",
+        "approach_tags",
+        "issuing_body",
+        "summary_md",
+        "review_status",
+        "as_of_date",
+        "last_verified",
+        "source_ids"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "atlas/instrument",
+  "$comment": "GENERATED from src/lib/schemas (Zod is normative — ENG §8/MN-15). Do not edit by hand."
+}

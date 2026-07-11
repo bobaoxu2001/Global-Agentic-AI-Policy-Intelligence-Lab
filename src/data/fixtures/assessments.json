@@ -1,0 +1,286 @@
+[
+  {
+    "id": "aria-eu-v1", "scenario_id": "aria", "jurisdiction_id": "eu", "version": 1,
+    "dims": {
+      "A": { "score": 3, "justification": "Executes autonomously within hard policy limits (refund cap); human reviews asynchronously — §13.3 anchor 3." },
+      "T": { "score": 3, "justification": "State-changing tools act on production customer-facing state (refunds, outbound replies) — §13.3 anchor 3." },
+      "D": { "score": 3, "justification": "Ordinary personal data including possible minors' accounts and support history — §13.3 anchor 3." },
+      "E": { "score": 2, "justification": "One-to-one outbound communications to external customers (email, ticket replies) — §13.3 anchor 2." },
+      "R": { "score": 2, "justification": "Refunds and mass replies reversible only with significant effort and cost — §13.3 anchor 2." }
+    },
+    "mitigations": [
+      { "class": "M2", "evidence": "Per-task scoped credentials from a deny-by-default tool registry; no standing write credentials held." },
+      { "class": "M3", "evidence": "Immutable action log capturing actor, inputs, outputs, timestamps, trace id for every tool call (§18.5)." },
+      { "class": "M4", "evidence": "Refund value cap and rate limits enforced outside the model; documented and tested kill-switch runbook." },
+      { "class": "M5", "evidence": "PII redaction in model context assembly; customer-memory retention limited with automated purge." },
+      { "class": "M8", "evidence": "Users informed they are interacting with an AI agent; generated content labeled per jurisdictional rules." }
+    ],
+    "j_components": {
+      "binding_hit": { "value": 1, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." },
+      "near_term_hit": { "value": 1, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." },
+      "enforcement_posture": { "value": 1, "note": "FICTIONAL fixture value; enforcement-posture readings are always ▲ inference (MD-3)." },
+      "prohibition_adjacent": { "value": 0, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." }
+    },
+    "assessed_by": "fixture-author", "assessed_date": "2026-07-11", "review_status": "published", "fixture": true
+  },
+  {
+    "id": "aria-us-v1", "scenario_id": "aria", "jurisdiction_id": "us", "version": 1,
+    "dims": {
+      "A": { "score": 3, "justification": "Executes autonomously within hard policy limits (refund cap); human reviews asynchronously — §13.3 anchor 3." },
+      "T": { "score": 3, "justification": "State-changing tools act on production customer-facing state (refunds, outbound replies) — §13.3 anchor 3." },
+      "D": { "score": 3, "justification": "Ordinary personal data including possible minors' accounts and support history — §13.3 anchor 3." },
+      "E": { "score": 2, "justification": "One-to-one outbound communications to external customers (email, ticket replies) — §13.3 anchor 2." },
+      "R": { "score": 2, "justification": "Refunds and mass replies reversible only with significant effort and cost — §13.3 anchor 2." }
+    },
+    "mitigations": [
+      { "class": "M2", "evidence": "Per-task scoped credentials from a deny-by-default tool registry; no standing write credentials held." },
+      { "class": "M3", "evidence": "Immutable action log capturing actor, inputs, outputs, timestamps, trace id for every tool call (§18.5)." },
+      { "class": "M4", "evidence": "Refund value cap and rate limits enforced outside the model; documented and tested kill-switch runbook." },
+      { "class": "M5", "evidence": "PII redaction in model context assembly; customer-memory retention limited with automated purge." },
+      { "class": "M8", "evidence": "Users informed they are interacting with an AI agent; generated content labeled per jurisdictional rules." }
+    ],
+    "j_components": {
+      "binding_hit": { "value": 1, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." },
+      "near_term_hit": { "value": 0, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." },
+      "enforcement_posture": { "value": 0, "note": "FICTIONAL fixture value; enforcement-posture readings are always ▲ inference (MD-3)." },
+      "prohibition_adjacent": { "value": 0, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." }
+    },
+    "assessed_by": "fixture-author", "assessed_date": "2026-07-11", "review_status": "published", "fixture": true
+  },
+  {
+    "id": "aria-sg-v1", "scenario_id": "aria", "jurisdiction_id": "sg", "version": 1,
+    "dims": {
+      "A": { "score": 3, "justification": "Executes autonomously within hard policy limits (refund cap); human reviews asynchronously — §13.3 anchor 3." },
+      "T": { "score": 3, "justification": "State-changing tools act on production customer-facing state (refunds, outbound replies) — §13.3 anchor 3." },
+      "D": { "score": 3, "justification": "Ordinary personal data including possible minors' accounts and support history — §13.3 anchor 3." },
+      "E": { "score": 2, "justification": "One-to-one outbound communications to external customers (email, ticket replies) — §13.3 anchor 2." },
+      "R": { "score": 2, "justification": "Refunds and mass replies reversible only with significant effort and cost — §13.3 anchor 2." }
+    },
+    "mitigations": [
+      { "class": "M2", "evidence": "Per-task scoped credentials from a deny-by-default tool registry; no standing write credentials held." },
+      { "class": "M3", "evidence": "Immutable action log capturing actor, inputs, outputs, timestamps, trace id for every tool call (§18.5)." },
+      { "class": "M4", "evidence": "Refund value cap and rate limits enforced outside the model; documented and tested kill-switch runbook." },
+      { "class": "M5", "evidence": "PII redaction in model context assembly; customer-memory retention limited with automated purge." },
+      { "class": "M8", "evidence": "Users informed they are interacting with an AI agent; generated content labeled per jurisdictional rules." }
+    ],
+    "j_components": {
+      "binding_hit": { "value": 1, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." },
+      "near_term_hit": { "value": 0, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." },
+      "enforcement_posture": { "value": 0, "note": "FICTIONAL fixture value; enforcement-posture readings are always ▲ inference (MD-3)." },
+      "prohibition_adjacent": { "value": 0, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." }
+    },
+    "assessed_by": "fixture-author", "assessed_date": "2026-07-11", "review_status": "published", "fixture": true
+  },
+  {
+    "id": "aria-cn-v1", "scenario_id": "aria", "jurisdiction_id": "cn", "version": 1,
+    "dims": {
+      "A": { "score": 3, "justification": "Executes autonomously within hard policy limits (refund cap); human reviews asynchronously — §13.3 anchor 3." },
+      "T": { "score": 3, "justification": "State-changing tools act on production customer-facing state (refunds, outbound replies) — §13.3 anchor 3." },
+      "D": { "score": 3, "justification": "Ordinary personal data including possible minors' accounts and support history — §13.3 anchor 3." },
+      "E": { "score": 2, "justification": "One-to-one outbound communications to external customers (email, ticket replies) — §13.3 anchor 2." },
+      "R": { "score": 2, "justification": "Refunds and mass replies reversible only with significant effort and cost — §13.3 anchor 2." }
+    },
+    "mitigations": [
+      { "class": "M2", "evidence": "Per-task scoped credentials from a deny-by-default tool registry; no standing write credentials held." },
+      { "class": "M3", "evidence": "Immutable action log capturing actor, inputs, outputs, timestamps, trace id for every tool call (§18.5)." },
+      { "class": "M4", "evidence": "Refund value cap and rate limits enforced outside the model; documented and tested kill-switch runbook." },
+      { "class": "M5", "evidence": "PII redaction in model context assembly; customer-memory retention limited with automated purge." },
+      { "class": "M8", "evidence": "Users informed they are interacting with an AI agent; generated content labeled per jurisdictional rules." }
+    ],
+    "j_components": {
+      "binding_hit": { "value": 1, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." },
+      "near_term_hit": { "value": 0, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." },
+      "enforcement_posture": { "value": 0, "note": "FICTIONAL fixture value; enforcement-posture readings are always ▲ inference (MD-3)." },
+      "prohibition_adjacent": { "value": 1, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." }
+    },
+    "assessed_by": "fixture-author", "assessed_date": "2026-07-11", "review_status": "published", "fixture": true
+  },
+  {
+    "id": "sentinel-us-v1", "scenario_id": "sentinel", "jurisdiction_id": "us", "version": 1,
+    "dims": {
+      "A": { "score": 3, "justification": "Autonomous containment within hard policy limits; human review within 30 minutes after action — §13.3 anchor 3." },
+      "T": { "score": 4, "justification": "High-potency tools: security controls at fleet scale (isolate VMs, revoke credentials) — §13.3 anchor 4." },
+      "D": { "score": 1, "justification": "Telemetry and infrastructure data; minimal personal data in the operating flow — §13.3 anchor 1." },
+      "E": { "score": 1, "justification": "Outputs visible to internal operators; customer-visible effects but no external comms — §13.3 anchor 1." },
+      "R": { "score": 3, "justification": "Wrong quarantine causes costly outages; mostly recoverable but practically severe — §13.3 anchor 3." }
+    },
+    "mitigations": [
+      { "class": "M2", "evidence": "Per-task scoped credentials; deny-by-default tool registry for every containment action taken." },
+      { "class": "M3", "evidence": "Immutable action log of every containment step with trace ids and before/after state digests." },
+      { "class": "M4", "evidence": "Blast-radius limiter capping hosts per window; kill-switch tested in quarterly game-day drills." },
+      { "class": "M6", "evidence": "Prompt-injection testing program; untrusted alert content isolated from tool-invocation context." },
+      { "class": "M7", "evidence": "Documented pre-deployment review by the platform security team outside the building team." },
+      { "class": "M9", "evidence": "Incident response runbook with tested rollback and customer notification procedure in place." }
+    ],
+    "j_components": {
+      "binding_hit": { "value": 0, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." },
+      "near_term_hit": { "value": 1, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." },
+      "enforcement_posture": { "value": 0, "note": "FICTIONAL fixture value; enforcement-posture readings are always ▲ inference (MD-3)." },
+      "prohibition_adjacent": { "value": 0, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." }
+    },
+    "assessed_by": "fixture-author", "assessed_date": "2026-07-11", "review_status": "published", "fixture": true
+  },
+  {
+    "id": "sentinel-eu-v1", "scenario_id": "sentinel", "jurisdiction_id": "eu", "version": 1,
+    "dims": {
+      "A": { "score": 3, "justification": "Autonomous containment within hard policy limits; human review within 30 minutes after action — §13.3 anchor 3." },
+      "T": { "score": 4, "justification": "High-potency tools: security controls at fleet scale (isolate VMs, revoke credentials) — §13.3 anchor 4." },
+      "D": { "score": 1, "justification": "Telemetry and infrastructure data; minimal personal data in the operating flow — §13.3 anchor 1." },
+      "E": { "score": 1, "justification": "Outputs visible to internal operators; customer-visible effects but no external comms — §13.3 anchor 1." },
+      "R": { "score": 3, "justification": "Wrong quarantine causes costly outages; mostly recoverable but practically severe — §13.3 anchor 3." }
+    },
+    "mitigations": [
+      { "class": "M2", "evidence": "Per-task scoped credentials; deny-by-default tool registry for every containment action taken." },
+      { "class": "M3", "evidence": "Immutable action log of every containment step with trace ids and before/after state digests." },
+      { "class": "M4", "evidence": "Blast-radius limiter capping hosts per window; kill-switch tested in quarterly game-day drills." },
+      { "class": "M6", "evidence": "Prompt-injection testing program; untrusted alert content isolated from tool-invocation context." },
+      { "class": "M7", "evidence": "Documented pre-deployment review by the platform security team outside the building team." },
+      { "class": "M9", "evidence": "Incident response runbook with tested rollback and customer notification procedure in place." }
+    ],
+    "j_components": {
+      "binding_hit": { "value": 0, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." },
+      "near_term_hit": { "value": 1, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." },
+      "enforcement_posture": { "value": 1, "note": "FICTIONAL fixture value; enforcement-posture readings are always ▲ inference (MD-3)." },
+      "prohibition_adjacent": { "value": 0, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." }
+    },
+    "assessed_by": "fixture-author", "assessed_date": "2026-07-11", "review_status": "published", "fixture": true
+  },
+  {
+    "id": "sentinel-sg-v1", "scenario_id": "sentinel", "jurisdiction_id": "sg", "version": 1,
+    "dims": {
+      "A": { "score": 3, "justification": "Autonomous containment within hard policy limits; human review within 30 minutes after action — §13.3 anchor 3." },
+      "T": { "score": 4, "justification": "High-potency tools: security controls at fleet scale (isolate VMs, revoke credentials) — §13.3 anchor 4." },
+      "D": { "score": 1, "justification": "Telemetry and infrastructure data; minimal personal data in the operating flow — §13.3 anchor 1." },
+      "E": { "score": 1, "justification": "Outputs visible to internal operators; customer-visible effects but no external comms — §13.3 anchor 1." },
+      "R": { "score": 3, "justification": "Wrong quarantine causes costly outages; mostly recoverable but practically severe — §13.3 anchor 3." }
+    },
+    "mitigations": [
+      { "class": "M2", "evidence": "Per-task scoped credentials; deny-by-default tool registry for every containment action taken." },
+      { "class": "M3", "evidence": "Immutable action log of every containment step with trace ids and before/after state digests." },
+      { "class": "M4", "evidence": "Blast-radius limiter capping hosts per window; kill-switch tested in quarterly game-day drills." },
+      { "class": "M6", "evidence": "Prompt-injection testing program; untrusted alert content isolated from tool-invocation context." },
+      { "class": "M7", "evidence": "Documented pre-deployment review by the platform security team outside the building team." },
+      { "class": "M9", "evidence": "Incident response runbook with tested rollback and customer notification procedure in place." }
+    ],
+    "j_components": {
+      "binding_hit": { "value": 0, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." },
+      "near_term_hit": { "value": 1, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." },
+      "enforcement_posture": { "value": 0, "note": "FICTIONAL fixture value; enforcement-posture readings are always ▲ inference (MD-3)." },
+      "prohibition_adjacent": { "value": 0, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." }
+    },
+    "assessed_by": "fixture-author", "assessed_date": "2026-07-11", "review_status": "published", "fixture": true
+  },
+  {
+    "id": "sentinel-cn-v1", "scenario_id": "sentinel", "jurisdiction_id": "cn", "version": 1,
+    "dims": {
+      "A": { "score": 3, "justification": "Autonomous containment within hard policy limits; human review within 30 minutes after action — §13.3 anchor 3." },
+      "T": { "score": 4, "justification": "High-potency tools: security controls at fleet scale (isolate VMs, revoke credentials) — §13.3 anchor 4." },
+      "D": { "score": 1, "justification": "Telemetry and infrastructure data; minimal personal data in the operating flow — §13.3 anchor 1." },
+      "E": { "score": 1, "justification": "Outputs visible to internal operators; customer-visible effects but no external comms — §13.3 anchor 1." },
+      "R": { "score": 3, "justification": "Wrong quarantine causes costly outages; mostly recoverable but practically severe — §13.3 anchor 3." }
+    },
+    "mitigations": [
+      { "class": "M2", "evidence": "Per-task scoped credentials; deny-by-default tool registry for every containment action taken." },
+      { "class": "M3", "evidence": "Immutable action log of every containment step with trace ids and before/after state digests." },
+      { "class": "M4", "evidence": "Blast-radius limiter capping hosts per window; kill-switch tested in quarterly game-day drills." },
+      { "class": "M6", "evidence": "Prompt-injection testing program; untrusted alert content isolated from tool-invocation context." },
+      { "class": "M7", "evidence": "Documented pre-deployment review by the platform security team outside the building team." },
+      { "class": "M9", "evidence": "Incident response runbook with tested rollback and customer notification procedure in place." }
+    ],
+    "j_components": {
+      "binding_hit": { "value": 0, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." },
+      "near_term_hit": { "value": 1, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." },
+      "enforcement_posture": { "value": 1, "note": "FICTIONAL fixture value; enforcement-posture readings are always ▲ inference (MD-3)." },
+      "prohibition_adjacent": { "value": 0, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." }
+    },
+    "assessed_by": "fixture-author", "assessed_date": "2026-07-11", "review_status": "published", "fixture": true
+  },
+  {
+    "id": "mira-cn-v1", "scenario_id": "mira", "jurisdiction_id": "cn", "version": 1,
+    "dims": {
+      "A": { "score": 2, "justification": "Content auto-published within an approved moderation plan; batch-level human oversight — §13.3 anchor 2." },
+      "T": { "score": 1, "justification": "Read-only tools plus posting to the game's own feed; no high-potency state changes — §13.3 anchor 1." },
+      "D": { "score": 3, "justification": "Minors' data plus deep cross-session profiling of player relationships — §13.3 anchor 3." },
+      "E": { "score": 3, "justification": "Public-facing content posted to the community feed at scale — §13.3 anchor 3." },
+      "R": { "score": 3, "justification": "Public synthetic content spreads; minors' exposure is not undoable once published — §13.3 anchor 3." }
+    },
+    "mitigations": [
+      { "class": "M3", "evidence": "Immutable log of every generation and post action with trace ids and content digests kept." },
+      { "class": "M5", "evidence": "PII filtering before model context; age-gating enforced; memory retention limits with purge API." },
+      { "class": "M8", "evidence": "AI companion disclosed in-product; all generated media labeled as synthetic per local rules." }
+    ],
+    "j_components": {
+      "binding_hit": { "value": 1, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." },
+      "near_term_hit": { "value": 1, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." },
+      "enforcement_posture": { "value": 1, "note": "FICTIONAL fixture value; enforcement-posture readings are always ▲ inference (MD-3)." },
+      "prohibition_adjacent": { "value": 1, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." }
+    },
+    "assessed_by": "fixture-author", "assessed_date": "2026-07-11", "review_status": "published", "fixture": true
+  },
+  {
+    "id": "mira-eu-v1", "scenario_id": "mira", "jurisdiction_id": "eu", "version": 1,
+    "dims": {
+      "A": { "score": 2, "justification": "Content auto-published within an approved moderation plan; batch-level human oversight — §13.3 anchor 2." },
+      "T": { "score": 1, "justification": "Read-only tools plus posting to the game's own feed; no high-potency state changes — §13.3 anchor 1." },
+      "D": { "score": 3, "justification": "Minors' data plus deep cross-session profiling of player relationships — §13.3 anchor 3." },
+      "E": { "score": 3, "justification": "Public-facing content posted to the community feed at scale — §13.3 anchor 3." },
+      "R": { "score": 3, "justification": "Public synthetic content spreads; minors' exposure is not undoable once published — §13.3 anchor 3." }
+    },
+    "mitigations": [
+      { "class": "M3", "evidence": "Immutable log of every generation and post action with trace ids and content digests kept." },
+      { "class": "M5", "evidence": "PII filtering before model context; age-gating enforced; memory retention limits with purge API." },
+      { "class": "M8", "evidence": "AI companion disclosed in-product; all generated media labeled as synthetic per local rules." }
+    ],
+    "j_components": {
+      "binding_hit": { "value": 1, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." },
+      "near_term_hit": { "value": 1, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." },
+      "enforcement_posture": { "value": 0, "note": "FICTIONAL fixture value; enforcement-posture readings are always ▲ inference (MD-3)." },
+      "prohibition_adjacent": { "value": 1, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." }
+    },
+    "assessed_by": "fixture-author", "assessed_date": "2026-07-11", "review_status": "published", "fixture": true
+  },
+  {
+    "id": "mira-us-v1", "scenario_id": "mira", "jurisdiction_id": "us", "version": 1,
+    "dims": {
+      "A": { "score": 2, "justification": "Content auto-published within an approved moderation plan; batch-level human oversight — §13.3 anchor 2." },
+      "T": { "score": 1, "justification": "Read-only tools plus posting to the game's own feed; no high-potency state changes — §13.3 anchor 1." },
+      "D": { "score": 3, "justification": "Minors' data plus deep cross-session profiling of player relationships — §13.3 anchor 3." },
+      "E": { "score": 3, "justification": "Public-facing content posted to the community feed at scale — §13.3 anchor 3." },
+      "R": { "score": 3, "justification": "Public synthetic content spreads; minors' exposure is not undoable once published — §13.3 anchor 3." }
+    },
+    "mitigations": [
+      { "class": "M3", "evidence": "Immutable log of every generation and post action with trace ids and content digests kept." },
+      { "class": "M5", "evidence": "PII filtering before model context; age-gating enforced; memory retention limits with purge API." },
+      { "class": "M8", "evidence": "AI companion disclosed in-product; all generated media labeled as synthetic per local rules." }
+    ],
+    "j_components": {
+      "binding_hit": { "value": 1, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." },
+      "near_term_hit": { "value": 0, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." },
+      "enforcement_posture": { "value": 0, "note": "FICTIONAL fixture value; enforcement-posture readings are always ▲ inference (MD-3)." },
+      "prohibition_adjacent": { "value": 0, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." }
+    },
+    "assessed_by": "fixture-author", "assessed_date": "2026-07-11", "review_status": "published", "fixture": true
+  },
+  {
+    "id": "mira-sg-v1", "scenario_id": "mira", "jurisdiction_id": "sg", "version": 1,
+    "dims": {
+      "A": { "score": 2, "justification": "Content auto-published within an approved moderation plan; batch-level human oversight — §13.3 anchor 2." },
+      "T": { "score": 1, "justification": "Read-only tools plus posting to the game's own feed; no high-potency state changes — §13.3 anchor 1." },
+      "D": { "score": 3, "justification": "Minors' data plus deep cross-session profiling of player relationships — §13.3 anchor 3." },
+      "E": { "score": 3, "justification": "Public-facing content posted to the community feed at scale — §13.3 anchor 3." },
+      "R": { "score": 3, "justification": "Public synthetic content spreads; minors' exposure is not undoable once published — §13.3 anchor 3." }
+    },
+    "mitigations": [
+      { "class": "M3", "evidence": "Immutable log of every generation and post action with trace ids and content digests kept." },
+      { "class": "M5", "evidence": "PII filtering before model context; age-gating enforced; memory retention limits with purge API." },
+      { "class": "M8", "evidence": "AI companion disclosed in-product; all generated media labeled as synthetic per local rules." }
+    ],
+    "j_components": {
+      "binding_hit": { "value": 1, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." },
+      "near_term_hit": { "value": 0, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." },
+      "enforcement_posture": { "value": 0, "note": "FICTIONAL fixture value; enforcement-posture readings are always ▲ inference (MD-3)." },
+      "prohibition_adjacent": { "value": 0, "note": "FICTIONAL fixture value, illustrative pending Phase 1 research (OD-11/MD-3)." }
+    },
+    "assessed_by": "fixture-author", "assessed_date": "2026-07-11", "review_status": "published", "fixture": true
+  }
+]

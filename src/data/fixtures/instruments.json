@@ -1,0 +1,24 @@
+[
+  {
+    "id": "fx-fictional-agentic-act",
+    "jurisdiction_id": "eu",
+    "title_original": "Fictional Agentic Systems Act (FIXTURE)",
+    "title_en": "Fictional Agentic Systems Act (FIXTURE — NOT A REAL INSTRUMENT)",
+    "instrument_type": "enacted_law",
+    "bindingness": "binding",
+    "lifecycle_status": "in_force_partially_applicable",
+    "status_date": "2026-02-01",
+    "approach_tags": ["horizontal_comprehensive"],
+    "issuing_body": "Fictional Union Parliament (FIXTURE)",
+    "adopted_date": "2026-01-15",
+    "key_dates": [
+      { "date": "2026-06-01", "event": "amended", "source_id": "fx-src-001" }
+    ],
+    "summary_md": "FIXTURE — entirely fictional instrument used to exercise Phase 0 validators and route shells. It is not a real law and asserts no policy fact.",
+    "review_status": "published",
+    "as_of_date": "2026-07-11",
+    "last_verified": "2026-07-11",
+    "source_ids": ["fx-src-001"],
+    "fixture": true
+  }
+]

@@ -1,0 +1,14 @@
+[
+  { "id": "R1", "name": "Unauthorized action", "definition": "Agent executes an action outside its intended mandate", "driven_by": ["C5", "C7", "C11"] },
+  { "id": "R2", "name": "Privacy violation", "definition": "Personal data processed beyond lawful basis, purpose, or retention", "driven_by": ["C2", "C3", "C9"] },
+  { "id": "R3", "name": "Consequential-decision harm", "definition": "Erroneous or biased automated decision significantly affecting a person", "driven_by": ["C8"] },
+  { "id": "R4", "name": "Deceptive interaction", "definition": "Humans not informed they are dealing with AI, or synthetic content not labeled", "driven_by": ["C1", "C6"] },
+  { "id": "R5", "name": "Security compromise", "definition": "Agent becomes an attack vector (prompt injection → tool abuse; credential exfiltration)", "driven_by": ["C4", "C5", "C11"] },
+  { "id": "R6", "name": "Oversight failure", "definition": "Human control points absent, bypassed, or rubber-stamped", "driven_by": ["C5", "C7", "C8"] },
+  { "id": "R7", "name": "Accountability gap", "definition": "Actions cannot be attributed, reconstructed, or explained after the fact", "driven_by": ["C7", "C10"] },
+  { "id": "R8", "name": "Cross-border data/regulatory breach", "definition": "Data or actions cross jurisdictional lines that trigger transfer or localization rules", "driven_by": ["C2", "C3", "C6"] },
+  { "id": "R9", "name": "Content-governance breach", "definition": "Generated content violates jurisdictional content rules", "driven_by": ["C1", "C6"] },
+  { "id": "R10", "name": "Runaway scope / cascade", "definition": "Errors compound across autonomous steps or delegated agents before detection", "driven_by": ["C7", "C10", "C11"] },
+  { "id": "R11", "name": "Vulnerable-population harm", "definition": "Minors or other protected groups exposed to inappropriate agent behavior", "driven_by": ["C1", "C3", "C6", "C9"] },
+  { "id": "R12", "name": "Systemic/model-level risk", "definition": "Risks attaching to the underlying general-purpose model (capability misuse thresholds, GPAI obligations)", "driven_by": ["C1", "C2", "C3", "C4", "C5", "C6", "C7", "C8", "C9", "C10", "C11", "C12"] }
+]

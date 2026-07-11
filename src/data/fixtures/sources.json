@@ -1,0 +1,29 @@
+[
+  {
+    "id": "fx-src-001",
+    "tier": 1,
+    "publisher": "Fictional Union Official Journal (FIXTURE)",
+    "title": "Fictional Agentic Systems Act (FIXTURE — NOT A REAL INSTRUMENT)",
+    "url": "https://example.invalid/fixture/agentic-systems-act",
+    "stable_ref": "FX-2026/001",
+    "pub_date": "2026-01-15",
+    "language": "en",
+    "is_translation": false,
+    "archived_url": "https://archive.example.invalid/fixture/agentic-systems-act",
+    "accessed_date": "2026-07-11",
+    "fixture": true
+  },
+  {
+    "id": "fx-src-002",
+    "tier": 2,
+    "publisher": "Fictional Commission (FIXTURE)",
+    "title": "Fictional Guidance on Agent Oversight (FIXTURE — NOT A REAL DOCUMENT)",
+    "url": "https://example.invalid/fixture/agent-oversight-guidance",
+    "pub_date": "2026-03-01",
+    "language": "en",
+    "is_translation": false,
+    "archived_url": "https://archive.example.invalid/fixture/agent-oversight-guidance",
+    "accessed_date": "2026-07-11",
+    "fixture": true
+  }
+]

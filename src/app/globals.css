@@ -1,0 +1,10 @@
+/* Phase 0 low-fi shell styles ONLY — polished styling is Phase 1 (DESIGN_TOKENS.md). */
+:root { color-scheme: light; }
+body { font-family: ui-sans-serif, system-ui, sans-serif; margin: 0; color: #1a1a1a; }
+main { max-width: 960px; margin: 0 auto; padding: 16px; }
+nav a { margin-right: 10px; font-size: 13px; }
+.fixture-banner { background: #7a1f1f; color: #fff; text-align: center; padding: 6px 10px; font-size: 13px; font-weight: 700; letter-spacing: 0.03em; position: sticky; top: 0; z-index: 50; }
+.disclaimer { background: #f3f3f3; color: #444; font-size: 11px; padding: 4px 10px; text-align: center; }
+.phase0 { border: 1px dashed #999; padding: 8px; margin: 12px 0; font-size: 12px; color: #666; }
+table { border-collapse: collapse; font-size: 13px; } td, th { border: 1px solid #ccc; padding: 4px 8px; text-align: left; }
+fieldset { margin: 8px 0; }

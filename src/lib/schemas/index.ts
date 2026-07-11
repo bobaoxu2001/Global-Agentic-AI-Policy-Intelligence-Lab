@@ -31,7 +31,12 @@ export * from './enums';
 
 const countWords = (s: string) => s.trim().split(/\s+/).filter(Boolean).length;
 
-/** §18.4 citation — tier-1 without stable_ref requires archived_url (§21.6). */
+/**
+ * §18.4 citation (embedded in epistemic blocks). The Tier-1 archive rule
+ * (§21.6/MJ-7) is enforced on the shared `sources` records (SourceSchema
+ * below), which citations resolve to — not duplicated here, because embedded
+ * citations have no manual-verification log of their own.
+ */
 export const CitationSchema = z
   .object({
     tier: SourceTier,
@@ -68,7 +73,18 @@ export const SourceSchema = z
     manual_verification_date: IsoDate.optional(), // MJ-7 logged manual verification
     fixture: z.boolean().optional(),
   })
-  .strict();
+  .strict()
+  .superRefine((s, ctx) => {
+    // SPEC §21.6 / PRD §24.9 hard rule: a Tier 1 source must carry an
+    // archived_url or a logged manual verification (a stable_ref does NOT
+    // substitute — it is not always a resolvable URL).
+    if (s.tier === 1 && !s.archived_url && !s.manual_verification_date) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: 'Tier 1 source requires archived_url or manual_verification_date (§21.6/MJ-7)',
+      });
+    }
+  });
 
 /** §18.6 epistemic block — conditional requirements by kind. */
 export const EpistemicBlockSchema = z

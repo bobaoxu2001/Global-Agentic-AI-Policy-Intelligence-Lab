@@ -7,12 +7,14 @@
 import { describe, expect, it } from 'vitest';
 import assessmentsJson from '../../data/fixtures/assessments.json';
 import { computeAdrs, displayScore, type Dims, type JComponents, type MitigationClass } from '../../lib/adrs';
-import { AssessmentSchema, InstrumentSchema, ProvisionSchema } from '../../lib/schemas';
+import { AssessmentSchema, InstrumentSchema, ProvisionSchema, SourceSchema } from '../../lib/schemas';
 import { assertNotFixtureDeploy, FIXTURE_BANNER_TEXT, getBuildProfile } from '../../lib/validation/buildProfile';
 import {
   checkDimensionInvariance,
   checkNoFixturesInProduction,
   checkPublishedOnlyInProduction,
+  checkVersionUniqueness,
+  currentVersions,
   runIntegrity,
   type Dataset,
 } from '../../lib/validation/integrity';
@@ -210,5 +212,43 @@ describe('build profile guards (CB-4, rule 10)', () => {
     expect(() =>
       assertNotFixtureDeploy({ BUILD_PROFILE: 'production', DEPLOY_ENV: 'production' } as unknown as NodeJS.ProcessEnv),
     ).not.toThrow();
+  });
+});
+
+describe('code-review fixes — version selection & uniqueness (MD-4, SPEC §17 UNIQUE)', () => {
+  const mk = (id: string, version: number, review_status: 'draft' | 'in_review' | 'published') => {
+    const base = structuredClone(assessmentsJson[0]!) as (typeof assessmentsJson)[0];
+    return { ...base, id, version, review_status } as unknown as Dataset['assessments'][0];
+  };
+
+  it('F1: a draft re-score never shadows a published version (MD-4)', () => {
+    const picked = currentVersions([mk('pub-v1', 1, 'published'), mk('draft-v2', 2, 'draft')]);
+    expect(picked.map((a) => a.id)).toEqual(['pub-v1']);
+  });
+  it('F1: among published versions the highest wins; fallback used only when no published exists', () => {
+    expect(currentVersions([mk('pub-v1', 1, 'published'), mk('pub-v2', 2, 'published')]).map((a) => a.id)).toEqual(['pub-v2']);
+    expect(currentVersions([mk('draft-v1', 1, 'draft'), mk('draft-v3', 3, 'draft')]).map((a) => a.id)).toEqual(['draft-v3']);
+  });
+  it('F3: duplicate (scenario, jurisdiction, version) fails integrity instead of silently dropping', () => {
+    const r = good();
+    const ds: Dataset = { ...r.dataset, assessments: [...r.dataset.assessments, mk('aria-eu-v1-dup', 1, 'published')] };
+    const errors = checkVersionUniqueness(ds);
+    expect(errors.some((e) => e.rule === 'R-version-unique' && e.message.includes('aria:eu:v1'))).toBe(true);
+    expect(runIntegrity(ds, 'fixtures').some((e) => e.rule === 'R-version-unique')).toBe(true);
+  });
+});
+
+describe('code-review fixes — Tier 1 archive rule (§21.6/MJ-7)', () => {
+  it('F2: Tier 1 source without archived_url and without manual_verification_date is rejected', () => {
+    const base = {
+      id: 's1', tier: 1, publisher: 'p', title: 't', url: 'https://example.invalid/x',
+      language: 'en', accessed_date: '2026-07-11',
+    };
+    expect(SourceSchema.safeParse(base).success).toBe(false);
+    expect(SourceSchema.safeParse({ ...base, archived_url: 'https://archive.example.invalid/x' }).success).toBe(true);
+    expect(SourceSchema.safeParse({ ...base, manual_verification_date: '2026-07-11' }).success).toBe(true);
+    expect(SourceSchema.safeParse({ ...base, tier: 2 }).success).toBe(true); // rule is Tier 1 only
+    // a stable_ref alone does NOT substitute (MJ-7)
+    expect(SourceSchema.safeParse({ ...base, stable_ref: 'FX-1' }).success).toBe(false);
   });
 });

@@ -174,15 +174,43 @@ export function checkAdrsRecompute(ds: Dataset): IntegrityError[] {
   return errors;
 }
 
-/** Current version = highest published version per scenario×jurisdiction (MD-4); fixtures profile also admits fixture rows. */
+/**
+ * Current version per scenario×jurisdiction (MD-4): the highest version whose
+ * review_status='published'. A draft/in_review re-score NEVER shadows a
+ * published one. Only when a key has no published version at all (possible in
+ * the fixtures profile, whose publication gate is relaxed — CB-4) does the
+ * highest non-published version stand in.
+ */
 export function currentVersions(assessments: Assessment[]): Assessment[] {
-  const byKey = new Map<string, Assessment>();
+  const published = new Map<string, Assessment>();
+  const fallback = new Map<string, Assessment>();
   for (const a of assessments) {
     const key = `${a.scenario_id}:${a.jurisdiction_id}`;
-    const prev = byKey.get(key);
-    if (!prev || a.version > prev.version) byKey.set(key, a);
+    const pool = a.review_status === 'published' ? published : fallback;
+    const prev = pool.get(key);
+    if (!prev || a.version > prev.version) pool.set(key, a);
   }
-  return [...byKey.values()];
+  const out = new Map(fallback);
+  for (const [key, a] of published) out.set(key, a); // published always wins
+  return [...out.values()];
+}
+
+/**
+ * SPEC §17: UNIQUE (scenario_id, jurisdiction_id, version). No database
+ * enforces this in the content-as-files pipeline, so the integrity gate must —
+ * otherwise a duplicate key is silently dropped by version selection.
+ */
+export function checkVersionUniqueness(ds: Dataset): IntegrityError[] {
+  const errors: IntegrityError[] = [];
+  const seen = new Map<string, string>();
+  for (const a of ds.assessments) {
+    const key = `${a.scenario_id}:${a.jurisdiction_id}:v${a.version}`;
+    const prior = seen.get(key);
+    if (prior)
+      errors.push(err('R-version-unique', a.id, `duplicate (scenario, jurisdiction, version) key "${key}" also used by "${prior}" (SPEC §17 UNIQUE)`));
+    else seen.set(key, a.id);
+  }
+  return errors;
 }
 
 /** Run every integrity rule; returns collected errors (empty = pass). */
@@ -193,6 +221,7 @@ export function runIntegrity(ds: Dataset, profile: BuildProfile): IntegrityError
     ...checkDateFields(ds),
     ...checkBindingnessResolution(ds),
     ...checkDimensionInvariance(ds),
+    ...checkVersionUniqueness(ds),
     ...checkNoFixturesInProduction(ds, profile),
     ...checkPublishedOnlyInProduction(ds, profile),
     ...checkAdrsRecompute(ds),

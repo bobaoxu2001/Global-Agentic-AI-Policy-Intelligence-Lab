@@ -1,116 +1,111 @@
-# AI Policy Atlas — Phase 0 Independent Engineering Review
+# AI Policy Atlas — Phase 0 Independent Engineering Review (v2)
 
-**Date:** 2026-07-11 · **Reviewer:** independent engineering review (not the implementation author)
-**Requested scope:** full repository, SPEC.md, ENGINEERING_HANDOFF.md, ACCEPTANCE_CRITERIA.md, METHODOLOGY_DECISIONS.md, PHASE_0_IMPLEMENTATION_REPORT.md, PHASE_0_TEST_REPORT.md.
+**Date:** 2026-07-12 · **Reviewer:** independent engineering review of the implemented Phase 0.
+**Supersedes:** the 2026-07-11 v1 review (FAIL — implementation absent). Phase 0 now exists; this review audits it as-is and reproduces every claim itself. Reviewed at commit `bc177a2`; fixes landed as `cb4a96e`.
 
 ---
 
-## 0. Primary Finding — the review target does not exist
+## 1. Method
 
-**Phase 0 has not been implemented in this repository.** This review cannot audit code that is not there, and it will not simulate a review of imagined artifacts.
+Every reported result was **reproduced, not trusted**: all commands below were run fresh against the working tree, and each audit area was checked against source with file:line references. Two defects were additionally **proven with live reproductions** before fixing (see §4).
 
-**Evidence (repository inventory, 2026-07-11):**
+### Commands run (real output, this review)
 
-```
-Global Agentic AI Policy Intelligence Lab/
-├── SPEC.md
-└── docs/
-    ├── ACCEPTANCE_CRITERIA.md      ├── IMPLEMENTATION_BACKLOG.md
-    ├── DESIGN_HANDOFF.md           ├── METHODOLOGY_DECISIONS.md
-    ├── ENGINEERING_HANDOFF.md      ├── PRD.md
-    └── REVISION_LOG.md
-```
-
-Absent (checked by filesystem search of the project and all sibling directories under `AI Projects/`):
-
-| Expected artifact (ENG §18 Phase 0 DoD) | Status |
+| Command | Result |
 |---|---|
-| `docs/PHASE_0_IMPLEMENTATION_REPORT.md` (named in the review request) | **does not exist** |
-| `docs/PHASE_0_TEST_REPORT.md` (named in the review request) | **does not exist** |
-| Repo/CI skeleton (`package.json`, `.github/workflows/ci.yml`, tsconfig) | does not exist |
-| `/src/lib/zod/*` (normative Zod schemas) + `/schemas/*.json` | does not exist |
-| `/src/lib/adrs.ts` (locked formula module) + unit tests | does not exist |
-| Seed files (`capabilities.json`, `risks.json`, enums) | does not exist |
-| Fixtures (3 scenarios + 12 assessments, `fixture:true`) | does not exist |
-| Validation/integrity pipeline (`build-data`, `integrity.ts`) → `/data/atlas.json` | does not exist |
-| `BUILD_PROFILE` handling | does not exist |
-| Low-fi wireframes (Phase 0 design deliverable) | does not exist |
+| `npm run lint` | 0 errors, 0 warnings |
+| `npx tsc --noEmit` | clean |
+| `npm test` (unit) | **27/27 passed** (`src/lib/adrs/index.test.ts`) |
+| `npm run test:integration` | pre-fix **18/18**; post-fix **22/22** (4 regression tests added) |
+| `npm run test:e2e` | **3/3 passed** (fixtures profile, Chromium) |
+| `BUILD_PROFILE=fixtures npm run validate` | exit 0 — "all schema and integrity checks passed" |
+| `BUILD_PROFILE=production npm run validate` | exit 1 — exactly **20 × R7-no-fixtures-in-prod** (all 20 fixture records rejected) |
+| `BUILD_PROFILE=fixtures DEPLOY_ENV=production npm run validate` | exit 1 — "GATE FAILURE: BUILD_PROFILE=fixtures cannot be deployed to production" |
+| `npm run schemas:json` + `git diff schemas/` | no drift |
+| `npm run build:fixtures` | exit 0 — 12 routes prerendered (SSG paths from fixtures) |
+| `npm run build:production` | exit 1 at the validation gate (20 × R7) — **correct by design** in Phase 0 |
 
-The repository is not a git repository, so no history exists in which these artifacts might have been committed and removed. Conclusion: either Phase 0 was never started, or it was executed in an environment whose output was never synced here. **A review request that names implementation and test reports which do not exist is itself a process defect** — future review requests should be gated on the artifacts being present.
-
-Because there is no code, the audit items below are split into: (A) what could be audited today (the normative spec-side artifacts Phase 0 must implement), and (B) what is blocked.
-
----
-
-## A. Audited today — specification-side verification (independent recomputation)
-
-The reviewer recomputed every normative number from first principles (script: `adrs_audit.py`, scratchpad; weights/credits/caps taken from SPEC §13 only, results compared against SPEC §14 / AC §5 / ENG §12.1 within ±0.001 per §13.7).
-
-### A1. ADRS calculations — **PASS**
-All 21 numeric checks match:
-- **Aria:** inherent 66.25; credit 0.29; residual 47.0375; EU 56.445; SG/US 51.74125 — all OK.
-- **Sentinel:** inherent 62.5; credit 0.32; residual 42.5; finals 44.625–46.75 — all OK.
-- **Mira:** inherent 58.75; credit 0.15; residual 49.9375; CN 64.91875; EU 62.421875; US/SG 54.93125 — all OK.
-- One trivial doc-precision note: ENG §12.1.3 states SG/US as 51.74125 (exact); SPEC §14.1 shows 51.741 (display-truncated in prose). Within the ±0.001 convention; no action.
-
-### A2. Tier boundaries — **PASS**
-Half-open intervals verified at 0, 24.999, 25.000, 49.999, 50.000, 74.999, 75.000, 100 → low/low/moderate/moderate/high/high/critical/critical. SPEC §12, PRD §11, ENG §9, AC-ADRS-7, DES §8 are mutually consistent. All 12 scenario×jurisdiction tiers recomputed: Aria High×4, Sentinel Moderate×4, Mira High×4 — matches §14.
-
-### A3. Full-precision behavior — **PASS (spec level)**
-§13.7 convention is coherent and propagated (no intermediate rounding; display 1 dp; tier from raw; tests ±0.001). ENG §12.1.12's guard test (raw-chain ≠ rounded-chain) is correctly constructed: 56.445 vs 56.4.
-
-### A4. Mitigation cap — **PASS**
-ΣM1..M9 = 0.50 → clamps to 0.40 exactly; residual floor = 60% of inherent holds; per-credit values in ENG §9 `MITIGATION_CREDITS` match SPEC §13.4 exactly.
-
-### A5. Jurisdiction multiplier inputs — **PASS, with one real finding for implementation**
-Component weights (0.10/0.05/0.05/0.10), 0/1 domains, `binding_hit` computability (intensity ≥2 + §13.5 operational applicability definition), and `assessed_date` anchoring all verified consistent.
-
-> **Finding F-1 (brittle assumption, must be honored in `adrs.ts`):** in IEEE-754 arithmetic, `1.00 + 0.10 + 0.05 + 0.05 + 0.10 = 1.3000000000000003 > 1.30`. The documented claim that the J cap is "a defensive no-op at these weights" (AC-JUR-2, ENG §12.1.7) is **false in floating point**: without the `min(J_CAP, ·)` clamp, `jMultiplier` exceeds 1.30 by 3 ulp, and any exact-equality assertion (`=== 1.30`) fails. The clamp is therefore **load-bearing** and the AC-JUR-2 property test (J never exceeds 1.30) is the right test. Implementation must keep the clamp and must not "simplify it away" on the strength of the prose. No document change required — the normative rule (clamp + ±0.001 tolerance) already produces correct behavior — but the implementer should be aware the "no-op" remark is only true in exact arithmetic.
-
-### A6. Zod schemas — **BLOCKED** (no code). Spec-side inputs (§18 + ENG §8 single-normative-source rule) are implementable as written; conditional requirements (§18.6 fact/inference/recommendation; `translation_source_id` iff `quote_translated`; dual quote-length refinement) are all expressible in Zod. No blocker.
-
-### A7. Fixture/production separation — **BLOCKED** (no code). Design (BUILD_PROFILE table, `fixture:true`, banner, deploy gate, AC-INV-8) is complete and testable as specified.
-
-### A8. Integrity validation — **BLOCKED** (no code). The 14-rule PRD §24 set + SPEC §17 rule 13 is enumerable and each rule has a crafted-bad-fixture test defined (ENG §12.2.1–15). No spec gap found.
-
-### A9. Test completeness — **BLOCKED** (no tests exist). The defined suite (ENG §12.1.1–12, §12.2.1–15, §12.3 P-1–P-8) covers every locked formula property, every integrity rule, and the fixture-isolation boundary; adequate for Phase 0 **when implemented**.
-
-### A10. Environment validation — **BLOCKED** (no code). ENG §15 env table is complete; reviewer notes `BUILD_PROFILE` default = `production` is the safe default (fail-closed against fixture leakage).
-
-### A11. Methodology drift — **PASS**
-No drift found among SPEC §13/§14, ENG §9 constants, AC §5–7, METHODOLOGY_DECISIONS MD-1…MD-12. Weights, credits, caps, tier intervals, intensity scale, and worked examples are digit-identical across documents.
-
-### A12. Security issues — **PASS (docs) / BLOCKED (code)**
-Static-only architecture, no runtime API/LLM, no PII capture, CSP guidance, no secrets in bundle, cookieless page counts off by default — sound. Nothing to audit in code yet.
-
-### A13. Brittle assumptions — three found
-- **F-1** (above): float sum of J weights exceeds 1.30; clamp is load-bearing.
-- **F-2:** the prior verification's residues **N-1/N-2/N-3 remain unfixed** (confirmed by grep today): DESIGN_HANDOFF §11 still permits the keyword filter PRD §9 forbids; SPEC §6.5 "every record carries `last_verified`" still contradicts §17's instruments+provisions scope (AC-LV-1 inherits it); AC-SCN-3 still hardcodes CN/EU=High against MJ-10. These were the explicit pre-P1 cleanup conditions of the last verdict and were not done.
-- **F-3:** the repository is **not under version control** (`git init` never run). NFR-5/NFR-6 (reproducibility, content versioning, `CONTENT_VERSION` = git SHA) and the append-only `review_log` discipline all presuppose git. Starting Phase 0 without it would violate the handoff's own assumptions from the first commit.
-
-**Fixes applied by this review:** none. The instruction was to fix only high-confidence *engineering* defects — there is no code to fix, F-1 requires no document change (behavior is already correctly specified by clamp + tolerance), and F-2's document edits were explicitly assigned as pre-P1 cleanup owned by the methodology owner, not silently patched during an independent review.
+**Reproduced test totals: 52** (27 unit + 22 integration + 3 e2e), all passing after fixes.
 
 ---
 
-## B. Blocked audit items
+## 2. Audit results by area (25 requested areas)
 
-ADRS module correctness, Zod schema fidelity, fixture/production enforcement, integrity-pipeline behavior, test execution results, and environment validation **cannot be assessed** until the ENG §18 deliverables exist. No partial credit is given for well-specified-but-unbuilt components: Phase 0's gate is "schemas validate sample records; formula tests green" (SPEC §26), and no schema, sample record, formula module, or test exists to be green.
+| # | Area | Verdict | Evidence |
+|---|---|---|---|
+| 1 | ADRS arithmetic | ✅ | Constants digit-identical to SPEC §13: `WEIGHTS` (adrs/index.ts:17), `MITIGATION_CREDITS` (:19), caps (:31–32), `J_COMPONENT_WEIGHTS` (:35). Worked examples reproduce at ±0.001 (unit tests §12.1.1–5) |
+| 2 | Tier boundaries | ✅ | `tierOf` (:109) half-open `<25/<50/<75`; boundary tests at 24.999/25.000/49.999/50.000/74.999/75.000/0/100 pass; out-of-range throws |
+| 3 | Full precision | ✅ | No intermediate rounding anywhere in the chain; guard test proves raw path (56.445) ≠ rounded path (56.4) |
+| 4 | Display rounding separation | ✅ | `displayScore` (:120) is display-only; tier computed from raw (`computeAdrs` passes raw `final` to `tierOf`); "49.96 → moderate though displays 50.0" tested |
+| 5 | Mitigation cap | ✅ | `min(0.40, Σ)`; exhaustive 512-subset property test asserts credit ≤0.40 and residual ≥60% of inherent |
+| 6 | J multiplier inputs | ✅ | Pure function of four 0/1 components only — **no jurisdiction parameter exists in the API**; non-0/1 rejected (:92–94) |
+| 7 | Floating-point clamp (F-1) | ✅ | Verified live: unclamped IEEE sum = 1.3000000000000003; clamp makes all-four = exactly 1.3; both asserted in tests; 16-combination property test |
+| 8 | Zod schema correctness | ✅ after fix | Enums verbatim from SPEC §8–§11; dual quote limit, translation-source rule, bindingness override, kind-conditional epistemic rules, strict assessment (computed fields rejected) all verified by crafted-bad tests. **Defect found & fixed:** Tier-1 archive rule was claimed in comments but unimplemented (F2, §4) |
+| 9 | Generated JSON Schemas | ✅ with caveat | 7 artifacts regenerate drift-free; CI enforces. Caveat (inherent to MN-15 policy): Zod refinements (word counts, conditional rules, the new Tier-1 rule) do **not** appear in generated JSON — the files are stamped "Zod is normative" and must never be used as the sole validator |
+| 10 | Fixture/production separation | ✅ | R7 rejects all 20 `fixture:true` records in production (reproduced); `getPageDataset` serves no fixture content in production; fixtures build renders them behind the banner |
+| 11 | Deployment guard | ✅ | `assertNotFixtureDeploy` (buildProfile.ts) aborts fixtures+DEPLOY_ENV=production (reproduced, exit 1); default profile is `production` (fail-closed); unknown profile throws; CI has a dedicated inverted-exit guard step |
+| 12 | Integrity validators | ✅ after fix | All 10 required validators present and unit/integration-tested; ADRS recompute gate runs in both profiles. **Gap found & fixed:** no uniqueness check for SPEC §17's `UNIQUE (scenario_id, jurisdiction_id, version)` (F3, §4) |
+| 13 | A/T/R invariance | ✅ | `checkDimensionInvariance` R5; mutation test (Aria EU A→4) fails correctly |
+| 14 | D/E divergence justification | ✅ | R6: justified divergence accepted, unjustified rejected — both directions tested |
+| 15 | Source metadata validation | ✅ | `checkSourceMetadata` resolves `source_id`/`translation_source_id`, non-empty rationale; orphan-reference test passes |
+| 16 | Fact/inference/recommendation separation | ✅ | Kind-conditional schema (facts: citations+confidence, Tier-3-never-cites-fact; inferences: confidence+based_on; recommendations: based_on, **no confidence**) + `checkEpistemicSeparation`; crafted-bad tests for each |
+| 17 | Environment validation | ✅ | `getBuildProfile` validates enum, fail-closed default; `.env.example` documents both vars and the no-secrets policy |
+| 18 | Route shells | ✅ | All 12 required routes render (e2e loop, zero console errors); SSG from fixture ids with `dynamicParams=false`; `/compare` implements MD-11 (no intensity threshold, build-date reference); shells marked "Phase 0" |
+| 19 | Fixture banner | ✅ | Exact text `FIXTURE DATA — ILLUSTRATIVE ONLY` asserted on every route in e2e; absent in production profile (component returns null) |
+| 20 | Test completeness | ✅ | ENG §12.1 items 1–12 all present; §12.2 crafted-bad set covered; e2e covers banner/shells/calculator incl. the CB-3 no-auto-J flow; MJ-10 honored (scenario expectations read from fixture files; only pure formula tests hardcode) |
+| 21 | CI correctness | ✅ | Order matches ENG §13; includes production-rejection gate and deploy-guard as *inverted* checks (pass = gate fails), schema-drift check, dual builds; deploy job intentionally absent with CB-4 conditions documented |
+| 22 | Security | ✅ | No secrets (grep-scanned), no `dangerouslySetInnerHTML`/`eval`/network calls in `src/`; design prototype's Google-Fonts link is not part of the served app; `.gitignore` blocks `.env` |
+| 23 | Methodology drift | ✅ none | Every constant, boundary, and rule verified against SPEC §10/§12/§13/§13.7; fixture J notes all marked "FICTIONAL … (OD-11/MD-3)"; no real policy claims anywhere (all fixture sources use `example.invalid`) |
+| 24 | Brittle assumptions | ⚠ 3 noted | See §5 — none blocking |
+| 25 | Reports vs. code | ✅ after fix | Every claim in both Phase 0 reports reproduced exactly. One mismatch found: the CitationSchema comment claimed an unimplemented refinement (fixed, F2). Report test totals (48) are now 52 after this review's regression tests — noted here so the audit trail stays truthful |
 
 ---
 
-## C. Re-entry criteria for re-review
+## 3. Findings by severity
 
-Re-request this review when ALL of the following are true:
-1. `git init` done; all work committed (F-3).
-2. ENG §18 items 1–6 exist in-repo: CI skeleton, Zod schemas + JSON mirrors, `adrs.ts` + §12.1 tests passing, seeds, 12 assessment fixtures (`fixture:true`, §14 values incl. capability intensities), pipeline emitting `/data/atlas.json` under `BUILD_PROFILE=fixtures`, wireframes.
-3. `docs/PHASE_0_IMPLEMENTATION_REPORT.md` and `docs/PHASE_0_TEST_REPORT.md` actually exist and reflect real runs (test report must include the raw runner output).
-4. F-1 respected: clamp present; no exact-equality float assertions.
-5. N-1/N-2/N-3 document residues cleared (or explicitly waived by the owner).
+**High — none.**
+
+**Medium — 3 found, 3 fixed (see §4).**
+
+**Low / observations (not fixed — outside "high-confidence defect" bar or explicitly P1 scope):**
+
+| # | Finding | Location | Why left |
+|---|---|---|---|
+| L1 | §20.5 word-ban lint ("likely/should/…" over analyst-authored fields) not implemented | validation layer | Not among the 10 required Phase 0 validators; belongs with P1 content tooling. Tracked. |
+| L2 | Cross-provision `based_on` refs (containing `:`) bypass epistemic-reference validation | integrity.ts:58 | Deliberate escape hatch; cross-record resolution needs the P1 content graph. Tracked. |
+| L3 | `paraphrase_en` enforces ≤600 chars but not the §17 comment's "≤80 words" | schemas/index.ts | Revised SPEC §18.2 (normative) specifies maxLength 600 only; no contradiction, noted for P1 tightening. |
+| L4 | E2E runs against `next dev`, not `build`+`start` | playwright.config.ts | Faster loop; behavior-identical for these assertions. CI can harden later. |
+| L5 | Route naming `/policies` vs SPEC §16 `/instruments` | src/app/policies | Known divergence, logged as Q1 in IMPLEMENTATION_DECISIONS; rename in P1. |
 
 ---
 
-## Final Verdict
+## 4. Defects fixed (commit `cb4a96e`, separate from this report)
 
-# **FAIL**
+**F1 — MEDIUM: `currentVersions` violated MD-4.**
+`src/lib/validation/integrity.ts` (pre-fix :178–186) selected the highest version of **any** review status, while its own docstring and MD-4 require "highest version whose `review_status='published'`". **Proven live:** `[published v1, draft v2] → draft v2`. A draft re-score would have silently replaced a published score on scenario pages and in the A/T/R invariance check. **Fix** (:184–201): published versions always win per key; non-published fallback only where a key has no published version (preserves the CB-4 fixtures-profile relaxation). Regression tests added.
 
-Not on the merits of any code — on the absence of it. Phase 0 has not been implemented: none of the ten mandatory deliverables exists, and the two reports this review was asked to audit do not exist. The specification side is in strong shape (all 21 normative ADRS values, tier boundaries, cap and multiplier invariants independently recomputed and confirmed; zero methodology drift across five documents), and one genuinely useful implementation constraint was surfaced (F-1: the J cap is load-bearing in floating point). But an engineering review of a phase with zero engineering artifacts can only fail. Build the ENG §18 deliverables, then re-run this review against real code and real test output.
+**F2 — MEDIUM: Tier-1 archive rule documented but not enforced (comment/code mismatch).**
+`src/lib/schemas/index.ts` comments on CitationSchema/SourceSchema claimed the §21.6/MJ-7 rule; **no refinement existed** — a Tier 1 source with neither `archived_url` nor a logged manual verification validated cleanly, directly contradicting SPEC §21.6/PRD §24.9 ("hard failure"). **Fix** (:77–86): `SourceSchema.superRefine` — `tier===1` requires `archived_url` **or** `manual_verification_date`; `stable_ref` explicitly does not substitute; CitationSchema's false comment replaced with an accurate pointer. Shipped fixtures already carried `archived_url`, so no fixture change. Regression tests cover accept/reject/both-alternatives/tier-2-exempt/stable-ref-insufficient.
+
+**F3 — MEDIUM: SPEC §17 `UNIQUE (scenario_id, jurisdiction_id, version)` had no pipeline equivalent.**
+There is no database in the content-as-files pipeline, so nothing enforced the uniqueness constraint; **proven live:** two `(aria, eu, v1)` records → one silently dropped by map-overwrite, corrupting version selection undetectably. **Fix:** `checkVersionUniqueness` (integrity.ts:203–215), wired into `runIntegrity` (:217+), with regression test.
+
+All three fixes are spec-restoring (MD-4, §21.6, §17) — **no methodology change, no new features.** Post-fix full regression: lint 0 · tsc clean · 27 + 22 + 3 = 52/52 · fixtures validate OK · production rejects 20 · deploy guard holds · schemas drift-free · fixtures build OK.
+
+---
+
+## 5. Remaining risks
+
+1. **Generated JSON Schemas are lossy by design** (MN-15): refinements (incl. F2's rule) exist only in Zod. Anyone validating with the JSON artifacts alone gets weaker checks. Mitigation: files are stamped "Zod is normative"; keep it that way.
+2. **`build:production` fails until Phase 1 real content exists** — correct CB-4 behavior, but a future engineer may be tempted to weaken R7 to "make the build green." The CI gate is inverted (green = rejection works) precisely to resist this; do not remove it.
+3. **E2E label-locator coupling** — calculator tests locate mitigation toggles by label-text regex (`^M2 `); P1 restyling must keep `data-testid`s or update locators.
+4. **Compare-page reference date** is module-load time (`BUILD_DATE`) — correct for SSG; if ISR/long-lived dev servers appear later, revisit.
+5. **F-1 discipline**: the J clamp is load-bearing in floating point (regression-tested here). Any "cleanup" removing `Math.min(J_CAP, …)` will break exact-1.30 behavior.
+
+---
+
+## 6. Final verdict
+
+# **PASS WITH FIXES**
+
+The implementation is faithful to the locked methodology — every constant, boundary, cap, and epistemic rule verified against SPEC and reproduced by 52 passing tests, with the fixture/production separation and both deployment gates working exactly as specified. The three medium defects found (MD-4 version selection, unenforced Tier-1 archive rule, missing §17 uniqueness check) were real, spec-grounded, proven with live reproductions, fixed surgically in `cb4a96e`, and covered by new regression tests. No high-severity issues, no methodology drift, no security findings, no report falsification — the prior reports' claims all reproduced. Phase 0 stands; proceed to P1 with the five tracked risks above.

@@ -250,6 +250,23 @@ export const ControlSchema = z
   })
   .strict();
 
+/** §17 changelog — dated status-change / drift entries (P2-13). */
+export const ChangelogSchema = z
+  .object({
+    id: z.string().min(1),
+    entry_date: IsoDate,
+    instrument_id: z.string().min(1),
+    old_status: LifecycleStatus.nullable(),
+    new_status: LifecycleStatus.nullable(),
+    description: z.string().min(1),
+    source_id: z.string().min(1),
+    analyst: z.string().min(1),
+    review_status: ReviewStatus,
+    as_of_date: IsoDate,
+    fixture: z.boolean().optional(),
+  })
+  .strict();
+
 export const CapabilitySeedSchema = z
   .object({ id: CapabilityId, name: z.string().min(1), definition: z.string().min(1), indicators: z.string().min(1) })
   .strict();
@@ -266,3 +283,4 @@ export type Assessment = z.infer<typeof AssessmentSchema>;
 export type SourceRecord = z.infer<typeof SourceSchema>;
 export type EpistemicBlock = z.infer<typeof EpistemicBlockSchema>;
 export type Control = z.infer<typeof ControlSchema>;
+export type ChangelogEntry = z.infer<typeof ChangelogSchema>;

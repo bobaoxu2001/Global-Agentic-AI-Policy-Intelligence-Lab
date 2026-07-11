@@ -14,7 +14,7 @@ export function getPageDataset() {
   if (profile === 'production') {
     return {
       profile,
-      instruments: [], provisions: [], sources: [], scenarios: [],
+      instruments: [], provisions: [], sources: [], scenarios: [], changelog: [],
       assessments: [] as Assessment[],
     };
   }

@@ -5,7 +5,7 @@
  * so an author can fix a batch in one pass (ENG §16).
  */
 import { computeAdrs, type Dims, type JComponents, type MitigationClass } from '../adrs';
-import type { Assessment, Instrument, Provision, Scenario, SourceRecord } from '../schemas';
+import type { Assessment, ChangelogEntry, Instrument, Provision, Scenario, SourceRecord } from '../schemas';
 import type { BuildProfile } from './buildProfile';
 
 export interface IntegrityError {
@@ -20,6 +20,7 @@ export interface Dataset {
   sources: SourceRecord[];
   scenarios: Scenario[];
   assessments: Assessment[];
+  changelog: ChangelogEntry[];
 }
 
 const err = (rule: string, entity: string, message: string): IntegrityError => ({ rule, entity, message });
@@ -39,6 +40,11 @@ export function checkSourceMetadata(ds: Dataset): IntegrityError[] {
   for (const i of ds.instruments) {
     for (const sid of i.source_ids)
       if (!sourceIds.has(sid)) errors.push(err('R1-source-metadata', i.id, `source_id "${sid}" does not resolve`));
+  }
+  const instrumentIds = new Set(ds.instruments.map((i) => i.id));
+  for (const c of ds.changelog) {
+    if (!sourceIds.has(c.source_id)) errors.push(err('R1-source-metadata', c.id, `source_id "${c.source_id}" does not resolve`));
+    if (!instrumentIds.has(c.instrument_id)) errors.push(err('R1-source-metadata', c.id, `instrument_id "${c.instrument_id}" does not resolve`));
   }
   return errors;
 }
@@ -132,7 +138,7 @@ export function checkNoFixturesInProduction(ds: Dataset, profile: BuildProfile):
   if (profile !== 'production') return [];
   const errors: IntegrityError[] = [];
   const all: Array<{ id: string; fixture?: boolean }> = [
-    ...ds.instruments, ...ds.provisions, ...ds.sources, ...ds.scenarios, ...ds.assessments,
+    ...ds.instruments, ...ds.provisions, ...ds.sources, ...ds.scenarios, ...ds.assessments, ...ds.changelog,
   ];
   for (const r of all)
     if (r.fixture) errors.push(err('R7-no-fixtures-in-prod', r.id, 'fixture:true record present in a production build (CB-4)'));
@@ -143,7 +149,7 @@ export function checkNoFixturesInProduction(ds: Dataset, profile: BuildProfile):
 export function checkPublishedOnlyInProduction(ds: Dataset, profile: BuildProfile): IntegrityError[] {
   if (profile !== 'production') return [];
   const errors: IntegrityError[] = [];
-  const rows: Array<{ id: string; review_status: string }> = [...ds.instruments, ...ds.provisions, ...ds.assessments];
+  const rows: Array<{ id: string; review_status: string }> = [...ds.instruments, ...ds.provisions, ...ds.assessments, ...ds.changelog];
   for (const r of rows)
     if (r.review_status !== 'published')
       errors.push(err('R8-published-only', r.id, `review_status "${r.review_status}" not renderable in production (§19/PRD §15)`));

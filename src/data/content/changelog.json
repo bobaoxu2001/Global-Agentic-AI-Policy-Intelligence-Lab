@@ -1,0 +1,26 @@
+[
+  {
+    "id": "chg-2026-07-12-co-supersession",
+    "entry_date": "2026-07-12",
+    "instrument_id": "us-co-sb24-205",
+    "old_status": "adopted_not_yet_applicable",
+    "new_status": "superseded",
+    "description": "Observed during batch-1 research: Colorado SB 24-205 was repealed and reenacted by SB 26-189 (signed 2026-05-14) before its substantive duties ever became applicable — recorded here as the corpus's first real status-change entry. Repeal-timing nuance (operative on signing vs 2026-08-12) is an open Pass 2 verification item.",
+    "source_id": "us-src-sb26189-leg",
+    "analyst": "atlas-analyst",
+    "review_status": "in_review",
+    "as_of_date": "2026-07-12"
+  },
+  {
+    "id": "chg-2026-07-12-eu-omnibus",
+    "entry_date": "2026-07-12",
+    "instrument_id": "eu-ai-act",
+    "old_status": null,
+    "new_status": null,
+    "description": "Observed during batch-1 research: the 2026 digital-omnibus amendment (Council final approval 2026-06-29, OJ publication pending) defers Annex III high-risk obligations to 2027-12-02 and Annex I-embedded to 2028-08-02, while Art 50(1) transparency keeps its 2026-08-02 date. Instrument lifecycle status unchanged (in_force_partially_applicable); dates drift recorded in key_dates. New CELEX to be captured at OJ publication (§19.5 re-scoring trigger).",
+    "source_id": "eu-src-omnibus-consilium",
+    "analyst": "atlas-analyst",
+    "review_status": "in_review",
+    "as_of_date": "2026-07-12"
+  }
+]

@@ -4,6 +4,7 @@
  * Fails with a collected, readable error report — never fail-fast (ENG §16).
  */
 import assessmentsJson from '../../data/fixtures/assessments.json';
+import contentChangelogJson from '../../data/content/changelog.json';
 import contentInstrumentsJson from '../../data/content/instruments.json';
 import contentProvisionsJson from '../../data/content/provisions.json';
 import contentSourcesJson from '../../data/content/sources.json';
@@ -16,6 +17,7 @@ import risksJson from '../../data/seeds/risks.json';
 import { z } from 'zod';
 import {
   AssessmentSchema,
+  ChangelogSchema,
   CapabilitySeedSchema,
   InstrumentSchema,
   ProvisionSchema,
@@ -74,6 +76,7 @@ export function loadAndValidate(profile: BuildProfile): ValidationReport & { dat
     ],
     scenarios: validateArray('fixtures/scenarios.json', ScenarioSchema, scenariosJson, schemaErrors),
     assessments: validateArray('fixtures/assessments.json', AssessmentSchema, assessmentsJson, schemaErrors),
+    changelog: validateArray('content/changelog.json', ChangelogSchema, contentChangelogJson, schemaErrors),
   };
 
   const integrityErrors = runIntegrity(dataset, profile);
@@ -90,6 +93,7 @@ export function loadAndValidate(profile: BuildProfile): ValidationReport & { dat
       provisions: dataset.provisions.length,
       scenarios: dataset.scenarios.length,
       assessments: dataset.assessments.length,
+      changelog: dataset.changelog.length,
     },
     ok: schemaErrors.length === 0 && integrityErrors.length === 0,
     dataset,

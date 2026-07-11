@@ -1,0 +1,92 @@
+/**
+ * Design tokens — lifted verbatim from docs/DESIGN_TOKENS.md (authoritative hex).
+ * HARD RULE: the five semantic systems (epistemic / lifecycle / bindingness /
+ * source-tier / ADRS-tier) never share a hue; confidence is neutral density only.
+ */
+:root {
+  /* surfaces & structure */
+  --bg-desk: #d9d5cc; --surface-paper: #f7f5ef; --surface-page: #fdfcf9;
+  --surface-panel: #f4f1e8; --surface-rail: #efece3; --surface-ink: #20242b;
+  --border-frame: #cdc7b8; --border-rule: #e3ddd0; --border-rule-soft: #ededed;
+  /* text */
+  --ink: #23211c; --ink-muted: #6b6350; --ink-eyebrow: #a08b63;
+  --ink-on-dark: #c3cbd6;
+  /* type */
+  --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-ui: 'Public Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  /* system 1 — epistemic */
+  --ep-fact: #1e3a8a; --ep-fact-border: rgba(30,58,138,.28); --ep-fact-bg: rgba(30,58,138,.07);
+  --ep-inf: #6d28d9; --ep-inf-border: rgba(109,40,217,.28); --ep-inf-bg: rgba(109,40,217,.07);
+  --ep-rec: #0f766e; --ep-rec-border: rgba(15,118,110,.28); --ep-rec-bg: rgba(15,118,110,.07);
+  /* system 2 — lifecycle */
+  --lc-prop: #475569; --lc-prop-bg: #eef1f4; --lc-prop-dot: #64748b;
+  --lc-adopt: #92600b; --lc-adopt-bg: #fdf1dd; --lc-adopt-dot: #c17d0a;
+  --lc-partial: #4d6b1e; --lc-partial-bg: #eef6e6; --lc-partial-dot: #6f9c2e;
+  --lc-full: #1f6b34; --lc-full-bg: #e3f2e4; --lc-full-dot: #1f8a43;
+  --lc-hist: #71717a; --lc-hist-bg: #f1f1f2; --lc-hist-dot: #a1a1aa;
+  /* system 3 — bindingness (shape/weight, not hue) */
+  --bind-b: #20242b; --bind-c-border: #6b7280; --bind-c-ink: #374151;
+  --bind-n-bg: #f4f4f5; --bind-n-border: #d4d4d8; --bind-n-ink: #6b7280;
+  /* system 4 — source tier */
+  --tier1: #0f172a; --tier2: #e2e8f0; --tier2-ink: #334155;
+  --tier3-border: #cbd5e1; --tier3-ink: #64748b;
+  /* system 5 — ADRS tier */
+  --adrs-low: #1f6b34; --adrs-low-bg: #e3f2e4;
+  --adrs-mod: #8a6d0a; --adrs-mod-bg: #fbf0cf;
+  --adrs-high: #b4530f; --adrs-high-bg: #fbe4d2;
+  --adrs-crit: #a52a1f; --adrs-crit-bg: #f8d7d2;
+  /* confidence — neutral density */
+  --conf-fill: #3f3f46; --conf-track: #e4e4e7; --conf-border: #cbd0d6;
+  /* framing accents (never data meaning) */
+  --fixture-stripe-a: #fef3c7; --fixture-stripe-b: #fde9a8;
+  --fixture-border: #d9b64a; --fixture-ink: #78500a;
+  --hypo-bg: #fef3c7; --hypo-ink: #78500a;
+  --stale: #92600b; --review-ok: #1f6b34;
+}
+
+/* ---------- semantic component classes ---------- */
+.ep-block { border-left: 3px solid; padding: 8px 12px; margin: 10px 0; font-size: 14px; line-height: 1.58; background: var(--surface-page); }
+.ep-block.fact { border-color: var(--ep-fact); background: var(--ep-fact-bg); }
+.ep-block.inference { border-color: var(--ep-inf); background: var(--ep-inf-bg); }
+.ep-block.recommendation { border-color: var(--ep-rec); background: var(--ep-rec-bg); }
+.ep-tag { font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: .04em; margin-right: 6px; }
+.ep-tag.fact { color: var(--ep-fact); } .ep-tag.inference { color: var(--ep-inf); } .ep-tag.recommendation { color: var(--ep-rec); }
+
+.chip { display: inline-flex; align-items: center; gap: 5px; border-radius: 5px; padding: 2px 8px; font-family: var(--font-ui); font-size: 12px; border: 1px solid transparent; }
+.chip .dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+.chip-lc-proposed { color: var(--lc-prop); background: var(--lc-prop-bg); } .chip-lc-proposed .dot { background: var(--lc-prop-dot); }
+.chip-lc-adopted_not_yet_applicable { color: var(--lc-adopt); background: var(--lc-adopt-bg); } .chip-lc-adopted_not_yet_applicable .dot { background: var(--lc-adopt-dot); }
+.chip-lc-in_force_partially_applicable { color: var(--lc-partial); background: var(--lc-partial-bg); } .chip-lc-in_force_partially_applicable .dot { background: var(--lc-partial-dot); }
+.chip-lc-fully_applicable { color: var(--lc-full); background: var(--lc-full-bg); } .chip-lc-fully_applicable .dot { background: var(--lc-full-dot); }
+.chip-lc-amended, .chip-lc-superseded, .chip-lc-rescinded, .chip-lc-expired, .chip-lc-withdrawn { color: var(--lc-hist); background: var(--lc-hist-bg); text-decoration: line-through; }
+.chip-lc-amended .dot, .chip-lc-superseded .dot, .chip-lc-rescinded .dot, .chip-lc-expired .dot, .chip-lc-withdrawn .dot { background: var(--lc-hist-dot); }
+
+.chip-bind-binding { background: var(--bind-b); color: #fff; }
+.chip-bind-conditionally_binding { background: #fff; border: 1.5px dashed var(--bind-c-border); color: var(--bind-c-ink); }
+.chip-bind-non_binding { background: var(--bind-n-bg); border-color: var(--bind-n-border); color: var(--bind-n-ink); }
+
+.chip-tier1 { background: var(--tier1); color: #fff; font-family: var(--font-mono); }
+.chip-tier2 { background: var(--tier2); color: var(--tier2-ink); font-family: var(--font-mono); }
+.chip-tier3 { background: #fff; border-color: var(--tier3-border); color: var(--tier3-ink); font-family: var(--font-mono); }
+
+.tierbadge { display: inline-flex; align-items: baseline; gap: 6px; border-radius: 6px; padding: 3px 10px; font-family: var(--font-mono); font-weight: 700; font-size: 13px; }
+.tierbadge .score { font-size: 15px; }
+.tier-low { color: var(--adrs-low); background: var(--adrs-low-bg); }
+.tier-moderate { color: var(--adrs-mod); background: var(--adrs-mod-bg); }
+.tier-high { color: var(--adrs-high); background: var(--adrs-high-bg); }
+.tier-critical { color: var(--adrs-crit); background: var(--adrs-crit-bg); }
+
+.conf { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: var(--ink-muted); font-family: var(--font-ui); }
+.conf .track { width: 44px; height: 7px; background: var(--conf-track); border: 1px solid var(--conf-border); border-radius: 4px; overflow: hidden; }
+.conf .fill { height: 100%; background: var(--conf-fill); }
+
+.chip-type { background: var(--surface-panel); border-color: var(--border-rule); color: var(--ink-muted); font-family: var(--font-mono); font-size: 11px; }
+.hypo-tag { background: var(--hypo-bg); color: var(--hypo-ink); border-radius: 4px; padding: 2px 8px; font-size: 11px; font-weight: 700; }
+.stale-flag { color: var(--stale); font-size: 11px; font-weight: 600; }
+.eyebrow { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-eyebrow); }
+.mono { font-family: var(--font-mono); }
+
+a { color: var(--ep-fact); text-decoration: none; }
+a:hover { text-decoration: underline; }
+:focus-visible { outline: 2px solid #1e3a8a; outline-offset: 2px; }

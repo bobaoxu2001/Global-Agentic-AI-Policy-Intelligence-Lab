@@ -9,7 +9,7 @@ import scenarios from '../src/data/fixtures/scenarios.json';
 test('every route shell renders with the fixture banner and no console errors', async ({ page }) => {
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(String(e)));
-  const routes = ['/', '/policies', '/compare', '/scenarios', '/calculator', '/controls', '/brief', '/methodology', '/changelog'];
+  const routes = ['/', '/instruments', '/compare', '/scenarios', '/calculator', '/controls', '/brief', '/methodology', '/changelog'];
   for (const r of routes) {
     await page.goto(r);
     await expect(page.getByTestId('fixture-banner')).toHaveText('FIXTURE DATA — ILLUSTRATIVE ONLY');
@@ -34,7 +34,7 @@ test('calculator: live arithmetic, cap notice, jurisdiction never auto-sets J (A
   await expect(page.getByTestId('out-inherent')).toHaveText('66.25');
   // toggle M2,M3,M4,M5,M8 → credit 0.29, residual 47.0375
   for (const m of ['M2', 'M3', 'M4', 'M5', 'M8']) {
-    await page.getByLabel(new RegExp(`^${m} `)).check();
+    await page.getByTestId(`mit-${m}`).check();
   }
   await expect(page.getByTestId('out-credit')).toHaveText('0.29');
   await expect(page.getByTestId('out-residual')).toHaveText('47.0375');
@@ -49,11 +49,24 @@ test('calculator: live arithmetic, cap notice, jurisdiction never auto-sets J (A
   await page.getByTestId('j-enforcement_posture').check();
   await expect(page.getByTestId('out-j')).toHaveText('1.20');
   await expect(page.getByTestId('out-final')).toHaveText('56.4');
-  await expect(page.getByTestId('out-tier')).toHaveText('high');
+  await expect(page.getByTestId('out-tier')).toContainText('high');
   // cap notice appears when all mitigations selected (0.50 → 0.40)
   for (const m of ['M1', 'M6', 'M7', 'M9']) {
-    await page.getByLabel(new RegExp(`^${m} `)).check();
+    await page.getByTestId(`mit-${m}`).check();
   }
   await expect(page.getByTestId('cap-notice')).toBeVisible();
   await expect(page.getByTestId('out-credit')).toHaveText('0.40');
+});
+
+test('calculator permalink round-trips state (AC-ADRS-8) and anchor text updates', async ({ page }) => {
+  await page.goto('/calculator?A=3&T=3&D=3&E=2&R=2&m=M2,M3,M4,M5,M8&binding=1&near=1&enf=1&proh=0');
+  await expect(page.getByTestId('out-inherent')).toHaveText('66.25');
+  await expect(page.getByTestId('out-credit')).toHaveText('0.29');
+  await expect(page.getByTestId('out-j')).toHaveText('1.20');
+  await expect(page.getByTestId('out-final')).toHaveText('56.4');
+  await expect(page.getByTestId('anchor-A')).toContainText('hard policy limits');
+  // invalid params clamp, never crash (AC-ERR-2)
+  await page.goto('/calculator?A=9&T=-1&m=BOGUS,M2');
+  await expect(page.getByTestId('out-inherent')).toHaveText('0.00');
+  await expect(page.getByTestId('out-credit')).toHaveText('0.08');
 });

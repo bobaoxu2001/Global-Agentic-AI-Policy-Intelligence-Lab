@@ -1,10 +1,24 @@
-/* Phase 0 low-fi shell styles ONLY — polished styling is Phase 1 (DESIGN_TOKENS.md). */
+/* Global base — P1. Tokens are authoritative (docs/DESIGN_TOKENS.md). */
+@import './tokens.css';
+
 :root { color-scheme: light; }
-body { font-family: ui-sans-serif, system-ui, sans-serif; margin: 0; color: #1a1a1a; }
+body { font-family: var(--font-ui); margin: 0; color: var(--ink); background: var(--surface-paper); font-size: 14px; line-height: 1.58; }
 main { max-width: 960px; margin: 0 auto; padding: 16px; }
-nav a { margin-right: 10px; font-size: 13px; }
-.fixture-banner { background: #7a1f1f; color: #fff; text-align: center; padding: 6px 10px; font-size: 13px; font-weight: 700; letter-spacing: 0.03em; position: sticky; top: 0; z-index: 50; }
-.disclaimer { background: #f3f3f3; color: #444; font-size: 11px; padding: 4px 10px; text-align: center; }
-.phase0 { border: 1px dashed #999; padding: 8px; margin: 12px 0; font-size: 12px; color: #666; }
-table { border-collapse: collapse; font-size: 13px; } td, th { border: 1px solid #ccc; padding: 4px 8px; text-align: left; }
-fieldset { margin: 8px 0; }
+h1 { font-family: var(--font-serif); font-weight: 600; font-size: 24px; }
+h2 { font-size: 18px; }
+blockquote { font-family: var(--font-serif); border-left: 3px solid var(--border-frame); margin: 10px 0; padding: 6px 14px; background: var(--surface-page); }
+nav.primary { background: var(--surface-rail); border-bottom: 1px solid var(--border-rule); }
+nav.primary a { margin-right: 12px; font-size: 13px; color: var(--ink); }
+.fixture-banner {
+  background: repeating-linear-gradient(45deg, var(--fixture-stripe-a), var(--fixture-stripe-a) 14px, var(--fixture-stripe-b) 14px, var(--fixture-stripe-b) 28px);
+  color: var(--fixture-ink); border-bottom: 2px solid var(--fixture-border);
+  text-align: center; padding: 6px 10px; font-size: 12.5px; font-weight: 700; letter-spacing: .04em;
+  position: sticky; top: 0; z-index: 50;
+}
+.disclaimer { background: var(--surface-ink); color: var(--ink-on-dark); font-size: 11px; padding: 4px 10px; text-align: center; }
+.phase0 { border: 1px dashed var(--border-frame); padding: 8px; margin: 12px 0; font-size: 12px; color: var(--ink-muted); background: var(--surface-panel); }
+table { border-collapse: collapse; font-size: 13px; background: var(--surface-page); }
+td, th { border: 1px solid var(--border-rule); padding: 5px 9px; text-align: left; }
+th { background: var(--surface-panel); font-size: 12px; }
+fieldset { margin: 8px 0; border: 1px solid var(--border-rule); background: var(--surface-page); }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }

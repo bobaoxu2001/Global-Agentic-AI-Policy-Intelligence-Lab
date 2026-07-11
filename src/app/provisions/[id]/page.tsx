@@ -1,3 +1,4 @@
+import { BindingnessChip, ConfidenceChip, EpistemicBlockView } from '@/components/semantic';
 import { getPageDataset } from '@/lib/validation/pageData';
 
 export const dynamicParams = false;
@@ -5,35 +6,36 @@ export function generateStaticParams() {
   return getPageDataset().provisions.map((p) => ({ id: p.id }));
 }
 
-/** Provision / Source Evidence shell — typed chain rendered flat in Phase 0 (3-pane reader is Phase 1). */
+/** Provision / Evidence — typed ■▲● chain with semantic components (3-pane reader arrives P1-8 full). */
 export default async function ProvisionPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const decoded = decodeURIComponent(id);
   const ds = getPageDataset();
   const p = ds.provisions.find((x) => x.id === decoded);
   if (!p) return <p>Not found.</p>;
-  const glyph = { fact: '■ Fact', inference: '▲ Inference', recommendation: '● Recommendation' } as const;
   return (
     <>
+      <div className="eyebrow">{p.instrument_id}</div>
       <h1>{p.pin_cite}</h1>
-      <p className="phase0">Phase 0 shell — typed Fact → Inference → Recommendation chain, unstyled.</p>
+      <p style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+        <span className="chip chip-type">{p.obligation_type}</span>
+        {p.bindingness ? <BindingnessChip level={p.bindingness} /> : null}
+        <ConfidenceChip level={p.confidence} />
+        {p.applies_from ? <span className="mono" style={{ fontSize: 12 }}>applies from {p.applies_from}</span> : null}
+      </p>
       {p.quote_verbatim ? <blockquote lang="en">{p.quote_verbatim}</blockquote> : null}
       <p>{p.paraphrase_en}</p>
-      <p>confidence=<b>{p.confidence}</b> — {p.confidence_rationale}</p>
-      <h2>Epistemic chain</h2>
-      <ol>
-        {p.epistemic_blocks.map((b) => (
-          <li key={b.id}>
-            <b>{glyph[b.kind]}</b>
-            {b.kind !== 'recommendation' && b.confidence ? ` (confidence: ${b.confidence})` : ''} — {b.text_md}
-            {b.citations?.map((c, i) => (
-              <div key={i} style={{ fontSize: 12 }}>
-                cite: {c.publisher} — {c.title}, {c.pin_cite} · Tier {c.tier} · accessed {c.accessed_date}
-              </div>
-            ))}
-          </li>
+      <p style={{ fontSize: 12, color: 'var(--ink-muted)' }}>{p.confidence_rationale}</p>
+      <h2>Epistemic chain <span className="eyebrow">■ fact → ▲ inference → ● recommendation</span></h2>
+      {p.epistemic_blocks.map((b) => <EpistemicBlockView key={b.id} block={b} />)}
+      <h2>Mappings</h2>
+      <ul>
+        {p.capability_map.map((m) => (
+          <li key={m.capability_id}><b className="mono">{m.capability_id}</b> — {m.rationale} <ConfidenceChip level={m.confidence} /></li>
         ))}
-      </ol>
+        {p.risk_map.map((m) => <li key={m.risk_id}><b className="mono">{m.risk_id}</b> — {m.rationale}</li>)}
+      </ul>
+      <p className="mono" style={{ fontSize: 12, color: 'var(--ink-muted)' }}>as_of {p.as_of_date} · last_verified {p.last_verified}</p>
     </>
   );
 }

@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 const NAV = [
   ['/', 'Dashboard'],
-  ['/policies', 'Policy Tracker'],
+  ['/instruments', 'Policy Tracker'],
   ['/compare', 'Compare'],
   ['/scenarios', 'Scenarios'],
   ['/calculator', 'ADRS Calculator'],
@@ -29,7 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="disclaimer">
           Independent research project. Hypothetical scenarios. Not legal advice. Not affiliated with any company.
         </div>
-        <nav aria-label="Primary" style={{ maxWidth: 960, margin: '0 auto', padding: '8px 16px' }}>
+        <nav className="primary" aria-label="Primary" style={{ maxWidth: 960, margin: '0 auto', padding: '8px 16px' }}>
           {NAV.map(([href, label]) => (
             <Link key={href} href={href}>
               {label}

@@ -28,7 +28,7 @@ export default async function ProvisionPage({ params }: { params: Promise<{ id: 
       <p style={{ fontSize: 12, color: 'var(--ink-muted)' }}>{p.confidence_rationale}</p>
       <h2>Epistemic chain <span className="eyebrow">■ fact → ▲ inference → ● recommendation</span></h2>
       {p.epistemic_blocks.map((b) => <EpistemicBlockView key={b.id} block={b} />)}
-      <h2>Mapped controls <span className="eyebrow">● the §15.1 chain's action end</span></h2>
+      <h2>Mapped controls <span className="eyebrow">● the §15.1 chain&apos;s action end</span></h2>
       {ds.controlMaps.filter((m) => m.provision_id === p.id).length === 0 ? (
         <p style={{ fontSize: 12.5, color: 'var(--ink-muted)' }}>No control mappings yet for this provision (P2-7 in progress).</p>
       ) : (

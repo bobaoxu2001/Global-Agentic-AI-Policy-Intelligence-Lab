@@ -32,3 +32,23 @@ Corpus after batch 1: **10 sources · 7 instruments · 7 provisions** (plus the 
 3. **GDPR Art 22(1) verbatim** re-fetch; **SB 26-189** and **标识办法** full-text passes (pin cites, article numbers); **MGF-GenAI** nine dimensions.
 4. **Queued instruments:** CN 深度合成规定 + 生成式AI暂行办法; SG PDPA (+2020 amendment as MJ-4 event exemplar); US EO 14179/EO 14110 pair + NIST AI RMF/AI 600-1.
 5. Per §19.3 checklist: re-resolve every URL, confirm quotes against pin cites, then flip to `published` and cut changelog entries for the two drift events.
+
+
+---
+
+# Batches 2–3 addendum (same Pass-1 day, 2026-07-12)
+
+**Corpus after batch 3: 16 sources · 13 instruments · 11 provisions · 13 controls · 10 control-maps · 2 changelog** — all `in_review`.
+
+| Record | Verification | Note |
+|---|---|---|
+| EO 14148 (90 FR 8237) | **govinfo PDF read in full** | §2(ggg) lists EO 14110 among revocations — revocation vehicle CLOSED with pin cite; 14110→14148→14179 chain fully Tier-1 |
+| CN 暂行办法 (令第15号) | **CAC fetch, Art 9 verbatim** | provider bears content-producer responsibility — accountability allocation |
+| CN 深度合成规定 | **CAC fetch, Art 17 verbatim** | 智能对话 enumerated → agent chat surface in scope since 2023-01-10 |
+| CN 算法推荐规定 (令第9号) | **CAC fetch, Arts 16+24 verbatim** | Art 24 备案 = the named referent of §13.5 prohibition_adjacent; CN stack complete (4 instruments) |
+| NIST AI RMF 1.0 + GenAI Profile | **nist.gov page, voluntary-use sentence verbatim** | US voluntary-framework exemplar; K10/K11 ↔ Govern/Manage |
+| SG PDPA | **BLOCKED — sso.agc.gov.sg 403** (MJ-7 host) | queued: try PDPC official pages next session |
+
+**Also landed:** P2-13 changelog layer (2 real drift entries) · P2-5 K-series catalog (13) · P2-7 provision→control chains (10 mappings, FK-gated, rendered both directions) · P1-10 FilterBar · §28/§29/§30 deliverable drafts (memo, brief incl. corrected K01 all-four-Moderate arithmetic, demo script with 90s cut).
+
+**Pass 2 queue additions:** PDPA (blocked host); 深度合成 order number backfill; NIST PDF function-level provisions; AI Verify; MGF nine dimensions.

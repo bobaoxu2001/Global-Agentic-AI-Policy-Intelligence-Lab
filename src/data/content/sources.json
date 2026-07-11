@@ -164,5 +164,18 @@
     "is_translation": false,
     "accessed_date": "2026-07-12",
     "manual_verification_date": "2026-07-12"
+  },
+  {
+    "id": "us-src-nist-airmf",
+    "tier": 1,
+    "publisher": "National Institute of Standards and Technology (nist.gov)",
+    "title": "AI Risk Management Framework (AI RMF 1.0) — program page",
+    "url": "https://www.nist.gov/itl/ai-risk-management-framework",
+    "stable_ref": "NIST AI 100-1 (framework) · NIST-AI-600-1 (GenAI Profile)",
+    "pub_date": "2023-01-26",
+    "language": "en",
+    "is_translation": false,
+    "accessed_date": "2026-07-12",
+    "manual_verification_date": "2026-07-12"
   }
 ]

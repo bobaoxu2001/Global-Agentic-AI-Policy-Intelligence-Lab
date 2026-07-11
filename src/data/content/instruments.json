@@ -422,5 +422,41 @@
     "source_ids": [
       "cn-src-algo-rec-cac"
     ]
+  },
+  {
+    "id": "us-nist-ai-rmf",
+    "jurisdiction_id": "us",
+    "title_original": "NIST AI Risk Management Framework (AI RMF 1.0)",
+    "title_en": "NIST AI Risk Management Framework 1.0 (+ Generative AI Profile, NIST-AI-600-1)",
+    "instrument_type": "voluntary_framework",
+    "bindingness": "non_binding",
+    "lifecycle_status": "fully_applicable",
+    "status_date": "2023-01-26",
+    "approach_tags": [
+      "standards_assurance",
+      "safety_security"
+    ],
+    "issuing_body": "National Institute of Standards and Technology (NIST)",
+    "adopted_date": "2023-01-26",
+    "key_dates": [
+      {
+        "date": "2023-01-26",
+        "event": "AI RMF 1.0 released",
+        "source_id": "us-src-nist-airmf"
+      },
+      {
+        "date": "2024-07-26",
+        "event": "Generative AI Profile (NIST-AI-600-1) released",
+        "source_id": "us-src-nist-airmf"
+      }
+    ],
+    "summary_md": "■ FACT (high): Released 2023-01-26; NIST states verbatim it 'is intended for voluntary use and to improve the ability to incorporate trustworthiness considerations into the design, development, use, and evaluation of AI products, services, and systems' (official page verified this session); GenAI Profile followed 2024-07-26. Four functions: Govern, Map, Measure, Manage. ▲ INFERENCE (medium): the US voluntary-framework counterpart to Singapore's MGF-GenAI — non_binding yet the de-facto vocabulary of US AI-governance programs and procurement conversations; it shapes enforcement_posture readings and supplies the process spine the K-series controls plug into (K10/K11 map naturally onto Govern/Manage).",
+    "analyst_notes": "Pass 1 (authoring) 2026-07-12. Verified via official nist.gov program page (title, version, dates, voluntary-use sentence verbatim). Function-level provisions and the GenAI Profile's agent-relevant actions to be extracted from the PDFs in a later pass — not asserted from memory. Conditionally-binding upgrade path exists if referenced by contract/procurement (§8 rule 1) — none asserted.",
+    "review_status": "in_review",
+    "as_of_date": "2026-07-12",
+    "last_verified": "2026-07-12",
+    "source_ids": [
+      "us-src-nist-airmf"
+    ]
   }
 ]

@@ -151,5 +151,18 @@
     "is_translation": false,
     "accessed_date": "2026-07-12",
     "manual_verification_date": "2026-07-12"
+  },
+  {
+    "id": "cn-src-algo-rec-cac",
+    "tier": 1,
+    "publisher": "国家互联网信息办公室 (CAC) — cac.gov.cn",
+    "title": "互联网信息服务算法推荐管理规定 (Provisions on the Administration of Algorithmic Recommendation of Internet Information Services)",
+    "url": "https://www.cac.gov.cn/2022-01/04/c_1642894606364259.htm",
+    "stable_ref": "四部门令第9号",
+    "pub_date": "2021-12-31",
+    "language": "zh",
+    "is_translation": false,
+    "accessed_date": "2026-07-12",
+    "manual_verification_date": "2026-07-12"
   }
 ]

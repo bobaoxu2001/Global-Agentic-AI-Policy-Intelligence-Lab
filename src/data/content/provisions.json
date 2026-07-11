@@ -522,5 +522,151 @@
     "review_status": "in_review",
     "as_of_date": "2026-07-12",
     "last_verified": "2026-07-12"
+  },
+  {
+    "id": "cn-algo-recommendation-provisions:art16",
+    "instrument_id": "cn-algo-recommendation-provisions",
+    "pin_cite": "第十六条 (Article 16)",
+    "quote_verbatim": "算法推荐服务提供者应当以显著方式告知用户其提供算法推荐服务的情况。",
+    "paraphrase_en": "Algorithmic-recommendation service providers must inform users, in a conspicuous manner, that they are providing algorithmic recommendation services — an algorithmic-transparency disclosure duty predating every generative-AI rule in the stack.",
+    "obligation_type": "obligation",
+    "applies_from": "2022-03-01",
+    "source_id": "cn-src-algo-rec-cac",
+    "confidence": "medium",
+    "confidence_rationale": "Chinese original quoted verbatim from the Tier 1 CAC text fetched this session; English paraphrase is the analyst's own translation (§7.5 cap → medium).",
+    "epistemic_blocks": [
+      {
+        "id": "b1",
+        "kind": "fact",
+        "text_md": "Article 16 requires providers to conspicuously inform users that algorithmic recommendation services are being provided.",
+        "citations": [
+          {
+            "tier": 1,
+            "publisher": "CAC (cac.gov.cn)",
+            "title": "互联网信息服务算法推荐管理规定",
+            "url": "https://www.cac.gov.cn/2022-01/04/c_1642894606364259.htm",
+            "stable_ref": "四部门令第9号",
+            "pin_cite": "第十六条",
+            "pub_date": "2021-12-31",
+            "language": "zh",
+            "accessed_date": "2026-07-12"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "id": "b2",
+        "kind": "inference",
+        "text_md": "An agent that personalizes or nudges via cross-session memory (C9) toward CN users owes a conspicuous algorithmic-service disclosure ON TOP of AI-content labeling — the disclosure stack has an algorithmic-transparency layer distinct from the synthetic-content layer.",
+        "confidence": "medium",
+        "based_on": [
+          "b1"
+        ]
+      },
+      {
+        "id": "b3",
+        "kind": "recommendation",
+        "text_md": "Operators could extend the K09 labeling surface with an algorithmic-recommendation notice variant for CN, keeping all user-facing transparency copy behind one reviewed control.",
+        "based_on": [
+          "b2"
+        ]
+      }
+    ],
+    "capability_map": [
+      {
+        "capability_id": "C9",
+        "rationale": "Recommendation personalization is memory/profiling-driven.",
+        "confidence": "high"
+      },
+      {
+        "capability_id": "C6",
+        "rationale": "The duty governs the user-facing service interface.",
+        "confidence": "medium"
+      }
+    ],
+    "risk_map": [
+      {
+        "risk_id": "R4",
+        "rationale": "Undisclosed algorithmic curation is a deceptive-interaction variant."
+      }
+    ],
+    "review_status": "in_review",
+    "as_of_date": "2026-07-12",
+    "last_verified": "2026-07-12"
+  },
+  {
+    "id": "cn-algo-recommendation-provisions:art24",
+    "instrument_id": "cn-algo-recommendation-provisions",
+    "pin_cite": "第二十四条 (Article 24)",
+    "quote_verbatim": "具有舆论属性或者社会动员能力的算法推荐服务提供者应当在提供服务之日起十个工作日内通过互联网信息服务算法备案系统填报信息。",
+    "paraphrase_en": "Providers of algorithmic recommendation services with public-opinion attributes or social-mobilization capability must file with the internet algorithm filing system within ten working days of launching the service — the 备案 regime that gates public-content services.",
+    "obligation_type": "obligation",
+    "applies_from": "2022-03-01",
+    "source_id": "cn-src-algo-rec-cac",
+    "confidence": "medium",
+    "confidence_rationale": "Chinese original quoted verbatim from the Tier 1 CAC text fetched this session; English paraphrase is the analyst's own translation (§7.5 cap → medium).",
+    "epistemic_blocks": [
+      {
+        "id": "b1",
+        "kind": "fact",
+        "text_md": "Article 24 requires providers whose algorithmic services carry public-opinion attributes or social-mobilization capability to file via the algorithm filing system within ten working days of providing the service.",
+        "citations": [
+          {
+            "tier": 1,
+            "publisher": "CAC (cac.gov.cn)",
+            "title": "互联网信息服务算法推荐管理规定",
+            "url": "https://www.cac.gov.cn/2022-01/04/c_1642894606364259.htm",
+            "stable_ref": "四部门令第9号",
+            "pin_cite": "第二十四条",
+            "pub_date": "2021-12-31",
+            "language": "zh",
+            "accessed_date": "2026-07-12"
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "id": "b2",
+        "kind": "inference",
+        "text_md": "This is the concrete statutory referent of the ADRS prohibition_adjacent example 'China's algorithm-filing regimes' (§13.5): a public-posting social agent (Mira-class, C1+C6 public) plausibly triggers 舆论属性 filing — a licensing-gate-like precondition, not a mere disclosure.",
+        "confidence": "medium",
+        "based_on": [
+          "b1"
+        ]
+      },
+      {
+        "id": "b3",
+        "kind": "recommendation",
+        "text_md": "Operators of public-content agents for CN could treat 备案 assessment as a launch-blocking checklist item alongside K09/K12, since it is a dated filing precondition rather than a design duty.",
+        "based_on": [
+          "b2"
+        ]
+      }
+    ],
+    "capability_map": [
+      {
+        "capability_id": "C1",
+        "rationale": "Generated public content is the mobilization-relevant surface.",
+        "confidence": "medium"
+      },
+      {
+        "capability_id": "C6",
+        "rationale": "Public-facing distribution triggers the 舆论属性 analysis.",
+        "confidence": "high"
+      }
+    ],
+    "risk_map": [
+      {
+        "risk_id": "R9",
+        "rationale": "Filing is the gate of the CN content-governance stack."
+      },
+      {
+        "risk_id": "R12",
+        "rationale": "Filing scrutiny attaches at the service/model level."
+      }
+    ],
+    "review_status": "in_review",
+    "as_of_date": "2026-07-12",
+    "last_verified": "2026-07-12"
   }
 ]

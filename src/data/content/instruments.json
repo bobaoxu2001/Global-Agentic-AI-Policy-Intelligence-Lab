@@ -386,5 +386,41 @@
     "source_ids": [
       "cn-src-deepsynthesis-cac"
     ]
+  },
+  {
+    "id": "cn-algo-recommendation-provisions",
+    "jurisdiction_id": "cn",
+    "title_original": "互联网信息服务算法推荐管理规定",
+    "title_en": "Provisions on the Administration of Algorithmic Recommendation of Internet Information Services",
+    "instrument_type": "regulation",
+    "bindingness": "binding",
+    "lifecycle_status": "fully_applicable",
+    "status_date": "2022-03-01",
+    "approach_tags": [
+      "technology_specific",
+      "content_governance"
+    ],
+    "issuing_body": "四部门:国家互联网信息办公室、工业和信息化部、公安部、国家市场监督管理总局 (CAC, MIIT, MPS, SAMR)",
+    "adopted_date": "2021-12-31",
+    "key_dates": [
+      {
+        "date": "2021-12-31",
+        "event": "公布 (令第9号, four departments)",
+        "source_id": "cn-src-algo-rec-cac"
+      },
+      {
+        "date": "2022-03-01",
+        "event": "施行 (came into effect)",
+        "source_id": "cn-src-algo-rec-cac"
+      }
+    ],
+    "summary_md": "■ FACT (medium, translation cap): Four-department provisions on algorithmic recommendation (Order No. 9), published 2021-12-31, in effect since 2022-03-01 — the foundation layer of the CN algorithm-governance stack and home of the 备案 (filing) regime. ▲ INFERENCE (medium): Art 24's filing duty for services with public-opinion attributes or social-mobilization capability is the concrete referent of the ADRS J-component example 'China's algorithm-filing regimes' (§13.5 prohibition_adjacent) — an engagement-nudging social agent like the Mira scenario sits squarely in its shadow.",
+    "analyst_notes": "Pass 1 (authoring) 2026-07-12. Verified by direct CAC fetch (departments, dates, 令第9号, Arts 16/24 verbatim). English renderings are analyst translations (§7.5 cap). CN stack now complete: 算法推荐(2022) → 深度合成(2023) → 暂行办法(2023) → 标识办法(2025).",
+    "review_status": "in_review",
+    "as_of_date": "2026-07-12",
+    "last_verified": "2026-07-12",
+    "source_ids": [
+      "cn-src-algo-rec-cac"
+    ]
   }
 ]

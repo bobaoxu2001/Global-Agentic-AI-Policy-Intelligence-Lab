@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { getPageDataset } from '@/lib/validation/pageData';
 
 const CAT_ORDER = ['technical', 'process', 'organizational', 'documentation'] as const;
@@ -22,6 +23,17 @@ export default function ControlsPage() {
                 <div style={{ marginTop: 4 }}>{c.description}</div>
                 <div style={{ fontSize: 12.5, color: 'var(--ink-muted)', marginTop: 4 }}><b>Implement:</b> {c.implementation_notes}</div>
                 <div style={{ fontSize: 12.5, color: 'var(--ink-muted)' }}><b>Verify:</b> {c.verification_method}</div>
+                {ds.controlMaps.filter((m) => m.control_id === c.id).length > 0 ? (
+                  <div style={{ fontSize: 12.5, marginTop: 4 }}>
+                    <b>Driving provisions:</b>{' '}
+                    {ds.controlMaps.filter((m) => m.control_id === c.id).map((m, i, arr) => (
+                      <span key={m.id}>
+                        <Link href={`/provisions/${encodeURIComponent(m.provision_id)}`}>{m.provision_id}</Link>
+                        <span className="mono" style={{ fontSize: 11 }}> ({m.strength})</span>{i < arr.length - 1 ? ' · ' : ''}
+                      </span>
+                    ))}
+                  </div>
+                ) : null}
               </div>
             ))}
           </section>

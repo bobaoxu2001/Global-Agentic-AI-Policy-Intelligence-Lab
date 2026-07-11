@@ -6,6 +6,7 @@
 import assessmentsJson from '../../data/fixtures/assessments.json';
 import contentChangelogJson from '../../data/content/changelog.json';
 import contentControlsJson from '../../data/content/controls.json';
+import contentControlMapsJson from '../../data/content/control-provision-map.json';
 import contentInstrumentsJson from '../../data/content/instruments.json';
 import contentProvisionsJson from '../../data/content/provisions.json';
 import contentSourcesJson from '../../data/content/sources.json';
@@ -20,6 +21,7 @@ import {
   AssessmentSchema,
   ChangelogSchema,
   ControlSchema,
+  ControlProvisionMapSchema,
   CapabilitySeedSchema,
   InstrumentSchema,
   ProvisionSchema,
@@ -27,7 +29,7 @@ import {
   ScenarioSchema,
   SourceSchema,
 } from '../schemas';
-import type { Control } from '../schemas';
+import type { Control, ControlProvisionMap } from '../schemas';
 import type { BuildProfile } from './buildProfile';
 import { runIntegrity, type Dataset, type IntegrityError } from './integrity';
 
@@ -55,7 +57,7 @@ function validateArray<S extends z.ZodTypeAny>(
 }
 
 /** Validate seeds + content for the given profile. Seeds render in both profiles; fixture content only in `fixtures`. */
-export function loadAndValidate(profile: BuildProfile): ValidationReport & { dataset: Dataset; controls: Control[] } {
+export function loadAndValidate(profile: BuildProfile): ValidationReport & { dataset: Dataset; controls: Control[]; controlMaps: ControlProvisionMap[] } {
   const schemaErrors: ValidationReport['schemaErrors'] = [];
 
   validateArray('seeds/capabilities.json', CapabilitySeedSchema, capabilitiesJson, schemaErrors);
@@ -83,7 +85,17 @@ export function loadAndValidate(profile: BuildProfile): ValidationReport & { dat
   };
 
   const controls = validateArray('content/controls.json', ControlSchema, contentControlsJson, schemaErrors);
+  const controlMaps = validateArray('content/control-provision-map.json', ControlProvisionMapSchema, contentControlMapsJson, schemaErrors);
   const integrityErrors = runIntegrity(dataset, profile);
+  // P2-7 FK gate: every mapping must resolve to a real control AND provision.
+  const controlIds = new Set(controls.map((c) => c.id));
+  const provisionIds = new Set(dataset.provisions.map((p) => p.id));
+  for (const m of controlMaps) {
+    if (!controlIds.has(m.control_id))
+      integrityErrors.push({ rule: 'R-control-map', entity: m.id, message: `control_id "${m.control_id}" does not resolve` });
+    if (!provisionIds.has(m.provision_id))
+      integrityErrors.push({ rule: 'R-control-map', entity: m.id, message: `provision_id "${m.provision_id}" does not resolve` });
+  }
 
   return {
     profile,
@@ -99,9 +111,11 @@ export function loadAndValidate(profile: BuildProfile): ValidationReport & { dat
       assessments: dataset.assessments.length,
       changelog: dataset.changelog.length,
       controls: controls.length,
+      controlMaps: controlMaps.length,
     },
     ok: schemaErrors.length === 0 && integrityErrors.length === 0,
     dataset,
     controls,
+    controlMaps,
   };
 }

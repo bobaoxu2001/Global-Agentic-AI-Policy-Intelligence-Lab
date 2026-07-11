@@ -250,6 +250,21 @@ export const ControlSchema = z
   })
   .strict();
 
+/** §17 control_provision_map — the ● link of the §15.1 typed chain (P2-7). */
+export const ControlProvisionMapSchema = z
+  .object({
+    id: z.string().min(1),
+    control_id: z.string().min(1),
+    provision_id: z.string().min(1),
+    strength: MappingStrength,
+    relation: MappingRelation,
+    rationale: z.string().min(1), // the RECOMMENDATION text — never "makes you compliant" (§15.4)
+    review_status: ReviewStatus,
+    as_of_date: IsoDate,
+    fixture: z.boolean().optional(),
+  })
+  .strict();
+
 /** §17 changelog — dated status-change / drift entries (P2-13). */
 export const ChangelogSchema = z
   .object({
@@ -284,3 +299,4 @@ export type SourceRecord = z.infer<typeof SourceSchema>;
 export type EpistemicBlock = z.infer<typeof EpistemicBlockSchema>;
 export type Control = z.infer<typeof ControlSchema>;
 export type ChangelogEntry = z.infer<typeof ChangelogSchema>;
+export type ControlProvisionMap = z.infer<typeof ControlProvisionMapSchema>;

@@ -22,7 +22,7 @@ test('scenario page renders per-jurisdiction tiers computed from fixtures (MJ-10
   await page.goto(`/scenarios/${first.id}`);
   await expect(page.getByRole('heading', { level: 1 })).toContainText(first.name.split(' — ')[0]!);
   const jurCount = assessments.filter((a) => a.scenario_id === first.id).length;
-  await expect(page.locator('tbody tr')).toHaveCount(jurCount);
+  await expect(page.locator('[data-testid="adrs-worksheets"] tbody tr')).toHaveCount(jurCount);
 });
 
 test('calculator: live arithmetic, cap notice, jurisdiction never auto-sets J (AC-ADRS-10)', async ({ page }) => {
@@ -92,5 +92,5 @@ test('tracker filters: OR within axis, AND across axes, URL state, empty state (
   await expect(page.locator('tbody tr')).toHaveCount(total);
   // URL round-trip: direct load with params applies filters
   await page.goto('/instruments?jur=cn');
-  await expect(page.getByTestId('result-count')).toContainText('1 of');
+  await expect(page.getByTestId('result-count')).toContainText('4 of'); // CN stack complete: 4 instruments
 });

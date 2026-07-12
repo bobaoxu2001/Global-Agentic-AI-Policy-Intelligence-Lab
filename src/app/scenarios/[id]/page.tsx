@@ -27,7 +27,7 @@ export default async function ScenarioPage({ params }: { params: Promise<{ id: s
       <h2>Capability profile <span className="eyebrow">§10 intensities</span></h2>
       <ul>{s.capability_profile.map((c) => <li key={c.capability_id}><b className="mono">{c.capability_id} = {c.intensity}</b> — {c.note}</li>)}</ul>
       <h2>ADRS per jurisdiction <span className="eyebrow">not a compliance determination</span></h2>
-      <table>
+      <table data-testid="adrs-worksheets">
         <thead><tr><th>Jurisdiction</th><th>Inherent</th><th>Credit</th><th>Residual (raw)</th><th>J</th><th>Tier</th><th></th></tr></thead>
         <tbody>
           {rows.map((a) => {

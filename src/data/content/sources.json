@@ -189,5 +189,30 @@
     "is_translation": false,
     "accessed_date": "2026-07-12",
     "manual_verification_date": "2026-07-12"
+  },
+  {
+    "id": "sg-src-aiverify-foundation",
+    "tier": 1,
+    "publisher": "AI Verify Foundation (aiverifyfoundation.sg)",
+    "title": "What is AI Verify — official foundation page",
+    "url": "https://aiverifyfoundation.sg/what-is-ai-verify/",
+    "pub_date": "2023-06-07",
+    "language": "en",
+    "is_translation": false,
+    "accessed_date": "2026-07-12",
+    "manual_verification_date": "2026-07-12"
+  },
+  {
+    "id": "cn-src-tc260-framework-cac",
+    "tier": 1,
+    "publisher": "中央网络安全和信息化委员会办公室 (cac.gov.cn) — 全国网络安全标准化技术委员会发布",
+    "title": "《人工智能安全治理框架》2.0版发布 (AI Safety Governance Framework 2.0)",
+    "url": "https://www.cac.gov.cn/2025-09/15/c_1759653448369123.htm",
+    "stable_ref": "全国网安标委技术文件 (2.0版, 2025-09-15)",
+    "pub_date": "2025-09-15",
+    "language": "zh",
+    "is_translation": false,
+    "accessed_date": "2026-07-12",
+    "manual_verification_date": "2026-07-12"
   }
 ]

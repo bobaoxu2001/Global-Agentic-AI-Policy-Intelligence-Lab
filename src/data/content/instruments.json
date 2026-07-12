@@ -494,5 +494,77 @@
     "source_ids": [
       "eu-src-prohibited-guidelines"
     ]
+  },
+  {
+    "id": "sg-ai-verify",
+    "jurisdiction_id": "sg",
+    "title_original": "AI Verify — AI governance testing framework and software toolkit",
+    "title_en": "AI Verify (testing framework + toolkit)",
+    "instrument_type": "voluntary_framework",
+    "bindingness": "non_binding",
+    "lifecycle_status": "fully_applicable",
+    "status_date": "2023-06-07",
+    "approach_tags": [
+      "standards_assurance",
+      "technology_specific"
+    ],
+    "issuing_body": "IMDA & PDPC (launch); AI Verify Foundation (steward)",
+    "adopted_date": "2022-05-25",
+    "key_dates": [
+      {
+        "date": "2022-05-25",
+        "event": "initial MVP launched by IMDA and PDPC",
+        "source_id": "sg-src-aiverify-foundation"
+      },
+      {
+        "date": "2023-06-07",
+        "event": "open-sourced on GitHub; AI Verify Foundation stewardship",
+        "source_id": "sg-src-aiverify-foundation"
+      }
+    ],
+    "summary_md": "■ FACT (medium): Testing framework + software toolkit evaluating AI systems against 11 governance principles (incl. transparency, accountability, and human agency and oversight) via process checks and technical tests; MVP 2022-05-25, open-sourced 2023-06-07 (official foundation page verified). ▲ INFERENCE (medium): the assurance half of Singapore's voluntary stack beside MGF-GenAI — its 'human agency and oversight' principle is the voluntary-world counterpart of the binding oversight duties elsewhere in the corpus (EU Art 14), which is exactly the SG governance thesis: same control points, assurance-first instrumentation.",
+    "analyst_notes": "Pass 1 (authoring) 2026-07-12. Foundation page does not explicitly state voluntariness; classified non_binding on the self-assessment framing (corroborated by MGF context) — sentence-level confirmation queued for Pass 2. Testable-criteria depth (process checks) noted but classified voluntary_framework rather than technical_standard: the Foundation is not a standards body (§9.7 test).",
+    "review_status": "in_review",
+    "as_of_date": "2026-07-12",
+    "last_verified": "2026-07-12",
+    "source_ids": [
+      "sg-src-aiverify-foundation"
+    ]
+  },
+  {
+    "id": "cn-tc260-ai-safety-framework",
+    "jurisdiction_id": "cn",
+    "title_original": "人工智能安全治理框架 (2.0版)",
+    "title_en": "AI Safety Governance Framework 2.0 (TC260 technical document)",
+    "instrument_type": "technical_standard",
+    "bindingness": "non_binding",
+    "lifecycle_status": "fully_applicable",
+    "status_date": "2025-09-15",
+    "approach_tags": [
+      "safety_security",
+      "standards_assurance"
+    ],
+    "issuing_body": "全国网络安全标准化技术委员会 (TC260); 国家互联网应急中心牵头制定",
+    "adopted_date": "2024-09-09",
+    "key_dates": [
+      {
+        "date": "2024-09-09",
+        "event": "1.0版发布 (v1.0 released)",
+        "source_id": "cn-src-tc260-framework-cac"
+      },
+      {
+        "date": "2025-09-15",
+        "event": "2.0版发布于国家网络安全宣传周主论坛 — 完善风险分类、研究风险分级、新增应用衍生安全风险维度",
+        "source_id": "cn-src-tc260-framework-cac"
+      }
+    ],
+    "summary_md": "■ FACT (medium, translation cap): TC260 technical document (全国网安标委技术文件), v1.0 2024-09-09 → v2.0 2025-09-15; purpose verbatim: '促进形成安全、可信、可控的人工智能发展生态，构建跨国界、跨领域、跨行业的协同治理格局'. ▲ INFERENCE (medium): the corpus's technical_standard exemplar per SPEC §8 rule 3 (TC260 documents = technical_standard, non_binding); v2.0's risk-GRADING exploration (应用场景/智能化水平/应用规模三入手) is a Chinese-official analogue to tiered risk scoring — a striking methodological parallel to this Atlas's own ADRS dimensions-and-tiers approach.",
+    "analyst_notes": "Pass 1 (authoring) 2026-07-12. Verified via CAC announcement page for v2.0; v1.0 CAC page identified in search (2024-09/09) — direct fetch of the v1.0 page and the framework PDF text queued for Pass 2. English renderings are analyst translations (§7.5 cap). Version evolution modeled as one instrument + key_dates (technical-document pattern, like NIST RMF + Profile), not supersession.",
+    "review_status": "in_review",
+    "as_of_date": "2026-07-12",
+    "last_verified": "2026-07-12",
+    "source_ids": [
+      "cn-src-tc260-framework-cac"
+    ]
   }
 ]

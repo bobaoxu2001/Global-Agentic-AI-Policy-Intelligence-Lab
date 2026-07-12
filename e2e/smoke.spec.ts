@@ -5,6 +5,15 @@
 import { expect, test } from '@playwright/test';
 import assessments from '../src/data/fixtures/assessments.json';
 import scenarios from '../src/data/fixtures/scenarios.json';
+import contentInstruments from '../src/data/content/instruments.json';
+import fixtureInstruments from '../src/data/fixtures/instruments.json';
+
+// MJ-10 discipline, applied after two stale-literal breakages: tracker
+// expectations are DERIVED from the content files, never hardcoded.
+const ALL_INSTRUMENTS = [...fixtureInstruments, ...contentInstruments] as Array<{
+  jurisdiction_id: string; instrument_type: string;
+}>;
+const countBy = (f: (i: (typeof ALL_INSTRUMENTS)[number]) => boolean) => ALL_INSTRUMENTS.filter(f).length;
 
 test('every route shell renders with the fixture banner and no console errors', async ({ page }) => {
   const errors: string[] = [];
@@ -74,16 +83,18 @@ test('calculator permalink round-trips state (AC-ADRS-8) and anchor text updates
 test('tracker filters: OR within axis, AND across axes, URL state, empty state (AC-TRK-2/3/4)', async ({ page }) => {
   await page.goto('/instruments');
   const total = await page.locator('tbody tr').count();
-  expect(total).toBeGreaterThanOrEqual(9);
+  expect(total).toBe(ALL_INSTRUMENTS.length);
   // AND across axes: jurisdiction=eu AND type=enacted_law
   await page.getByTestId('f-jur-eu').check();
   await page.getByTestId('f-type-enacted_law').check();
-  await expect(page.getByTestId('result-count')).toContainText('3 of'); // eu-ai-act, eu-gdpr + the fictional EU fixture
+  const euEnacted = countBy((i) => i.jurisdiction_id === 'eu' && i.instrument_type === 'enacted_law');
+  await expect(page.getByTestId('result-count')).toContainText(`${euEnacted} of`);
   expect(page.url()).toContain('jur=eu');
   expect(page.url()).toContain('type=enacted_law');
   // OR within axis: add jurisdiction=us → grows
   await page.getByTestId('f-jur-us').check();
-  await expect(page.getByTestId('result-count')).toContainText('5 of'); // + Colorado pair
+  const euUsEnacted = countBy((i) => ['eu', 'us'].includes(i.jurisdiction_id) && i.instrument_type === 'enacted_law');
+  await expect(page.getByTestId('result-count')).toContainText(`${euUsEnacted} of`);
   // impossible combo → empty state
   await page.getByTestId('f-lifecycle-withdrawn').check();
   await expect(page.getByTestId('empty-state')).toBeVisible();
@@ -92,5 +103,6 @@ test('tracker filters: OR within axis, AND across axes, URL state, empty state (
   await expect(page.locator('tbody tr')).toHaveCount(total);
   // URL round-trip: direct load with params applies filters
   await page.goto('/instruments?jur=cn');
-  await expect(page.getByTestId('result-count')).toContainText('4 of'); // CN stack complete: 4 instruments
+  const cn = countBy((i) => i.jurisdiction_id === 'cn');
+  await expect(page.getByTestId('result-count')).toContainText(`${cn} of`);
 });

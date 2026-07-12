@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { getPageDataset } from '@/lib/validation/pageData';
 import { BUILD_DATE, isCurrentlyApplicableBinding } from '@/lib/validation/applicability';
 import capabilities from '@/data/seeds/capabilities.json';
@@ -9,12 +10,6 @@ const JURS = ['us', 'eu', 'sg', 'cn'] as const;
 export default function ComparePage() {
   const ds = getPageDataset();
   const instrumentsById = new Map(ds.instruments.map((i) => [i.id, i]));
-  const count = (capId: string, jur: string) =>
-    ds.provisions.filter((p) =>
-      instrumentsById.get(p.instrument_id)?.jurisdiction_id === jur &&
-      isCurrentlyApplicableBinding(p, instrumentsById, BUILD_DATE) &&
-      p.capability_map.some((m) => m.capability_id === capId),
-    ).length;
   return (
     <>
       <h1>Jurisdiction Comparison</h1>
@@ -23,7 +18,35 @@ export default function ComparePage() {
         <thead><tr><th>Capability</th>{JURS.map((j) => <th key={j}>{j.toUpperCase()}</th>)}</tr></thead>
         <tbody>
           {capabilities.map((c) => (
-            <tr key={c.id}><td>{c.id} {c.name}</td>{JURS.map((j) => <td key={j}>{count(c.id, j)}</td>)}</tr>
+            <tr key={c.id}>
+              <td>{c.id} {c.name}</td>
+              {JURS.map((j) => {
+                const hits = ds.provisions.filter((p) =>
+                  instrumentsById.get(p.instrument_id)?.jurisdiction_id === j &&
+                  isCurrentlyApplicableBinding(p, instrumentsById, BUILD_DATE) &&
+                  p.capability_map.some((m) => m.capability_id === c.id),
+                );
+                return (
+                  <td key={j}>
+                    {hits.length === 0 ? (
+                      <span title="no currently-applicable binding provisions mapped to this row for this jurisdiction">0</span>
+                    ) : (
+                      <details>
+                        <summary style={{ cursor: 'pointer' }}>{hits.length}</summary>
+                        <ul style={{ margin: '4px 0', paddingLeft: 16, fontSize: 12 }}>
+                          {hits.map((p) => (
+                            <li key={p.id}>
+                              <Link href={`/provisions/${encodeURIComponent(p.id)}`}>{p.pin_cite}</Link>{' '}
+                              <span className="mono" style={{ fontSize: 10.5 }}>{p.instrument_id}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </details>
+                    )}
+                  </td>
+                );
+              })}
+            </tr>
           ))}
         </tbody>
       </table>

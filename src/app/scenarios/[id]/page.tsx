@@ -3,6 +3,9 @@ import { TierBadge } from '@/components/semantic';
 import { encodeCalcState } from '@/lib/adrs/urlState';
 import type { MitigationClass, Dims, JComponents } from '@/lib/adrs';
 import { getPageDataset, scoreAssessment } from '@/lib/validation/pageData';
+import { BUILD_DATE, isCurrentlyApplicableBinding } from '@/lib/validation/applicability';
+import { BindingnessChip } from '@/components/semantic';
+import { effectiveBindingness } from '@/lib/validation/integrity';
 
 export const dynamicParams = false;
 export function generateStaticParams() {
@@ -49,6 +52,42 @@ export default async function ScenarioPage({ params }: { params: Promise<{ id: s
         </tbody>
       </table>
       <p style={{ fontSize: 12, color: 'var(--ink-muted)' }}>J components in fixtures are FICTIONAL, illustrative pending Phase 1 research (OD-11/MD-3). Deep links pre-populate the calculator from this assessment (AC-ADRS-11); every toggle stays editable.</p>
+
+      <h2>Provisions touching this capability profile <span className="eyebrow">▲ inference — capability overlap, reference date {BUILD_DATE}</span></h2>
+      {(() => {
+        const instrumentsById = new Map(ds.instruments.map((i) => [i.id, i]));
+        const profileCaps = new Set(s.capability_profile.filter((c) => c.intensity >= 1).map((c) => c.capability_id));
+        const hits = ds.provisions
+          .map((p) => ({ p, caps: p.capability_map.filter((m) => profileCaps.has(m.capability_id)).map((m) => m.capability_id) }))
+          .filter((x) => x.caps.length > 0)
+          .map((x) => ({ ...x, inst: instrumentsById.get(x.p.instrument_id), bindingNow: isCurrentlyApplicableBinding(x.p, instrumentsById, BUILD_DATE) }))
+          .sort((a, b) => Number(b.bindingNow) - Number(a.bindingNow));
+        if (hits.length === 0) return <p style={{ fontSize: 12.5, color: 'var(--ink-muted)' }}>No corpus provisions map onto this profile yet.</p>;
+        const JURS = ['us', 'eu', 'sg', 'cn'] as const;
+        return (
+          <>
+            <p data-testid="cross-jur-strip" style={{ fontSize: 12.5 }}>
+              Currently-applicable binding hits by jurisdiction:{' '}
+              {JURS.map((j) => `${j.toUpperCase()} ${hits.filter((h) => h.inst?.jurisdiction_id === j && h.bindingNow).length}`).join(' · ')}
+            </p>
+            <table data-testid="scenario-provisions">
+              <thead><tr><th>Provision</th><th>Jur</th><th>Overlap</th><th>Bindingness</th><th>Applies from</th><th>Binding now?</th></tr></thead>
+              <tbody>
+                {hits.map(({ p, caps, inst, bindingNow }) => (
+                  <tr key={p.id}>
+                    <td><Link href={`/provisions/${encodeURIComponent(p.id)}`}>{p.pin_cite}</Link> <span className="mono" style={{ fontSize: 11 }}>{p.instrument_id}</span></td>
+                    <td className="mono">{inst?.jurisdiction_id.toUpperCase()}</td>
+                    <td className="mono" style={{ fontSize: 11 }}>{caps.join(', ')}</td>
+                    <td><BindingnessChip level={effectiveBindingness(p, instrumentsById) ?? 'non_binding'} /></td>
+                    <td className="mono" style={{ fontSize: 12 }}>{p.applies_from ?? '—'}</td>
+                    <td>{bindingNow ? '✓ yes' : '— not yet / not binding'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </>
+        );
+      })()}
     </>
   );
 }

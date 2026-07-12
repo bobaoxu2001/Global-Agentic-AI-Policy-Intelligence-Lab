@@ -47,7 +47,7 @@ Corpus after batch 1: **10 sources · 7 instruments · 7 provisions** (plus the 
 | CN 深度合成规定 | **CAC fetch, Art 17 verbatim** | 智能对话 enumerated → agent chat surface in scope since 2023-01-10 |
 | CN 算法推荐规定 (令第9号) | **CAC fetch, Arts 16+24 verbatim** | Art 24 备案 = the named referent of §13.5 prohibition_adjacent; CN stack complete (4 instruments) |
 | NIST AI RMF 1.0 + GenAI Profile | **nist.gov page, voluntary-use sentence verbatim** | US voluntary-framework exemplar; K10/K11 ↔ Govern/Manage |
-| SG PDPA | **BLOCKED — sso.agc.gov.sg 403** (MJ-7 host) | queued: try PDPC official pages next session |
+| SG PDPA | **BLOCKED twice** — sso.agc.gov.sg 403 (MJ-7 host); pdpc.gov.sg overview body is JS-rendered (no extractable text) | queued: try PDPC PDF publications or archived snapshot next session |
 
 **Also landed:** P2-13 changelog layer (2 real drift entries) · P2-5 K-series catalog (13) · P2-7 provision→control chains (10 mappings, FK-gated, rendered both directions) · P1-10 FilterBar · §28/§29/§30 deliverable drafts (memo, brief incl. corrected K01 all-four-Moderate arithmetic, demo script with 90s cut).
 

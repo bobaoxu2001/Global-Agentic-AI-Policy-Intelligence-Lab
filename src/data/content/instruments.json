@@ -458,5 +458,41 @@
     "source_ids": [
       "us-src-nist-airmf"
     ]
+  },
+  {
+    "id": "eu-prohibited-practices-guidelines",
+    "jurisdiction_id": "eu",
+    "title_original": "Commission Guidelines on prohibited artificial intelligence practices established by Regulation (EU) 2024/1689 (AI Act)",
+    "title_en": "Commission Guidelines on Prohibited AI Practices (Art 5 AI Act)",
+    "instrument_type": "regulator_guidance",
+    "bindingness": "non_binding",
+    "lifecycle_status": "fully_applicable",
+    "status_date": "2025-02-04",
+    "approach_tags": [
+      "horizontal_comprehensive",
+      "content_governance"
+    ],
+    "issuing_body": "European Commission",
+    "adopted_date": "2025-02-04",
+    "key_dates": [
+      {
+        "date": "2025-02-02",
+        "event": "the Art 5 prohibitions the guidelines interpret became applicable",
+        "source_id": "eu-src-prohibited-guidelines"
+      },
+      {
+        "date": "2025-02-04",
+        "event": "guidelines published (approval of draft Communication)",
+        "source_id": "eu-src-prohibited-guidelines"
+      }
+    ],
+    "summary_md": "■ FACT (medium): Published 2025-02-04, two days after the Art 5 prohibitions became applicable; covers harmful manipulation, social scoring, real-time remote biometric identification, among others. Explicitly non-binding — verbatim from the Commission page: 'they are non-binding, with authoritative interpretations reserved for the Court of Justice of the European Union (CJEU)'. ▲ INFERENCE (medium): the corpus's regulator_guidance exemplar — SPEC §9.5's decision test on a real instrument: it explains existing Art 5 authority without creating obligations, yet ignoring it carries practical risk; it feeds enforcement_posture and prohibition_adjacent readings for EU assessments (Mira-class engagement mechanics vs the manipulation prohibition).",
+    "analyst_notes": "Pass 1 (authoring) 2026-07-12. Verified via the official Commission library page (date, coverage, non-binding sentence verbatim). Page shows 'Approval of the content of the draft Communication' without a C(2025) number — formal-adoption reference to backfill in Pass 2 from the guidelines PDF itself. Art 5 provision-level extraction (which prohibitions touch C1/C6/C9 engagement mechanics) queued.",
+    "review_status": "in_review",
+    "as_of_date": "2026-07-12",
+    "last_verified": "2026-07-12",
+    "source_ids": [
+      "eu-src-prohibited-guidelines"
+    ]
   }
 ]

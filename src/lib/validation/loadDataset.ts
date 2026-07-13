@@ -16,6 +16,7 @@ import scenariosJson from '../../data/fixtures/scenarios.json';
 import sourcesJson from '../../data/fixtures/sources.json';
 import capabilitiesJson from '../../data/seeds/capabilities.json';
 import risksJson from '../../data/seeds/risks.json';
+import previewManifestJson from '../../../docs/research/GOLDEN_8_REVIEW_MANIFEST.json';
 import { z } from 'zod';
 import {
   AssessmentSchema,
@@ -88,8 +89,22 @@ export function loadAndValidate(profile: BuildProfile): ValidationReport & { dat
   // The K-series catalog and its mappings are research content too. They are
   // intentionally withheld from the fixture demo unless a dedicated fixture
   // catalog is authored.
-  const controls = fixtureProfile ? [] : validateArray('content/controls.json', ControlSchema, contentControlsJson, schemaErrors);
-  const controlMaps = fixtureProfile ? [] : validateArray('content/control-provision-map.json', ControlProvisionMapSchema, contentControlMapsJson, schemaErrors);
+  let controls = fixtureProfile ? [] : validateArray('content/controls.json', ControlSchema, contentControlsJson, schemaErrors);
+  let controlMaps = fixtureProfile ? [] : validateArray('content/control-provision-map.json', ControlProvisionMapSchema, contentControlMapsJson, schemaErrors);
+  if (profile === 'preview') {
+    const approvedIds = new Set(previewManifestJson.records.filter((r) => r.decision === 'APPROVED FOR AI-ASSISTED PREVIEW').map((r) => r.record_id));
+    dataset.instruments = dataset.instruments.filter((r) => approvedIds.has(r.id));
+    dataset.provisions = dataset.provisions.filter((r) => approvedIds.has(r.id));
+    const sourceIds = new Set([
+      ...dataset.instruments.flatMap((r) => r.source_ids),
+      ...dataset.provisions.flatMap((r) => [r.source_id, ...(r.translation_source_id ? [r.translation_source_id] : [])]),
+    ]);
+    dataset.sources = dataset.sources.filter((r) => sourceIds.has(r.id));
+    dataset.changelog = [];
+    controlMaps = controlMaps.filter((m) => dataset.provisions.some((p) => p.id === m.provision_id));
+    const controlIds = new Set(controlMaps.map((m) => m.control_id));
+    controls = controls.filter((c) => controlIds.has(c.id));
+  }
   const integrityErrors = runIntegrity(dataset, profile);
   // P2-7 FK gate: every mapping must resolve to a real control AND provision.
   const controlIds = new Set(controls.map((c) => c.id));

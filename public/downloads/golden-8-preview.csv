@@ -1,0 +1,4 @@
+record_id,review_basis,review_decision,reviewed_by,human_review_status,last_verified,source_url,disclaimer
+eu-gdpr,AI-assisted primary-source verification,APPROVED FOR AI-ASSISTED PREVIEW,Codex,pending,2026-07-13,https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679,"Interview research preview, not legal advice"
+eu-gdpr:art22,AI-assisted primary-source verification,APPROVED FOR AI-ASSISTED PREVIEW,Codex,pending,2026-07-13,https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679,"Interview research preview, not legal advice"
+cn-genai-interim-measures:art9,AI-assisted primary-source verification,APPROVED FOR AI-ASSISTED PREVIEW,Codex,pending,2026-07-13,https://www.cac.gov.cn/2023-07/13/c_1690898327029107.htm,"Interview research preview, not legal advice"

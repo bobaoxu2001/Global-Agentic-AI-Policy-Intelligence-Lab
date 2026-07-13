@@ -11,7 +11,7 @@ export function getPageDataset() {
   // Production validation has already rejected fixture/non-published records.
   // The explicit predicates keep this boundary visible at the rendering layer.
   const approved = <T extends { fixture?: boolean; review_status?: string }>(rows: T[]) =>
-    profile === 'fixtures' ? rows.filter((row) => row.fixture === true) : rows.filter((row) => !row.fixture && row.review_status === 'published');
+    profile === 'fixtures' ? rows.filter((row) => row.fixture === true) : profile === 'preview' ? rows.filter((row) => !row.fixture) : rows.filter((row) => !row.fixture && row.review_status === 'published');
   return {
     profile,
     ...dataset,

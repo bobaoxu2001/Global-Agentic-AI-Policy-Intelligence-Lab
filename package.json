@@ -7,6 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "build:fixtures": "cross-env-shell BUILD_PROFILE=fixtures \"npm run validate && next build\"",
+    "build:preview": "cross-env-shell BUILD_PROFILE=preview \"npm run validate && next build\"",
     "build:production": "cross-env-shell BUILD_PROFILE=production \"npm run validate && next build\"",
     "start": "next start",
     "lint": "eslint .",
@@ -15,7 +16,9 @@
     "test:integration": "vitest run src/test/integration",
     "test:e2e": "playwright test",
     "test:e2e:production": "playwright test --config=playwright.production.config.ts",
+    "test:e2e:preview": "playwright test --config=playwright.preview.config.ts",
     "validate:fixtures": "cross-env-shell BUILD_PROFILE=fixtures \"npm run validate\"",
+    "validate:preview": "cross-env-shell BUILD_PROFILE=preview \"npm run validate\"",
     "validate:production": "cross-env-shell BUILD_PROFILE=production \"npm run validate\"",
     "validate": "tsx scripts/validate.ts",
     "schemas:json": "tsx scripts/generate-json-schemas.ts"

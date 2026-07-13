@@ -10,6 +10,7 @@ export default function DashboardPage() {
       <h1>AI Policy Atlas</h1>
       <p><b>Agentic AI Governance Intelligence.</b> A structured, source-traceable research workbench translating policy provisions into agent capabilities, controls, and a transparent risk score.</p>
       <p className="status-note">Research corpus status: in progress. Only records that complete the documented human publication review render in production. Fixture mode is illustrative only.</p>
+      {ds.profile === 'preview' ? <section className="status-note" data-testid="preview-summary"><b>Golden 8 preview:</b> {ds.instruments.length} instruments · {ds.provisions.length} provisions · {Object.entries(ds.instruments.reduce<Record<string, number>>((a, i) => (a[i.jurisdiction_id] = (a[i.jurisdiction_id] ?? 0) + 1, a), {})).map(([j, n]) => `${j.toUpperCase()} ${n}`).join(' · ')} · {ds.instruments.filter((i) => i.bindingness === 'binding').length} binding · {ds.instruments.filter((i) => i.bindingness === 'non_binding').length} non-binding · last verified 2026-07-13.</section> : null}
       <p className="status-note">Rolled-up scenario badge = <b>worst of four</b> jurisdictions (risk-conservative, MD-5) — ▲ inference. Per-jurisdiction scores are the authoritative detail.</p>
       {ds.scenarios.length === 0 ? (
         <p>No published content in this profile.</p>

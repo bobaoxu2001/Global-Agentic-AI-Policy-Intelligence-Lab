@@ -34,6 +34,8 @@ export default async function InstrumentDetailPage({ params }: { params: Promise
         </>
       ) : null}
       <h2>Agentic-relevant provisions</h2>
+      {ds.profile === 'preview' && inst.id === 'sg-mgf-genai' ? <p className="status-note">Context instrument — no provision-level mapping in the current preview.</p> : null}
+      {ds.profile === 'preview' && inst.id === 'us-co-sb26-189' ? <p className="status-note">This instrument is included in the preview. Some associated provisions remain outside the approved preview set.</p> : null}
       <ul>
         {provisions.map((p) => (
           <li key={p.id}>

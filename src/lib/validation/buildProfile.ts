@@ -1,19 +1,20 @@
 /**
- * BUILD_PROFILE=fixtures|production (CB-4, ENG §10).
+ * BUILD_PROFILE=fixtures|preview|production.
  * - fixtures: renders fictional §14 fixtures behind the persistent
  *   "FIXTURE DATA — ILLUSTRATIVE ONLY" banner; local dev / tests / design review only.
  * - production: rejects fixture records and non-published records; the only
  *   profile permitted to deploy.
  * Methodology-protecting checks (ADRS recompute, A/T/R invariance, caps) run in BOTH profiles.
  */
-export type BuildProfile = 'fixtures' | 'production';
+export type BuildProfile = 'fixtures' | 'preview' | 'production';
 
 export const FIXTURE_BANNER_TEXT = 'FIXTURE DATA — ILLUSTRATIVE ONLY';
+export const PREVIEW_BANNER_TEXT = 'AI-ASSISTED RESEARCH PREVIEW';
 
 export function getBuildProfile(env: NodeJS.ProcessEnv = process.env): BuildProfile {
   const raw = env.BUILD_PROFILE ?? 'production'; // fail-closed default
-  if (raw === 'fixtures' || raw === 'production') return raw;
-  throw new Error(`Invalid BUILD_PROFILE "${raw}" — expected "fixtures" or "production"`);
+  if (raw === 'fixtures' || raw === 'preview' || raw === 'production') return raw;
+  throw new Error(`Invalid BUILD_PROFILE "${raw}" — expected "fixtures", "preview", or "production"`);
 }
 
 /**
@@ -22,9 +23,9 @@ export function getBuildProfile(env: NodeJS.ProcessEnv = process.env): BuildProf
  * the combination. Called at build time by scripts/validate.ts.
  */
 export function assertNotFixtureDeploy(env: NodeJS.ProcessEnv = process.env): void {
-  if (getBuildProfile(env) === 'fixtures' && env.DEPLOY_ENV === 'production') {
+  if ((getBuildProfile(env) === 'fixtures' || getBuildProfile(env) === 'preview') && env.DEPLOY_ENV === 'production') {
     throw new Error(
-      'BUILD_PROFILE=fixtures cannot be deployed to production (DEPLOY_ENV=production). Build with BUILD_PROFILE=production.',
+      'BUILD_PROFILE=fixtures or preview cannot be deployed to production (DEPLOY_ENV=production). Build with BUILD_PROFILE=production.',
     );
   }
 }

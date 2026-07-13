@@ -27,7 +27,7 @@ ADRS is a communication and prioritization tool, **not** a legal determination o
 | `fixtures` | Explicitly fictional scenarios and records | Demo, interaction tests, design review | Never deploy |
 | `production` | Real research records only | Publication-gated delivery | Code path ready; corpus has zero published records |
 
-Production selection is fail-closed: it excludes `fixture:true` data and rejects every record whose `review_status` is not `published`. The current 15 instruments and 9 provisions remain in review. See [publication readiness](docs/research/PUBLICATION_READINESS_REPORT.md).
+Production selection is fail-closed: it excludes `fixture:true` data and rejects every record whose `review_status` is not `published`. The reconciled corpus contains 17 sources, 15 instruments, 9 provisions, 13 controls, 10 control mappings, and 2 changelog records; every reviewable record remains `in_review`. See [publication readiness](docs/research/PUBLICATION_READINESS_REPORT.md) and the [corpus inventory](docs/research/CORPUS_INVENTORY.md).
 
 ## Current implementation status
 

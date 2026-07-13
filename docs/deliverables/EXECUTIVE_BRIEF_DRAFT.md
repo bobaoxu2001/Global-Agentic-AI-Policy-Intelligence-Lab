@@ -1,6 +1,6 @@
 # EXECUTIVE BRIEF — WORKING DRAFT (Pass 1)
 
-> **Draft status:** ADRS figures are FIXTURE values (illustrative J pending Pass 2 / OD-11); underlying policy records are `in_review`. Finalize after Pass 2 publishes. Target: ≤1 page / ~350 words + one visual (SPEC §29). *Hypothetical scenario; independent analysis; not legal advice.*
+> **Draft status:** ADRS figures are FIXTURE values (illustrative J pending Pass 2 / OD-11); underlying policy records are `in_review`. This is not a production recommendation. Current corpus inventory: 17 sources, 15 instruments, 9 provisions, 13 controls, 10 mappings, and 2 changelog records. Finalize after Pass 2 publishes. Target: ≤1 page / ~350 words + one visual (SPEC §29). *Hypothetical scenario; independent analysis; not legal advice.*
 
 ---
 

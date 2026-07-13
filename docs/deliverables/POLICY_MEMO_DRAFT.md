@@ -1,6 +1,6 @@
 # POLICY MEMO — WORKING DRAFT (Pass 1)
 
-> **Draft status:** built on Atlas batch-1 records that are `in_review` (Pass 2 pending, §19.4). Epistemic labels and confidence carry through from the corpus. Finalize only after Pass 2 publishes the underlying records. Format target: ≤2 pages / ~900 words when typeset (SPEC §28).
+> **Draft status:** built on Pass-1 Atlas records that are `in_review` (Pass 2 pending, §19.4). It is not a current corpus inventory or publication-ready memo. The reconciled corpus is 17 sources, 15 instruments, 9 provisions, 13 controls, 10 mappings, and 2 changelog records; see `docs/research/CORPUS_INVENTORY.md`. Finalize only after Pass 2 publishes the underlying records. Format target: ≤2 pages / ~900 words when typeset (SPEC §28).
 
 ---
 

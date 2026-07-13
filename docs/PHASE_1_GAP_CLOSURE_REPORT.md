@@ -19,6 +19,7 @@
 - No real instrument, provision, changelog item, scenario, or assessment was promoted to `published`.
 - Production build remains intentionally blocked until a human review record supports publication.
 - The real corpus remains below the target corpus scope and lacks reviewed production scenario assessments.
+- Reconciliation identifies 17 sources, 15 instruments, 9 provisions, 13 controls, 10 mappings, and 2 changelog records; eight instruments lack provision coverage and two provisions lack control mappings.
 - Final policy memo, executive-brief PDF, methodology PDF, and production data exports await approved content.
 
 ## Integrity posture

@@ -1,6 +1,6 @@
 # THREE-MINUTE INTERVIEW DEMO — SCRIPT v1
 
-> Runs against the **fixtures build** (banner visible — that's a feature: say why). Every beat names the on-screen page. Timed per SPEC §30; updated to use the REAL batch-1 corpus instead of placeholder beats. A 90-second cut is marked ◆.
+> Runs against the **fixtures build** (banner visible — that's a feature: say why). Every beat names the on-screen page. It references Pass-1 policy research that remains unpublished; the reconciled production corpus is 17 sources, 15 instruments, 9 provisions, 13 controls, 10 mappings, and 2 changelog records. A 90-second cut is marked ◆.
 
 ---
 
@@ -20,7 +20,7 @@
 "Three weeks before this demo, the EU deferred its high-risk deadlines to late 2027 — but kept the AI-disclosure date. That asymmetry is in the changelog with its source, and the affected records carry *medium* confidence with the reason stated: the amending act wasn't yet in the Official Journal when I verified. Where a government site blocked my fetch, the record says so. Policy moved while I was building — the system is designed to be corrected in public, not to pretend it was always right."
 
 **2:50–3:00 — Close** · *screen: `/` with memo + brief* ◆
-"Primary-source rigor, agentic-AI technical fluency, and translation into decisions teams can act on — the memo and the one-page brief on screen are the writing samples, built from this corpus. That's the job, demonstrated end to end."
+"Primary-source rigor, agentic-AI technical fluency, and translation into decisions teams can act on — the memo and one-page brief are clearly marked working drafts built from an in-review corpus. The publication queue shows exactly what still needs human verification. That's the job, demonstrated honestly end to end."
 
 ---
 

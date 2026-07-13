@@ -2,7 +2,9 @@
 
 **Pass 1 (authoring) date:** 2026-07-12 · **Analyst:** single-author mode (§19.4 two-pass protocol) · **All records:** `review_status: in_review` — nothing publishes until Pass 2 on a different day, working checklist-only against primary sources (§19.3).
 
-Corpus after batch 1: **10 sources · 7 instruments · 7 provisions** (plus the 20-record fictional fixture corpus, which remains profile-separated). Production gate verified: R7 rejects fixtures, R8 rejects these in_review records — `build:production` stays red until Pass 2 publishes, by design.
+> **Current-state reconciliation (2026-07-13):** the authoritative current corpus is **17 sources · 15 instruments · 9 provisions · 13 controls · 10 control mappings · 2 changelog records**. All reviewable records remain `in_review`. The batch totals below are historical snapshots, not current corpus totals; see `docs/research/CORPUS_INVENTORY.md` and `PUBLICATION_REVIEW_QUEUE.md` for the reconciled state.
+
+**Historical snapshot — corpus after batch 1:** **10 sources · 7 instruments · 7 provisions** (plus the 20-record fictional fixture corpus, which remains profile-separated). Production gate verified: R7 rejects fixtures, R8 rejects these in_review records — `build:production` stays red until Pass 2 publishes, by design.
 
 ---
 
@@ -38,7 +40,7 @@ Corpus after batch 1: **10 sources · 7 instruments · 7 provisions** (plus the 
 
 # Batches 2–3 addendum (same Pass-1 day, 2026-07-12)
 
-**Corpus after batch 3: 16 sources · 13 instruments · 11 provisions · 13 controls · 10 control-maps · 2 changelog** — all `in_review`.
+**Historical snapshot — corpus after batch 3:** **16 sources · 13 instruments · 11 provisions · 13 controls · 10 control-maps · 2 changelog** — all `in_review`. This is not the current corpus total.
 
 | Record | Verification | Note |
 |---|---|---|

@@ -20,14 +20,19 @@ The Atlas classifies policy instruments by type, bindingness, lifecycle, and reg
 
 ADRS is a communication and prioritization tool, **not** a legal determination or compliance certification. See [methodology](docs/METHODOLOGY_DECISIONS.md).
 
-## Fixture vs. production modes
+## Build profiles
 
 | Mode | Content | Purpose | Deployment status |
 |---|---|---|---|
 | `fixtures` | Explicitly fictional scenarios and records | Demo, interaction tests, design review | Never deploy |
+| `preview` | Golden 8 AI-assisted, source-traceable records only | Interview research preview | Never production; not human legal review |
 | `production` | Real research records only | Publication-gated delivery | Code path ready; corpus has zero published records |
 
 Production selection is fail-closed: it excludes `fixture:true` data and rejects every record whose `review_status` is not `published`. The reconciled corpus contains 17 sources, 15 instruments, 9 provisions, 13 controls, 10 control mappings, and 2 changelog records; every reviewable record remains `in_review`. See [publication readiness](docs/research/PUBLICATION_READINESS_REPORT.md) and the [corpus inventory](docs/research/CORPUS_INVENTORY.md).
+
+### Golden 8 interview preview
+
+`npm run build:preview` builds a tightly scoped, non-production profile containing only: `eu-gdpr`, `eu-gdpr:art22`, `us-co-sb26-189`, `us-eo-14179`, `cn-ai-labeling-measures`, `cn-genai-interim-measures`, `cn-genai-interim-measures:art9`, and `sg-mgf-genai`. It is prepared and reviewed by Codex using AI-assisted primary-source verification. It is not final legal publication, has not received universal independent human legal review, and is not legal advice. See the [evidence register](docs/research/GOLDEN_8_EVIDENCE_REGISTER.md) and [review manifest](docs/research/GOLDEN_8_REVIEW_MANIFEST.json).
 
 ## Current implementation status
 
@@ -54,6 +59,7 @@ npm ci
 npm run dev
 npm run validate:fixtures
 npm run build:fixtures
+npm run build:preview
 npm run test:e2e
 ```
 
@@ -65,9 +71,12 @@ npm run test:e2e
 | `npm run test:integration` | Dataset/profile/integrity pipeline |
 | `npm run test:e2e` | Fixture demo browser flows |
 | `npm run test:e2e:production` | Production empty-state and fixture-exclusion UI |
+| `npm run test:e2e:preview` | Golden 8 preview boundaries and disclosure UI |
 | `npm run validate:fixtures` | Illustrative corpus integrity |
 | `npm run build:fixtures` | Fixture static build |
 | `npm run validate:production` | Publication gate; currently fails because content is `in_review` |
+| `npm run validate:preview` | Golden 8 manifest and dependency integrity |
+| `npm run build:preview` | AI-assisted interview preview build |
 | `npm run build:production` | Run only after publication validation passes |
 
 ## Route map
@@ -86,11 +95,12 @@ Legacy paths `/calculator`, `/policies`, and `/brief` permanently redirect to ca
 
 ## Interview demo flow
 
-1. Open the fixture profile and point out the persistent illustrative-data banner.
-2. Use the tracker to distinguish a policy instrument’s type, bindingness, and lifecycle.
-3. Open a provision to follow Fact → Inference → Recommendation.
-4. Show the policy-to-control mapper and the ADRS calculator’s manual inputs.
-5. End at [publication readiness](docs/research/PUBLICATION_READINESS_REPORT.md): explain why the real corpus is withheld until human review.
+1. Explain fixtures, preview, and human-gated production.
+2. Open the Golden 8 preview and point out its persistent AI-assisted-research banner.
+3. Open GDPR Article 22 and follow Fact → qualified inference → recommendation.
+4. Show China Article 9’s policy-to-control chain (K04/K13).
+5. Compare binding law with Singapore’s voluntary framework, then demonstrate ADRS without calling it a legal determination.
+6. End with the Golden 8 evidence register and open-issues register.
 
 ## Repository structure
 

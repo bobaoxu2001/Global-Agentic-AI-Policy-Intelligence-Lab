@@ -5,6 +5,27 @@ on:
   pull_request:
 
 jobs:
+  preview-quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm run test
+      - run: npm run test:integration
+      - run: npm run validate:preview
+      - run: npm run build:preview
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e:preview
+      - run: npm run generate:preview-exports
+      - name: Generated preview exports are committed
+        run: git diff --exit-code -- public/downloads/
+
   fixture-quality:
     runs-on: ubuntu-latest
     steps:

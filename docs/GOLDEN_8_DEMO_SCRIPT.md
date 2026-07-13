@@ -1,5 +1,11 @@
 # Golden 8 interview-preview demo
 
+Public interview Preview: <https://ai-policy-atlas-ax2183-5057-ao-xus-projects.vercel.app>
+
+Deployment: Vercel Preview `dpl_3YY9ppr2Yys45DHveazW4RKhW79y`, commit `88c041a1332606044ff746ee2a488c7e0b781ab3`
+
+Safety status: public without login, `noindex`, and separate from the human-gated Production environment.
+
 1. Explain the profiles: fictional `fixtures`, AI-assisted `preview`, and human-gated `production`.
 2. Launch `BUILD_PROFILE=preview`; point out the persistent AI-assisted-research banner.
 3. Show the six instruments and two provisions in the Golden 8 corpus with source links.

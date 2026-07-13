@@ -9,7 +9,17 @@ Publication class: interview research preview, not final legal publication
 
 **PASS — public Preview ready with the production publication gate intentionally closed.** The rendered dataset contains exactly six instruments and two provisions. All 15 required routes returned a successful response and displayed the persistent AI-assisted preview banner.
 
-Public Vercel Preview: <https://ai-policy-atlas-cckww5o6g-ao-xus-projects.vercel.app>
+Public Vercel Preview: <https://ai-policy-atlas-ax2183-5057-ao-xus-projects.vercel.app>
+
+Deployment evidence:
+
+- Deployment ID: `dpl_3YY9ppr2Yys45DHveazW4RKhW79y`
+- Deployed commit: `88c041a1332606044ff746ee2a488c7e0b781ab3`
+- Vercel target/state: `preview` / `READY`
+- Environment: Vercel-supplied `VERCEL_ENV=preview`; `BUILD_PROFILE=preview`
+- Public access: no login required
+- Indexing: `X-Robots-Tag: noindex` confirmed on every required route
+- Production remains configured with `BUILD_PROFILE=production` and remains closed by the formal human publication gate.
 
 | Route | HTTP/render | Banner | Source/content result |
 |---|---|---|---|

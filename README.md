@@ -34,6 +34,8 @@ Production selection is fail-closed: it excludes `fixture:true` data and rejects
 
 `npm run build:preview` builds a tightly scoped, non-production profile containing only: `eu-gdpr`, `eu-gdpr:art22`, `us-co-sb26-189`, `us-eo-14179`, `cn-ai-labeling-measures`, `cn-genai-interim-measures`, `cn-genai-interim-measures:art9`, and `sg-mgf-genai`. It is prepared and reviewed by Codex using AI-assisted primary-source verification. It is not final legal publication, has not received universal independent human legal review, and is not legal advice. See the [evidence register](docs/research/GOLDEN_8_EVIDENCE_REGISTER.md) and [review manifest](docs/research/GOLDEN_8_REVIEW_MANIFEST.json).
 
+Live interview Preview: <https://ai-policy-atlas-ax2183-5057-ao-xus-projects.vercel.app> — Vercel Preview deployment `dpl_3YY9ppr2Yys45DHveazW4RKhW79y`, built from commit `88c041a1332606044ff746ee2a488c7e0b781ab3`. The public URL is marked `noindex`; it is not a Production deployment.
+
 Preview exports are generated deterministically with `npm run generate:preview-exports`; preview validation fails when they are stale. For safe non-production hosting, follow the [Vercel Preview deployment guide](docs/VERCEL_PREVIEW_DEPLOYMENT.md). The Vercel build is fail-closed and rejects any preview/production environment mismatch.
 
 ## Current implementation status

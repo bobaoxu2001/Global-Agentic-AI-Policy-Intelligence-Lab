@@ -20,6 +20,7 @@ import {
 } from '../../lib/validation/integrity';
 import { loadAndValidate } from '../../lib/validation/loadDataset';
 import { getPageDataset } from '../../lib/validation/pageData';
+import previewManifest from '../../../docs/research/GOLDEN_8_REVIEW_MANIFEST.json';
 
 const good = () => loadAndValidate('fixtures');
 
@@ -119,6 +120,22 @@ describe('profile-specific page data', () => {
     expect(ds.instruments).toEqual([]);
     expect(ds.provisions).toEqual([]);
     expect(ds.scenarios).toEqual([]);
+  });
+
+  it('preview exposes only manifest-approved Golden 8 records and their dependencies', () => {
+    process.env.BUILD_PROFILE = 'preview';
+    const raw = loadAndValidate('preview');
+    const ds = getPageDataset();
+    const approved = new Set(previewManifest.records.filter((r) => r.decision === 'APPROVED FOR AI-ASSISTED PREVIEW').map((r) => r.record_id));
+    expect(raw.ok).toBe(true);
+    expect([...ds.instruments, ...ds.provisions].every((r) => approved.has(r.id))).toBe(true);
+    expect(ds.instruments.map((r) => r.id).sort()).toEqual(['cn-ai-labeling-measures', 'cn-genai-interim-measures', 'eu-gdpr', 'sg-mgf-genai', 'us-co-sb26-189', 'us-eo-14179'].sort());
+    expect(ds.provisions.map((r) => r.id).sort()).toEqual(['cn-genai-interim-measures:art9', 'eu-gdpr:art22'].sort());
+    expect(ds.instruments.every((r) => r.fixture !== true)).toBe(true);
+    expect(ds.instruments).not.toContainEqual(expect.objectContaining({ id: 'eu-ai-act' }));
+    expect(ds.provisions).not.toContainEqual(expect.objectContaining({ id: 'us-co-sb26-189:developer-disclosure' }));
+    expect(ds.controlMaps.every((m) => ds.provisions.some((p) => p.id === m.provision_id))).toBe(true);
+    expect(ds.sources.length).toBe(6);
   });
 
   it('restores the inherited profile for subsequent test files', () => {

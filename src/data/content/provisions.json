@@ -180,15 +180,16 @@
     "last_verified": "2026-07-12"
   },
   {
-    "id": "eu-gdpr:art22",
-    "instrument_id": "eu-gdpr",
-    "pin_cite": "Article 22(1)",
+  "id": "eu-gdpr:art22",
+  "instrument_id": "eu-gdpr",
+  "pin_cite": "Article 22(1)",
+  "quote_verbatim": "The data subject shall have the right not to be subject to a decision based solely on automated processing, including profiling, which produces legal effects concerning him or her or similarly significantly affects him or her.",
     "paraphrase_en": "Data subjects have the right not to be subject to decisions based solely on automated processing, including profiling, that produce legal effects or similarly significantly affect them — the core EU constraint on fully automated consequential decisions by agents (C8).",
     "obligation_type": "right",
     "applies_from": "2018-05-25",
     "source_id": "eu-src-gdpr-eurlex",
     "confidence": "medium",
-    "confidence_rationale": "Paraphrase-only record: instrument metadata verified against the EUR-Lex CELEX record this session, but Art 22's verbatim wording was not re-fetched; per the project's verification discipline no quote is included and confidence is capped at medium until the text is re-verified in a review pass.",
+  "confidence_rationale": "Article 22(1) was re-verified against the Tier 1 EUR-Lex text on 2026-07-13. The quoted legal text is exact; the agentic-scope and meaningful-human-review statements remain medium-confidence inferences rather than blanket legal conclusions.",
     "epistemic_blocks": [
       {
         "id": "b1",
@@ -203,7 +204,7 @@
             "stable_ref": "CELEX:32016R0679",
             "pin_cite": "Article 22(1)",
             "pub_date": "2016-05-04",
-            "accessed_date": "2026-07-12"
+          "accessed_date": "2026-07-13"
           }
         ],
         "confidence": "medium"
@@ -211,7 +212,7 @@
       {
         "id": "b2",
         "kind": "inference",
-        "text_md": "An agent that finalizes consequential outcomes without independent human judgment (C8 at intensity ≥2) operates in Art 22 territory; a genuine human-in-the-loop (M1) is the classic path out of 'solely automated'.",
+      "text_md": "An agent that finalizes consequential outcomes without independent human judgment (C8 at intensity ≥2) may engage Article 22 where the Article's ‘legal effects’ or similarly significant-effects condition is met; whether human involvement is meaningful is context-specific.",
         "confidence": "medium",
         "based_on": [
           "b1"
@@ -220,7 +221,7 @@
       {
         "id": "b3",
         "kind": "recommendation",
-        "text_md": "Operators of consequential-decision agents in the EU could route Art-22-relevant outcomes through a meaningful human decision point (M1) and log the human's role (M3) as evidence the decision was not solely automated.",
+      "text_md": "Operators of consequential-decision agents in the EU could route Article-22-relevant outcomes through a meaningful human decision point (M1) and log the human's role (M3) as evidence; this is a design recommendation, not a determination that the Article applies or that the control alone assures compliance.",
         "based_on": [
           "b2"
         ]
@@ -245,8 +246,8 @@
       }
     ],
     "review_status": "in_review",
-    "as_of_date": "2026-07-12",
-    "last_verified": "2026-07-12"
+  "as_of_date": "2026-07-13",
+  "last_verified": "2026-07-13"
   },
   {
     "id": "us-co-sb26-189:developer-disclosure",
@@ -392,12 +393,12 @@
     "instrument_id": "cn-genai-interim-measures",
     "pin_cite": "第九条 (Article 9)",
     "quote_verbatim": "提供者应当依法承担网络信息内容生产者责任，履行网络信息安全义务。",
-    "paraphrase_en": "Generative-AI service providers bear network content-producer responsibility in accordance with law and must fulfil network information security obligations — the provider, not the model vendor or end user, is the accountable party for what the service generates.",
+  "paraphrase_en": "Generative-AI service providers must, in accordance with law, assume network-information content-producer responsibility and fulfil network-information-security obligations. The Article assigns these duties to the provider; it does not by itself resolve responsibility among every independent model vendor, deployer, and user arrangement.",
     "obligation_type": "obligation",
     "applies_from": "2023-08-15",
     "source_id": "cn-src-genai-interim-cac",
     "confidence": "medium",
-    "confidence_rationale": "Chinese original quoted verbatim from the Tier 1 CAC text fetched this session; English paraphrase is the analyst's own translation (§7.5 cap → medium).",
+  "confidence_rationale": "Chinese original was re-verified verbatim against the Tier 1 CAC text on 2026-07-13; English paraphrase is the analyst's own translation (§7.5 cap → medium).",
     "epistemic_blocks": [
       {
         "id": "b1",
@@ -413,7 +414,7 @@
             "pin_cite": "第九条",
             "pub_date": "2023-07-10",
             "language": "zh",
-            "accessed_date": "2026-07-12"
+          "accessed_date": "2026-07-13"
           }
         ],
         "confidence": "medium"
@@ -421,7 +422,7 @@
       {
         "id": "b2",
         "kind": "inference",
-        "text_md": "For an agent that generates content toward CN users (C1), accountability sits with the deploying operator as 'provider' — an agent architecture cannot delegate content responsibility to the upstream model; this is a currently-applicable binding_hit driver for C1-bearing agents in CN.",
+      "text_md": "For a CN-facing agent service whose operator is the Article 9 ‘provider’, the provision is a currently-applicable binding input for C1-bearing agents. The provision does not itself settle every allocation question among independent upstream vendors, deployers, and users.",
         "confidence": "medium",
         "based_on": [
           "b1"
@@ -450,8 +451,8 @@
       }
     ],
     "review_status": "in_review",
-    "as_of_date": "2026-07-12",
-    "last_verified": "2026-07-12"
+  "as_of_date": "2026-07-13",
+  "last_verified": "2026-07-13"
   },
   {
     "id": "cn-deep-synthesis-provisions:art17",

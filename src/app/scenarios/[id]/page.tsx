@@ -51,7 +51,7 @@ export default async function ScenarioPage({ params }: { params: Promise<{ id: s
           })}
         </tbody>
       </table>
-      <p style={{ fontSize: 12, color: 'var(--ink-muted)' }}>J components in fixtures are FICTIONAL, illustrative pending Phase 1 research (OD-11/MD-3). Deep links pre-populate the calculator from this assessment (AC-ADRS-11); every toggle stays editable.</p>
+      <p style={{ fontSize: 12, color: 'var(--ink-muted)' }}>J components in fixtures are FICTIONAL and illustrative pending reviewed research (OD-11/MD-3). Deep links pre-populate the calculator from this assessment (AC-ADRS-11); every toggle stays editable.</p>
 
       <h2>Provisions touching this capability profile <span className="eyebrow">▲ inference — capability overlap, reference date {BUILD_DATE}</span></h2>
       {(() => {

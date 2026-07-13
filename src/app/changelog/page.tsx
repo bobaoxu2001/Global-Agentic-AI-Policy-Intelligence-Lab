@@ -9,7 +9,7 @@ export default function ChangelogPage() {
   return (
     <>
       <h1>Changelog</h1>
-      <p className="phase0">Dated record of instrument-status updates and regulatory-drift events observed during the project period (§19.5). Policy moves; this product is built to be corrected in public.</p>
+      <p className="status-note">Dated record of instrument-status updates and regulatory-drift events observed during the project period (§19.5). Policy moves; this product is built to be corrected in public.</p>
       {entries.length === 0 ? <p>No status changes recorded in this period.</p> : (
         <ul style={{ listStyle: 'none', padding: 0 }}>
           {entries.map((c) => (

@@ -80,7 +80,7 @@ const MIT_LABEL: Record<MitigationClass, string> = {
   M9: 'Incident response runbook — tested rollback and notification procedure',
 };
 
-/** SPEC §13.5 J-component definitions — reference material (jurisdiction-neutral until Phase 1 research lands). */
+/** SPEC §13.5 J-component definitions — jurisdiction-neutral reference material until reviewed research is published. */
 const J_DEF: Record<JComponentName, string> = {
   binding_hit: '≥1 currently-applicable binding provision maps to a capability the agent has at intensity ≥2',
   near_term_hit: '≥1 adopted-but-not-yet-applicable binding provision applies within 18 months of assessed_date (intensity ≥1)',
@@ -148,7 +148,7 @@ export function AdrsCalculator() {
         <div data-testid="jurisdiction-ref" style={{ fontSize: 12, color: 'var(--ink-muted)', marginTop: 6 }}>
           {jurisdiction === 'none'
             ? 'No jurisdiction selected. The four J components below are always set manually by the analyst.'
-            : `Reference for ${jurisdiction.toUpperCase()}: jurisdiction-specific component examples arrive with Phase 1 research (OD-11). Selecting a jurisdiction changed nothing on the toggles below — set them yourself against the definitions shown.`}
+            : `Reference for ${jurisdiction.toUpperCase()}: jurisdiction-specific component examples appear only after reviewed research is published (OD-11). Selecting a jurisdiction changed nothing on the toggles below — set them yourself against the definitions shown.`}
         </div>
       </fieldset>
 

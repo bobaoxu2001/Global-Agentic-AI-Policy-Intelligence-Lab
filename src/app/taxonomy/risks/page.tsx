@@ -1,0 +1,2 @@
+import risks from '@/data/seeds/risks.json';
+export default function RiskTaxonomyPage() { return <><h1>Governance-Risk Taxonomy</h1><p className="status-note">Risks are a structured analytical taxonomy; scenario failure narratives remain hypothetical.</p><table><thead><tr><th>ID</th><th>Risk</th><th>Definition</th></tr></thead><tbody>{risks.map((r) => <tr key={r.id}><td>{r.id}</td><td>{r.name}</td><td>{r.definition}</td></tr>)}</tbody></table></>; }

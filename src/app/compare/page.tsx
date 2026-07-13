@@ -13,7 +13,7 @@ export default function ComparePage() {
   return (
     <>
       <h1>Jurisdiction Comparison</h1>
-      <p className="phase0">▲ Analytical inference. Phase 0 shell — cells count currently-applicable binding provisions (SPEC §13.5 definition, build-date reference; no agent, no intensity threshold).</p>
+      <p className="status-note">▲ Analytical inference. Cells count currently-applicable binding provisions (SPEC §13.5 definition, build-date reference; no agent, no intensity threshold).</p>
       <table>
         <thead><tr><th>Capability</th>{JURS.map((j) => <th key={j}>{j.toUpperCase()}</th>)}</tr></thead>
         <tbody>

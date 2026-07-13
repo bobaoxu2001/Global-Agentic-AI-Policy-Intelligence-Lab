@@ -4,19 +4,21 @@ import { FixtureBanner } from '@/components/FixtureBanner';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'AI Policy Atlas — Phase 0',
+  title: 'AI Policy Atlas — Agentic AI Governance Intelligence',
   description:
-    'Agentic AI governance intelligence — Phase 0 foundation shells. Independent research project; hypothetical scenarios; not legal advice.',
+    'Source-traceable policy intelligence for agentic AI. Independent research project; not legal advice.',
 };
 
 const NAV = [
-  ['/', 'Dashboard'],
-  ['/instruments', 'Policy Tracker'],
+  ['/', 'Overview'],
+  ['/instruments', 'Instruments'],
+  ['/jurisdictions', 'Jurisdictions'],
   ['/compare', 'Compare'],
   ['/scenarios', 'Scenarios'],
-  ['/calculator', 'ADRS Calculator'],
+  ['/risk-score', 'Risk Score'],
+  ['/taxonomy/policy', 'Taxonomies'],
   ['/controls', 'Controls'],
-  ['/brief', 'Brief'],
+  ['/executive-brief', 'Brief'],
   ['/methodology', 'Methodology'],
   ['/changelog', 'Changelog'],
 ] as const;
@@ -27,7 +29,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <FixtureBanner />
         <div className="disclaimer">
-          Independent research project. Hypothetical scenarios. Not legal advice. Not affiliated with any company.
+          Independent research project. Corpus publication requires human review. Hypothetical scenarios. Not legal advice. Not affiliated with any company.
         </div>
         <nav className="primary" aria-label="Primary" style={{ maxWidth: 960, margin: '0 auto', padding: '8px 16px' }}>
           {NAV.map(([href, label]) => (

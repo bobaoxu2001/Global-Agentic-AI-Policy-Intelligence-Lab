@@ -6,12 +6,12 @@ export default function ScenariosPage() {
   return (
     <>
       <h1>Agent Scenarios</h1>
-      <p className="phase0">Phase 0 shell. All scenarios are hypothetical fictional composites (SPEC §14).</p>
-      <ul>
+      <p className="status-note">All scenarios are hypothetical fictional composites. They render in fixture mode until research-backed, human-reviewed assessments are available.</p>
+      {ds.scenarios.length === 0 ? <p>No published scenarios in this profile.</p> : <ul>
         {ds.scenarios.map((s) => (
           <li key={s.id}><Link href={`/scenarios/${s.id}`}>{s.name}</Link></li>
         ))}
-      </ul>
+      </ul>}
     </>
   );
 }

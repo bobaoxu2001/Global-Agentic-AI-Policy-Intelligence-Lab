@@ -9,7 +9,7 @@ export default function ControlsPage() {
   return (
     <>
       <h1>Policy-to-Control Mapper</h1>
-      <p className="phase0">Control catalog (K-series, SPEC §15.3). Every entry is a ● recommendation-class artifact: implementation notes for engineers, verification method for auditors, ADRS mitigation class where applicable. Provision→control chains land with P2-7.</p>
+      <p className="status-note">Control catalog (K-series, SPEC §15.3). Every entry is a ● recommendation-class artifact: implementation notes for engineers, verification method for auditors, and ADRS mitigation class where applicable.</p>
       {ds.controls.length === 0 ? <p>No controls in this profile.</p> : CAT_ORDER.map((cat) => {
         const rows = ds.controls.filter((c) => c.category === cat);
         if (rows.length === 0) return null;

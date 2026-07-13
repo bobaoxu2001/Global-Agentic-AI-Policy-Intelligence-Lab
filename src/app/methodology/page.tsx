@@ -2,7 +2,7 @@ export default function MethodologyPage() {
   return (
     <>
       <h1>Methodology</h1>
-      <p className="phase0">Phase 0 shell — full §6/§7/§13/§15/§19–22 rendering is Phase 3 (P3-1).</p>
+      <p className="status-note">Research records are source-traceable, epistemically typed, and published only after a documented human review. The present corpus remains in review.</p>
       <h2>ADRS constants (SPEC §13 — locked)</h2>
       <pre>{`Weights: A 0.25 · T 0.20 · D 0.20 · E 0.15 · R 0.20
 Credits: M1 .10 M2 .08 M3 .07 M4 .06 M5 .05 M6 .04 M7 .04 M8 .03 M9 .03 (cap 0.40)

@@ -14,6 +14,7 @@ export default async function InstrumentDetailPage({ params }: { params: Promise
   const inst = ds.instruments.find((i) => i.id === id);
   if (!inst) return <p>Not found.</p>;
   const provisions = ds.provisions.filter((p) => p.instrument_id === inst.id);
+  const officialSources = ds.sources.filter((source) => inst.source_ids.includes(source.id));
   return (
     <>
       <div className="eyebrow">{inst.jurisdiction_id.toUpperCase()} · {inst.issuing_body}</div>
@@ -27,6 +28,8 @@ export default async function InstrumentDetailPage({ params }: { params: Promise
         as_of {inst.as_of_date} · last_verified {inst.last_verified}
       </p>
       <p>{inst.summary_md}</p>
+      <h2>Official sources</h2>
+      <ul>{officialSources.map((source) => <li key={source.id}><a href={source.url} target="_blank" rel="noreferrer">{source.title}</a> <span className="mono">(Tier {source.tier})</span></li>)}</ul>
       {inst.key_dates?.length ? (
         <>
           <h2>Key dates</h2>
@@ -34,7 +37,7 @@ export default async function InstrumentDetailPage({ params }: { params: Promise
         </>
       ) : null}
       <h2>Agentic-relevant provisions</h2>
-      {ds.profile === 'preview' && inst.id === 'sg-mgf-genai' ? <p className="status-note">Context instrument — no provision-level mapping in the current preview.</p> : null}
+      {ds.profile === 'preview' && provisions.length === 0 ? <p className="status-note">Context instrument — no provision-level mapping in the current preview.</p> : null}
       {ds.profile === 'preview' && inst.id === 'us-co-sb26-189' ? <p className="status-note">This instrument is included in the preview. Some associated provisions remain outside the approved preview set.</p> : null}
       <ul>
         {provisions.map((p) => (

@@ -22,7 +22,7 @@ export function EpistemicBlockView({ block }: { block: EpistemicBlock }) {
       <div>{block.text_md}</div>
       {block.citations?.map((c, i) => (
         <div key={i} className="mono" style={{ fontSize: 11.5, marginTop: 4, color: 'var(--ink-muted)' }}>
-          <SourceTierBadge tier={c.tier} /> {c.publisher} — <i>{c.title}</i>, {c.pin_cite}
+          <SourceTierBadge tier={c.tier} /> {c.publisher} — <a href={c.url} target="_blank" rel="noreferrer"><i>{c.title}</i></a>, {c.pin_cite}
           {c.pub_date ? ` (${c.pub_date})` : ''} · accessed {c.accessed_date}
         </div>
       ))}

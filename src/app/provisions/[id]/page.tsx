@@ -23,7 +23,7 @@ export default async function ProvisionPage({ params }: { params: Promise<{ id: 
         <ConfidenceChip level={p.confidence} />
         {p.applies_from ? <span className="mono" style={{ fontSize: 12 }}>applies from {p.applies_from}</span> : null}
       </p>
-      {p.quote_verbatim ? <blockquote lang="en">{p.quote_verbatim}</blockquote> : null}
+      {p.quote_verbatim ? <blockquote lang={p.instrument_id.startsWith('cn-') ? 'zh' : 'en'}>{p.quote_verbatim}</blockquote> : null}
       <p>{p.paraphrase_en}</p>
       <p style={{ fontSize: 12, color: 'var(--ink-muted)' }}>{p.confidence_rationale}</p>
       <h2>Epistemic chain <span className="eyebrow">■ fact → ▲ inference → ● recommendation</span></h2>

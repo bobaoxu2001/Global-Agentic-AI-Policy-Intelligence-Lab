@@ -3,11 +3,11 @@
 
 :root { color-scheme: light; }
 body { font-family: var(--font-ui); margin: 0; color: var(--ink); background: var(--surface-paper); font-size: 14px; line-height: 1.58; }
-main { max-width: 960px; margin: 0 auto; padding: 16px; }
+main { max-width: 960px; margin: 0 auto; padding: 16px; overflow-x: auto; }
 h1 { font-family: var(--font-serif); font-weight: 600; font-size: 24px; }
 h2 { font-size: 18px; }
 blockquote { font-family: var(--font-serif); border-left: 3px solid var(--border-frame); margin: 10px 0; padding: 6px 14px; background: var(--surface-page); }
-nav.primary { background: var(--surface-rail); border-bottom: 1px solid var(--border-rule); }
+nav.primary { background: var(--surface-rail); border-bottom: 1px solid var(--border-rule); display: flex; flex-wrap: wrap; gap: 4px 0; }
 nav.primary a { margin-right: 12px; font-size: 13px; color: var(--ink); }
 .fixture-banner {
   background: repeating-linear-gradient(45deg, var(--fixture-stripe-a), var(--fixture-stripe-a) 14px, var(--fixture-stripe-b) 14px, var(--fixture-stripe-b) 28px);

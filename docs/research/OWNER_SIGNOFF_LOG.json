@@ -1,0 +1,16 @@
+{
+  "decisions": [
+    {
+      "record_id": "eu-gdpr",
+      "record_type": "instrument",
+      "owner_reviewer": "Ao Xu",
+      "owner_decision": "approved",
+      "owner_reviewed_at": "2026-07-13T15:45:07+09:00",
+      "official_source": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679",
+      "source_reference": "EUR-Lex CELEX 32016R0679",
+      "provision_inheritance": false,
+      "prepared_by": "Codex",
+      "scope_note": "This decision applies only to the eu-gdpr instrument. It does not approve eu-gdpr:art22 or any other provision, and it does not change preview or production publication status."
+    }
+  ]
+}

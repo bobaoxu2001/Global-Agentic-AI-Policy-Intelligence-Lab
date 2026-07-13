@@ -34,6 +34,8 @@ Production selection is fail-closed: it excludes `fixture:true` data and rejects
 
 `npm run build:preview` builds a tightly scoped, non-production profile containing only: `eu-gdpr`, `eu-gdpr:art22`, `us-co-sb26-189`, `us-eo-14179`, `cn-ai-labeling-measures`, `cn-genai-interim-measures`, `cn-genai-interim-measures:art9`, and `sg-mgf-genai`. It is prepared and reviewed by Codex using AI-assisted primary-source verification. It is not final legal publication, has not received universal independent human legal review, and is not legal advice. See the [evidence register](docs/research/GOLDEN_8_EVIDENCE_REGISTER.md) and [review manifest](docs/research/GOLDEN_8_REVIEW_MANIFEST.json).
 
+Preview exports are generated deterministically with `npm run generate:preview-exports`; preview validation fails when they are stale. For safe non-production hosting, follow the [Vercel Preview deployment guide](docs/VERCEL_PREVIEW_DEPLOYMENT.md). The Vercel build is fail-closed and rejects any preview/production environment mismatch.
+
 ## Current implementation status
 
 - Production and fixture datasets are isolated and covered by automated checks.
@@ -76,7 +78,9 @@ npm run test:e2e
 | `npm run build:fixtures` | Fixture static build |
 | `npm run validate:production` | Publication gate; currently fails because content is `in_review` |
 | `npm run validate:preview` | Golden 8 manifest and dependency integrity |
+| `npm run generate:preview-exports` | Regenerate all four Golden 8 exports from the canonical manifest |
 | `npm run build:preview` | AI-assisted interview preview build |
+| `npm run build:vercel` | Environment-gated Vercel Preview or production build |
 | `npm run build:production` | Run only after publication validation passes |
 
 ## Route map

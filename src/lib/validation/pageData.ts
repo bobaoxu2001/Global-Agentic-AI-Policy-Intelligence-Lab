@@ -1,8 +1,4 @@
-/**
- * Page-level data access for Phase 0 shells. Profile-gated: fixture content is
- * served ONLY under BUILD_PROFILE=fixtures; production renders empty states
- * (real corpus arrives in Phase 1/2 through the reviewed pipeline).
- */
+/** Page-level access to the validated, profile-specific corpus. */
 import { computeAdrs, displayScore, type Dims, type JComponents, type MitigationClass } from '../adrs';
 import type { Assessment } from '../schemas';
 import { getBuildProfile } from './buildProfile';
@@ -11,15 +7,23 @@ import { loadAndValidate } from './loadDataset';
 
 export function getPageDataset() {
   const profile = getBuildProfile();
-  if (profile === 'production') {
-    return {
-      profile,
-      instruments: [], provisions: [], sources: [], scenarios: [], changelog: [],
-      assessments: [] as Assessment[], controls: [], controlMaps: [],
-    };
-  }
   const { dataset, controls, controlMaps } = loadAndValidate(profile);
-  return { profile, ...dataset, controls, controlMaps, assessments: currentVersions(dataset.assessments) };
+  // Production validation has already rejected fixture/non-published records.
+  // The explicit predicates keep this boundary visible at the rendering layer.
+  const approved = <T extends { fixture?: boolean; review_status?: string }>(rows: T[]) =>
+    profile === 'fixtures' ? rows.filter((row) => row.fixture === true) : rows.filter((row) => !row.fixture && row.review_status === 'published');
+  return {
+    profile,
+    ...dataset,
+    sources: profile === 'fixtures' ? dataset.sources.filter((row) => row.fixture === true) : dataset.sources.filter((row) => !row.fixture),
+    instruments: approved(dataset.instruments),
+    provisions: approved(dataset.provisions),
+    scenarios: approved(dataset.scenarios),
+    changelog: approved(dataset.changelog),
+    controls,
+    controlMaps,
+    assessments: currentVersions(approved(dataset.assessments) as Assessment[]),
+  };
 }
 
 export function scoreAssessment(a: Assessment) {

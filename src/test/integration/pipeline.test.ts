@@ -19,6 +19,7 @@ import {
   type Dataset,
 } from '../../lib/validation/integrity';
 import { loadAndValidate } from '../../lib/validation/loadDataset';
+import { getPageDataset } from '../../lib/validation/pageData';
 
 const good = () => loadAndValidate('fixtures');
 
@@ -76,10 +77,14 @@ describe('production profile rejections (CB-4, rules 7–8)', () => {
     expect(errors.length).toBe(fixtureCount); // real (non-fixture) research content is NOT R7-rejected
     expect(errors.every((e) => e.rule === 'R7-no-fixtures-in-prod')).toBe(true);
   });
-  it('full production pipeline fails on the shipped fixture corpus', () => {
+  it('production loads real research only and rejects its non-published review state', () => {
     const r = loadAndValidate('production');
     expect(r.ok).toBe(false);
-    expect(r.integrityErrors.some((e) => e.rule === 'R7-no-fixtures-in-prod')).toBe(true);
+    expect(r.dataset.instruments.length).toBeGreaterThan(0);
+    expect(r.dataset.instruments.every((row) => row.fixture !== true)).toBe(true);
+    expect(r.dataset.instruments.every((row) => row.review_status === 'in_review')).toBe(true);
+    expect(r.integrityErrors.some((e) => e.rule === 'R7-no-fixtures-in-prod')).toBe(false);
+    expect(r.integrityErrors.some((e) => e.rule === 'R8-published-only')).toBe(true);
   });
   it('rejects non-published records in production', () => {
     const r = good();
@@ -92,6 +97,33 @@ describe('production profile rejections (CB-4, rules 7–8)', () => {
     const errors = checkPublishedOnlyInProduction(ds, 'production');
     expect(errors.some((e) => e.rule === 'R8-published-only')).toBe(true);
     expect(checkPublishedOnlyInProduction(ds, 'fixtures')).toEqual([]);
+  });
+});
+
+describe('profile-specific page data', () => {
+  const prior = process.env.BUILD_PROFILE;
+
+  it('fixture pages expose only illustrative fixture content', () => {
+    process.env.BUILD_PROFILE = 'fixtures';
+    const ds = getPageDataset();
+    expect(ds.instruments.length).toBeGreaterThan(0);
+    expect(ds.instruments.every((row) => row.fixture === true)).toBe(true);
+    expect(ds.scenarios.every((row) => row.fixture === true)).toBe(true);
+  });
+
+  it('production pages never discard valid records by accident and render zero until publication', () => {
+    process.env.BUILD_PROFILE = 'production';
+    const raw = loadAndValidate('production');
+    const ds = getPageDataset();
+    expect(raw.dataset.instruments.some((row) => row.fixture !== true)).toBe(true);
+    expect(ds.instruments).toEqual([]);
+    expect(ds.provisions).toEqual([]);
+    expect(ds.scenarios).toEqual([]);
+  });
+
+  it('restores the inherited profile for subsequent test files', () => {
+    if (prior === undefined) delete process.env.BUILD_PROFILE;
+    else process.env.BUILD_PROFILE = prior;
   });
 });
 

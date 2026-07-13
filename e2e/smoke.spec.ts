@@ -5,12 +5,11 @@
 import { expect, test } from '@playwright/test';
 import assessments from '../src/data/fixtures/assessments.json';
 import scenarios from '../src/data/fixtures/scenarios.json';
-import contentInstruments from '../src/data/content/instruments.json';
 import fixtureInstruments from '../src/data/fixtures/instruments.json';
 
 // MJ-10 discipline, applied after two stale-literal breakages: tracker
 // expectations are DERIVED from the content files, never hardcoded.
-const ALL_INSTRUMENTS = [...fixtureInstruments, ...contentInstruments] as Array<{
+const ALL_INSTRUMENTS = fixtureInstruments as Array<{
   jurisdiction_id: string; instrument_type: string;
 }>;
 const countBy = (f: (i: (typeof ALL_INSTRUMENTS)[number]) => boolean) => ALL_INSTRUMENTS.filter(f).length;

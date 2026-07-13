@@ -2,7 +2,7 @@
   "name": "ai-policy-atlas",
   "version": "0.1.0",
   "private": true,
-  "description": "AI Policy Atlas — Phase 0 foundation (schemas, ADRS formula, fixtures, validation, route shells). Independent research project; hypothetical scenarios; not legal advice.",
+  "description": "AI Policy Atlas — Agentic AI Governance Intelligence. Independent, source-traceable policy research; not legal advice.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -14,6 +14,9 @@
     "test": "vitest run src/lib/adrs src/lib/schemas src/lib/validation",
     "test:integration": "vitest run src/test/integration",
     "test:e2e": "playwright test",
+    "test:e2e:production": "playwright test --config=playwright.production.config.ts",
+    "validate:fixtures": "cross-env-shell BUILD_PROFILE=fixtures \"npm run validate\"",
+    "validate:production": "cross-env-shell BUILD_PROFILE=production \"npm run validate\"",
     "validate": "tsx scripts/validate.ts",
     "schemas:json": "tsx scripts/generate-json-schemas.ts"
   },

@@ -56,36 +56,40 @@ function validateArray<S extends z.ZodTypeAny>(
   return parsed;
 }
 
-/** Validate seeds + content for the given profile. Seeds render in both profiles; fixture content only in `fixtures`. */
+/**
+ * Validate the profile-specific corpus. Seeds and the control catalog are shared
+ * reference material. Every policy record, scenario, and assessment belongs to
+ * exactly one profile: illustrative fixtures or reviewed production content.
+ */
 export function loadAndValidate(profile: BuildProfile): ValidationReport & { dataset: Dataset; controls: Control[]; controlMaps: ControlProvisionMap[] } {
   const schemaErrors: ValidationReport['schemaErrors'] = [];
 
   validateArray('seeds/capabilities.json', CapabilitySeedSchema, capabilitiesJson, schemaErrors);
   validateArray('seeds/risks.json', RiskSeedSchema, risksJson, schemaErrors);
 
-  // Real research content (src/data/content/, non-fixture) is loaded in BOTH
-  // profiles: production admits it subject to R8 (published-only); fixtures
-  // profile previews in_review drafts (CB-4 relaxation).
+  const fixtureProfile = profile === 'fixtures';
+  const sourceRows = fixtureProfile ? sourcesJson : contentSourcesJson;
+  const instrumentRows = fixtureProfile ? instrumentsJson : contentInstrumentsJson;
+  const provisionRows = fixtureProfile ? provisionsJson : contentProvisionsJson;
+
+  // Fixture mode is an isolated illustrative demo. Production is an equally
+  // isolated research corpus and is still checked by R7/R8 below. Keeping the
+  // selection here—not as a later UI filter—prevents fixture leakage into a
+  // deployable build.
   const dataset: Dataset = {
-    sources: [
-      ...validateArray('fixtures/sources.json', SourceSchema, sourcesJson, schemaErrors),
-      ...validateArray('content/sources.json', SourceSchema, contentSourcesJson, schemaErrors),
-    ],
-    instruments: [
-      ...validateArray('fixtures/instruments.json', InstrumentSchema, instrumentsJson, schemaErrors),
-      ...validateArray('content/instruments.json', InstrumentSchema, contentInstrumentsJson, schemaErrors),
-    ],
-    provisions: [
-      ...validateArray('fixtures/provisions.json', ProvisionSchema, provisionsJson, schemaErrors),
-      ...validateArray('content/provisions.json', ProvisionSchema, contentProvisionsJson, schemaErrors),
-    ],
-    scenarios: validateArray('fixtures/scenarios.json', ScenarioSchema, scenariosJson, schemaErrors),
-    assessments: validateArray('fixtures/assessments.json', AssessmentSchema, assessmentsJson, schemaErrors),
-    changelog: validateArray('content/changelog.json', ChangelogSchema, contentChangelogJson, schemaErrors),
+    sources: validateArray(fixtureProfile ? 'fixtures/sources.json' : 'content/sources.json', SourceSchema, sourceRows, schemaErrors),
+    instruments: validateArray(fixtureProfile ? 'fixtures/instruments.json' : 'content/instruments.json', InstrumentSchema, instrumentRows, schemaErrors),
+    provisions: validateArray(fixtureProfile ? 'fixtures/provisions.json' : 'content/provisions.json', ProvisionSchema, provisionRows, schemaErrors),
+    scenarios: fixtureProfile ? validateArray('fixtures/scenarios.json', ScenarioSchema, scenariosJson, schemaErrors) : [],
+    assessments: fixtureProfile ? validateArray('fixtures/assessments.json', AssessmentSchema, assessmentsJson, schemaErrors) : [],
+    changelog: fixtureProfile ? [] : validateArray('content/changelog.json', ChangelogSchema, contentChangelogJson, schemaErrors),
   };
 
-  const controls = validateArray('content/controls.json', ControlSchema, contentControlsJson, schemaErrors);
-  const controlMaps = validateArray('content/control-provision-map.json', ControlProvisionMapSchema, contentControlMapsJson, schemaErrors);
+  // The K-series catalog and its mappings are research content too. They are
+  // intentionally withheld from the fixture demo unless a dedicated fixture
+  // catalog is authored.
+  const controls = fixtureProfile ? [] : validateArray('content/controls.json', ControlSchema, contentControlsJson, schemaErrors);
+  const controlMaps = fixtureProfile ? [] : validateArray('content/control-provision-map.json', ControlProvisionMapSchema, contentControlMapsJson, schemaErrors);
   const integrityErrors = runIntegrity(dataset, profile);
   // P2-7 FK gate: every mapping must resolve to a real control AND provision.
   const controlIds = new Set(controls.map((c) => c.id));

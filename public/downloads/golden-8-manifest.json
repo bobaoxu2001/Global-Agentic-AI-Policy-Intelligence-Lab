@@ -1,1 +1,73 @@
-{"review_basis":"AI-assisted primary-source verification","reviewed_by":"Codex","human_review_status":"pending unless separately evidenced in OWNER_SIGNOFF_LOG","disclaimer":"Interview research preview, not final legal publication. Not legal advice.","manifest":"/docs/research/GOLDEN_8_REVIEW_MANIFEST.json"}
+{
+  "publication_class": "interview research preview, not final legal publication",
+  "review_basis": "AI-assisted primary-source verification",
+  "reviewed_by": "Codex",
+  "human_review_status": "pending unless separately evidenced in OWNER_SIGNOFF_LOG",
+  "disclaimer": "Primary sources were checked by an AI review workflow. Not all records have received independent human legal review. Not legal advice.",
+  "records": [
+    {
+      "record_id": "eu-gdpr",
+      "decision": "APPROVED FOR AI-ASSISTED PREVIEW",
+      "source_ids": [
+        "eu-src-gdpr-eurlex"
+      ],
+      "last_verified": "2026-07-13"
+    },
+    {
+      "record_id": "eu-gdpr:art22",
+      "decision": "APPROVED FOR AI-ASSISTED PREVIEW",
+      "source_ids": [
+        "eu-src-gdpr-eurlex"
+      ],
+      "last_verified": "2026-07-13"
+    },
+    {
+      "record_id": "us-co-sb26-189",
+      "decision": "APPROVED FOR AI-ASSISTED PREVIEW",
+      "source_ids": [
+        "us-src-sb26189-leg"
+      ],
+      "last_verified": "2026-07-13"
+    },
+    {
+      "record_id": "us-eo-14179",
+      "decision": "APPROVED FOR AI-ASSISTED PREVIEW",
+      "source_ids": [
+        "us-src-eo14179-govinfo"
+      ],
+      "last_verified": "2026-07-13"
+    },
+    {
+      "record_id": "cn-ai-labeling-measures",
+      "decision": "APPROVED FOR AI-ASSISTED PREVIEW",
+      "source_ids": [
+        "cn-src-labeling-cac"
+      ],
+      "last_verified": "2026-07-13"
+    },
+    {
+      "record_id": "cn-genai-interim-measures",
+      "decision": "APPROVED FOR AI-ASSISTED PREVIEW",
+      "source_ids": [
+        "cn-src-genai-interim-cac"
+      ],
+      "last_verified": "2026-07-13"
+    },
+    {
+      "record_id": "cn-genai-interim-measures:art9",
+      "decision": "APPROVED FOR AI-ASSISTED PREVIEW",
+      "source_ids": [
+        "cn-src-genai-interim-cac"
+      ],
+      "last_verified": "2026-07-13"
+    },
+    {
+      "record_id": "sg-mgf-genai",
+      "decision": "APPROVED FOR AI-ASSISTED PREVIEW",
+      "source_ids": [
+        "sg-src-mgf-genai"
+      ],
+      "last_verified": "2026-07-13"
+    }
+  ]
+}

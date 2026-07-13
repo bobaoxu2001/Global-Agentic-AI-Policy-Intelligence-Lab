@@ -16,7 +16,6 @@ import scenariosJson from '../../data/fixtures/scenarios.json';
 import sourcesJson from '../../data/fixtures/sources.json';
 import capabilitiesJson from '../../data/seeds/capabilities.json';
 import risksJson from '../../data/seeds/risks.json';
-import previewManifestJson from '../../../docs/research/GOLDEN_8_REVIEW_MANIFEST.json';
 import { z } from 'zod';
 import {
   AssessmentSchema,
@@ -33,6 +32,7 @@ import {
 import type { Control, ControlProvisionMap } from '../schemas';
 import type { BuildProfile } from './buildProfile';
 import { runIntegrity, type Dataset, type IntegrityError } from './integrity';
+import { approvedPreviewIds, previewManifest } from './previewManifest';
 
 export interface ValidationReport {
   profile: BuildProfile;
@@ -91,10 +91,25 @@ export function loadAndValidate(profile: BuildProfile): ValidationReport & { dat
   // catalog is authored.
   let controls = fixtureProfile ? [] : validateArray('content/controls.json', ControlSchema, contentControlsJson, schemaErrors);
   let controlMaps = fixtureProfile ? [] : validateArray('content/control-provision-map.json', ControlProvisionMapSchema, contentControlMapsJson, schemaErrors);
+  const previewIntegrityErrors: IntegrityError[] = [];
   if (profile === 'preview') {
-    const approvedIds = new Set(previewManifestJson.records.filter((r) => r.decision === 'APPROVED FOR AI-ASSISTED PREVIEW').map((r) => r.record_id));
+    const approvedIds = new Set(approvedPreviewIds());
+    const allRecordIds = new Set([...dataset.instruments, ...dataset.provisions].map((record) => record.id));
+    const recordsById = new Map([...dataset.instruments, ...dataset.provisions].map((record) => [record.id, record]));
+    const allSourceIds = new Set(dataset.sources.map((source) => source.id));
+    for (const record of previewManifest.records) {
+      if (!allRecordIds.has(record.record_id)) previewIntegrityErrors.push({ rule: 'R-preview-manifest', entity: record.record_id, message: 'record_id does not resolve' });
+      for (const sourceId of record.source_ids) if (!allSourceIds.has(sourceId)) previewIntegrityErrors.push({ rule: 'R-preview-manifest', entity: record.record_id, message: `source_id "${sourceId}" does not resolve` });
+      const contentRecord = recordsById.get(record.record_id);
+      if (contentRecord) {
+        const declaredSources = 'source_ids' in contentRecord ? contentRecord.source_ids : [contentRecord.source_id, ...(('translation_source_id' in contentRecord && contentRecord.translation_source_id) ? [contentRecord.translation_source_id] : [])];
+        for (const sourceId of record.source_ids) if (!declaredSources.includes(sourceId)) previewIntegrityErrors.push({ rule: 'R-preview-manifest', entity: record.record_id, message: `source_id "${sourceId}" is not declared by the content record` });
+      }
+    }
     dataset.instruments = dataset.instruments.filter((r) => approvedIds.has(r.id));
     dataset.provisions = dataset.provisions.filter((r) => approvedIds.has(r.id));
+    const includedInstrumentIds = new Set(dataset.instruments.map((instrument) => instrument.id));
+    for (const provision of dataset.provisions) if (!includedInstrumentIds.has(provision.instrument_id)) previewIntegrityErrors.push({ rule: 'R-preview-parent', entity: provision.id, message: `approved parent instrument "${provision.instrument_id}" is missing` });
     const sourceIds = new Set([
       ...dataset.instruments.flatMap((r) => r.source_ids),
       ...dataset.provisions.flatMap((r) => [r.source_id, ...(r.translation_source_id ? [r.translation_source_id] : [])]),
@@ -105,7 +120,7 @@ export function loadAndValidate(profile: BuildProfile): ValidationReport & { dat
     const controlIds = new Set(controlMaps.map((m) => m.control_id));
     controls = controls.filter((c) => controlIds.has(c.id));
   }
-  const integrityErrors = runIntegrity(dataset, profile);
+  const integrityErrors = [...previewIntegrityErrors, ...runIntegrity(dataset, profile)];
   // P2-7 FK gate: every mapping must resolve to a real control AND provision.
   const controlIds = new Set(controls.map((c) => c.id));
   const provisionIds = new Set(dataset.provisions.map((p) => p.id));

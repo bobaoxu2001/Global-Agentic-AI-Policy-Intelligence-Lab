@@ -23,9 +23,11 @@ export function getBuildProfile(env: NodeJS.ProcessEnv = process.env): BuildProf
  * the combination. Called at build time by scripts/validate.ts.
  */
 export function assertNotFixtureDeploy(env: NodeJS.ProcessEnv = process.env): void {
-  if ((getBuildProfile(env) === 'fixtures' || getBuildProfile(env) === 'preview') && env.DEPLOY_ENV === 'production') {
+  const profile = getBuildProfile(env);
+  const productionDeployment = env.DEPLOY_ENV === 'production' || env.VERCEL_ENV === 'production';
+  if (profile !== 'production' && productionDeployment) {
     throw new Error(
-      'BUILD_PROFILE=fixtures or preview cannot be deployed to production (DEPLOY_ENV=production). Build with BUILD_PROFILE=production.',
+      'BUILD_PROFILE=fixtures or preview cannot be deployed to production (DEPLOY_ENV=production or VERCEL_ENV=production). Build with BUILD_PROFILE=production.',
     );
   }
 }

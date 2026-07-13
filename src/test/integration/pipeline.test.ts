@@ -264,6 +264,13 @@ describe('build profile guards (CB-4, rule 10)', () => {
       assertNotFixtureDeploy({ BUILD_PROFILE: 'production', DEPLOY_ENV: 'production' } as unknown as NodeJS.ProcessEnv),
     ).not.toThrow();
   });
+  it('enforces Vercel production and preview environment boundaries', () => {
+    expect(() => assertNotFixtureDeploy({ BUILD_PROFILE: 'preview', VERCEL_ENV: 'production' } as unknown as NodeJS.ProcessEnv)).toThrow();
+    expect(() => assertNotFixtureDeploy({ BUILD_PROFILE: 'fixtures', VERCEL_ENV: 'production' } as unknown as NodeJS.ProcessEnv)).toThrow();
+    expect(() => assertNotFixtureDeploy({ BUILD_PROFILE: 'preview', VERCEL_ENV: 'preview' } as unknown as NodeJS.ProcessEnv)).not.toThrow();
+    expect(() => assertNotFixtureDeploy({ BUILD_PROFILE: 'production', VERCEL_ENV: 'production' } as unknown as NodeJS.ProcessEnv)).not.toThrow();
+    expect(() => assertNotFixtureDeploy({ BUILD_PROFILE: 'preview', DEPLOY_ENV: 'production' } as unknown as NodeJS.ProcessEnv)).toThrow();
+  });
 });
 
 describe('code-review fixes — version selection & uniqueness (MD-4, SPEC §17 UNIQUE)', () => {

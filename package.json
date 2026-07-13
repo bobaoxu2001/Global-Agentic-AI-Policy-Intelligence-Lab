@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "build:fixtures": "cross-env-shell BUILD_PROFILE=fixtures \"npm run validate && next build\"",
-    "build:preview": "cross-env-shell BUILD_PROFILE=preview \"npm run validate && next build\"",
+    "build:preview": "cross-env-shell BUILD_PROFILE=preview \"npm run validate:preview && next build\"",
     "build:production": "cross-env-shell BUILD_PROFILE=production \"npm run validate && next build\"",
     "start": "next start",
     "lint": "eslint .",
@@ -18,29 +18,35 @@
     "test:e2e:production": "playwright test --config=playwright.production.config.ts",
     "test:e2e:preview": "playwright test --config=playwright.preview.config.ts",
     "validate:fixtures": "cross-env-shell BUILD_PROFILE=fixtures \"npm run validate\"",
-    "validate:preview": "cross-env-shell BUILD_PROFILE=preview \"npm run validate\"",
+    "validate:preview": "npm run check:preview-exports && cross-env-shell BUILD_PROFILE=preview \"npm run validate\"",
     "validate:production": "cross-env-shell BUILD_PROFILE=production \"npm run validate\"",
     "validate": "tsx scripts/validate.ts",
-    "schemas:json": "tsx scripts/generate-json-schemas.ts"
+    "schemas:json": "tsx scripts/generate-json-schemas.ts",
+    "generate:preview-exports": "tsx scripts/generate-preview-exports.ts",
+    "check:preview-exports": "tsx scripts/generate-preview-exports.ts --check",
+    "build:vercel": "tsx scripts/build-vercel.ts"
   },
   "dependencies": {
-    "next": "15.3.4",
+    "next": "15.5.20",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "zod": "3.25.67"
   },
   "devDependencies": {
     "@eslint/eslintrc": "3.3.1",
-    "@playwright/test": "1.53.1",
+    "@playwright/test": "1.61.1",
     "@types/node": "22.15.33",
     "@types/react": "19.1.8",
     "@types/react-dom": "19.1.6",
     "cross-env": "7.0.3",
     "eslint": "9.29.0",
-    "eslint-config-next": "15.3.4",
+    "eslint-config-next": "15.5.20",
     "tsx": "4.20.3",
     "typescript": "5.8.3",
-    "vitest": "3.2.4",
+    "vitest": "3.2.7",
     "zod-to-json-schema": "3.24.5"
+  },
+  "overrides": {
+    "postcss": "8.5.10"
   }
 }

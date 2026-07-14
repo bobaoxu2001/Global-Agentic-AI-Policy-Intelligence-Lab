@@ -8,6 +8,7 @@ const routes = [
   '/instruments/cn-ai-labeling-measures', '/instruments/cn-genai-interim-measures',
   '/provisions/cn-genai-interim-measures%3Aart9', '/instruments/sg-mgf-genai',
   '/compare', '/controls', '/bibliography', '/downloads', '/methodology',
+  '/executive-brief', '/work-samples',
 ];
 
 test('all preview routes render with persistent boundaries', async ({ page }) => {
@@ -53,6 +54,31 @@ test('Golden 8 content, dependencies, sources, and exports are complete', async 
   expect(json.records).toHaveLength(8);
   const csv = await (await request.get(exportPaths[1]!)).text();
   expect(csv.trim().split('\n')).toHaveLength(9);
+
+  await page.goto('/work-samples');
+  await expect(page.locator('.sample-card')).toHaveCount(13);
+  const sampleLinks = page.locator('.sample-primary-link');
+  await expect(sampleLinks).toHaveCount(13);
+  const hrefs = await sampleLinks.evaluateAll((links) => links.map((link) => link.getAttribute('href')));
+  expect(new Set(hrefs).size).toBe(13);
+
+  const portfolioPaths = [
+    '/downloads/global-ai-policy-intelligence-brief.md',
+    '/downloads/emerging-tech-policy-radar.md',
+    '/downloads/business-implications-matrix.md',
+    '/downloads/policy-position-note-sample.md',
+    '/downloads/meeting-brief-sample.md',
+    '/downloads/adrs-sensitivity-note.md',
+    '/downloads/stakeholder-landscape.json',
+    '/downloads/policy-memo-human-oversight-and-disclosure.md',
+    '/downloads/consultation-response-sample.md',
+    '/downloads/speaking-brief-sample.md',
+    '/downloads/industry-initiatives-tracker.md',
+    '/downloads/policy-corpus-descriptive-analysis.md',
+    '/downloads/tencent-public-information-implications-brief.md',
+    '/downloads/Global_AI_Policy_Executive_Briefing.pptx',
+  ];
+  for (const portfolioPath of portfolioPaths) expect((await request.get(portfolioPath)).ok(), portfolioPath).toBe(true);
 });
 
 test('capture intended desktop and mobile QA evidence', async ({ page }) => {

@@ -1,7 +1,7 @@
 /**
  * Integration tests — validation + integrity pipeline (ENG §12.2).
  * Good fixtures pass under the fixtures profile; crafted-bad records fail
- * with the right rule; production profile rejects fixtures and non-published.
+ * with the right rule; production rejects fixtures and gates its published subset.
  * Scenario expectations are READ FROM FIXTURE FILES, never hardcoded (MJ-10).
  */
 import { describe, expect, it } from 'vitest';
@@ -12,7 +12,7 @@ import { assertNotFixtureDeploy, FIXTURE_BANNER_TEXT, getBuildProfile } from '..
 import {
   checkDimensionInvariance,
   checkNoFixturesInProduction,
-  checkPublishedOnlyInProduction,
+  checkProductionPublicationGate,
   checkVersionUniqueness,
   currentVersions,
   runIntegrity,
@@ -66,7 +66,7 @@ describe('ADRS recompute over fixtures — expectations derived from fixture dat
   });
 });
 
-describe('production profile rejections (CB-4, rules 7–8)', () => {
+describe('production profile publication gate (CB-4, rules 7–8)', () => {
   it('rejects every fixture:true record in production', () => {
     const r = good();
     const errors = checkNoFixturesInProduction(r.dataset, 'production');
@@ -78,26 +78,30 @@ describe('production profile rejections (CB-4, rules 7–8)', () => {
     expect(errors.length).toBe(fixtureCount); // real (non-fixture) research content is NOT R7-rejected
     expect(errors.every((e) => e.rule === 'R7-no-fixtures-in-prod')).toBe(true);
   });
-  it('production loads real research only and rejects its non-published review state', () => {
+  it('production loads real research only and fails closed when its published subset is empty', () => {
     const r = loadAndValidate('production');
     expect(r.ok).toBe(false);
     expect(r.dataset.instruments.length).toBeGreaterThan(0);
     expect(r.dataset.instruments.every((row) => row.fixture !== true)).toBe(true);
     expect(r.dataset.instruments.every((row) => row.review_status === 'in_review')).toBe(true);
     expect(r.integrityErrors.some((e) => e.rule === 'R7-no-fixtures-in-prod')).toBe(false);
-    expect(r.integrityErrors.some((e) => e.rule === 'R8-published-only')).toBe(true);
+    expect(r.integrityErrors.filter((e) => e.rule.startsWith('R8-'))).toEqual([
+      expect.objectContaining({ rule: 'R8-publication-empty', entity: 'production' }),
+    ]);
   });
-  it('rejects non-published records in production', () => {
-    const r = good();
+
+  it('allows in-review rows to coexist with a partial, independently approved published subset', () => {
+    const r = loadAndValidate('production');
     const ds: Dataset = {
       ...r.dataset,
-      assessments: r.dataset.assessments.map((a, i) =>
-        i === 0 ? { ...a, review_status: 'draft' as const } : a,
+      instruments: r.dataset.instruments.map((record) =>
+        record.id === 'eu-gdpr' ? { ...record, review_status: 'published' as const } : record,
       ),
     };
-    const errors = checkPublishedOnlyInProduction(ds, 'production');
-    expect(errors.some((e) => e.rule === 'R8-published-only')).toBe(true);
-    expect(checkPublishedOnlyInProduction(ds, 'fixtures')).toEqual([]);
+    expect(ds.instruments.some((record) => record.review_status === 'in_review')).toBe(true);
+    expect(ds.provisions.some((record) => record.review_status === 'in_review')).toBe(true);
+    expect(checkProductionPublicationGate(ds, r.controls, r.controlMaps, 'production')).toEqual([]);
+    expect(checkProductionPublicationGate(ds, r.controls, r.controlMaps, 'preview')).toEqual([]);
   });
 });
 
@@ -120,6 +124,10 @@ describe('profile-specific page data', () => {
     expect(ds.instruments).toEqual([]);
     expect(ds.provisions).toEqual([]);
     expect(ds.scenarios).toEqual([]);
+    expect(ds.sources).toEqual([]);
+    expect(ds.controls).toEqual([]);
+    expect(ds.controlMaps).toEqual([]);
+    expect(ds.changelog).toEqual([]);
   });
 
   it('preview exposes only manifest-approved Golden 8 records and their dependencies', () => {

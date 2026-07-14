@@ -18,12 +18,16 @@
     "test:e2e:production": "playwright test --config=playwright.production.config.ts",
     "test:e2e:preview": "playwright test --config=playwright.preview.config.ts",
     "validate:fixtures": "cross-env-shell BUILD_PROFILE=fixtures \"npm run validate\"",
-    "validate:preview": "npm run check:preview-exports && cross-env-shell BUILD_PROFILE=preview \"npm run validate\"",
+    "validate:preview": "npm run check:preview-exports && npm run check:portfolio-exports && npm run check:corpus-analysis && cross-env-shell BUILD_PROFILE=preview \"npm run validate\"",
     "validate:production": "cross-env-shell BUILD_PROFILE=production \"npm run validate\"",
     "validate": "tsx scripts/validate.ts",
     "schemas:json": "tsx scripts/generate-json-schemas.ts",
     "generate:preview-exports": "tsx scripts/generate-preview-exports.ts",
     "check:preview-exports": "tsx scripts/generate-preview-exports.ts --check",
+    "generate:portfolio-exports": "tsx scripts/generate-portfolio-exports.ts",
+    "check:portfolio-exports": "tsx scripts/generate-portfolio-exports.ts --check",
+    "generate:corpus-analysis": "tsx scripts/generate-corpus-analysis.ts",
+    "check:corpus-analysis": "tsx scripts/generate-corpus-analysis.ts --check",
     "build:vercel": "tsx scripts/build-vercel.ts"
   },
   "dependencies": {

@@ -4,8 +4,19 @@
  * CROSS-RECORD and PROFILE rules. Errors are collected, never fail-fast,
  * so an author can fix a batch in one pass (ENG §16).
  */
+import { z } from 'zod';
+import ownerSignoffLogJson from '../../../docs/research/OWNER_SIGNOFF_LOG.json';
 import { computeAdrs, type Dims, type JComponents, type MitigationClass } from '../adrs';
-import type { Assessment, ChangelogEntry, Instrument, Provision, Scenario, SourceRecord } from '../schemas';
+import type {
+  Assessment,
+  ChangelogEntry,
+  Control,
+  ControlProvisionMap,
+  Instrument,
+  Provision,
+  Scenario,
+  SourceRecord,
+} from '../schemas';
 import type { BuildProfile } from './buildProfile';
 
 export interface IntegrityError {
@@ -145,14 +156,151 @@ export function checkNoFixturesInProduction(ds: Dataset, profile: BuildProfile):
   return errors;
 }
 
-/** Rule 8: production builds reject review_status other than published. */
-export function checkPublishedOnlyInProduction(ds: Dataset, profile: BuildProfile): IntegrityError[] {
+const OwnerSignoffDecisionSchema = z
+  .object({
+    record_id: z.string().trim().min(1),
+    record_type: z.enum(['instrument', 'provision', 'assessment', 'changelog', 'control', 'control_provision_map']),
+    owner_reviewer: z.string().trim().min(1),
+    owner_decision: z.enum(['approved', 'returned_for_revision', 'blocked']),
+    owner_reviewed_at: z.string().datetime({ offset: true }),
+    official_source: z.string().url(),
+    source_reference: z.string().trim().min(1),
+    provision_inheritance: z.boolean(),
+    prepared_by: z.string().trim().min(1),
+    scope_note: z.string().trim().min(1),
+  })
+  .strict();
+
+export const OwnerSignoffLogSchema = z
+  .object({ decisions: z.array(OwnerSignoffDecisionSchema) })
+  .strict();
+
+type OwnerSignoffDecision = z.infer<typeof OwnerSignoffDecisionSchema>;
+type PublishedRecordType = OwnerSignoffDecision['record_type'];
+
+interface PublishedRecord {
+  id: string;
+  recordType: PublishedRecordType;
+}
+
+const decisionKey = (recordType: PublishedRecordType, recordId: string): string => `${recordType}:${recordId}`;
+const normalizedPerson = (name: string): string => name.trim().toLocaleLowerCase('en-US');
+
+/**
+ * Rule 8: production renders a partial published subset. Draft and in-review
+ * rows may remain in the authoring corpus, but every row selected for public
+ * rendering needs a current, independent owner approval in the tracked log.
+ */
+export function checkProductionPublicationGate(
+  ds: Dataset,
+  controls: Control[],
+  controlMaps: ControlProvisionMap[],
+  profile: BuildProfile,
+  rawOwnerSignoffLog: unknown = ownerSignoffLogJson,
+): IntegrityError[] {
   if (profile !== 'production') return [];
+
   const errors: IntegrityError[] = [];
-  const rows: Array<{ id: string; review_status: string }> = [...ds.instruments, ...ds.provisions, ...ds.assessments, ...ds.changelog];
-  for (const r of rows)
-    if (r.review_status !== 'published')
-      errors.push(err('R8-published-only', r.id, `review_status "${r.review_status}" not renderable in production (§19/PRD §15)`));
+  const publishedInstruments = ds.instruments.filter((record) => record.review_status === 'published');
+  const publishedProvisions = ds.provisions.filter((record) => record.review_status === 'published');
+  const publishedChangelog = ds.changelog.filter((record) => record.review_status === 'published');
+
+  // A production policy atlas needs at least one publishable policy anchor.
+  // Working rows may coexist, but they do not make an empty public build valid.
+  if (publishedInstruments.length === 0) {
+    errors.push(
+      err(
+        'R8-publication-empty',
+        'production',
+        'no instrument has review_status "published"; at least one independently approved instrument is required',
+      ),
+    );
+  }
+
+  const publishedInstrumentIds = new Set(publishedInstruments.map((record) => record.id));
+  for (const provision of publishedProvisions) {
+    if (!publishedInstrumentIds.has(provision.instrument_id)) {
+      errors.push(
+        err(
+          'R8-published-parent',
+          provision.id,
+          `published provision requires parent instrument "${provision.instrument_id}" to be published`,
+        ),
+      );
+    }
+  }
+  for (const entry of publishedChangelog) {
+    if (!publishedInstrumentIds.has(entry.instrument_id)) {
+      errors.push(
+        err(
+          'R8-published-parent',
+          entry.id,
+          `published changelog entry requires parent instrument "${entry.instrument_id}" to be published`,
+        ),
+      );
+    }
+  }
+
+  const parsedLog = OwnerSignoffLogSchema.safeParse(rawOwnerSignoffLog);
+  if (!parsedLog.success) {
+    for (const issue of parsedLog.error.issues) {
+      const path = issue.path.length > 0 ? issue.path.join('.') : 'root';
+      errors.push(err('R8-owner-log', path, issue.message));
+    }
+    return errors;
+  }
+
+  // The tracked file is append-only evidence. If a record has multiple owner
+  // decisions, the latest dated decision governs so a later block cannot be
+  // bypassed by an older approval.
+  const latestDecisions = new Map<string, OwnerSignoffDecision>();
+  for (const decision of parsedLog.data.decisions) {
+    const key = decisionKey(decision.record_type, decision.record_id);
+    const current = latestDecisions.get(key);
+    if (!current || Date.parse(decision.owner_reviewed_at) >= Date.parse(current.owner_reviewed_at)) {
+      latestDecisions.set(key, decision);
+    }
+  }
+
+  const publishedRecords: PublishedRecord[] = [
+    ...publishedInstruments.map((record) => ({ id: record.id, recordType: 'instrument' as const })),
+    ...publishedProvisions.map((record) => ({ id: record.id, recordType: 'provision' as const })),
+    ...ds.assessments
+      .filter((record) => record.review_status === 'published')
+      .map((record) => ({ id: record.id, recordType: 'assessment' as const })),
+    ...publishedChangelog.map((record) => ({ id: record.id, recordType: 'changelog' as const })),
+    ...controls
+      .filter((record) => record.review_status === 'published')
+      .map((record) => ({ id: record.id, recordType: 'control' as const })),
+    ...controlMaps
+      .filter((record) => record.review_status === 'published')
+      .map((record) => ({ id: record.id, recordType: 'control_provision_map' as const })),
+  ];
+
+  for (const record of publishedRecords) {
+    const decision = latestDecisions.get(decisionKey(record.recordType, record.id));
+    if (!decision || decision.owner_decision !== 'approved') {
+      const detail = decision ? `latest owner decision is "${decision.owner_decision}"` : 'no matching owner decision is recorded';
+      errors.push(
+        err(
+          'R8-owner-approval',
+          record.id,
+          `published ${record.recordType} requires an approved decision in docs/research/OWNER_SIGNOFF_LOG.json; ${detail}`,
+        ),
+      );
+      continue;
+    }
+    if (normalizedPerson(decision.owner_reviewer) === normalizedPerson(decision.prepared_by)) {
+      errors.push(
+        err(
+          'R8-reviewer-independence',
+          record.id,
+          `owner_reviewer "${decision.owner_reviewer}" must differ from prepared_by "${decision.prepared_by}"`,
+        ),
+      );
+    }
+  }
+
   return errors;
 }
 
@@ -220,7 +368,12 @@ export function checkVersionUniqueness(ds: Dataset): IntegrityError[] {
 }
 
 /** Run every integrity rule; returns collected errors (empty = pass). */
-export function runIntegrity(ds: Dataset, profile: BuildProfile): IntegrityError[] {
+export function runIntegrity(
+  ds: Dataset,
+  profile: BuildProfile,
+  controls: Control[] = [],
+  controlMaps: ControlProvisionMap[] = [],
+): IntegrityError[] {
   return [
     ...checkSourceMetadata(ds),
     ...checkEpistemicSeparation(ds),
@@ -229,7 +382,7 @@ export function runIntegrity(ds: Dataset, profile: BuildProfile): IntegrityError
     ...checkDimensionInvariance(ds),
     ...checkVersionUniqueness(ds),
     ...checkNoFixturesInProduction(ds, profile),
-    ...checkPublishedOnlyInProduction(ds, profile),
+    ...checkProductionPublicationGate(ds, controls, controlMaps, profile),
     ...checkAdrsRecompute(ds),
   ];
 }

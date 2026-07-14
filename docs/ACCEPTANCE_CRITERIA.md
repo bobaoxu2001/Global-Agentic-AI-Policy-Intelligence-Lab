@@ -395,7 +395,7 @@ IDs (AC-…) are referenced by `IMPLEMENTATION_BACKLOG.md`. All numeric values t
 
 **AC-BRF-1**
 - **Given** the Aria scenario
-- **When** I view the executive-brief section (and the exported PDF)
+- **When** I view the executive-brief section and exported Markdown brief
 - **Then** it shows a title + one-sentence answer (● recommendation), a 4-column scorecard strip (jurisdiction, ADRS tier badge, top binding obligation one-line + citation, gating control), three "what drives the score" bullets (■/▲ labeled), two "what changes the answer" bullets, an ask/next step, and a footer (disclaimer + `as_of` + link to full scenario) (SPEC §29).
 
 **AC-BRF-2 (traceable numbers)**
@@ -405,8 +405,8 @@ IDs (AC-…) are referenced by `IMPLEMENTATION_BACKLOG.md`. All numeric values t
 
 **AC-BRF-3 (export)**
 - **Given** the built site
-- **When** I open `/downloads/executive-brief.pdf`
-- **Then** the one-page brief renders with print styles (NFR-9) and retains ■▲● glyphs.
+- **When** I open `/downloads/executive-brief.md`
+- **Then** the source-traceable executive brief is readable as a static artifact and preserves its evidence labels and decision boundary. Presentation delivery is separately covered by `/downloads/Global_AI_Policy_Executive_Briefing.pptx`.
 
 ---
 

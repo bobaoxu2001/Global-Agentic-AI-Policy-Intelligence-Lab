@@ -1,7 +1,7 @@
 # Corpus Inventory
 
-**Reconciled:** 2026-07-13
-**Data authority:** `src/data/content/*.json` on `main` at `aca3630`
+**Reconciled:** 2026-07-14
+**Data authority:** `src/data/content/*.json`; commit SHA is recorded in the publication handoff after release
 **Publication state:** no record is published.
 
 ## Exact totals
@@ -61,6 +61,12 @@ All 9 provisions have at least one capability and risk mapping. Two provisions l
 - Controls: 9 technical, 3 process, 1 documentation; 11 map to mitigation classes and 2 have no mitigation class.
 - Every instrument source ID resolves; every provision source is listed on its parent instrument; no source is orphaned.
 
-## Coverage against the MVP target
+## Portfolio MVP boundary
+
+For hiring-manager review, the current implementation is a **curated research and workflow MVP**: it demonstrates source governance, typed policy-to-control mapping, profile isolation, generated analysis, and a fail-closed publication path. It does not claim the original specification’s large corpus target was completed.
+
+The 24–40 instrument, 120–200 provision, and 25–35 control ranges are retained as a **future research-program target**, not an acceptance claim for this portfolio release. Publication readiness is determined record by record through source, reviewer, and owner evidence—not by reaching a row count.
+
+## Coverage against the future research-program target
 
 The SPEC target is 24–40 instruments, 120–200 provisions, and 25–35 controls. The current corpus is 15 instruments (9–25 short), 9 provisions (111–191 short), and 13 controls (12–22 short). The data is a curated Pass-1 foundation, not an MVP-complete publication corpus.

@@ -1,17 +1,13 @@
 import { FIXTURE_BANNER_TEXT, PREVIEW_BANNER_TEXT, getBuildProfile } from '@/lib/validation/buildProfile';
 
 /**
- * Persistent, non-dismissible fixture banner (CB-4 / INTERACTION_SPEC §9).
- * Rendered on every page via the root layout whenever BUILD_PROFILE=fixtures.
- * Production builds render nothing here.
+ * One persistent, non-dismissible research-status banner per profile.
+ * Keeping the legal/research boundary in this component prevents stacked,
+ * competing banners at the top of the application.
  */
 export function FixtureBanner() {
   const profile = getBuildProfile();
-  if (profile === 'preview') return <div className="fixture-banner" role="status" aria-live="off" data-testid="preview-banner"><b>{PREVIEW_BANNER_TEXT}</b><br />Primary sources were checked by an AI review workflow. Not all records have received independent human legal review. Not legal advice.</div>;
-  if (profile !== 'fixtures') return null;
-  return (
-    <div className="fixture-banner" role="status" aria-live="off" data-testid="fixture-banner">
-      {FIXTURE_BANNER_TEXT}
-    </div>
-  );
+  if (profile === 'preview') return <div className="fixture-banner" role="status" aria-live="off" data-testid="preview-banner"><b>{PREVIEW_BANNER_TEXT}</b><br />AI-assisted primary-source review · Independent human publication review incomplete · Not legal advice · No company affiliation</div>;
+  if (profile === 'fixtures') return <div className="fixture-banner" role="status" aria-live="off" data-testid="fixture-banner"><b>{FIXTURE_BANNER_TEXT}</b><br />Fictional test data · Not policy research · Not legal advice · Never a production evidence surface</div>;
+  return <div className="disclaimer" role="status">Independent research · Only approved structured records render · Not legal advice · No company affiliation</div>;
 }

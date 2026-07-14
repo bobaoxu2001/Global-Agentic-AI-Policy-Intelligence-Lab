@@ -1,0 +1,58 @@
+# Global AI Policy Intelligence Brief
+
+**As of:** 2026-07-14
+**Audience:** hypothetical global AI, cloud, product, legal, compliance, and public-affairs leadership
+**Status:** independent portfolio work sample; AI-assisted research; not legal advice; not affiliated with any company
+
+## Executive readout
+
+The policy center of gravity is moving in two directions at once: governments are accelerating compute and cloud capacity while making agentic systems more observable, bounded, and accountable. The near-term operating question is therefore not simply “can this product launch?” It is “which controls preserve launch options while standards, infrastructure policy, and market-specific duties continue to move?”
+
+Three actions are defensible across this limited scan:
+
+1. **Fund the shared control layer now:** agent identity and authorization, tool allowlists, action logs, human approval checkpoints, and user-facing AI disclosure.
+2. **Separate infrastructure opportunity from market-access risk:** cloud/data-center incentives and permitting can improve capacity, while export controls, sovereignty requirements, and procurement rules can narrow where and how that capacity is used.
+3. **Create a 30-day policy operating rhythm:** assign owners to the dated triggers below, record what changed, and escalate only when a source-verified change affects product scope, launch timing, supply, or external positioning.
+
+## Priority signals
+
+| Signal | Verified fact | Evidence IDs | Business implication (analysis) | Risk / opportunity | Affected teams | Next action |
+|---|---|---|---|---|---|---|
+| **EU AI Act implementation split** | On 2026-06-29, the Council gave final approval to an AI omnibus that sets later dates for high-risk rules: 2027-12-02 for stand-alone high-risk systems and 2028-08-02 for high-risk systems embedded in products. EU Article 50 transparency rules remain scheduled from 2026-08-02; the final implementation code was published on 2026-06-10, and the Commission page last updated on 2026-07-09 says the Commission and AI Board confirmed it as an adequate voluntary tool. | S01, S02 | A user-facing agent may face an earlier disclosure/labeling workstream even when high-risk conformity work moves later. This creates sequencing flexibility, not permission to stop readiness work. | **Risk:** teams may treat the high-risk delay as a general AI Act delay. **Opportunity:** ship reusable disclosure and provenance controls before heavier conformity work. | Policy, legal, product, trust & safety, engineering | Confirm which Article 50 paragraphs are relevant to each product surface; test first-interaction disclosure and machine-readable output marking. |
+| **EU Cloud and AI Development Act proposal** | The Commission proposed CADA on 2026-06-03 to expand cloud and data-center capacity, accelerate deployment, and introduce an EU-wide cloud/AI sovereignty assessment framework. | S03 | Infrastructure policy is becoming a product and procurement issue, not only a facilities issue. Capacity expansion may coexist with tighter sovereignty expectations in critical public-sector use cases. | **Risk:** procurement or architecture choices become harder to reverse. **Opportunity:** new capacity, partnerships, and public-sector routes. | Cloud, infrastructure, procurement, government affairs, security | Map planned regions and critical-sector offerings against CADA’s capacity, sustainability, and sovereignty workstreams. |
+| **US advanced-compute export-control execution** | BIS issued guidance dated 2026-05-31 on license requirements for advanced-computing items involving entities headquartered in Country Group D:5 or Macau and updated its FAQ on 2026-06-17; in January 2026 it moved specified H200/MI325X-class license applications for China to case-by-case review subject to conditions. | S04, S05, S06 | Model availability, cloud resale, customer screening, and supply allocation can be affected by the customer’s ownership and end-user profile, not only delivery location. | **Risk:** diversion, licensing delay, partner-screening gaps. **Opportunity:** controlled, documented commercial pathways where authorizations are available. | Export compliance, cloud, sales operations, supply chain, security | Add ultimate-parent and end-use checks to compute capacity workflows; maintain a counsel-owned licensing decision record. |
+| **US agent standards are becoming a policy channel** | NIST created the AI Agent Standards Initiative on 2026-02-17 around industry-led standards, open protocols, agent security, identity, authorization, and research. | S07 | Agent identity, scoped authority, auditability, and interoperability are becoming external-policy questions as well as architecture choices. | **Risk:** fragmented protocols and weak authorization erode trust. **Opportunity:** contribute practical evidence and shape interoperable standards. | Standards, security, engineering, research, public affairs | Prepare a non-confidential evidence pack on agent identity, authorization, logging, and prompt-injection controls for future public engagement. |
+| **Singapore published agentic-AI governance guidance** | IMDA launched its Model AI Governance Framework for Agentic AI on 2026-01-22, organized around risk bounding, meaningful human accountability, lifecycle controls, and end-user responsibility; a 2026-05-20 sandbox report added practical observations. | S08, S09 | Voluntary guidance can serve as a deployment playbook and a low-friction route to demonstrate responsible innovation, even when it is not itself a binding obligation. | **Risk:** treating voluntary guidance as either law or irrelevant. **Opportunity:** test controls and build evidence in a pro-innovation environment. | Product, engineering, assurance, policy, partnerships | Crosswalk the Atlas control catalog to the four IMDA dimensions; identify a sandbox-ready, low-risk agent use case. |
+| **Korea’s AI Basic Act is now operational** | Korea’s AI Basic Act and Enforcement Decree came into force on 2026-01-22; MSIT describes transparency, safety, high-impact AI, and industry-promotion measures, with supporting guidance and an initial administrative-fine grace approach. | S10 | APAC launch planning now needs a Korea-specific classification and transparency check rather than treating the region as one policy market. | **Risk:** late product classification and localization work. **Opportunity:** policy support for adoption, testing, certification, and AI infrastructure. | Korea market, legal, product, policy, communications | Assign a Korean-language source owner; map generative and high-impact use cases to the final decree and guidance before launch claims are made. |
+| **UK consumer policy is testing agentic use cases** | The UK Competition and Markets Authority published *Agentic AI and consumers* on 2026-03-09, covering opportunities, consumer risks, existing law, and steps businesses can take to build trust. | S11 | Consumer-facing agents may be assessed through existing consumer-protection principles before agent-specific legislation arrives. | **Risk:** misleading delegation, weak redress, or hidden commercial influence. **Opportunity:** trust-by-design as a market differentiator. | Consumer product, legal, UX, trust & safety, policy | Test disclosure, confirmation, cancellation, redress, and conflicts-of-interest across an end-to-end consumer-agent journey. |
+
+## Dated watchlist
+
+| Horizon | Trigger | Owner | Escalate when |
+|---|---|---|---|
+| **2026-08-02** | EU AI Act Article 50 transparency obligations begin to apply | EU policy + product counsel | A product interacts directly with people or generates covered synthetic content without a documented disclosure/marking decision |
+| **Monthly** | BIS advanced-compute guidance, EAR updates, and licensing-policy changes | Export compliance | A product, cloud region, chip class, customer owner, or end use moves into a new license or diligence path |
+| **Quarterly** | NIST/CAISI agent standards outputs and convenings | Standards + security policy | A draft standard affects identity, authorization, interoperability, evaluation, or audit evidence |
+| **Quarterly** | CADA and related EU cloud-sovereignty negotiations | EU public policy + cloud strategy | The text changes procurement access, sovereignty assessment, capacity incentives, or data-center permitting assumptions |
+| **On guidance change** | Korea AI Basic Act notices and guidelines | Korea legal + policy | Final guidance changes classification, transparency, safety, or reporting expectations for a scoped use case |
+
+## Confidence and limits
+
+- Facts above are paraphrased from official government or regulator sources linked below and were checked on 2026-07-14.
+- Business implications, risks, opportunities, and actions are analytical work product, not statements of law.
+- This is a deliberately selective executive scan, not a comprehensive jurisdictional survey or a substitute for qualified local review.
+- “Weekly” describes the recommended operating cadence. Not every signal originated in the last seven days.
+
+## Primary sources
+
+1. **S01 / `PS-EU-OMNIBUS-2026`** — Council of the EU, [AI: final green light to simplify and streamline rules](https://www.consilium.europa.eu/en/press/press-releases/2026/06/29/artificial-intelligence-council-gives-final-green-light-to-simplify-and-streamline-rules/), 2026-06-29.
+2. **S02 / `PS-EU-ART50-CODE-2026`** — European Commission, [Code of Practice on Transparency of AI-Generated Content](https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content), final code 2026-06-10; official page last updated 2026-07-09.
+3. **S03 / `PS-EU-CADA-2026`** — European Commission, [Proposal for the Cloud and AI Development Act](https://digital-strategy.ec.europa.eu/en/library/proposal-cloud-and-ai-development-act-cada), 2026-06-03.
+4. **S04 / `PS-US-BIS-GUIDANCE-2026-05`** — BIS, [Guidance Regarding Enforcement of License Requirements for Advanced Computing Items](https://media.bis.gov/media/documents/bis-guidance-may-31-2026.pdf), 2026-05-31.
+5. **S05 / `PS-US-BIS-FAQ-2026-06`** — BIS, [FAQ on the May 2026 advanced-computing guidance](https://www.bis.gov/media/documents/May-31-FAQ.pdf), updated 2026-06-17.
+6. **S06 / `PS-US-BIS-REVIEW-2026-01`** — BIS, [revised semiconductor license-review policy](https://www.bis.gov/sites/default/files/documents/DoC%20Revises%20License%20Review%20Policy%20for%20Semiconductors%20Exports.pdf), 2026-01-13.
+7. **S07 / `PS-US-NIST-AGENTS-2026`** — NIST, [AI Agent Standards Initiative](https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative), created 2026-02-17; updated 2026-04-20.
+8. **S08 / `PS-SG-IMDA-AGENTS-2026`** — Singapore IMDA, [Model AI Governance Framework for Agentic AI](https://www.imda.gov.sg/resources/press-releases-factsheets-and-speeches/press-releases/2026/new-model-ai-governance-framework-for-agentic-ai), 2026-01-22.
+9. **S09 / `PS-SG-IMDA-SANDBOX-2026`** — Singapore IMDA, [AI Agents Sandbox insights](https://www.imda.gov.sg/resources/press-releases-factsheets-and-speeches/factsheets/2026/ai-agents-insights-from-the-singapore-government-and-google-sandbox), 2026-05-20.
+10. **S10 / `PS-KR-MSIT-AI-ACT-2026`** — Republic of Korea MSIT, [AI Basic Act comes into force](https://www.msit.go.kr/eng/bbs/view.do%3Bjsessionid%3DR15sRn4EJvYb4ya9k4Roiy9k6Ci-tgMefxkNeVIs.AP_msit_1?bbsSeqNo=42&mId=4&mPid=2&nttSeqNo=1214&sCode=eng), 2026-01-22.
+11. **S11 / `PS-UK-CMA-AGENTS-2026`** — UK Competition and Markets Authority, [Agentic AI and consumers](https://www.gov.uk/government/publications/agentic-ai-and-consumers), 2026-03-09.

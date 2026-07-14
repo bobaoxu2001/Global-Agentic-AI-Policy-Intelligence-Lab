@@ -1,4 +1,5 @@
 import { LifecycleChip } from '@/components/semantic';
+import { PORTFOLIO_MONITORING_LOG } from '@/lib/portfolio/policySignals';
 import { getPageDataset } from '@/lib/validation/pageData';
 
 /** Changelog — dated status changes and drift events (FR-9 / P2-13). */
@@ -28,6 +29,11 @@ export default function ChangelogPage() {
           ))}
         </ul>
       )}
+      {ds.profile === 'preview' ? <section className="section-block">
+        <h2>Portfolio monitoring log</h2>
+        <p className="status-note">This is a transparent start-of-series log, not a backfilled weekly track record.</p>
+        <ul className="plain-record-list">{PORTFOLIO_MONITORING_LOG.map((entry) => <li key={`${entry.date}-${entry.action}`}><b>{entry.date} · {entry.action}</b><p>{entry.note}</p><small>{entry.signalIds.join(' · ')}</small></li>)}</ul>
+      </section> : null}
     </>
   );
 }

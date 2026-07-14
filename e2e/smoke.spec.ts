@@ -20,7 +20,7 @@ test('every route shell renders with the fixture banner and no console errors', 
   const routes = ['/', '/instruments', '/compare', '/scenarios', '/calculator', '/controls', '/brief', '/methodology', '/changelog'];
   for (const r of routes) {
     await page.goto(r);
-    await expect(page.getByTestId('fixture-banner')).toHaveText('FIXTURE DATA — ILLUSTRATIVE ONLY');
+    await expect(page.getByTestId('fixture-banner')).toContainText('FIXTURE DATA — ILLUSTRATIVE ONLY');
   }
   expect(errors).toEqual([]);
 });

@@ -74,9 +74,9 @@ export function loadAndValidate(profile: BuildProfile): ValidationReport & { dat
   const provisionRows = fixtureProfile ? provisionsJson : contentProvisionsJson;
 
   // Fixture mode is an isolated illustrative demo. Production is an equally
-  // isolated research corpus and is still checked by R7/R8 below. Keeping the
-  // selection here—not as a later UI filter—prevents fixture leakage into a
-  // deployable build.
+  // isolated research corpus: R7 rejects fixtures, while R8 validates only the
+  // partial subset explicitly marked for publication. Keeping corpus selection
+  // here—not as a later UI filter—prevents fixture leakage into a deployable build.
   const dataset: Dataset = {
     sources: validateArray(fixtureProfile ? 'fixtures/sources.json' : 'content/sources.json', SourceSchema, sourceRows, schemaErrors),
     instruments: validateArray(fixtureProfile ? 'fixtures/instruments.json' : 'content/instruments.json', InstrumentSchema, instrumentRows, schemaErrors),
@@ -120,7 +120,7 @@ export function loadAndValidate(profile: BuildProfile): ValidationReport & { dat
     const controlIds = new Set(controlMaps.map((m) => m.control_id));
     controls = controls.filter((c) => controlIds.has(c.id));
   }
-  const integrityErrors = [...previewIntegrityErrors, ...runIntegrity(dataset, profile)];
+  const integrityErrors = [...previewIntegrityErrors, ...runIntegrity(dataset, profile, controls, controlMaps)];
   // P2-7 FK gate: every mapping must resolve to a real control AND provision.
   const controlIds = new Set(controls.map((c) => c.id));
   const provisionIds = new Set(dataset.provisions.map((p) => p.id));

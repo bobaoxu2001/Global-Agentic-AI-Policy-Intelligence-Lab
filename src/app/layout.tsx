@@ -4,41 +4,85 @@ import { FixtureBanner } from '@/components/FixtureBanner';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'AI Policy Atlas — Agentic AI Governance Intelligence',
+  applicationName: 'AI Policy Atlas',
+  title: {
+    default: 'AI Policy Atlas — Global Agentic AI Policy Intelligence',
+    template: '%s · AI Policy Atlas',
+  },
   description:
-    'Source-traceable policy intelligence for agentic AI. Independent research project; not legal advice.',
+    'Source-traceable global AI policy intelligence translating regulatory change into product, cloud, and governance decisions.',
+  openGraph: {
+    type: 'website',
+    title: 'AI Policy Atlas — Global Agentic AI Policy Intelligence',
+    description: 'Source-traceable policy intelligence translating regulatory change into accountable product and cloud decisions.',
+  },
 };
 
-const NAV = [
+const PRIMARY_NAV = [
   ['/', 'Overview'],
+  ['/executive-brief', 'Executive Brief'],
+  ['/work-samples', 'Work Samples'],
   ['/instruments', 'Instruments'],
-  ['/jurisdictions', 'Jurisdictions'],
   ['/compare', 'Compare'],
-  ['/scenarios', 'Scenarios'],
-  ['/risk-score', 'Risk Score'],
-  ['/taxonomy/policy', 'Taxonomies'],
   ['/controls', 'Controls'],
-  ['/executive-brief', 'Brief'],
   ['/methodology', 'Methodology'],
+] as const;
+
+const RESEARCH_LINKS = [
+  ['/jurisdictions', 'Jurisdictions'],
+  ['/scenarios', 'Scenarios'],
+  ['/risk-score', 'ADRS Method'],
+  ['/taxonomy/policy', 'Policy Taxonomy'],
   ['/changelog', 'Changelog'],
+] as const;
+
+const EVIDENCE_LINKS = [
+  ['/bibliography', 'Bibliography'],
+  ['/downloads', 'Downloads'],
+  ['/glossary', 'Glossary'],
+  ['/about', 'About & Limits'],
 ] as const;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
+        <a className="skip-link" href="#main-content">Skip to main content</a>
         <FixtureBanner />
-        <div className="disclaimer">
-          Independent research project. Corpus publication requires human review. Hypothetical scenarios. Not legal advice. Not affiliated with any company.
-        </div>
-        <nav className="primary" aria-label="Primary" style={{ maxWidth: 960, margin: '0 auto', padding: '8px 16px' }}>
-          {NAV.map(([href, label]) => (
-            <Link key={href} href={href}>
-              {label}
+        <header className="site-header">
+          <div className="header-inner">
+            <Link className="brand" href="/" aria-label="AI Policy Atlas home">
+              <span className="brand-mark" aria-hidden="true">A</span>
+              <span>
+                <b>AI Policy Atlas</b>
+                <small>Global agentic AI intelligence</small>
+              </span>
             </Link>
-          ))}
-        </nav>
-        <main>{children}</main>
+            <nav className="primary-nav" aria-label="Primary">
+              {PRIMARY_NAV.map(([href, label]) => (
+                <Link key={href} href={href}>{label}</Link>
+              ))}
+            </nav>
+          </div>
+        </header>
+        <main id="main-content">{children}</main>
+        <footer className="site-footer">
+          <div className="footer-inner">
+            <div>
+              <p className="eyebrow">AI Policy Atlas</p>
+              <p className="footer-statement">Policy change → business implication → accountable action.</p>
+              <p className="footer-note">Independent portfolio research. Conclusions remain bounded by the checked, source-limited scope.</p>
+            </div>
+            <div>
+              <p className="footer-heading">Research</p>
+              {RESEARCH_LINKS.map(([href, label]) => <Link key={href} href={href}>{label}</Link>)}
+            </div>
+            <div>
+              <p className="footer-heading">Evidence</p>
+              {EVIDENCE_LINKS.map(([href, label]) => <Link key={href} href={href}>{label}</Link>)}
+            </div>
+          </div>
+        </footer>
       </body>
     </html>
   );

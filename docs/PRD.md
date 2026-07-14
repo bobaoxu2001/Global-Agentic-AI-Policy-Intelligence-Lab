@@ -75,7 +75,7 @@ Top nav (§16): **Jurisdictions · Scenarios · Risk Score · Taxonomies · Cont
 /about                         Purpose, author, scope limits, long-form disclaimer
 ```
 
-Static assets: `/downloads/methodology.pdf`, `/downloads/memo.pdf`, `/downloads/executive-brief.pdf`, `/downloads/control-mapping.csv`, `/downloads/atlas-dataset.json` (FR-11).
+Implemented static assets: `/downloads/methodology.md`, `/downloads/policy-memo-human-oversight-and-disclosure.md`, `/downloads/executive-brief.md`, `/downloads/Global_AI_Policy_Executive_Briefing.pptx`, `/downloads/control-mapping.csv`, and `/downloads/atlas-dataset.json` (FR-11). Markdown is used for accessible, diffable brief exports; the executive deck is the presentation-format artifact.
 
 ---
 

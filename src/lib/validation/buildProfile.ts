@@ -2,8 +2,9 @@
  * BUILD_PROFILE=fixtures|preview|production.
  * - fixtures: renders fictional §14 fixtures behind the persistent
  *   "FIXTURE DATA — ILLUSTRATIVE ONLY" banner; local dev / tests / design review only.
- * - production: rejects fixture records and non-published records; the only
- *   profile permitted to deploy.
+ * - production: rejects fixtures, renders only the published subset, and
+ *   requires independently approved publication evidence; the only profile
+ *   permitted to deploy.
  * Methodology-protecting checks (ADRS recompute, A/T/R invariance, caps) run in BOTH profiles.
  */
 export type BuildProfile = 'fixtures' | 'preview' | 'production';

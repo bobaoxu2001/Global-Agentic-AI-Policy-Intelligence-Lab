@@ -42,7 +42,7 @@ const json = JSON.stringify({
 }, null, 2) + '\n';
 const publicManifest = JSON.stringify(previewManifest, null, 2) + '\n';
 const sourceRegister = [
-  '# Golden 8 source register', '',
+  '# Curated research snapshot — source register', '',
   `Review basis: ${previewManifest.review_basis}  `,
   `Reviewed by: ${previewManifest.reviewed_by}  `,
   `Human review status: ${previewManifest.human_review_status}  `,

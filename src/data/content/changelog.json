@@ -22,5 +22,17 @@
     "analyst": "atlas-analyst",
     "review_status": "in_review",
     "as_of_date": "2026-07-12"
+  },
+  {
+    "id": "chg-2026-08-06-eu-omnibus-oj",
+    "entry_date": "2026-08-06",
+    "instrument_id": "eu-ai-act",
+    "old_status": null,
+    "new_status": null,
+    "description": "Closed the recorded Official Journal trigger: Regulation (EU) 2026/1744 was published on 2026-07-24 and entered into force on 2026-07-27. Recorded the conditional Article 14 timelines—2027-12-02 for Article 6(2)/Annex III and 2028-08-02 for Article 6(1)/Annex I-embedded systems—and preserved Article 50 transparency applicability from 2026-08-02, with only the amendment's limited transition for Article 50(2) marking by systems already on the market.",
+    "source_id": "eu-src-omnibus-eurlex",
+    "analyst": "atlas-analyst",
+    "review_status": "in_review",
+    "as_of_date": "2026-08-06"
   }
 ]

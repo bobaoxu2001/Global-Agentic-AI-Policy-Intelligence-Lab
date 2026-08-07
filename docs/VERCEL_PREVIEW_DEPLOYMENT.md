@@ -1,6 +1,6 @@
 # Vercel Preview Deployment
 
-The Golden 8 profile is a non-production interview research preview. Never deploy it with `vercel --prod`.
+The curated research snapshot is a non-production, source-traceable research Preview. Never deploy it with `vercel --prod`.
 
 ## Vercel CLI
 
@@ -10,7 +10,7 @@ The Golden 8 profile is a non-production interview research preview. Never deplo
 4. Open the returned Preview URL and confirm the persistent AI-assisted preview banner.
 
 The build requires Vercel to provide `VERCEL_ENV=preview`; missing or mismatched environment values fail closed.
-New Vercel projects may enable Deployment Protection by default. For a genuinely public interview URL, confirm Project Settings → Deployment Protection does not require Vercel Authentication for this project; otherwise the URL is a private Preview and must not be described as public.
+New Vercel projects may enable Deployment Protection by default. Before describing a Preview URL as publicly accessible, confirm Project Settings → Deployment Protection does not require Vercel Authentication for this project; otherwise describe it as a private Preview.
 
 ## Git-connected project
 

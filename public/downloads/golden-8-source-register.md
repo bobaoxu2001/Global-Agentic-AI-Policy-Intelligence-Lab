@@ -1,4 +1,4 @@
-# Golden 8 source register
+# Curated research snapshot — source register
 
 Review basis: AI-assisted primary-source verification  
 Reviewed by: Codex  

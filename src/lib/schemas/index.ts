@@ -164,6 +164,7 @@ export const ProvisionSchema = z
     obligation_type: ObligationType,
     bindingness: Bindingness.nullable().optional(), // null/absent = inherit instrument (MJ-2)
     applies_from: IsoDate.optional(),
+    applies_from_note: z.string().min(1).optional(),
     source_id: z.string().min(1),
     confidence: Confidence,
     confidence_rationale: z.string().min(1),

@@ -9,8 +9,8 @@
     "pub_date": "2024-07-12",
     "language": "en",
     "is_translation": false,
-    "accessed_date": "2026-07-12",
-    "manual_verification_date": "2026-07-12"
+    "accessed_date": "2026-08-07",
+    "manual_verification_date": "2026-08-07"
   },
   {
     "id": "eu-src-aiact-servicedesk",
@@ -21,8 +21,8 @@
     "pub_date": "2025-10-08",
     "language": "en",
     "is_translation": false,
-    "accessed_date": "2026-07-12",
-    "manual_verification_date": "2026-07-12"
+    "accessed_date": "2026-08-07",
+    "manual_verification_date": "2026-08-07"
   },
   {
     "id": "eu-src-omnibus-consilium",
@@ -36,6 +36,19 @@
     "accessed_date": "2026-07-12"
   },
   {
+    "id": "eu-src-omnibus-eurlex",
+    "tier": 1,
+    "publisher": "EUR-Lex (Official Journal of the European Union)",
+    "title": "Regulation (EU) 2026/1744 amending the Artificial Intelligence Act",
+    "url": "https://eur-lex.europa.eu/eli/reg/2026/1744/oj/eng",
+    "stable_ref": "CELEX:32026R1744 · OJ L, 2026/1744, 24.7.2026",
+    "pub_date": "2026-07-24",
+    "language": "en",
+    "is_translation": false,
+    "accessed_date": "2026-08-07",
+    "manual_verification_date": "2026-08-07"
+  },
+  {
     "id": "eu-src-gdpr-eurlex",
     "tier": 1,
     "publisher": "EUR-Lex (Official Journal of the European Union)",
@@ -45,8 +58,8 @@
     "pub_date": "2016-05-04",
     "language": "en",
     "is_translation": false,
-    "accessed_date": "2026-07-12",
-    "manual_verification_date": "2026-07-12"
+    "accessed_date": "2026-08-07",
+    "manual_verification_date": "2026-08-07"
   },
   {
     "id": "us-src-sb24205-leg",
@@ -71,8 +84,8 @@
     "pub_date": "2026-05-14",
     "language": "en",
     "is_translation": false,
-    "accessed_date": "2026-07-12",
-    "manual_verification_date": "2026-07-12"
+    "accessed_date": "2026-08-07",
+    "manual_verification_date": "2026-08-07"
   },
   {
     "id": "cn-src-labeling-cac",
@@ -84,8 +97,8 @@
     "pub_date": "2025-03-07",
     "language": "zh",
     "is_translation": false,
-    "accessed_date": "2026-07-12",
-    "manual_verification_date": "2026-07-12"
+    "accessed_date": "2026-08-07",
+    "manual_verification_date": "2026-08-07"
   },
   {
     "id": "sg-src-mgf-genai",
@@ -97,8 +110,8 @@
     "pub_date": "2024-05-30",
     "language": "en",
     "is_translation": false,
-    "accessed_date": "2026-07-12",
-    "manual_verification_date": "2026-07-12"
+    "accessed_date": "2026-08-07",
+    "manual_verification_date": "2026-08-07"
   },
   {
     "id": "us-src-eo14179-govinfo",
@@ -110,8 +123,8 @@
     "pub_date": "2025-01-31",
     "language": "en",
     "is_translation": false,
-    "accessed_date": "2026-07-12",
-    "manual_verification_date": "2026-07-12"
+    "accessed_date": "2026-08-07",
+    "manual_verification_date": "2026-08-07"
   },
   {
     "id": "us-src-eo14148-govinfo",
@@ -136,8 +149,8 @@
     "pub_date": "2023-07-10",
     "language": "zh",
     "is_translation": false,
-    "accessed_date": "2026-07-12",
-    "manual_verification_date": "2026-07-12"
+    "accessed_date": "2026-08-07",
+    "manual_verification_date": "2026-08-07"
   },
   {
     "id": "cn-src-deepsynthesis-cac",

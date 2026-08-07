@@ -4,12 +4,13 @@
     "instrument_id": "eu-ai-act",
     "pin_cite": "Article 14(1)",
     "quote_verbatim": "High-risk AI systems shall be designed and developed in such a way, including with appropriate human-machine interface tools, that they can be effectively overseen by natural persons during the period in which they are in use.",
-    "paraphrase_en": "High-risk AI systems must be designed for effective human oversight while in use, including appropriate human-machine interface tools. A high-risk agentic system executing consequential actions autonomously would need architecturally real oversight, not nominal review.",
+    "paraphrase_en": "High-risk AI systems must be designed for effective human oversight while in use, including appropriate human-machine interface tools. The requirement applies from 2027-12-02 for Article 6(2)/Annex III systems and 2028-08-02 for Article 6(1)/Annex I-embedded systems; product classification determines the date.",
     "obligation_type": "obligation",
-    "applies_from": "2026-08-02",
+    "applies_from": "2027-12-02",
+    "applies_from_note": "earliest date · Annex III 2027-12-02 · Annex I-embedded 2028-08-02",
     "source_id": "eu-src-aiact-eurlex",
     "confidence": "medium",
-    "confidence_rationale": "Text verified verbatim this session via the Commission's AI Act Service Desk (Tier 2 official mirror of the Tier 1 EUR-Lex text). Confidence capped at medium per SPEC §22: a known adopted-but-unpublished amendment (2026 omnibus) defers this provision's application date from 2026-08-02 to 2027-12-02 (Annex III).",
+    "confidence_rationale": "Article 14(1) text was verified verbatim on 2026-07-12 via the Commission's AI Act Service Desk. The two applicability dates were checked on 2026-08-06 against Regulation (EU) 2026/1744 in Tier 1 EUR-Lex. Confidence remains medium because the applicable date depends on whether a product is classified under Article 6(2)/Annex III or Article 6(1)/Annex I.",
     "epistemic_blocks": [
       {
         "id": "b1",
@@ -32,16 +33,17 @@
       {
         "id": "b2",
         "kind": "fact",
-        "text_md": "On 2026-06-29 the Council gave final approval to the omnibus amendment deferring Annex III high-risk obligations (which include Art 14 for such systems) to 2027-12-02; the amending act awaited Official Journal publication as of 2026-07-12.",
+        "text_md": "Regulation (EU) 2026/1744, published on 2026-07-24 and in force from 2026-07-27, applies the relevant Chapter III requirements from 2027-12-02 for Article 6(2)/Annex III high-risk systems and from 2028-08-02 for Article 6(1)/Annex I-embedded high-risk systems.",
         "citations": [
           {
-            "tier": 2,
-            "publisher": "Council of the EU (Consilium)",
-            "title": "AI: Council gives final green light to simplify and streamline rules",
-            "url": "https://www.consilium.europa.eu/en/press/press-releases/2026/06/29/artificial-intelligence-council-gives-final-green-light-to-simplify-and-streamline-rules/",
-            "pin_cite": "(press release, whole document)",
-            "pub_date": "2026-06-29",
-            "accessed_date": "2026-07-12"
+            "tier": 1,
+            "publisher": "EUR-Lex",
+            "title": "Regulation (EU) 2026/1744",
+            "url": "https://eur-lex.europa.eu/eli/reg/2026/1744/oj/eng",
+            "stable_ref": "CELEX:32026R1744",
+            "pin_cite": "Article 1(40)(b), amendment to Article 113",
+            "pub_date": "2026-07-24",
+            "accessed_date": "2026-08-06"
           }
         ],
         "confidence": "medium"
@@ -88,20 +90,20 @@
       }
     ],
     "review_status": "in_review",
-    "as_of_date": "2026-07-12",
-    "last_verified": "2026-07-12"
+    "as_of_date": "2026-08-06",
+    "last_verified": "2026-08-06"
   },
   {
     "id": "eu-ai-act:art50-1",
     "instrument_id": "eu-ai-act",
     "pin_cite": "Article 50(1)",
     "quote_verbatim": "Providers shall ensure that AI systems intended to interact directly with natural persons are designed and developed in such a way that the natural persons concerned are informed that they are interacting with an AI system",
-    "paraphrase_en": "AI systems that interact directly with people must be designed so users know they are dealing with AI, unless that is obvious to a reasonably informed person in context. Applies from 2026-08-02 and was NOT deferred by the 2026 omnibus.",
+    "paraphrase_en": "AI systems that interact directly with people must be designed so users know they are dealing with AI, unless that is obvious to a reasonably informed person in context. Article 50(1) has applied since 2026-08-02 and was not deferred by Regulation (EU) 2026/1744.",
     "obligation_type": "obligation",
     "applies_from": "2026-08-02",
     "source_id": "eu-src-aiact-eurlex",
     "confidence": "medium",
-    "confidence_rationale": "First-clause text verified verbatim this session (Commission AI Act Service Desk; quote truncated to ≤50 words per §21.3 — the full sentence adds a reasonableness qualifier). Not-deferred status corroborated by the Council press release (fetch blocked, 403) and multiple independent secondary reports; capped medium until the omnibus text is checked in the OJ.",
+    "confidence_rationale": "The first-clause text and obviousness qualifier were re-verified on 2026-08-07 through official EU sources; the quote is truncated to ≤50 words. The fact that Article 50 has applied since 2026-08-02, and the narrow transition only for Article 50(2) marking and detectability duties for qualifying systems placed on the market before that date, were re-checked against Regulation (EU) 2026/1744 in Tier 1 EUR-Lex. Confidence remains medium because scope and exceptions are product- and context-specific.",
     "epistemic_blocks": [
       {
         "id": "b1",
@@ -116,7 +118,7 @@
             "stable_ref": "CELEX:32024R1689",
             "pin_cite": "Article 50(1)",
             "pub_date": "2024-07-12",
-            "accessed_date": "2026-07-12"
+            "accessed_date": "2026-08-07"
           }
         ],
         "confidence": "high"
@@ -124,16 +126,27 @@
       {
         "id": "b2",
         "kind": "fact",
-        "text_md": "Art 50 transparency obligations apply from 2026-08-02; the 2026 omnibus deferral of high-risk deadlines did not defer Art 50(1) (Art 50(2) watermarking gains a limited extension to 2026-12-02 for systems already on the market).",
+        "text_md": "Article 50 transparency obligations have applied since 2026-08-02. Regulation (EU) 2026/1744 provides only a narrow transition to 2026-12-02 for Article 50(2) marking and detectability duties where the qualifying system was placed on the market before 2026-08-02; it does not postpone other Article 50 duties.",
         "citations": [
           {
-            "tier": 2,
-            "publisher": "Council of the EU (Consilium)",
-            "title": "AI: Council gives final green light to simplify and streamline rules",
-            "url": "https://www.consilium.europa.eu/en/press/press-releases/2026/06/29/artificial-intelligence-council-gives-final-green-light-to-simplify-and-streamline-rules/",
-            "pin_cite": "(press release, whole document)",
-            "pub_date": "2026-06-29",
-            "accessed_date": "2026-07-12"
+            "tier": 1,
+            "publisher": "EUR-Lex",
+            "title": "Regulation (EU) 2024/1689",
+            "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32024R1689",
+            "stable_ref": "CELEX:32024R1689",
+            "pin_cite": "Article 113, second paragraph",
+            "pub_date": "2024-07-12",
+            "accessed_date": "2026-08-07"
+          },
+          {
+            "tier": 1,
+            "publisher": "EUR-Lex",
+            "title": "Regulation (EU) 2026/1744",
+            "url": "https://eur-lex.europa.eu/eli/reg/2026/1744/oj/eng",
+            "stable_ref": "CELEX:32026R1744",
+            "pin_cite": "Article 1(39)(b), inserting Article 111(4)",
+            "pub_date": "2026-07-24",
+            "accessed_date": "2026-08-07"
           }
         ],
         "confidence": "medium"
@@ -141,7 +154,7 @@
       {
         "id": "b3",
         "kind": "inference",
-        "text_md": "This reaches customer-facing agents (C1 generation + C6 external communication) directly: a support or companion agent interacting with EU users needs AI disclosure from 2026-08-02 — three weeks from this record's last_verified date — regardless of the high-risk deferral.",
+        "text_md": "This may reach customer-facing agents directly: where an in-scope support or companion agent interacts with EU users, Article 50(1) disclosure is now an applicable product requirement, independent of the later high-risk-system dates.",
         "confidence": "medium",
         "based_on": [
           "b1",
@@ -151,7 +164,7 @@
       {
         "id": "b4",
         "kind": "recommendation",
-        "text_md": "Operators of user-facing agents could treat AI-disclosure (control class M8) as a launch-blocking control for EU deployments now, since this obligation's date held while the high-risk dates moved.",
+        "text_md": "Operators of potentially in-scope user-facing agents could treat AI disclosure (control class M8) as a launch evidence gate for EU deployments, with scope and exceptions reviewed by the accountable owner.",
         "based_on": [
           "b3"
         ]
@@ -176,8 +189,8 @@
       }
     ],
     "review_status": "in_review",
-    "as_of_date": "2026-07-12",
-    "last_verified": "2026-07-12"
+    "as_of_date": "2026-08-07",
+    "last_verified": "2026-08-07"
   },
   {
   "id": "eu-gdpr:art22",
@@ -189,7 +202,7 @@
     "applies_from": "2018-05-25",
     "source_id": "eu-src-gdpr-eurlex",
     "confidence": "medium",
-  "confidence_rationale": "Article 22(1) was re-verified against the Tier 1 EUR-Lex text on 2026-07-13. The quoted legal text is exact; the agentic-scope and meaningful-human-review statements remain medium-confidence inferences rather than blanket legal conclusions.",
+  "confidence_rationale": "Article 22(1) was re-verified against the Tier 1 EUR-Lex text on 2026-08-07. The quoted legal text is exact; the agentic-scope and meaningful-human-review statements remain medium-confidence inferences rather than blanket legal conclusions.",
     "epistemic_blocks": [
       {
         "id": "b1",
@@ -204,7 +217,7 @@
             "stable_ref": "CELEX:32016R0679",
             "pin_cite": "Article 22(1)",
             "pub_date": "2016-05-04",
-          "accessed_date": "2026-07-13"
+          "accessed_date": "2026-08-07"
           }
         ],
         "confidence": "medium"
@@ -246,8 +259,8 @@
       }
     ],
     "review_status": "in_review",
-  "as_of_date": "2026-07-13",
-  "last_verified": "2026-07-13"
+  "as_of_date": "2026-08-07",
+  "last_verified": "2026-08-07"
   },
   {
     "id": "us-co-sb26-189:developer-disclosure",
@@ -398,7 +411,7 @@
     "applies_from": "2023-08-15",
     "source_id": "cn-src-genai-interim-cac",
     "confidence": "medium",
-  "confidence_rationale": "Chinese original was re-verified verbatim against the Tier 1 CAC text on 2026-07-13; English paraphrase is the analyst's own translation (§7.5 cap → medium).",
+  "confidence_rationale": "Chinese original was re-verified verbatim against the Tier 1 CAC text on 2026-08-07; English paraphrase is the analyst's own translation (§7.5 cap → medium).",
     "epistemic_blocks": [
       {
         "id": "b1",
@@ -414,7 +427,7 @@
             "pin_cite": "第九条",
             "pub_date": "2023-07-10",
             "language": "zh",
-          "accessed_date": "2026-07-13"
+          "accessed_date": "2026-08-07"
           }
         ],
         "confidence": "medium"
@@ -451,8 +464,8 @@
       }
     ],
     "review_status": "in_review",
-  "as_of_date": "2026-07-13",
-  "last_verified": "2026-07-13"
+  "as_of_date": "2026-08-07",
+  "last_verified": "2026-08-07"
   },
   {
     "id": "cn-deep-synthesis-provisions:art17",

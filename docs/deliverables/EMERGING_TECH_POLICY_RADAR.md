@@ -1,8 +1,10 @@
 # Emerging Technology Policy Radar
 
-**As of:** 2026-07-14
+**As of:** 2026-08-07
 **Scope:** agentic AI, semiconductors/compute, cloud/data centers, standards, and APAC implementation
 **Status:** independent portfolio work sample; not legal advice; no company affiliation
+
+**Refresh discipline:** rows labeled **7 Aug re-check** were checked against the linked official source on 2026-08-07. The Korea row retains its 2026-08-06 verification date; other rows retain 2026-07-14. This radar does not silently relabel older research as newly verified.
 
 ## Radar
 
@@ -14,8 +16,12 @@
 | **Advanced semiconductors** | BIS’s January, May, and June 2026 materials combine conditional case-by-case review for specified chips with clarified licensing expectations for advanced-compute items involving certain ownership and destination profiles. | S04, S05, S06 | Security-led managed access | Supply, licensing, re-export, ultimate-parent, and diversion exposure | Documented authorized pathways and stronger customer trust | **30d:** refresh chip/customer/end-use matrix. **90d:** audit reseller and cloud-capacity workflows. |
 | **US data-center buildout** | Executive Order 14318 directs faster federal permitting and support for qualifying AI data-center infrastructure, including projects above a defined load threshold. | S12 | Capacity acceleration | Energy, environmental, community, permitting, and policy-reversal risk | Faster capacity deployment and infrastructure partnerships | **30d:** identify threshold-relevant projects. **90d:** integrate energy/community and permitting risk into site strategy. |
 | **EU cloud & AI capacity** | The Commission’s June 2026 CADA proposal targets capacity, innovation, sustainability, and an EU-wide sovereignty assessment framework. | S03 | Capacity expansion plus sovereignty policy | Architecture/procurement lock-in; critical-sector access constraints | AI-factory/gigafactory ecosystem, partnerships, public-sector routes | **30d:** assign legislative owner. **90d:** scenario-test sovereignty and procurement outcomes. |
-| **EU product transparency** | Article 50 transparency obligations apply from 2026-08-02; the final implementation code was published on 2026-06-10, and the Commission page last updated on 2026-07-09 records confirmation by the Commission and AI Board. Specified high-risk timelines moved later under the omnibus. | S01, S02 | Near-term product obligation | Misreading the high-risk delay as a general delay | Reusable disclosure, labeling, and provenance layer | **30d:** finish product inventory and gap test. **90d:** collect evidence of control effectiveness. |
-| **Korea AI implementation** | The AI Basic Act and Enforcement Decree took effect on 2026-01-22 with promotion, transparency, safety, and high-impact-AI mechanisms. | S10 | Comprehensive implementation with innovation support | Classification/localization error; stale English-only monitoring | Testing/certification support and market confidence | **30d:** nominate Korean-source owner. **90d:** validate product-by-product classification with local expertise. |
+| **EU AI Act lifecycle - 7 Aug re-check** | Regulation (EU) 2026/1744 was published on 2026-07-24 and entered into force on 2026-07-27. It moves Annex III high-risk obligations to 2027-12-02 and Annex I-embedded obligations to 2028-08-02. | S01 | Binding amending regulation in force | Briefing from stale adoption-stage status; mixing high-risk and transparency dates | Traceable lifecycle intelligence and more reliable sequencing | **Now:** replace the pending-OJ status and record both conditional Article 14 timelines. **30d:** monitor implementation sources, not legislative adoption. |
+| **EU product transparency - 7 Aug re-check** | Article 50 obligations have applied since 2026-08-02; the Commission issued final interpretive guidelines on 2026-07-20. The amendment's transition to 2026-12-02 is limited to Article 50(2) marking and detectability for qualifying systems placed on the market before 2026-08-02; it does not postpone the other Article 50 duties. | S01, S02, S13 | Current binding obligations plus non-binding implementation guidance | Treating all Article 50 duties as delayed or treating the voluntary code as the law | Reusable disclosure, labeling, provenance, and evidence layer | **Now:** classify paragraph, role, surface, exception, and control evidence. **30d:** test effectiveness in the actual journey. |
+| **California content authenticity - 7 Aug re-check** | The AI Transparency Act's core covered-provider provisions became operative on 2026-08-02; platform and hosting provisions begin in 2027 and capture-device provisions in 2028. | S14 | Binding state law with staggered scope | Assuming the shared EU date means shared definitions or controls | Staged detection, provenance, and disclosure roadmap | **Now:** classify provider scale, modality, and platform role. **90d:** assign separate 2027 owners. |
+| **China anthropomorphic interaction - 7 Aug re-check** | A binding departmental rule took effect on 2026-07-15 for public-facing services that simulate a natural person and provide continuous emotional interaction; ordinary assistants are excluded when they lack that interaction pattern. | S15 | Scoped consumer/social AI rule | Missing companion-AI duties or over-scoping every chatbot | Safer interaction, minors, dependency, exit, and disclosure design | **Now:** run a continuous-emotional-interaction scope screen. **30d:** map evidence for applicable duties. |
+| **China agent policy - 7 Aug re-check** | A May 2026 implementation opinion addresses agent identity, scoped authority, user decision rights, behavioral guardrails, lifecycle and supply-chain security, and risk-tiered governance. | S16 | Non-binding national policy direction | Encoding every recommendation as a directly enforceable duty | Anticipate standards and infrastructure direction | **30d:** track standards and sensitive-sector measures. **90d:** map direction to product questions, not legal conclusions. |
+| **Korea AI implementation - 6 Aug refresh** | The AI Basic Act and Enforcement Decree took effect on 2026-01-22; amended Act and Decree provisions took effect on 2026-07-21, including additional public-sector, inclusion, research, startup, and data-access support. | S10, S17, S18 | Binding framework with continuing implementation and innovation support | Classification/localization error; stale English-only monitoring | Public-sector adoption, testing, research, and market confidence | **30d:** nominate Korean-source owner. **90d:** validate product-by-product classification and amendment relevance with local expertise. |
 
 ## Monitoring protocol
 
@@ -26,7 +32,7 @@
 
 ## Source register
 
-- **S01** — [Council AI omnibus approval](https://www.consilium.europa.eu/en/press/press-releases/2026/06/29/artificial-intelligence-council-gives-final-green-light-to-simplify-and-streamline-rules/)
+- **S01** — [EUR-Lex Regulation (EU) 2026/1744](https://eur-lex.europa.eu/eli/reg/2026/1744/oj/eng)
 - **S02** — [European Commission Article 50 transparency code](https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content)
 - **S03** — [European Commission CADA proposal](https://digital-strategy.ec.europa.eu/en/library/proposal-cloud-and-ai-development-act-cada)
 - **S04** — [BIS May 2026 Advanced Computing guidance](https://media.bis.gov/media/documents/bis-guidance-may-31-2026.pdf)
@@ -38,3 +44,9 @@
 - **S10** — [Korea MSIT: AI Basic Act comes into force](https://www.msit.go.kr/eng/bbs/view.do%3Bjsessionid%3DR15sRn4EJvYb4ya9k4Roiy9k6Ci-tgMefxkNeVIs.AP_msit_1?bbsSeqNo=42&mId=4&mPid=2&nttSeqNo=1214&sCode=eng)
 - **S11** — [UK CMA: Agentic AI and consumers](https://www.gov.uk/government/publications/agentic-ai-and-consumers)
 - **S12** — [White House EO 14318: Accelerating Federal Permitting of Data Center Infrastructure](https://www.whitehouse.gov/presidential-actions/2025/07/accelerating-federal-permitting-of-data-center-infrastructure/)
+- **S13** — [European Commission Article 50 transparency guidelines](https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems)
+- **S14** — [California Business and Professions Code chapter 25 - AI Transparency Act](https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?article=&chapter=25.&division=8.&lawCode=BPC&part=&title=)
+- **S15** — [China Interim Measures for Anthropomorphic AI Interaction Services](https://www.cac.gov.cn/2026-04/10/c_1777558395078289.htm)
+- **S16** — [China Implementation Opinion on AI Agents](https://www.cac.gov.cn/2026-05/08/c_1779979789523320.htm)
+- **S17** — [Korea amended AI Basic Act](https://www.law.go.kr/lsInfoP.do?chrClsCd=010102&lsiSeq=282791&viewCls=lsRvsDocInfoR)
+- **S18** — [Korea amended AI Basic Act Enforcement Decree](https://www.law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lspttninfSeq=198009)

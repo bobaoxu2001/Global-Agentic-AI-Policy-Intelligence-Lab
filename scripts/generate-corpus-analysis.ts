@@ -25,7 +25,7 @@ const lastVerified = [...instruments, ...provisions].map((row) => row.last_verif
 
 const output = `# Structured Policy Corpus — Descriptive Analysis
 
-**Generated:** 2026-07-14
+**Generated:** ${lastVerified}
 **Data basis:** \`src/data/content/*.json\` working corpus
 **Status:** reproducible descriptive portfolio analysis; not a legal-coverage or compliance study
 

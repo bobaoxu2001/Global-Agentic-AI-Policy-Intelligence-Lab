@@ -9,6 +9,9 @@ export function derivePreviewSummary(instruments: SummaryRecord[], provisions: S
     bindingCount: instruments.filter((record) => record.bindingness === 'binding').length,
     conditionallyBindingCount: instruments.filter((record) => record.bindingness === 'conditionally_binding').length,
     nonBindingCount: instruments.filter((record) => record.bindingness === 'non_binding').length,
-    lastVerified: verified.at(-1) ?? null,
+    // This date represents the freshness of the complete scoped set. Using the
+    // oldest row prevents one newly refreshed record from refreshing the whole
+    // snapshot by implication.
+    lastVerified: verified.at(0) ?? null,
   };
 }

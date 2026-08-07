@@ -2,7 +2,7 @@
 
 **Pass 1 (authoring) date:** 2026-07-12 · **Analyst:** single-author mode (§19.4 two-pass protocol) · **All records:** `review_status: in_review` — nothing publishes until Pass 2 on a different day, working checklist-only against primary sources (§19.3).
 
-> **Current-state reconciliation (2026-07-13):** the authoritative current corpus is **17 sources · 15 instruments · 9 provisions · 13 controls · 10 control mappings · 2 changelog records**. All reviewable records remain `in_review`. The batch totals below are historical snapshots, not current corpus totals; see `docs/research/CORPUS_INVENTORY.md` and `PUBLICATION_REVIEW_QUEUE.md` for the reconciled state.
+> **Current-state reconciliation (2026-08-06):** the authoritative current corpus is **18 sources · 15 instruments · 9 provisions · 13 controls · 10 control mappings · 3 changelog records**. The refresh closed the EU Digital Omnibus Official Journal trigger against Regulation (EU) 2026/1744 and aligned Article 14/50 timing. All reviewable records remain `in_review`. The batch totals and verification notes below are historical snapshots, not current corpus totals; see `docs/research/CORPUS_INVENTORY.md` and `PUBLICATION_REVIEW_QUEUE.md` for the reconciled state.
 
 **Historical snapshot — corpus after batch 1:** **10 sources · 7 instruments · 7 provisions** (plus the 20-record fictional fixture corpus, which remains profile-separated). Production gate verified: R7 rejects fixtures, R8 rejects these in_review records — `build:production` stays red until Pass 2 publishes, by design.
 

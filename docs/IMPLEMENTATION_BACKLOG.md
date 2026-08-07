@@ -118,7 +118,7 @@
 | D-8 | Any conversational / chatbot / runtime-LLM feature | Non-goal §5.3 — permanently excluded |
 | D-9 | Compliance certification / attestation | Non-goal §5.6 |
 | D-10 | Enforcement-action DB, litigation tracking, lobbying content | Non-goal §5.8 |
-| D-11 | Multi-language UI (beyond i18n-ready storage) | NFR-8 defers UI i18n |
+| D-11 | Locale-prefixed routes and translated downloadable artifacts | Deferred after the 2026-08-06 presentation-layer i18n release. The global shell and interview-critical routes now support English, Simplified Chinese, Spanish, and Portuguese with persistent selection; canonical evidence and downloads remain in their verified language. |
 | D-12 | SQLite runtime query layer | Build-time JSON suffices for read-only MVP |
 
 ---

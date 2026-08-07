@@ -35,25 +35,31 @@
         "source_id": "eu-src-aiact-eurlex"
       },
       {
-        "date": "2026-06-29",
-        "event": "Council final approval of the digital-omnibus amendment deferring high-risk obligations (Annex III to 2027-12-02; Annex I-embedded to 2028-08-02); amending act pending OJ publication as of last_verified — Art 50(1) transparency NOT deferred",
-        "source_id": "eu-src-omnibus-consilium"
+        "date": "2026-07-24",
+        "event": "Regulation (EU) 2026/1744 published in the Official Journal, deferring Annex III high-risk obligations to 2027-12-02 and Annex I-embedded obligations to 2028-08-02",
+        "source_id": "eu-src-omnibus-eurlex"
       },
       {
-        "date": "2026-08-02",
-        "event": "Art 50 transparency obligations apply (unchanged by omnibus for 50(1); 50(2) watermarking deferred to 2026-12-02 for systems already on market)",
-        "source_id": "eu-src-omnibus-consilium"
-      }
-    ],
-    "summary_md": "■ FACT: Adopted 2024, in force since 2024-08-01, applying in stages; classified enacted_law per SPEC §9.3 (primary legislation despite the EU-law label 'Regulation'). ■ FACT: A June 2026 omnibus amendment — finally approved by the Council on 2026-06-29 and pending Official Journal publication as of 2026-07-12 — defers the Annex III high-risk obligations to 2027-12-02 and Annex I-embedded to 2028-08-02, while leaving Art 50(1) transparency applying from 2026-08-02. ▲ INFERENCE (medium): until the amending act is published, the dates on the books remain those of Reg 2024/1689; records here therefore carry the original applies_from with the deferral documented in key_dates.",
-    "analyst_notes": "Pass 1 (authoring) 2026-07-12. Consilium press-release URL returned HTTP 403 to automated fetch (known bot-blocking host, MJ-7 allowlist); existence and content corroborated via multiple independent Tier-3 law-firm alerts and the Parliament endorsement of 2026-06-16. Re-verify OJ publication of the amending act before Pass 2 review; when published, update key_dates with the new CELEX and re-score any affected assessments (§19.5).",
-    "review_status": "in_review",
-    "as_of_date": "2026-07-12",
-    "last_verified": "2026-07-12",
+        "date": "2026-07-27",
+        "event": "Regulation (EU) 2026/1744 entered into force",
+        "source_id": "eu-src-omnibus-eurlex"
+      },
+    {
+      "date": "2026-08-02",
+      "event": "Art 50 transparency obligations began to apply; the amending regulation gives only Art 50(2) marking and detectability obligations for qualifying systems placed on the market before this date a transition to 2026-12-02",
+      "source_id": "eu-src-omnibus-eurlex"
+    }
+  ],
+  "summary_md": "■ FACT: Adopted in 2024, in force since 2024-08-01, and applying in stages; classified enacted_law per SPEC §9.3 (primary legislation despite the EU-law label 'Regulation'). ■ FACT: Regulation (EU) 2026/1744 was published on 2026-07-24 and entered into force on 2026-07-27. It defers Annex III high-risk obligations to 2027-12-02 and Annex I-embedded obligations to 2028-08-02. Article 50 transparency obligations have applied since 2026-08-02. The amendment provides only a narrow transition to 2026-12-02 for Article 50(2) marking and detectability duties where the qualifying system was placed on the market before 2026-08-02; it does not postpone the other Article 50 duties. ▲ INFERENCE (medium): product teams should separate the currently applicable transparency workstream from later high-risk-system obligations.",
+  "analyst_notes": "Pass 1 authored 2026-07-12. Change refresh 2026-08-06 closed the Official Journal trigger and aligned Article 14 timing with Regulation (EU) 2026/1744. Targeted source-freshness check 2026-08-07 re-verified the AI Act and amending regulation through official EU sources and confirmed that Article 50 has applied since 2026-08-02, subject only to the narrow Article 50(2) transition described in the record. Records remain in_review and require owner/legal review before publication or product-specific reliance.",
+  "review_status": "in_review",
+  "as_of_date": "2026-08-07",
+  "last_verified": "2026-08-07",
     "source_ids": [
       "eu-src-aiact-eurlex",
       "eu-src-aiact-servicedesk",
-      "eu-src-omnibus-consilium"
+      "eu-src-omnibus-consilium",
+      "eu-src-omnibus-eurlex"
     ]
   },
   {
@@ -84,10 +90,10 @@
       }
     ],
     "summary_md": "■ FACT: Fully applicable since 2018-05-25; the EU's horizontal data-protection regime. Amendment history does not change its live status (amendment = event, not status — SPEC §8/MJ-4). ▲ INFERENCE (medium): Art 22's automated-decision-making right is the primary GDPR hook for agentic systems making consequential decisions (C8).",
-    "analyst_notes": "Pass 1 (authoring) 2026-07-12. Instrument metadata verified against EUR-Lex CELEX record this session; Art 22 verbatim wording not re-fetched this session (paraphrase-only provision, confidence capped accordingly).",
-    "review_status": "in_review",
-    "as_of_date": "2026-07-12",
-    "last_verified": "2026-07-12",
+  "analyst_notes": "Pass 1 authored 2026-07-12. Targeted source-freshness check 2026-08-07 re-verified the instrument metadata and Article 22 text against Tier 1 EUR-Lex; the agentic-scope analysis remains an inference and human/legal review remains pending.",
+  "review_status": "in_review",
+  "as_of_date": "2026-08-07",
+  "last_verified": "2026-08-07",
     "source_ids": [
       "eu-src-gdpr-eurlex"
     ]
@@ -164,10 +170,10 @@
       }
     ],
     "summary_md": "■ FACT: Signed 2026-05-14; repeals and reenacts the 2024 Colorado AI Act, replacing its duty-of-care/risk-management model with a disclosure- and transparency-centered framework for automated decision-making technology (ADMT) in consequential decisions (employment, housing, financial services, insurance, healthcare, education, government benefits). ■ FACT: Developer obligations apply from 2027-01-01. ▲ INFERENCE (medium): for agentic systems, the operative hook is consequential decision-making (C8) — the pivot from EU-style risk management to disclosure narrows the engineering surface to documentation and notice controls.",
-    "analyst_notes": "Pass 1 (authoring) 2026-07-12. Verified via the official bill page fetch. Enforcement contingent on AG rulemaking per corroborating reports (not yet independently verified — Pass 2 item). Candidate near_term_hit driver for US assessments of C8-bearing agents once published (applies within 18 months of any assessed_date near today).",
-    "review_status": "in_review",
-    "as_of_date": "2026-07-12",
-    "last_verified": "2026-07-12",
+  "analyst_notes": "Pass 1 authored 2026-07-12. Targeted source-freshness check 2026-08-07 confirmed the official Colorado General Assembly page's Governor Signed status and 2026-05-14 action date. Enforcement and product-specific implications still require the separately identified research and human/legal review; review_status remains in_review.",
+  "review_status": "in_review",
+  "as_of_date": "2026-08-07",
+  "last_verified": "2026-08-07",
     "source_ids": [
       "us-src-sb26189-leg"
     ]
@@ -200,10 +206,10 @@
       }
     ],
     "summary_md": "■ FACT: Four-department departmental rules (classified regulation + binding per SPEC §8 rule 3) requiring explicit (显式) and implicit (隐式) labeling of AI-generated synthetic content; issued 2025-03-07, in effect since 2025-09-01. ▲ INFERENCE (medium): together with the deep-synthesis and generative-AI interim measures it forms the content-governance stack that drives prohibition_adjacent readings for public-content agents (C1/C6) in CN assessments — the Mira scenario's China story.",
-    "analyst_notes": "Pass 1 (authoring) 2026-07-12. Verified by direct fetch of the CAC notice (Tier 1, Chinese authoritative text; verbatim definitions captured). Official Q&A (答记者问) states coordination with 深度合成规定 and 生成式人工智能服务管理暂行办法 — those two instruments to be added with their own Tier 1 verification in the next CN pass rather than cited second-hand here. English renderings in this record are the analyst's own translation — confidence capped per §7.5.",
-    "review_status": "in_review",
-    "as_of_date": "2026-07-12",
-    "last_verified": "2026-07-12",
+  "analyst_notes": "Pass 1 authored 2026-07-12. Targeted source-freshness check 2026-08-07 re-verified the authoritative CAC notice. English renderings remain analyst translations with the existing confidence cap; review_status remains in_review pending human/legal review.",
+  "review_status": "in_review",
+  "as_of_date": "2026-08-07",
+  "last_verified": "2026-08-07",
     "source_ids": [
       "cn-src-labeling-cac"
     ]
@@ -231,10 +237,10 @@
       }
     ],
     "summary_md": "■ FACT: Voluntary governance framework for generative AI issued by the AI Verify Foundation and IMDA on 2024-05-30 (title, issuers, and date verified against the official PDF this session). ▲ INFERENCE (medium): as a voluntary_framework it is non_binding (§8 Axis B independent of Axis C: 'fully_applicable' here means published-and-operative as guidance); it typifies Singapore's assurance-first approach — market-expected adoption without legal mandate, so it never drives binding_hit but shapes enforcement_posture readings.",
-    "analyst_notes": "Pass 1 (authoring) 2026-07-12. PDF text extraction was limited (compressed); the framework's nine governance dimensions and any agent-relevant sections are a Pass 2 full-text item — deliberately NOT asserted as fact here. PDPA and its 2020 amendment (MJ-4 amendment-as-event exemplar) queued for the next SG pass.",
-    "review_status": "in_review",
-    "as_of_date": "2026-07-12",
-    "last_verified": "2026-07-12",
+  "analyst_notes": "Pass 1 authored 2026-07-12. Targeted source-freshness check 2026-08-07 re-verified the official AI Verify Foundation PDF, including publisher, title, and publication date. The existing limits on full-text extraction and agent-relevant analysis remain; review_status stays in_review pending human review.",
+  "review_status": "in_review",
+  "as_of_date": "2026-08-07",
+  "last_verified": "2026-08-07",
     "source_ids": [
       "sg-src-mgf-genai"
     ]
@@ -268,10 +274,10 @@
       }
     ],
     "summary_md": "■ FACT (high): Signed 2025-01-23, published 90 FR 8741; sets the replacement federal AI policy ('sustain and enhance America's global AI dominance', Sec 2), directs an AI Action Plan (Sec 4), and orders agencies to suspend/revise/rescind actions taken under 'the revoked Executive Order 14110' (Sec 5(a)) and to revise OMB M-24-10/M-24-18 (Sec 5(b)). Full Tier 1 text read this session. ▲ INFERENCE (medium): conditionally_binding per SPEC §8 rule 4 — binds the executive branch, not private parties; for the Atlas its main effect is on enforcement_posture readings and the federal-procurement channel, not direct obligations on agent operators.",
-    "analyst_notes": "Pass 1 (authoring) 2026-07-12. Full FR text read from the govinfo PDF. PRECISION NOTE vs SPEC Appendix A: EO 14179 does not itself revoke EO 14110 — Sec 5(a) refers to 'the revoked Executive Order 14110', i.e. revocation had already occurred (EO 14148 of 2025-01-20, §2 — to be independently verified Pass 2). Supersession links kept at the policy-replacement level. OMB M-24-10/M-24-18 revision status = Pass 2 item.",
-    "review_status": "in_review",
-    "as_of_date": "2026-07-12",
-    "last_verified": "2026-07-12",
+  "analyst_notes": "Pass 1 authored 2026-07-12. Targeted source-freshness check 2026-08-07 re-verified EO 14179 against the official govinfo Federal Register PDF. The existing precision note, OMB follow-up item, and human-review requirement remain; review_status stays in_review.",
+  "review_status": "in_review",
+  "as_of_date": "2026-08-07",
+  "last_verified": "2026-08-07",
     "source_ids": [
       "us-src-eo14179-govinfo"
     ]
@@ -343,10 +349,10 @@
       }
     ],
     "summary_md": "■ FACT (medium, translation cap): Seven-department interim measures for generative AI services (Order No. 15), published 2023-07-10, in effect since 2023-08-15; classified regulation + binding per SPEC §8 rule 3. ▲ INFERENCE (medium): Article 9 places network content-producer responsibility on the service PROVIDER — for agent operators this locates accountability at the operator, not the model vendor or the user, which is the pivotal allocation question for agentic deployments in CN.",
-    "analyst_notes": "Pass 1 (authoring) 2026-07-12. Verified by direct CAC fetch (issuing departments, dates, 文号, Art 9 verbatim). English renderings are analyst translations (§7.5 cap). Algorithm/GenAI filing (备案) linkage and Art 17 labeling cross-reference to be detailed in a later pass.",
-    "review_status": "in_review",
-    "as_of_date": "2026-07-12",
-    "last_verified": "2026-07-12",
+  "analyst_notes": "Pass 1 authored 2026-07-12. Targeted source-freshness check 2026-08-07 re-verified the issuing departments, dates, order number, and Article 9 text against the authoritative CAC publication. English renderings remain analyst translations with the existing confidence cap; review_status stays in_review pending human/legal review.",
+  "review_status": "in_review",
+  "as_of_date": "2026-08-07",
+  "last_verified": "2026-08-07",
     "source_ids": [
       "cn-src-genai-interim-cac"
     ]

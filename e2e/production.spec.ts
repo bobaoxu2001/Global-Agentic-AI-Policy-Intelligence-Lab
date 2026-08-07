@@ -10,11 +10,11 @@ test('production routes exclude preview records while public portfolio files ret
   await expect(page.getByText('No published instruments in this profile.')).toBeVisible();
 
   await page.goto('/executive-brief');
-  await expect(page.getByRole('heading', { name: 'Executive policy analysis is available only in the interview preview.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Executive policy analysis is available only in the research preview.' })).toBeVisible();
   await expect(page.locator('.market-table')).toHaveCount(0);
 
   await page.goto('/work-samples');
-  await expect(page.getByRole('heading', { name: 'Policy work samples are available only in the interview preview.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Policy work samples are available only in the research preview.' })).toBeVisible();
   await expect(page.locator('.sample-card')).toHaveCount(0);
 
   await page.goto('/downloads');

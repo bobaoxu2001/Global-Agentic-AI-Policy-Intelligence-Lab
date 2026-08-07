@@ -1,6 +1,6 @@
 # Publication Readiness Report
 
-**Reconciled:** 2026-07-13
+**Reconciled:** 2026-08-06
 **Scope:** current `main` content corpus (`src/data/content/`)
 **Verdict:** **NOT READY FOR PUBLICATION**
 
@@ -8,14 +8,14 @@
 
 | Entity | Current count | Status |
 |---|---:|---|
-| Sources | 17 | 14 Tier 1 / 3 Tier 2; source rows do not have `review_status` |
+| Sources | 18 | 15 Tier 1 / 3 Tier 2; source rows do not have `review_status` |
 | Instruments | 15 | all `in_review` |
 | Provisions | 9 | all `in_review` |
 | Controls | 13 | all `in_review` |
 | Control mappings | 10 | all `in_review` |
-| Changelog records | 2 | all `in_review` |
+| Changelog records | 3 | all `in_review` |
 
-The prior 15-instrument/9-provision headline remains accurate, but it was incomplete: the reconciled reviewer-facing baseline must also state 17 sources, 13 controls, 10 mappings, and 2 changelog records. See [Corpus Inventory](CORPUS_INVENTORY.md).
+The 15-instrument/9-provision headline remains accurate. The 2026-08-06 lifecycle refresh adds one Tier 1 EU amending-regulation source and one changelog record, bringing the current baseline to 18 sources, 13 controls, 10 mappings, and 3 changelog records. See [Corpus Inventory](CORPUS_INVENTORY.md).
 
 ## Publication gates
 
@@ -35,7 +35,7 @@ The prior 15-instrument/9-provision headline remains accurate, but it was incomp
 
 ## Why no record is promoted
 
-This reconciliation does not verify primary-source texts anew, infer a reviewer, or resolve open analyst notes. Metadata completeness and validation success are not a substitute for the documented second-pass workflow. Every record remains `in_review`.
+The 2026-08-06 refresh closed the EU amending-regulation Official Journal trigger against Tier 1 EUR-Lex and aligned the affected dates. It did not infer an independent reviewer, resolve all quote/mapping questions, or create owner approval. Metadata completeness and validation success are not a substitute for the documented second-pass workflow. Every record remains `in_review`.
 
 ## Required sequence before production publication
 

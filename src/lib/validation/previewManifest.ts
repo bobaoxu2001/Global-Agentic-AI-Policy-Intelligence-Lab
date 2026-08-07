@@ -4,7 +4,7 @@ import manifestJson from '../../../docs/research/GOLDEN_8_REVIEW_MANIFEST.json';
 export const PREVIEW_APPROVAL = 'APPROVED FOR AI-ASSISTED PREVIEW' as const;
 
 export const PreviewManifestSchema = z.object({
-  publication_class: z.literal('interview research preview, not final legal publication'),
+  publication_class: z.literal('AI-assisted research preview, not final legal publication'),
   review_basis: z.literal('AI-assisted primary-source verification'),
   reviewed_by: z.literal('Codex'),
   human_review_status: z.string().min(1),

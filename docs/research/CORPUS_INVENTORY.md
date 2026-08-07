@@ -1,6 +1,6 @@
 # Corpus Inventory
 
-**Reconciled:** 2026-07-14
+**Reconciled:** 2026-08-06
 **Data authority:** `src/data/content/*.json`; commit SHA is recorded in the publication handoff after release
 **Publication state:** no record is published.
 
@@ -8,12 +8,12 @@
 
 | Entity | Count | Review-status breakdown |
 |---|---:|---|
-| Sources | 17 | no `review_status` field |
+| Sources | 18 | no `review_status` field |
 | Instruments | 15 | 15 `in_review` |
 | Provisions | 9 | 9 `in_review` |
 | Controls | 13 | 13 `in_review` |
 | Control mappings | 10 | 10 `in_review` |
-| Changelog records | 2 | 2 `in_review` |
+| Changelog records | 3 | 3 `in_review` |
 
 ## Instruments
 
@@ -57,7 +57,7 @@ All 9 provisions have at least one capability and risk mapping. Two provisions l
 
 ## Sources and controls
 
-- Sources: 14 Tier 1, 3 Tier 2; 12 English, 5 Chinese.
+- Sources: 15 Tier 1, 3 Tier 2; 13 English, 5 Chinese.
 - Controls: 9 technical, 3 process, 1 documentation; 11 map to mitigation classes and 2 have no mitigation class.
 - Every instrument source ID resolves; every provision source is listed on its parent instrument; no source is orphaned.
 

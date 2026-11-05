@@ -22,6 +22,7 @@ import { TRANSLATIONS, translatedText } from '../../lib/i18n/translations';
 
 const CORE_FILES = [
   'src/app/layout.tsx',
+  'src/components/PrimaryNav.tsx',
   'src/components/FixtureBanner.tsx',
   'src/app/page.tsx',
   'src/app/policy-refresh/page.tsx',
@@ -94,11 +95,16 @@ function dynamicKeys() {
       add(`home.${profile}.${field}`);
     }
     add(`home.status.${profile}`);
+    add(`home.jurisdictions.intro.${profile}`);
+    add(`research.jurisdictions.count.${profile}`, `research.jurisdictions.count.${profile}.one`);
+  }
+  for (const status of ['within_window', 'due_soon', 'overdue']) {
+    add(`freshness.${status}.title`, `freshness.${status}.detail`);
   }
   for (const capability of ['monitor', 'synthesize', 'translate', 'engage', 'calibrate']) {
     add(`home.capability.${capability}.title`, `home.capability.${capability}.text`);
   }
-  for (const signal of PORTFOLIO_SIGNALS.slice(0, 4)) {
+  for (const signal of PORTFOLIO_SIGNALS) {
     for (const field of ['market', 'title', 'fact', 'implication', 'owner', 'action', 'evidenceGate']) add(`signal.${signal.id}.${field}`);
   }
   for (const change of POLICY_REFRESH_CHANGES) {
@@ -138,6 +144,7 @@ function dynamicKeys() {
   for (const tier of ['low', 'moderate', 'high', 'critical']) add(`value.tier.${tier}`);
 
   for (const axis of ['jur', 'type', 'binding', 'lifecycle']) add(`instrument.filter.axis.${axis}`);
+  for (const profile of ['preview', 'fixtures', 'production']) add(`instrument.list.empty.${profile}`);
   for (const jurisdiction of ['us', 'eu', 'sg', 'cn']) add(`instrument.filter.jurisdiction.${jurisdiction}`);
   for (const term of ['agentic-ai', 'instrument', 'provision', 'adrs']) {
     add(`support.glossary.${term}.term`, `support.glossary.${term}.definition`);

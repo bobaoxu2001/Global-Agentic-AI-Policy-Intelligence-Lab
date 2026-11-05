@@ -1,6 +1,6 @@
 # Global AI Policy Portfolio Pack
 
-**As of:** 2026-08-07
+**As of:** 2026-08-13
 **Prepared for:** public review of an applied global AI policy research portfolio
 **Status:** independent, AI-assisted portfolio research; not legal advice; no company affiliation
 
@@ -16,16 +16,16 @@ This is a reversible operating recommendation, not a legal conclusion or launch 
 
 | Signal | Verified fact | Business meaning | Next move |
 |---|---|---|---|
-| EU lifecycle | Regulation (EU) 2026/1744 was published on 24 July and entered into force on 27 July, closing the Atlas's prior Official Journal trigger | Adoption-stage monitoring must become an in-force legal record; high-risk and transparency dates are now settled but separate | Record the CELEX, preserve the conditional Article 14 dates—Annex III in 2027 and Annex I-embedded in 2028—and keep the limited Article 50(2) transition narrow |
-| EU / California transparency | EU Article 50 and California's core covered-provider provisions became operative on 2 August 2026, with different scope and staggered California dates | A shared date does not create a shared legal test | Classify product role, surface, scale, modality, exception, owner, control, and operating evidence |
-| China agent rules | A scoped anthropomorphic-interaction rule took effect on 15 July; the May agent implementation opinion remains policy direction | Binding consumer/social duties and broader agent-policy direction must be classified separately | Screen continuous emotional interaction, then map the applicable rule and track future agent standards |
-| EU cloud capacity | The European Commission proposed the Cloud and AI Development Act in June 2026 | Capacity, sustainability, procurement, and sovereignty policy can affect infrastructure strategy | Keep region and supplier architecture reversible; track the legislative path |
-| US advanced compute | BIS guidance ties advanced-compute licensing analysis to item, ownership, end use, destination, and authorization | Customer and transaction screening can become a product and sales-process constraint | Put export-screening questions before capacity commitment or delivery |
-| Agent standards | NIST and IMDA focus on identity, authorization, bounded agency, lifecycle controls, and accountability | Technical controls can become reusable assurance evidence | Crosswalk the control layer to standards and sandbox evidence needs |
-| APAC implementation | China, Singapore, and Korea use different bindingness, scope, and implementation models | “APAC” is not one launch classification | Assign authoritative-language owners and issue market-specific decisions |
-| UK consumer agents | The CMA applies existing consumer-law analysis to agentic journeys | Agent-specific legislation is not required for current exposure | Test disclosure, confirmation, cancellation, commercial influence, and redress end to end |
+| California current law / SB 1000 | Current Chapter 25 remains operative; SB 1000 was a pending urgency bill on the Assembly third-reading file on 13 August | A fast-moving proposal must not silently replace current law | Apply the current threshold and controls; maintain a separate bill scenario; re-check on the next legislative day |
+| EU transparency and literacy | Article 50 applies; code adherence is not conclusive proof. Article 4 still requires contextual AI-literacy measures | Product evidence and staff preparation are parallel operating workstreams | Record the applicable paragraph, control evidence, users, context, risk, and literacy measures |
+| China agent policy | A scoped binding rule applies to continuous emotional interaction; the May opinion and July interoperability initiative are non-binding direction | Binding duties and standards direction must stay separate | Screen product scope, then track implementing standards without inventing duties |
+| Singapore agent governance | IMDA's current voluntary framework is v1.5 | Older framework editions can omit multi-agent, third-party-agent, and automation-bias material | Use v1.5 for assurance and sandbox crosswalks |
+| UK consumer agents | Separate CMA guidance states that existing consumer law applies and businesses remain responsible for agents they use | Exposure exists without agent-specific legislation | Test disclosure, confirmation, cancellation, oversight, commercial influence, and redress end to end |
+| US advanced compute | A July BIS final rule adds narrow approved-entity pathways for specified UAE transactions while other EAR controls remain | Destination alone cannot determine the licensing route | Screen ownership, consignee, end user, ECCN, end use, destination, and approval status |
+| US AI cybersecurity | EO 14409 directs agency work and a voluntary developer framework; Gold Eagle is an operational coordination initiative, not regulation | Model-security evidence can support government coordination without becoming a universal mandate | Mature evaluation, vulnerability intake, remediation, and information-sharing evidence |
+| EU cloud capacity | CADA remains proposal COM(2026) 502 in ongoing procedure 2026/0138(COD) | Proposal-stage outcomes should remain scenario inputs | Keep region and supplier architecture reversible; track Parliament and Council movement |
 
-The full dated record, source links, verification dates, owners, and triggers are in `GLOBAL_AI_POLICY_INTELLIGENCE_BRIEF_2026-08-06.md`. The current EU, California, and China change rows were rechecked on 7 August; rows outside that refresh preserve their earlier verification dates.
+The full dated record, source links, verification dates, owners, and triggers are in `GLOBAL_AI_POLICY_INTELLIGENCE_BRIEF_2026-08-06.md`. The complete listed portfolio-source set was rechecked through 13 August. The review found no substantive post-7 August amendment in the existing tracked instruments; it adds omitted coverage and a live pending-legislation trigger without presenting either as newly enacted law.
 
 ## Decision architecture
 

@@ -5,9 +5,9 @@ export const SUPPORT_TRANSLATIONS: Record<string, { zh: string; es: string; pt: 
     pt: 'Bibliografia',
   },
   'support.bibliography.note': {
-    zh: '结构化语料库来源会根据当前应用配置自动呈现。研究预览版还会列出由独立治理流程管理、用于应用研究样本的当前监测来源。',
-    es: 'Las fuentes del corpus estructurado se muestran automáticamente según el perfil activo. La vista previa de investigación también enumera las fuentes de monitoreo actual, gobernadas por separado, que sustentan sus muestras aplicadas.',
-    pt: 'As fontes do corpus estruturado são apresentadas automaticamente de acordo com o perfil ativo. A prévia de pesquisa também lista as fontes de monitoramento atual, geridas separadamente, que sustentam suas amostras aplicadas.',
+    zh: '结构化语料库来源会根据当前应用配置自动呈现。研究预览版还会列出由独立治理流程管理、用于应用研究样本的带日期监测来源。',
+    es: 'Las fuentes del corpus estructurado se muestran automáticamente según el perfil activo. La vista previa de investigación también enumera fuentes de monitoreo fechadas y gobernadas por separado que sustentan sus muestras aplicadas.',
+    pt: 'As fontes do corpus estruturado são apresentadas automaticamente de acordo com o perfil ativo. A prévia de pesquisa também lista fontes de monitoramento datadas e geridas separadamente que sustentam suas amostras aplicadas.',
   },
   'support.bibliography.structured.title': {
     zh: '结构化语料库来源',
@@ -75,9 +75,9 @@ export const SUPPORT_TRANSLATIONS: Record<string, { zh: string; es: string; pt: 
     pt: 'Atualização de políticas de julho-agosto',
   },
   'support.downloads.file.policy-refresh.description': {
-    zh: '欧盟生命周期、欧盟/加州透明度义务，以及中国拟人化互动与智能体政策',
-    es: 'Ciclo de vida de la UE, transparencia en la UE y California, y políticas chinas sobre interacción antropomórfica y agentes',
-    pt: 'Ciclo de vida da UE, transparência na UE e na Califórnia e políticas chinesas sobre interação antropomórfica e agentes',
+    zh: '截至2026年8月13日的现行法、待审 California SB 1000 与官方来源覆盖修正',
+    es: 'Ley vigente, California SB 1000 pendiente y correcciones de cobertura oficial hasta el 13 de agosto de 2026',
+    pt: 'Lei vigente, California SB 1000 pendente e correções de cobertura oficial até 13 de agosto de 2026',
   },
   'support.downloads.file.portfolio-pack.name': {
     zh: '全球 AI 政策作品集资料包',
@@ -85,9 +85,9 @@ export const SUPPORT_TRANSLATIONS: Record<string, { zh: string; es: string; pt: 
     pt: 'Pacote do portfólio de políticas globais de IA',
   },
   'support.downloads.file.portfolio-pack.description': {
-    zh: '当前监测、商业影响、政策立场、利益相关方沟通和边界',
-    es: 'Monitoreo actual, implicaciones empresariales, posición de política, relacionamiento y límites',
-    pt: 'Monitoramento atual, implicações para o negócio, posicionamento de política, engajamento e limites',
+    zh: '带日期的监测、商业影响、政策立场、利益相关方沟通和边界',
+    es: 'Monitoreo fechado, implicaciones empresariales, posición de política, relacionamiento y límites',
+    pt: 'Monitoramento datado, implicações para o negócio, posicionamento de política, engajamento e limites',
   },
   'support.downloads.file.executive-brief.name': {
     zh: '高管决策简报',
@@ -125,9 +125,9 @@ export const SUPPORT_TRANSLATIONS: Record<string, { zh: string; es: string; pt: 
     pt: 'Informe de inteligência sobre políticas globais de IA',
   },
   'support.downloads.file.intelligence-brief.description': {
-    zh: '更新国际政策信号，并标注负责人和触发条件',
-    es: 'Señales internacionales actualizadas con responsables y factores desencadenantes',
-    pt: 'Sinais internacionais atualizados com responsáveis e gatilhos',
+    zh: '核验截止 2026 年 8 月 13 日的带日期国际政策信号，并标注负责人和触发条件',
+    es: 'Señales internacionales fechadas, verificadas hasta el 13 de agosto de 2026, con responsables y factores desencadenantes',
+    pt: 'Sinais internacionais datados, verificados até 13 de agosto de 2026, com responsáveis e gatilhos',
   },
   'support.downloads.file.technology-radar.name': {
     zh: '新兴技术政策雷达',
@@ -135,9 +135,9 @@ export const SUPPORT_TRANSLATIONS: Record<string, { zh: string; es: string; pt: 
     pt: 'Radar de políticas de tecnologias emergentes',
   },
   'support.downloads.file.technology-radar.description': {
-    zh: '智能体 AI、半导体、算力、云、数据中心和标准',
-    es: 'IA agéntica, semiconductores, cómputo, nube, centros de datos y estándares',
-    pt: 'IA agêntica, semicondutores, computação, nuvem, data centers e padrões',
+    zh: '智能体 AI、AI 网络安全、半导体、算力、云、数据中心和标准',
+    es: 'IA agéntica, ciberseguridad de IA, semiconductores, cómputo, nube, centros de datos y estándares',
+    pt: 'IA agêntica, cibersegurança de IA, semicondutores, computação, nuvem, data centers e padrões',
   },
   'support.downloads.file.business-matrix.name': {
     zh: '商业影响矩阵',

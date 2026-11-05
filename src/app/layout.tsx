@@ -4,6 +4,7 @@ import Script from 'next/script';
 import { FixtureBanner } from '@/components/FixtureBanner';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { LocalizedText } from '@/components/LocalizedText';
+import { PrimaryNav } from '@/components/PrimaryNav';
 import { languageBootstrapScript } from '@/lib/i18n/config';
 import './globals.css';
 
@@ -21,17 +22,6 @@ export const metadata: Metadata = {
     description: 'Source-traceable policy intelligence translating regulatory change into accountable product and cloud decisions.',
   },
 };
-
-const PRIMARY_NAV = [
-  ['/', 'Overview', 'shell.nav.overview'],
-  ['/policy-refresh', 'Latest Update', 'shell.nav.latest'],
-  ['/executive-brief', 'Executive Brief', 'shell.nav.executive'],
-  ['/work-samples', 'Work Samples', 'shell.nav.samples'],
-  ['/instruments', 'Instruments', 'shell.nav.instruments'],
-  ['/compare', 'Compare', 'shell.nav.compare'],
-  ['/controls', 'Controls', 'shell.nav.controls'],
-  ['/methodology', 'Methodology', 'shell.nav.methodology'],
-] as const;
 
 const RESEARCH_LINKS = [
   ['/jurisdictions', 'Jurisdictions', 'shell.footer.jurisdictions'],
@@ -65,11 +55,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <small><LocalizedText id="shell.brandTagline" fallback="Global agentic AI intelligence" /></small>
               </span>
             </Link>
-            <nav className="primary-nav" aria-label="Primary / 主要导航 / Principal">
-              {PRIMARY_NAV.map(([href, label, translationId]) => (
-                <Link key={href} href={href}><LocalizedText id={translationId} fallback={label} /></Link>
-              ))}
-            </nav>
+            <PrimaryNav />
             <LanguageSwitcher />
           </div>
         </header>

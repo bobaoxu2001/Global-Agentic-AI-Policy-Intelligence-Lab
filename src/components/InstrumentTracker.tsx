@@ -9,34 +9,20 @@
 import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import { LocalizedText } from '@/components/LocalizedText';
+import {
+  EMPTY_FILTERS,
+  encodeFilters,
+  FILTER_AXES as AXES,
+  type AxisKey,
+  type Filters,
+  type SortKey,
+  type TrackerState,
+} from '@/lib/portfolio/trackerState';
 import type { Instrument } from '@/lib/schemas';
 import { BindingnessChip, InstrumentTypeChip, LifecycleChip, StaleFlag } from './semantic';
 
-const AXES = {
-  jur: ['us', 'eu', 'sg', 'cn'],
-  type: ['enacted_law', 'proposed_legislation', 'regulation', 'executive_action', 'regulator_guidance', 'voluntary_framework', 'technical_standard'],
-  binding: ['binding', 'conditionally_binding', 'non_binding'],
-  lifecycle: ['proposed', 'adopted_not_yet_applicable', 'in_force_partially_applicable', 'fully_applicable', 'amended', 'superseded', 'rescinded', 'expired', 'withdrawn'],
-} as const;
-type AxisKey = keyof typeof AXES;
-type Filters = Record<AxisKey, string[]>;
-type SortKey = 'title' | 'status_date' | 'lifecycle';
-
-const EMPTY: Filters = { jur: [], type: [], binding: [], lifecycle: [] };
-
-export function decodeFilters(search: string): Filters {
-  const q = new URLSearchParams(search);
-  const pick = (k: AxisKey) =>
-    (q.get(k)?.split(',') ?? []).filter((v) => (AXES[k] as readonly string[]).includes(v));
-  return { jur: pick('jur'), type: pick('type'), binding: pick('binding'), lifecycle: pick('lifecycle') };
-}
-
-export function encodeFilters(f: Filters, sort: SortKey, dir: 'asc' | 'desc'): string {
-  const q = new URLSearchParams();
-  (Object.keys(AXES) as AxisKey[]).forEach((k) => { if (f[k].length) q.set(k, f[k].join(',')); });
-  if (sort !== 'status_date' || dir !== 'desc') { q.set('sort', sort); q.set('dir', dir); }
-  return q.toString();
-}
+const EMPTY = EMPTY_FILTERS;
+const LIFECYCLE_RANK = new Map(AXES.lifecycle.map((status, index) => [status, index]));
 
 export function applyFilters(rows: Instrument[], f: Filters): Instrument[] {
   // AND across axes; OR within an axis (PRD §9 / OD-2)
@@ -48,19 +34,12 @@ export function applyFilters(rows: Instrument[], f: Filters): Instrument[] {
   );
 }
 
-export function InstrumentTracker({ instruments }: { instruments: Instrument[] }) {
-  const [filters, setFilters] = useState<Filters>(EMPTY);
-  const [sort, setSort] = useState<SortKey>('status_date');
-  const [dir, setDir] = useState<'asc' | 'desc'>('desc');
+export function InstrumentTracker({ instruments, initialState }: { instruments: Instrument[]; initialState: TrackerState }) {
+  const [filters, setFilters] = useState<Filters>(initialState.filters);
+  const [sort, setSort] = useState<SortKey>(initialState.sort);
+  const [dir, setDir] = useState<'asc' | 'desc'>(initialState.dir);
   const now = useMemo(() => new Date(), []);
 
-  useEffect(() => {
-    const q = new URLSearchParams(window.location.search);
-    setFilters(decodeFilters(window.location.search));
-    const s = q.get('sort'); const d = q.get('dir');
-    if (s === 'title' || s === 'lifecycle' || s === 'status_date') setSort(s);
-    if (d === 'asc' || d === 'desc') setDir(d);
-  }, []);
   useEffect(() => {
     const qs = encodeFilters(filters, sort, dir);
     window.history.replaceState(null, '', qs ? `?${qs}` : window.location.pathname);
@@ -69,8 +48,8 @@ export function InstrumentTracker({ instruments }: { instruments: Instrument[] }
   const rows = useMemo(() => {
     const filtered = applyFilters(instruments, filters);
     const cmp = (a: Instrument, b: Instrument) => {
-      const va = sort === 'title' ? a.title_en : sort === 'lifecycle' ? a.lifecycle_status : a.status_date;
-      const vb = sort === 'title' ? b.title_en : sort === 'lifecycle' ? b.lifecycle_status : b.status_date;
+      const va = sort === 'title' ? a.title_en : sort === 'lifecycle' ? (LIFECYCLE_RANK.get(a.lifecycle_status) ?? Number.MAX_SAFE_INTEGER) : a.status_date;
+      const vb = sort === 'title' ? b.title_en : sort === 'lifecycle' ? (LIFECYCLE_RANK.get(b.lifecycle_status) ?? Number.MAX_SAFE_INTEGER) : b.status_date;
       return va < vb ? -1 : va > vb ? 1 : 0;
     };
     return [...filtered].sort((a, b) => (dir === 'asc' ? cmp(a, b) : -cmp(a, b)));
@@ -81,11 +60,17 @@ export function InstrumentTracker({ instruments }: { instruments: Instrument[] }
   const activeCount = (Object.keys(AXES) as AxisKey[]).reduce((n, k) => n + filters[k].length, 0);
   const header = (key: SortKey, translationId: string, fallback: string) => (
     <th
+      scope="col"
       aria-sort={sort === key ? (dir === 'asc' ? 'ascending' : 'descending') : 'none'}
-      style={{ cursor: 'pointer' }}
-      onClick={() => (sort === key ? setDir(dir === 'asc' ? 'desc' : 'asc') : (setSort(key), setDir('asc')))}
     >
-      <LocalizedText id={translationId} fallback={fallback} /> {sort === key ? (dir === 'asc' ? '↑' : '↓') : ''}
+      <button
+        className="sort-button"
+        type="button"
+        onClick={() => (sort === key ? setDir(dir === 'asc' ? 'desc' : 'asc') : (setSort(key), setDir('asc')))}
+      >
+        <LocalizedText id={translationId} fallback={fallback} />
+        {sort === key ? <span aria-hidden="true">{dir === 'asc' ? '↑' : '↓'}</span> : null}
+      </button>
     </th>
   );
 
@@ -102,55 +87,61 @@ export function InstrumentTracker({ instruments }: { instruments: Instrument[] }
 
   return (
     <div data-testid="tracker">
-      <fieldset data-testid="filterbar">
-        <legend><b><LocalizedText id="instrument.filters.title" fallback="Filters" /></b> — <LocalizedText id="instrument.filters.logic" fallback="OR within an axis, AND across axes (FR-2)" /></legend>
+      <section className="filter-panel" data-testid="filterbar" aria-labelledby="instrument-filters-title">
+        <h2 id="instrument-filters-title"><LocalizedText id="instrument.filters.title" fallback="Filters" /></h2>
+        <p className="filter-logic"><LocalizedText id="instrument.filters.logic" fallback="Select any value within a group; selections across groups combine." /></p>
         {(Object.keys(AXES) as AxisKey[]).map((k) => (
-          <div key={k} style={{ margin: '4px 0' }}>
-            <span className="eyebrow" style={{ marginRight: 6 }}><LocalizedText id={`instrument.filter.axis.${k}`} fallback={k} /></span>
-            {AXES[k].map((v) => (
-              <label key={v} style={{ marginRight: 10, fontSize: 12 }}>
-                <input type="checkbox" data-testid={`f-${k}-${v}`} checked={filters[k].includes(v)} onChange={() => toggle(k, v)} /> {filterValue(k, v)}
-              </label>
-            ))}
-          </div>
+          <fieldset className="filter-axis" key={k}>
+            <legend className="eyebrow"><LocalizedText id={`instrument.filter.axis.${k}`} fallback={k} /></legend>
+            <div className="filter-options">
+              {AXES[k].map((v) => (
+                <label key={v}>
+                  <input type="checkbox" data-testid={`f-${k}-${v}`} checked={filters[k].includes(v)} onChange={() => toggle(k, v)} /> {filterValue(k, v)}
+                </label>
+              ))}
+            </div>
+          </fieldset>
         ))}
-        <div style={{ marginTop: 6 }}>
-          <span data-testid="result-count" className="mono" style={{ fontSize: 12 }}><LocalizedText id="instrument.results" fallback="{visible} of {total} instruments" values={{ visible: rows.length, total: instruments.length }} /></span>
+        <div className="filter-results">
+          <span data-testid="result-count" className="mono" role="status" aria-live="polite" aria-atomic="true"><LocalizedText id="instrument.results" fallback="{visible} of {total} instruments" values={{ visible: rows.length, total: instruments.length }} /></span>
           {activeCount > 0 ? (
-            <button type="button" data-testid="clear-filters" style={{ marginLeft: 10 }} onClick={() => setFilters(EMPTY)}>
+            <button type="button" data-testid="clear-filters" onClick={() => setFilters(EMPTY)}>
               <LocalizedText id="instrument.filters.clearAll" fallback="Clear all ({count})" values={{ count: activeCount }} />
             </button>
           ) : null}
         </div>
-      </fieldset>
+      </section>
 
       {rows.length === 0 ? (
-        <p data-testid="empty-state"><LocalizedText id="instrument.filters.empty" fallback="No records match these filters." /> <button type="button" onClick={() => setFilters(EMPTY)}><LocalizedText id="instrument.filters.clear" fallback="Clear filters" /></button></p>
+        <div className="status-note" data-testid="empty-state"><p><LocalizedText id="instrument.filters.empty" fallback="No records match these filters." /></p><p><LocalizedText id="instrument.filters.activeSummary" fallback="{count} active filter selections." values={{ count: activeCount }} /></p><button type="button" onClick={() => setFilters(EMPTY)}><LocalizedText id="instrument.filters.clear" fallback="Clear filters" /></button></div>
       ) : (
-        <table>
-          <thead>
-            <tr>
-              {header('title', 'instrument.header.instrument', 'Instrument')}
-              <th><LocalizedText id="instrument.header.type" fallback="Type" /></th>
-              <th><LocalizedText id="instrument.header.bindingness" fallback="Bindingness" /></th>
-              {header('lifecycle', 'instrument.header.lifecycle', 'Lifecycle')}
-              {header('status_date', 'instrument.header.statusDate', 'Status date')}
-              <th><LocalizedText id="instrument.header.lastVerified" fallback="Last verified" /></th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((i) => (
-              <tr key={i.id}>
-                <td><Link href={`/instruments/${i.id}`}>{i.title_en}</Link></td>
-                <td><InstrumentTypeChip type={i.instrument_type} /></td>
-                <td><BindingnessChip level={i.bindingness} /></td>
-                <td><LifecycleChip status={i.lifecycle_status} /></td>
-                <td className="mono" style={{ fontSize: 12 }}>{i.status_date}</td>
-                <td className="mono" style={{ fontSize: 12 }}>{i.last_verified} <StaleFlag lastVerified={i.last_verified} asOf={now} /></td>
+        <div className="table-scroll" tabIndex={0} role="region" aria-labelledby="tracker-table-caption">
+          <table>
+            <caption className="visually-hidden" id="tracker-table-caption"><LocalizedText id="instrument.table.caption" fallback="Policy instruments matching the selected filters" /></caption>
+            <thead>
+              <tr>
+                {header('title', 'instrument.header.instrument', 'Instrument')}
+                <th scope="col"><LocalizedText id="instrument.header.type" fallback="Type" /></th>
+                <th scope="col"><LocalizedText id="instrument.header.bindingness" fallback="Bindingness" /></th>
+                {header('lifecycle', 'instrument.header.lifecycle', 'Lifecycle')}
+                {header('status_date', 'instrument.header.statusDate', 'Status date')}
+                <th scope="col"><LocalizedText id="instrument.header.lastVerified" fallback="Last verified" /></th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {rows.map((i) => (
+                <tr key={i.id}>
+                  <th scope="row"><Link href={`/instruments/${i.id}`} lang="en">{i.title_en}</Link></th>
+                  <td><InstrumentTypeChip type={i.instrument_type} /></td>
+                  <td><BindingnessChip level={i.bindingness} /></td>
+                  <td><LifecycleChip status={i.lifecycle_status} /></td>
+                  <td className="mono tracker-date">{i.status_date}</td>
+                  <td className="mono tracker-date">{i.last_verified} <StaleFlag lastVerified={i.last_verified} asOf={now} /></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

@@ -25,9 +25,9 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
 
   // Overview: hero variants.
   'home.preview.eyebrow': {
-    zh: '全球 AI 政策情报 · 2026年8月7日',
-    es: 'Inteligencia global sobre políticas de IA · 7 de agosto de 2026',
-    pt: 'Inteligência global sobre políticas de IA · 7 de agosto de 2026',
+    zh: '全球 AI 政策情报 · 2026年8月13日',
+    es: 'Inteligencia global sobre políticas de IA · 13 de agosto de 2026',
+    pt: 'Inteligência global sobre políticas de IA · 13 de agosto de 2026',
   },
   'home.preview.title': {
     zh: '从政策变化到产品决策。',
@@ -45,9 +45,9 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
     pt: 'Ver a decisão executiva',
   },
   'home.preview.secondaryLabel': {
-    zh: '查看当前政策更新',
-    es: 'Ver la actualización normativa vigente',
-    pt: 'Ver a atualização regulatória atual',
+    zh: '查看带日期的政策更新',
+    es: 'Ver la actualización normativa fechada',
+    pt: 'Ver a atualização regulatória datada',
   },
   'home.preview.footnote': {
     zh: '独立作品示例 · 事实、推断与建议清晰区分 · 不自动作出上线或法律结论。',
@@ -55,9 +55,9 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
     pt: 'Amostra de trabalho independente · Factos, inferências e recomendações são claramente separados · Nenhuma conclusão jurídica ou de lançamento é automatizada.',
   },
   'home.preview.postureLabel': {
-    zh: '当前高管立场',
-    es: 'Postura ejecutiva actual',
-    pt: 'Posição executiva atual',
+    zh: '快照中的高管立场',
+    es: 'Postura ejecutiva de la instantánea',
+    pt: 'Posição executiva do retrato',
   },
   'home.preview.postureTitle': {
     zh: '建设控制层，暂缓统一上线决策。',
@@ -70,9 +70,9 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
     pt: 'A evidência atual sustenta controlos reutilizáveis de identidade, autorização, divulgação, registo, aprovação, testes e reparação. Não sustenta uma única conclusão jurídica global.',
   },
   'home.preview.gate': {
-    zh: '产品事实 + 现行一手法律文本 + 控制运行证据 + 合格人工审核',
-    es: 'Hechos del producto + derecho primario vigente + evidencia operativa de los controles + revisión humana cualificada',
-    pt: 'Factos do produto + direito primário vigente + evidência operacional dos controlos + revisão humana qualificada',
+    zh: '产品事实 + 已核验的一手法律文本 + 控制运行证据 + 合格人工审核',
+    es: 'Hechos del producto + derecho primario verificado + evidencia operativa de los controles + revisión humana cualificada',
+    pt: 'Factos do produto + direito primário verificado + evidência operacional dos controlos + revisão humana qualificada',
   },
   'home.fixtures.eyebrow': {
     zh: '示例治理产品',
@@ -198,14 +198,80 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
     pt: 'registos de fontes de monitorização',
   },
   'home.metric.checked': {
-    zh: '作品集监测核验日期',
-    es: 'monitoreo del portafolio verificado',
-    pt: 'monitorização do portefólio verificada',
+    zh: '作品集快照日期',
+    es: 'fecha de la instantánea del portafolio',
+    pt: 'data do retrato do portefólio',
+  },
+  'home.jurisdictions.eyebrow': { zh: '司法管辖区覆盖', es: 'Cobertura por jurisdicción', pt: 'Cobertura por jurisdição' },
+  'home.jurisdictions.title': {
+    zh: '按司法管辖区探索政策',
+    es: 'Explorar políticas por jurisdicción',
+    pt: 'Explorar políticas por jurisdição',
+  },
+  'home.jurisdictions.intro.preview': {
+    zh: '打开各司法管辖区的清单范围研究视图。统计包括仍在审核中的记录。',
+    es: 'Abra la vista de investigación delimitada por el manifiesto para cada jurisdicción. Los recuentos incluyen registros aún en revisión.',
+    pt: 'Abra a vista de investigação delimitada pelo manifesto para cada jurisdição. As contagens incluem registos ainda em revisão.',
+  },
+  'home.jurisdictions.intro.fixtures': {
+    zh: '打开用于测试 Atlas 体验的各个虚构司法管辖区视图。',
+    es: 'Abra cada vista de jurisdicción ficticia utilizada para probar la experiencia de Atlas.',
+    pt: 'Abra cada vista de jurisdição fictícia utilizada para testar a experiência Atlas.',
+  },
+  'home.jurisdictions.intro.production': {
+    zh: '打开各司法管辖区视图。生产环境统计仅包括已发布记录。',
+    es: 'Abra cada vista de jurisdicción. En producción, los recuentos solo incluyen registros publicados.',
+    pt: 'Abra cada vista de jurisdição. Em produção, as contagens incluem apenas registos publicados.',
+  },
+  'home.jurisdictions.all': {
+    zh: '查看全部司法管辖区覆盖',
+    es: 'Ver toda la cobertura por jurisdicción',
+    pt: 'Ver toda a cobertura por jurisdição',
+  },
+  'freshness.eyebrow': {
+    zh: '证据新鲜度',
+    es: 'Vigencia de la evidencia',
+    pt: 'Atualidade da evidência',
+  },
+  'freshness.schedule': {
+    zh: '快照日期为 {checked}。各来源记录分别于 {oldest} 至 {newest} 期间核验。最早计划复核日期：{nextReview}。状态计算日期：{referenceDate}。',
+    es: 'Instantánea fechada el {checked}. Los registros de fuente se verificaron individualmente entre {oldest} y {newest}. Primera revisión programada: {nextReview}. Estado evaluado el {referenceDate}.',
+    pt: 'Retrato datado de {checked}. Os registos de fonte foram verificados individualmente entre {oldest} e {newest}. Primeira revisão agendada: {nextReview}. Estado avaliado em {referenceDate}.',
+  },
+  'freshness.within_window.title': {
+    zh: '尚在复核周期内',
+    es: 'Dentro del plazo de revisión',
+    pt: 'Dentro do prazo de revisão',
+  },
+  'freshness.within_window.detail': {
+    zh: '从页面所示评估日期起七天内，没有来源记录到期。',
+    es: 'Ningún registro de fuente vence en los siete días posteriores a la fecha de evaluación mostrada.',
+    pt: 'Nenhum registo de fonte vence nos sete dias seguintes à data de avaliação apresentada.',
+  },
+  'freshness.due_soon.title': {
+    zh: '即将到期复核',
+    es: 'Revisión próxima',
+    pt: 'Revisão próxima',
+  },
+  'freshness.due_soon.detail': {
+    zh: '从页面所示评估日期起七天内到期复核的来源记录：{count}/{total}。',
+    es: 'Registros de fuente que deben revisarse en los siete días posteriores a la fecha mostrada: {count} de {total}.',
+    pt: 'Registos de fonte a rever nos sete dias seguintes à data apresentada: {count} de {total}.',
+  },
+  'freshness.overdue.title': {
+    zh: '证据复核已逾期',
+    es: 'Revisión de evidencia vencida',
+    pt: 'Revisão da evidência em atraso',
+  },
+  'freshness.overdue.detail': {
+    zh: '已超过计划复核日期的来源记录：{count}/{total}。刷新前应将受影响的信号视为过期。',
+    es: 'Registros de fuente que superaron su fecha de revisión: {count} de {total}. Trate las señales afectadas como obsoletas hasta actualizarlas.',
+    pt: 'Registos de fonte que ultrapassaram a data de revisão: {count} de {total}. Trate os sinais afetados como desatualizados até serem atualizados.',
   },
   'home.refresh.eyebrow': {
-    zh: '政策更新 · 2026年8月7日',
-    es: 'Actualización normativa · 7 de agosto de 2026',
-    pt: 'Atualização regulatória · 7 de agosto de 2026',
+    zh: '政策更新 · 2026年8月13日',
+    es: 'Actualización normativa · 13 de agosto de 2026',
+    pt: 'Atualização regulatória · 13 de agosto de 2026',
   },
   'home.refresh.title': {
     zh: '7月至8月政策过渡期间发生了哪些变化',
@@ -213,9 +279,9 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
     pt: 'O que mudou durante a transição regulatória de julho para agosto',
   },
   'home.refresh.intro': {
-    zh: '本次更新纠正了 EU 法案的立法生命周期，记录 EU/California 已开始实施的义务，并将 China 范围明确的约束性规则与更广泛的政策方向区分开来。其他信号保留各自的核验日期。',
-    es: 'La actualización corrige el ciclo legislativo de EU, registra las obligaciones operativas en EU/California y separa la norma vinculante y delimitada de China de una orientación política más amplia. Las demás señales conservan sus propias fechas de verificación.',
-    pt: 'A atualização corrige o ciclo legislativo de EU, regista as obrigações operacionais em EU/California e separa a regra vinculativa e delimitada de China de uma orientação política mais ampla. Os restantes sinais mantêm as respetivas datas de verificação.',
+    zh: '8月13日复核未发现既有追踪文件在8月7日后发生实质变化。本次更新重新核验全部来源、补齐遗漏的官方材料，并将 California SB 1000 明确标为待审法案而非现行法。',
+    es: 'La revisión del 13 de agosto no halló cambios sustantivos posteriores al 7 de agosto en los instrumentos seguidos. Revalida todas las fuentes, incorpora cobertura oficial omitida y mantiene California SB 1000 claramente como proyecto pendiente, no como ley vigente.',
+    pt: 'A revisão de 13 de agosto não encontrou alterações substanciais posteriores a 7 de agosto nos instrumentos acompanhados. Revalida todas as fontes, acrescenta cobertura oficial omitida e mantém California SB 1000 claramente como projeto pendente, não como lei vigente.',
   },
   'home.signal.recheck': { zh: '最迟复核', es: 'volver a verificar antes de', pt: 'rever até' },
   'home.signal.open': {
@@ -265,9 +331,9 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
     pt: 'Uma prática interfuncional de pesquisa sobre políticas de IA',
   },
   'home.practice.text': {
-    zh: '本作品集现包括最新政策情报简报、半导体/算力/云雷达、业务影响矩阵、政策立场示例、利益相关方图谱、会议简报和 ADRS 敏感性说明。',
-    es: 'El portafolio incluye un informe actualizado de inteligencia regulatoria, un radar de semiconductores/cómputo/nube, una matriz de implicaciones empresariales, una muestra de posición de política, un mapa de partes interesadas, un informe de reunión y una nota de sensibilidad ADRS.',
-    pt: 'O portefólio inclui um briefing atualizado de inteligência regulatória, um radar de semicondutores/computação/cloud, uma matriz de implicações para o negócio, uma amostra de posição de política, um mapa de partes interessadas, um briefing de reunião e uma nota de sensibilidade ADRS.',
+    zh: '本作品集包括带日期的政策情报简报、半导体/算力/云雷达、业务影响矩阵、政策立场示例、利益相关方图谱、会议简报和 ADRS 敏感性说明。',
+    es: 'El portafolio incluye un informe fechado de inteligencia regulatoria, un radar de semiconductores/cómputo/nube, una matriz de implicaciones empresariales, una muestra de posición de política, un mapa de partes interesadas, un informe de reunión y una nota de sensibilidad ADRS.',
+    pt: 'O portefólio inclui um briefing datado de inteligência regulatória, um radar de semicondutores/computação/cloud, uma matriz de implicações para o negócio, uma amostra de posição de política, um mapa de partes interessadas, um briefing de reunião e uma nota de sensibilidade ADRS.',
   },
   'home.practice.link': {
     zh: '查看全部作品示例',
@@ -367,6 +433,41 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
     es: 'Escalar si una superficie potencialmente incluida carece de una decisión de alcance documentada, un responsable del control o evidencia operativa.',
     pt: 'Escalar se uma superfície potencialmente abrangida não tiver uma decisão de âmbito registada, um responsável pelo controlo ou evidência operacional.',
   },
+  'signal.SIG-CA-SB1000-PENDING.market': {
+    zh: 'California · 待审立法',
+    es: 'California · Legislación pendiente',
+    pt: 'California · Legislação pendente',
+  },
+  'signal.SIG-CA-SB1000-PENDING.title': {
+    zh: '如果 SB 1000 通过，California 透明度规则范围可能立即扩大',
+    es: 'El alcance de transparencia de California podría ampliarse de inmediato si se aprueba SB 1000',
+    pt: 'O âmbito de transparência da California poderá ampliar-se imediatamente se SB 1000 for aprovado',
+  },
+  'signal.SIG-CA-SB1000-PENDING.fact': {
+    zh: '截至2026年8月13日，SB 1000 仍是列入 Assembly 三读日程的待审紧急法案。当前文本拟取消100万用户门槛，并修改披露验证、潜在披露、隐私和被许可人控制。它不是现行法。',
+    es: 'A 13 de agosto de 2026, SB 1000 sigue siendo un proyecto urgente pendiente en el orden del día de tercera lectura de Assembly. El texto eliminaría el umbral de un millón de usuarios y revisaría controles de verificación, divulgación latente, privacidad y licenciatarios. No es ley vigente.',
+    pt: 'Em 13 de agosto de 2026, SB 1000 continua a ser um projeto urgente pendente na pauta de terceira leitura da Assembly. O texto eliminaria o limiar de um milhão de utilizadores e alteraria controlos de verificação, divulgação latente, privacidade e licenciados. Não é lei vigente.',
+  },
+  'signal.SIG-CA-SB1000-PENDING.implication': {
+    zh: '继续按现行 Chapter 25 执行，同时单独维护一个覆盖提供者范围显著扩大的情景。',
+    es: 'Seguir aplicando Chapter 25 codificado y mantener por separado un escenario de alcance materialmente más amplio para proveedores cubiertos.',
+    pt: 'Continuar a aplicar Chapter 25 codificado e manter separadamente um cenário de âmbito materialmente mais amplo para fornecedores abrangidos.',
+  },
+  'signal.SIG-CA-SB1000-PENDING.action': {
+    zh: '跟踪全院表决、送交程序及州长行动；若法案正式成章，立即重新进行范围和控制映射。',
+    es: 'Seguir la votación plenaria, la remisión y la actuación del Gobernador; repetir de inmediato el mapeo de alcance y controles si el proyecto se promulga.',
+    pt: 'Acompanhar a votação plenária, o envio e a atuação do Governador; refazer imediatamente o mapeamento de âmbito e controlos se o projeto for promulgado.',
+  },
+  'signal.SIG-CA-SB1000-PENDING.owner': {
+    zh: 'US 州级政策 + 产品法律顾问 + 来源证明工程',
+    es: 'Política estatal de US + asesoría jurídica de producto + ingeniería de procedencia',
+    pt: 'Política estadual de US + assessoria jurídica de produto + engenharia de proveniência',
+  },
+  'signal.SIG-CA-SB1000-PENDING.evidenceGate': {
+    zh: '除非官方成章证据确认法案已通过，否则不得用 SB 1000 文本替换现行法的门槛或义务。',
+    es: 'No sustituir el umbral ni los deberes vigentes por el texto de SB 1000 sin evidencia oficial de promulgación.',
+    pt: 'Não substituir o limiar nem os deveres vigentes pelo texto de SB 1000 sem prova oficial de promulgação.',
+  },
   'signal.SIG-COMPUTE-INFRA.market': {
     zh: 'US / EU · 基础设施',
     es: 'US / EU · Infraestructura',
@@ -378,19 +479,19 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
     pt: 'A política de computação está a tornar-se estratégia de produto',
   },
   'signal.SIG-COMPUTE-INFRA.fact': {
-    zh: 'BIS 与所有权相关的许可指引、US 数据中心审批政策和 EU CADA 提案正与模型政策并行推进。',
-    es: 'La guía de licencias de BIS vinculada a la propiedad, la política de permisos para centros de datos de US y la propuesta CADA de EU avanzan junto con la política sobre modelos.',
-    pt: 'As orientações de licenciamento do BIS ligadas à propriedade, a política de licenciamento de centros de dados de US e a proposta CADA de EU avançam em paralelo com a política sobre modelos.',
+    zh: 'BIS 与所有权相关的指引仍然有效；7月最终规则为特定 UAE 交易建立了范围有限的获批实体路径。EU CADA 仍处于立法程序中的未通过提案。',
+    es: 'La guía de BIS vinculada a la propiedad sigue vigente; una norma final de julio crea vías limitadas para entidades aprobadas en operaciones específicas con UAE. CADA de EU sigue siendo una propuesta no adoptada en trámite legislativo.',
+    pt: 'As orientações do BIS ligadas à propriedade continuam vigentes; uma regra final de julho cria vias limitadas para entidades aprovadas em operações específicas com UAE. CADA de EU continua a ser uma proposta não adotada em processo legislativo.',
   },
   'signal.SIG-COMPUTE-INFRA.implication': {
-    zh: '尽早筛查所有权与最终用途，并保持区域和采购架构可逆。',
-    es: 'Examinar pronto la propiedad y el uso final, y mantener reversibles la arquitectura regional y de compras.',
-    pt: 'Analisar cedo a propriedade e a utilização final, mantendo reversíveis as arquiteturas regional e de aquisição.',
+    zh: '仅看目的地并不充分；最终母公司、收货人和最终用户、芯片类别、最终用途及获批实体状态都可能改变许可路径。',
+    es: 'El destino no basta: la matriz última, el consignatario y usuario final, la clase de chip, el uso final y el estado de entidad aprobada pueden cambiar la vía de licencia.',
+    pt: 'O destino não basta: a empresa-mãe última, o consignatário e utilizador final, a classe de chip, a utilização final e o estatuto de entidade aprovada podem alterar a via de licença.',
   },
   'signal.SIG-COMPUTE-INFRA.action': {
-    zh: '在同一工作流程中维护最终母公司、最终用途、芯片类别、区域、供应商及由法律顾问负责的许可输入。',
-    es: 'Mantener en un mismo flujo de trabajo la matriz última, el uso final, la clase de chip, la región, el proveedor y los datos de licencia bajo responsabilidad jurídica.',
-    pt: 'Manter no mesmo fluxo de trabalho a empresa-mãe última, a utilização final, a classe de chip, a região, o fornecedor e os dados de licença sob responsabilidade jurídica.',
+    zh: '在作出架构或供应承诺前，筛查所有权、最终用途、芯片类别、目的地、收货人、最终用户和获批实体状态。',
+    es: 'Examinar propiedad, uso final, clase de chip, destino, consignatario, usuarios finales y estado de entidad aprobada antes de comprometer arquitectura o suministro.',
+    pt: 'Analisar propriedade, utilização final, classe de chip, destino, consignatário, utilizadores finais e estatuto de entidade aprovada antes de comprometer arquitetura ou fornecimento.',
   },
   'signal.SIG-COMPUTE-INFRA.owner': {
     zh: '出口合规 + 云战略 + 采购 + 产品',
@@ -403,9 +504,9 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
     pt: 'Escalar quando mudar a propriedade do cliente, a utilização final, a classe de chip, a rota de fornecimento ou a região.',
   },
   'signal.SIG-AGENT-STANDARDS.market': {
-    zh: 'US / SG · 标准',
-    es: 'US / SG · Estándares',
-    pt: 'US / SG · Normas',
+    zh: 'US / Singapore / China · 标准',
+    es: 'US / Singapur / China · Estándares',
+    pt: 'US / Singapura / China · Normas',
   },
   'signal.SIG-AGENT-STANDARDS.title': {
     zh: '智能体身份与授权也是政策问题',
@@ -413,9 +514,9 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
     pt: 'A identidade e a autorização dos agentes são também questões de política',
   },
   'signal.SIG-AGENT-STANDARDS.fact': {
-    zh: 'NIST 和 IMDA 正重点关注权限边界、身份、授权、生命周期控制与问责。',
-    es: 'NIST e IMDA se centran en la autoridad delimitada, la identidad, la autorización, los controles del ciclo de vida y la rendición de cuentas.',
-    pt: 'NIST e IMDA concentram-se na autoridade delimitada, identidade, autorização, controlos do ciclo de vida e responsabilização.',
+    zh: 'NIST 智能体工作与 AI 800-5 仍属不具约束力的研究和标准活动；Singapore 当前自愿框架为 v1.5；China 7月合作倡议提出身份、互操作与全生命周期安全方向，但不是法规。',
+    es: 'El trabajo de NIST sobre agentes y AI 800-5 siguen siendo investigación y estándares no vinculantes; el marco voluntario vigente de Singapur es v1.5; una iniciativa china de julio promueve identidad, interoperabilidad y seguridad del ciclo de vida, pero no es regulación.',
+    pt: 'O trabalho do NIST sobre agentes e AI 800-5 continua a ser investigação e normalização não vinculativa; o quadro voluntário atual de Singapura é v1.5; uma iniciativa chinesa de julho promove identidade, interoperabilidade e segurança do ciclo de vida, mas não é regulamentação.',
   },
   'signal.SIG-AGENT-STANDARDS.implication': {
     zh: '将最小权限、审批边界和审计记录转化为可复用的产品证据。',
@@ -448,9 +549,9 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
     pt: 'Um sinal sobre agentes é vinculativo; o outro indica uma orientação política',
   },
   'signal.SIG-APAC-IMPLEMENTATION.fact': {
-    zh: 'China 的拟人化互动规则自2026年7月15日起生效，适用于范围明确的持续情感互动；5月发布的智能体实施意见属于政策方向，而非新的约束性生成式 AI 法规。',
-    es: 'La norma de China sobre interacción antropomórfica entró en vigor el 15 de julio de 2026 para la interacción emocional continua dentro de su alcance; la opinión de implementación sobre agentes de mayo es orientación política, no una nueva regulación vinculante de IA generativa.',
-    pt: 'A regra de China sobre interação antropomórfica entrou em vigor em 15 de julho de 2026 para a interação emocional contínua abrangida; o parecer de implementação sobre agentes, de maio, é orientação política, não uma nova regulamentação vinculativa de IA generativa.',
+    zh: 'China 的拟人化互动规则自2026年7月15日起生效，适用于范围明确的持续情感互动；5月实施意见和7月互操作倡议是分开的非约束性政策信号，不是新的生成式 AI 法规。',
+    es: 'La norma china sobre interacción antropomórfica entró en vigor el 15 de julio de 2026 para la interacción emocional continua incluida; la opinión de mayo y la iniciativa de interoperabilidad de julio son señales no vinculantes separadas, no nuevas regulaciones de IA generativa.',
+    pt: 'A regra chinesa sobre interação antropomórfica entrou em vigor em 15 de julho de 2026 para a interação emocional contínua abrangida; o parecer de maio e a iniciativa de interoperabilidade de julho são sinais não vinculativos separados, não novas regulamentações de IA generativa.',
   },
   'signal.SIG-APAC-IMPLEMENTATION.implication': {
     zh: '应执行该规则的产品范围筛查，但不要把更广泛意见中的每项建议都编码为可直接执行的义务。',
@@ -483,9 +584,9 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
     pt: 'O direito do consumo vigente já é um canal de política para a IA agêntica',
   },
   'signal.SIG-UK-CONSUMER-AGENTS.fact': {
-    zh: 'CMA 于2026年3月9日发布 Agentic AI and consumers，涵盖机会、风险、适用法律与企业行动。',
-    es: 'CMA publicó Agentic AI and consumers el 9 de marzo de 2026, con oportunidades, riesgos, derecho aplicable y acciones empresariales.',
-    pt: 'CMA publicou Agentic AI and consumers em 9 de março de 2026, abrangendo oportunidades, riscos, direito aplicável e ações empresariais.',
+    zh: 'CMA 于2026年3月9日同时发布智能体 AI 研究及单独的企业指引，明确现有消费者法仍然适用，企业仍须对其使用的智能体负责。',
+    es: 'El 9 de marzo de 2026, CMA publicó tanto su investigación sobre IA agéntica como una guía empresarial separada que aclara que el derecho de consumo vigente sigue aplicándose y que las empresas responden por los agentes que usan.',
+    pt: 'Em 9 de março de 2026, a CMA publicou tanto a investigação sobre IA agêntica como orientações empresariais separadas, esclarecendo que o direito do consumo vigente continua aplicável e que as empresas respondem pelos agentes que utilizam.',
   },
   'signal.SIG-UK-CONSUMER-AGENTS.implication': {
     zh: '在完整智能体旅程中测试披露、确认、取消、救济与商业影响。',
@@ -507,12 +608,47 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
     es: 'Escalar si un agente puede comprometer a un consumidor sin una vía clara de confirmación, cancelación o reparación.',
     pt: 'Escalar se um agente puder vincular um consumidor sem uma via clara de confirmação, cancelamento ou reparação.',
   },
+  'signal.SIG-US-AI-CYBERSECURITY.market': {
+    zh: 'US · AI 网络安全',
+    es: 'US · Ciberseguridad de IA',
+    pt: 'US · Cibersegurança de IA',
+  },
+  'signal.SIG-US-AI-CYBERSECURITY.title': {
+    zh: '美国联邦 AI 网络安全政策已从指令走向协同运行',
+    es: 'La política federal de ciberseguridad de IA pasó de la directiva a la operación coordinada',
+    pt: 'A política federal de cibersegurança de IA passou da diretiva à operação coordenada',
+  },
+  'signal.SIG-US-AI-CYBERSECURITY.fact': {
+    zh: 'EO 14409 指示升级联邦网络防御、开展前沿模型基准测试并建立自愿开发者框架。White House 表示 Gold Eagle 正作为公私漏洞协调平台运行。该命令未授权强制模型许可或预审。',
+    es: 'EO 14409 ordena mejoras federales de ciberdefensa, evaluación de modelos de frontera y un marco voluntario para desarrolladores. White House informa que Gold Eagle opera como centro público-privado de coordinación de vulnerabilidades. La orden no autoriza licencias obligatorias ni preaprobación de modelos.',
+    pt: 'EO 14409 determina melhorias federais de ciberdefesa, avaliação de modelos de fronteira e um quadro voluntário para criadores. White House informa que Gold Eagle funciona como centro público-privado de coordenação de vulnerabilidades. A ordem não autoriza licenciamento obrigatório nem pré-aprovação de modelos.',
+  },
+  'signal.SIG-US-AI-CYBERSECURITY.implication': {
+    zh: '将其视为面向政府的保障与协调渠道，而不是普遍适用于私营部门的合规命令。',
+    es: 'Tratarlo como canal de aseguramiento y coordinación con el gobierno, no como mandato general de cumplimiento para el sector privado.',
+    pt: 'Tratá-lo como canal de garantia e coordenação com o governo, não como mandato geral de conformidade para o setor privado.',
+  },
+  'signal.SIG-US-AI-CYBERSECURITY.action': {
+    zh: '跟踪模型安全评估、漏洞接收、修复和信息共享证据，同时区分机构指令与自愿行业参与。',
+    es: 'Seguir evidencia de evaluación de seguridad del modelo, recepción y corrección de vulnerabilidades e intercambio de información, separando directivas de agencia y participación voluntaria del sector.',
+    pt: 'Acompanhar evidências de avaliação de segurança do modelo, receção e correção de vulnerabilidades e partilha de informação, separando diretivas de agência e participação voluntária do setor.',
+  },
+  'signal.SIG-US-AI-CYBERSECURITY.owner': {
+    zh: 'US 联邦政策 + 安全 + 模型保障',
+    es: 'Política federal de US + seguridad + aseguramiento de modelos',
+    pt: 'Política federal de US + segurança + garantia de modelos',
+  },
+  'signal.SIG-US-AI-CYBERSECURITY.evidenceGate': {
+    zh: '若机构将命令转化为有约束力的指令或规则，或参与条款产生合同义务，则升级处理；不得把 Gold Eagle 称为法规。',
+    es: 'Escalar si una agencia convierte la orden en directiva o norma vinculante, o si las condiciones de participación crean deberes contractuales; no llamar regulación a Gold Eagle.',
+    pt: 'Escalar se uma agência converter a ordem em diretiva ou regra vinculativa, ou se as condições de participação criarem deveres contratuais; não chamar regulamentação a Gold Eagle.',
+  },
 
   // Policy Refresh: profile boundary and page framework.
   'refresh.boundary.title': {
-    zh: '当前政策更新仅在研究预览中提供。',
-    es: 'La actualización normativa actual solo está disponible en la vista previa de investigación.',
-    pt: 'A atualização regulatória atual só está disponível na pré-visualização de pesquisa.',
+    zh: '带日期的政策更新仅在研究预览中提供。',
+    es: 'La actualización normativa fechada solo está disponible en la vista previa de investigación.',
+    pt: 'A atualização regulatória datada só está disponível na pré-visualização de pesquisa.',
   },
   'refresh.boundary.text': {
     zh: '此 {profile} 配置不展示仅限预览的监测结论。生产发布仍须通过有记录的人工审核。',
@@ -525,14 +661,14 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
     pt: 'Briefing de mudanças regulatórias',
   },
   'refresh.hero.title': {
-    zh: '四项变化，一个运营问题。',
-    es: 'Cuatro cambios. Una pregunta operativa.',
-    pt: 'Quatro mudanças. Uma questão operacional.',
+    zh: '现行法、一个待审触发点，以及来源覆盖修正。',
+    es: 'Ley vigente, un desencadenante pendiente y correcciones de cobertura.',
+    pt: 'Lei vigente, um gatilho pendente e correções de cobertura.',
   },
   'refresh.hero.dek': {
-    zh: '法律或政策信号发生了什么变化，决策因此发生了什么变化，而全球 AI 团队现在应能提供哪些证据？',
-    es: '¿Qué cambió en la ley o en la señal de política, qué cambió en la decisión y qué evidencia debería poder aportar ahora un equipo global de IA?',
-    pt: 'O que mudou na lei ou no sinal de política, o que mudou na decisão e que evidência deve uma equipa global de IA conseguir apresentar agora?',
+    zh: '8月13日复核未发现既有追踪文件在8月7日后发生实质变化。它重新核验基线、补齐遗漏的官方来源，并将 California SB 1000 清楚标为待审。',
+    es: 'La revisión del 13 de agosto no halló cambios sustantivos posteriores al 7 de agosto en los instrumentos seguidos. Revalida la base, añade cobertura oficial omitida y mantiene California SB 1000 claramente pendiente.',
+    pt: 'A revisão de 13 de agosto não encontrou alterações substanciais posteriores a 7 de agosto nos instrumentos acompanhados. Revalida a base, acrescenta cobertura oficial omitida e mantém California SB 1000 claramente pendente.',
   },
   'refresh.posture.before.label': {
     zh: '7月14日立场',
@@ -550,24 +686,24 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
     pt: 'Preparação para o prazo e um gatilho pendente no Official Journal.',
   },
   'refresh.posture.now.label': {
-    zh: '8月7日立场',
-    es: 'Postura del 7 de agosto',
-    pt: 'Posição de 7 de agosto',
+    zh: '8月13日立场',
+    es: 'Postura del 13 de agosto',
+    pt: 'Posição de 13 de agosto',
   },
   'refresh.posture.now.title': {
-    zh: '纠正生命周期表述，并立即测试运行证据。',
-    es: 'Corregir el ciclo de vida y probar ya la evidencia operativa.',
-    pt: 'Corrigir o ciclo de vida e testar já a evidência operacional.',
+    zh: '执行现行法，并单独跟踪 SB 1000。',
+    es: 'Aplicar la ley vigente y seguir SB 1000 por separado.',
+    pt: 'Aplicar a lei vigente e acompanhar SB 1000 separadamente.',
   },
   'refresh.posture.now.text': {
-    zh: '产品范围、适用规则、有效控制、负责人、证明和决策失效条件。',
-    es: 'Alcance del producto, norma aplicable, control operativo, responsable, prueba y caducidad de la decisión.',
-    pt: 'Âmbito do produto, regra aplicável, controlo operacional, responsável, prova e caducidade da decisão.',
+    zh: '重新核验的基线、补齐的来源覆盖、运行证据，以及待审法案的次日复核触发点。',
+    es: 'Base revalidada, cobertura de fuentes restaurada, evidencia operativa y revisión del proyecto pendiente al día siguiente.',
+    pt: 'Base revalidada, cobertura de fontes restaurada, evidência operacional e revisão do projeto pendente no dia seguinte.',
   },
   'refresh.log.eyebrow': {
-    zh: '已核验变化记录',
-    es: 'Registro de cambios verificados',
-    pt: 'Registo de mudanças verificadas',
+    zh: '重新核验的变化记录',
+    es: 'Registro de cambios revalidado',
+    pt: 'Registo de mudanças revalidado',
   },
   'refresh.log.title': {
     zh: '过去、现在与决策后果',
@@ -575,9 +711,9 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
     pt: 'Antes, agora e a consequência para a decisão',
   },
   'refresh.log.note': {
-    zh: '事实已于2026年8月7日依据所链接的官方来源核验。问题、影响与行动属于分析。',
-    es: 'Los hechos se verificaron el 7 de agosto de 2026 con las fuentes oficiales enlazadas. Las preguntas, implicaciones y acciones son análisis.',
-    pt: 'Os factos foram verificados em 7 de agosto de 2026 com base nas fontes oficiais ligadas. As questões, implicações e ações são análise.',
+    zh: '事实已于2026年8月13日依据所链接的官方来源核验。待审提案与非约束性来源均单独标注；问题、影响与行动属于分析。',
+    es: 'Los hechos se verificaron el 13 de agosto de 2026 con las fuentes oficiales enlazadas. Los proyectos pendientes y las fuentes no vinculantes se etiquetan por separado; preguntas, implicaciones y acciones son análisis.',
+    pt: 'Os factos foram verificados em 13 de agosto de 2026 com as fontes oficiais ligadas. Projetos pendentes e fontes não vinculativas são rotulados separadamente; questões, implicações e ações são análise.',
   },
   'refresh.label.before': { zh: '之前', es: 'Antes', pt: 'Antes' },
   'refresh.label.now': { zh: '现在', es: 'Ahora', pt: 'Agora' },
@@ -707,9 +843,9 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
     pt: 'Preparação para futura legislação estadual',
   },
   'refresh.change.california-transparency.now': {
-    zh: '核心义务已实施；平台、托管与设备日期仍分阶段推进',
-    es: 'Obligaciones centrales operativas; las fechas para plataformas, alojamiento y dispositivos siguen escalonadas',
-    pt: 'Obrigações centrais operacionais; as datas para plataformas, alojamento e dispositivos continuam faseadas',
+    zh: '核心义务已实施；SB 1000 仍在待审，尚非现行法',
+    es: 'Obligaciones centrales operativas; SB 1000 sigue pendiente y no es ley vigente',
+    pt: 'Obrigações centrais operacionais; SB 1000 continua pendente e não é lei vigente',
   },
   'refresh.change.california-transparency.effectiveDate': {
     zh: '自2026年8月2日起实施',
@@ -717,9 +853,9 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
     pt: 'Operacional desde 2 de agosto de 2026',
   },
   'refresh.change.california-transparency.fact': {
-    zh: 'Chapter 25 的适用取决于系统层面每月超过一百万访问者或用户、在 California 可公开访问、内容模态以及实体的法定角色。后续平台与托管条款于2027年开始适用；设备相关条款于2028年开始适用。',
-    es: 'Chapter 25 depende de más de un millón de visitantes o usuarios mensuales a nivel del sistema, de la accesibilidad pública en California, de la modalidad del contenido y de la función legal de la entidad. Las disposiciones posteriores para plataformas y alojamiento comienzan en 2027; las relativas a dispositivos, en 2028.',
-    pt: 'Chapter 25 depende de mais de um milhão de visitantes ou utilizadores mensais ao nível do sistema, da acessibilidade pública em California, da modalidade do conteúdo e do papel legal da entidade. As disposições posteriores para plataformas e alojamento começam em 2027; as relativas a dispositivos, em 2028.',
+    zh: '现行 Chapter 25 仍取决于系统层面每月超过一百万访问者或用户、在 California 可公开访问、内容模态以及实体的法定角色。截至8月13日，待审紧急法案 SB 1000 拟取消该门槛并修改多项控制，但尚未颁布。',
+    es: 'Chapter 25 vigente aún depende de más de un millón de visitantes o usuarios mensuales a nivel del sistema, accesibilidad pública en California, modalidad y función legal. A 13 de agosto, el proyecto urgente SB 1000 eliminaría el umbral y revisaría varios controles, pero no ha sido promulgado.',
+    pt: 'Chapter 25 vigente ainda depende de mais de um milhão de visitantes ou utilizadores mensais ao nível do sistema, acessibilidade pública em California, modalidade e papel legal. Em 13 de agosto, o projeto urgente SB 1000 eliminaria o limiar e alteraria vários controlos, mas não foi promulgado.',
   },
   'refresh.change.california-transparency.decisionQuestion': {
     zh: '相关实体属于受覆盖提供者（covered provider）、大型在线平台（large online platform）、GenAI 托管平台（GenAI hosting platform）、采集设备制造商（capture-device manufacturer）、第三方许可方（third-party licensee），还是不在 Chapter 25 范围内？Section 22757.5 的产品类别排除是否适用？',
@@ -737,9 +873,9 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
     pt: 'Política estadual de US + assessoria jurídica de produto + engenharia de plataforma de conteúdos/proveniência',
   },
   'refresh.change.california-transparency.evidenceGate': {
-    zh: '在作出控制结论前，必须记录流量门槛、California 可访问性、模态、法定角色、产品排除和分阶段日期。',
-    es: 'Antes de concluir sobre un control deben documentarse el umbral, la accesibilidad en California, la modalidad, la función legal, la exclusión del producto y la fecha escalonada.',
-    pt: 'Antes de concluir sobre um controlo devem ser registados o limiar, a acessibilidade em California, a modalidade, o papel legal, a exclusão do produto e a data faseada.',
+    zh: '在作出控制结论前，必须记录现行法门槛、California 可访问性、模态、法定角色、产品排除和分阶段日期；待审法案文本须留在独立情景中。',
+    es: 'Antes de concluir sobre un control deben documentarse el umbral vigente, accesibilidad, modalidad, función legal, exclusión y fecha; el proyecto pendiente permanece en un escenario separado.',
+    pt: 'Antes de concluir sobre um controlo devem ser registados o limiar vigente, acessibilidade, modalidade, papel legal, exclusão e data; o projeto pendente permanece num cenário separado.',
   },
   'refresh.change.china-agent-policy.market': {
     zh: 'China · 拟人化与智能体政策',
@@ -767,9 +903,9 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
     pt: 'Regra em vigor desde 15 de julho de 2026',
   },
   'refresh.change.china-agent-policy.fact': {
-    zh: '该约束性规则重点针对面向公众、模拟自然人特征并提供持续情感互动的服务。若不具备该功能，客户服务、问答、工作助手、教育和研究不在其范围内。5月发布的智能体实施意见被视为政策方向，而非新的约束性 GenAI 法规。',
-    es: 'La norma vinculante se centra en servicios dirigidos al público que simulan características de una persona natural y ofrecen interacción emocional continua. Atención al cliente, preguntas y respuestas, asistentes de trabajo, educación e investigación quedan excluidos cuando no existe esa función. La opinión de implementación sobre agentes de mayo se trata como orientación política, no como una nueva regulación vinculante de GenAI.',
-    pt: 'A regra vinculativa centra-se em serviços dirigidos ao público que simulam características de uma pessoa singular e oferecem interação emocional contínua. Atendimento ao cliente, perguntas e respostas, assistentes de trabalho, educação e investigação ficam excluídos quando essa função não existe. O parecer de implementação sobre agentes, de maio, é tratado como orientação política, não como uma nova regulamentação vinculativa de GenAI.',
+    zh: '该约束性规则重点针对面向公众、模拟自然人特征并提供持续情感互动的服务。若不具备该功能，客户服务、问答、工作助手、教育和研究不在其范围内。5月实施意见与7月互操作倡议均被视为政策方向，而非新的约束性 GenAI 法规。',
+    es: 'La norma vinculante se centra en servicios públicos que simulan características humanas y ofrecen interacción emocional continua; los usos sin esa función quedan fuera. La opinión de mayo y la iniciativa de interoperabilidad de julio se tratan como orientación, no como nuevas regulaciones vinculantes de GenAI.',
+    pt: 'A regra vinculativa centra-se em serviços públicos que simulam características humanas e oferecem interação emocional contínua; os usos sem essa função ficam fora. O parecer de maio e a iniciativa de interoperabilidade de julho são tratados como orientação, não como novas regulamentações vinculativas de GenAI.',
   },
   'refresh.change.china-agent-policy.decisionQuestion': {
     zh: '该服务是否确实提供持续情感互动？哪些要求来自约束性法律，哪些仅来自政策方向？',
@@ -859,45 +995,45 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
   // Shared four-market decision rows.
   'market.eu.name': { zh: '欧盟', es: 'Unión Europea', pt: 'União Europeia' },
   'market.eu.legalForm': {
-    zh: '具有约束力的法规 + 不具约束力的实施指引',
-    es: 'Reglamento vinculante + guía de aplicación no vinculante',
-    pt: 'Regulamento vinculativo + orientações de aplicação não vinculativas',
+    zh: '具有约束力的法规 + 不具约束力的指引与自愿准则',
+    es: 'Reglamento vinculante + guía no vinculante y código voluntario',
+    pt: 'Regulamento vinculativo + orientações não vinculativas e código voluntário',
   },
   'market.eu.signal': {
-    zh: 'Article 50 的透明度义务自2026年8月2日起适用；Commission 于7月20日发布最终实施指引。',
-    es: 'Las obligaciones de transparencia de Article 50 son aplicables desde el 2 de agosto de 2026; Commission publicó la guía final de aplicación el 20 de julio.',
-    pt: 'As obrigações de transparência de Article 50 são aplicáveis desde 2 de agosto de 2026; Commission publicou as orientações finais de aplicação em 20 de julho.',
+    zh: 'Article 50 的透明度义务自2026年8月2日起适用。Article 4 仍要求提供者与部署者采取符合情境的 AI 素养措施；各国监督与执法于8月初开始。',
+    es: 'La transparencia de Article 50 se aplica desde el 2 de agosto de 2026. Article 4 sigue exigiendo medidas de alfabetización en IA adaptadas al contexto; la supervisión y aplicación nacionales comenzaron a inicios de agosto.',
+    pt: 'A transparência de Article 50 aplica-se desde 2 de agosto de 2026. Article 4 continua a exigir medidas de literacia em IA adequadas ao contexto; a supervisão e aplicação nacionais começaram no início de agosto.',
   },
   'market.eu.implication': {
-    zh: '当相关段落和产品范围满足适用条件时，披露或输出来源证明不再是未来准备事项，而是当前运营要求。',
-    es: 'Cuando se cumplen el apartado pertinente y el alcance del producto, la evidencia de divulgación o procedencia del resultado es un requisito operativo actual, no una tarea de preparación futura.',
-    pt: 'Quando o número relevante e o âmbito do produto estão preenchidos, a evidência de divulgação ou proveniência do resultado é um requisito operacional atual, não uma tarefa de preparação futura.',
+    zh: '披露与来源证明证据，以及按角色和风险设计的人员准备，都是运营工作流。遵循自愿准则可支持合规证据，但不是决定性证明。',
+    es: 'La evidencia de divulgación y procedencia, junto con la preparación del personal según función y riesgo, son flujos operativos. Adherirse al código voluntario puede apoyar la evidencia, pero no es prueba concluyente.',
+    pt: 'A evidência de divulgação e proveniência, juntamente com a preparação do pessoal segundo função e risco, são fluxos operacionais. A adesão ao código voluntário pode apoiar a evidência, mas não é prova conclusiva.',
   },
   'market.eu.action': {
-    zh: '记录产品范围、适用的 Article 50 段落、所选控制及其运行证据。',
-    es: 'Documentar el alcance del producto, el apartado aplicable de Article 50, el control elegido y su evidencia operativa.',
-    pt: 'Registar o âmbito do produto, o número aplicável de Article 50, o controlo escolhido e a respetiva evidência operacional.',
+    zh: '记录产品范围、适用的 Article 50 段落、控制与证据，并记录 AI 系统使用者、情境、风险和素养措施。',
+    es: 'Documentar alcance, apartado aplicable de Article 50, control y evidencia, además de usuarios del sistema, contexto, riesgo y medidas de alfabetización.',
+    pt: 'Registar âmbito, número aplicável de Article 50, controlo e evidência, além dos utilizadores do sistema, contexto, risco e medidas de literacia.',
   },
   'market.eu.owner': {
-    zh: 'EU 政策 + 产品法律顾问 + 产品/工程',
-    es: 'Política de EU + asesoría jurídica de producto + producto/ingeniería',
-    pt: 'Política de EU + assessoria jurídica de produto + produto/engenharia',
+    zh: 'EU 政策 + 产品法律顾问 + 产品/工程 + 学习发展',
+    es: 'Política de EU + asesoría jurídica + producto/ingeniería + aprendizaje',
+    pt: 'Política de EU + assessoria jurídica + produto/engenharia + aprendizagem',
   },
   'market.eu.evidenceTrigger': {
-    zh: '潜在适用的产品界面缺少逐段范围记录、例外分析、控制负责人或测试证据。',
-    es: 'Una superficie potencialmente incluida carece de registro de alcance por apartado, análisis de excepciones, responsable del control o evidencia probada.',
-    pt: 'Uma superfície potencialmente abrangida não tem registo de âmbito por número, análise de exceções, responsável pelo controlo ou evidência testada.',
+    zh: '适用界面缺少逐段证据，或相关人员缺少符合情境的 AI 素养措施与记录。',
+    es: 'Una superficie incluida carece de evidencia por apartado, o el personal pertinente no tiene medidas y registros de alfabetización contextual.',
+    pt: 'Uma superfície abrangida não tem evidência por número, ou o pessoal relevante não possui medidas e registos de literacia contextual.',
   },
   'market.china.name': { zh: '中国', es: 'China', pt: 'China' },
   'market.china.legalForm': {
-    zh: '具有约束力的部门规章 + 不具约束力的实施意见',
-    es: 'Norma departamental vinculante + opinión de implementación no vinculante',
-    pt: 'Regra departamental vinculativa + parecer de implementação não vinculativo',
+    zh: '具有约束力的部门规章 + 不具约束力的意见与合作倡议',
+    es: 'Norma departamental vinculante + opinión e iniciativa de cooperación no vinculantes',
+    pt: 'Regra departamental vinculativa + parecer e iniciativa de cooperação não vinculativos',
   },
   'market.china.signal': {
-    zh: '一项针对持续拟人化互动的约束性规则于7月15日生效；5月发布的智能体实施意见仍属于政策方向。',
-    es: 'Una norma vinculante sobre interacción antropomórfica continua entró en vigor el 15 de julio; la opinión de implementación sobre agentes de mayo sigue siendo orientación política.',
-    pt: 'Uma regra vinculativa sobre interação antropomórfica contínua entrou em vigor em 15 de julho; o parecer de implementação sobre agentes, de maio, continua a ser orientação política.',
+    zh: '针对持续拟人化互动的约束性规则于7月15日生效；5月智能体意见和7月互操作倡议仍属于政策方向。',
+    es: 'La norma vinculante sobre interacción antropomórfica continua entró en vigor el 15 de julio; la opinión de mayo y la iniciativa de interoperabilidad de julio siguen siendo orientación política.',
+    pt: 'A regra vinculativa sobre interação antropomórfica contínua entrou em vigor em 15 de julho; o parecer de maio e a iniciativa de interoperabilidade de julho continuam a ser orientação política.',
   },
   'market.china.implication': {
     zh: '消费者/社交陪伴类用例需要进行范围筛查；若不具备持续情感互动，普通客户服务、问答、工作助手、教育与研究不在该规则范围内。',
@@ -921,24 +1057,24 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
   },
   'market.us.name': { zh: '美国', es: 'Estados Unidos', pt: 'Estados Unidos' },
   'market.us.legalForm': {
-    zh: '具有约束力的 California 州法 + 分散的联邦、州、行业和出口管制筛查',
-    es: 'Ley vinculante de California + análisis fragmentado federal, estatal, sectorial y de control de exportaciones',
-    pt: 'Lei vinculativa de California + análise fragmentada federal, estadual, setorial e de controlo de exportações',
+    zh: '具有约束力的 California 州法 + 待审紧急法案 + 联邦政策筛查',
+    es: 'Ley vinculante de California + proyecto urgente pendiente + análisis de política federal',
+    pt: 'Lei vinculativa da California + projeto urgente pendente + análise de política federal',
   },
   'market.us.signal': {
-    zh: 'California AI Transparency Act 于2026年8月2日起实施，而联邦、州、行业与出口管制环境仍然分散。',
-    es: 'California AI Transparency Act entró en aplicación el 2 de agosto de 2026 dentro de un panorama aún fragmentado entre normas federales, estatales, sectoriales y de control de exportaciones.',
-    pt: 'California AI Transparency Act começou a aplicar-se em 2 de agosto de 2026 num panorama ainda fragmentado entre regras federais, estaduais, setoriais e de controlo de exportações.',
+    zh: '现行 Chapter 25 义务已经实施。SB 1000 已列入 Assembly 三读日程，若通过可能重大修改范围与控制，但它不是现行法。',
+    es: 'Los deberes vigentes de Chapter 25 ya se aplican. SB 1000 está en el orden de tercera lectura de Assembly y podría modificar materialmente el alcance y los controles si se aprueba, pero no es ley vigente.',
+    pt: 'Os deveres vigentes de Chapter 25 já se aplicam. SB 1000 está na pauta de terceira leitura da Assembly e poderá alterar materialmente o âmbito e os controlos se for aprovado, mas não é lei vigente.',
   },
   'market.us.implication': {
-    zh: '提供者规模、内容模态、平台角色、产品类别和后续2027年义务都可能改变结论。',
-    es: 'La escala del proveedor, la modalidad del contenido, la función de la plataforma, la categoría del producto y las obligaciones posteriores de 2027 pueden cambiar el resultado.',
-    pt: 'A escala do fornecedor, a modalidade do conteúdo, o papel da plataforma, a categoria do produto e as obrigações posteriores de 2027 podem alterar o resultado.',
+    zh: '执行现行门槛和义务，同时保留一个可快速更新的独立 SB 1000 情景。',
+    es: 'Aplicar el umbral y los deberes vigentes y mantener un escenario separado de SB 1000 que pueda actualizarse rápidamente.',
+    pt: 'Aplicar o limiar e os deveres vigentes e manter um cenário separado de SB 1000 que possa ser atualizado rapidamente.',
   },
   'market.us.action': {
-    zh: '先分类 Chapter 25 角色、系统门槛、可访问性和模态，再选择检测、披露与来源证明控制。',
-    es: 'Clasificar la función bajo Chapter 25, el umbral del sistema, la accesibilidad y la modalidad antes de elegir controles de detección, divulgación y procedencia.',
-    pt: 'Classificar o papel ao abrigo de Chapter 25, o limiar do sistema, a acessibilidade e a modalidade antes de escolher controlos de deteção, divulgação e proveniência.',
+    zh: '分类现行 Chapter 25 的范围与控制；在正式证据出现前，只监测全院表决、送交程序及州长行动，不改变基线。',
+    es: 'Clasificar alcance y controles vigentes de Chapter 25; seguir votación, remisión y actuación del Gobernador sin cambiar la base hasta contar con evidencia oficial.',
+    pt: 'Classificar o âmbito e os controlos vigentes de Chapter 25; acompanhar votação, envio e atuação do Governador sem alterar a base até existir prova oficial.',
   },
   'market.us.owner': {
     zh: 'US 州级政策 + 产品法律顾问 + 内容平台/来源证明工程',
@@ -946,9 +1082,9 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
     pt: 'Política estadual de US + assessoria jurídica de produto + engenharia de plataforma de conteúdos/proveniência',
   },
   'market.us.evidenceTrigger': {
-    zh: '门槛、法定角色、模态、产品排除或2027年平台负责人仍未确定。',
-    es: 'Siguen sin resolverse un umbral, una función legal, una modalidad, una exclusión de producto o el responsable de plataforma para 2027.',
-    pt: 'Continuam por resolver um limiar, um papel legal, uma modalidade, uma exclusão de produto ou o responsável de plataforma para 2027.',
+    zh: '现行法范围事实仍未解决，或官方证据显示 SB 1000 已修订、通过、送交、否决或成章。',
+    es: 'Un hecho de alcance vigente sigue sin resolverse, o evidencia oficial muestra enmienda, aprobación, remisión, veto o promulgación de SB 1000.',
+    pt: 'Um facto de âmbito vigente continua por resolver, ou prova oficial mostra alteração, aprovação, envio, veto ou promulgação de SB 1000.',
   },
   'market.singapore.name': { zh: '新加坡', es: 'Singapur', pt: 'Singapura' },
   'market.singapore.legalForm': {
@@ -957,9 +1093,9 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
     pt: 'Quadro de governação não vinculativo + orientações de sandbox',
   },
   'market.singapore.signal': {
-    zh: '2026年智能体 AI 框架提供不具约束力的部署指引与测试方向。',
-    es: 'El marco de 2026 para IA agéntica ofrece orientación no vinculante sobre despliegue y pruebas.',
-    pt: 'O quadro de 2026 para IA agêntica oferece orientações não vinculativas sobre implementação e testes.',
+    zh: 'IMDA 当前 v1.5 智能体 AI 框架与沙盒材料就多智能体、第三方智能体、自动化偏差和保障风险提供自愿指引。',
+    es: 'El marco vigente v1.5 de IMDA y el material de sandbox ofrecen guía voluntaria sobre multiagentes, agentes de terceros, sesgo de automatización y riesgos de aseguramiento.',
+    pt: 'O quadro atual v1.5 da IMDA e o material de sandbox oferecem orientação voluntária sobre multiagentes, agentes de terceiros, viés de automação e riscos de garantia.',
   },
   'market.singapore.implication': {
     zh: '保障证据可以支持负责任采用，但不能被视为法律授权。',
@@ -1089,14 +1225,14 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
     pt: 'A análise executiva de políticas só está disponível na pré-visualização de pesquisa.',
   },
   'executive.boundary.text': {
-    zh: '此 {profile} 应用页面不展示预览中的当前政策结论。可单独下载的作品示例仍是公开且带状态标识的作品集材料，并非生产政策语料库中的记录。',
-    es: 'Esta página de la aplicación {profile} no muestra las conclusiones de política vigentes de la vista previa. Las muestras descargables por separado siguen siendo materiales públicos de portafolio con estado indicado; no son registros del corpus de políticas de producción.',
-    pt: 'Esta página da aplicação {profile} não apresenta as conclusões de política vigentes da pré-visualização. As amostras transferíveis separadamente continuam a ser materiais públicos de portefólio com estado identificado; não são registos do corpus de políticas de produção.',
+    zh: '此 {profile} 应用页面不展示预览中带日期的政策结论。可单独下载的作品示例仍是公开且带状态标识的作品集材料，并非生产政策语料库中的记录。',
+    es: 'Esta página de la aplicación {profile} no muestra las conclusiones normativas fechadas de la vista previa. Las muestras descargables por separado siguen siendo materiales públicos de portafolio con estado indicado; no son registros del corpus de políticas de producción.',
+    pt: 'Esta página da aplicação {profile} não apresenta as conclusões de política datadas da pré-visualização. As amostras transferíveis separadamente continuam a ser materiais públicos de portefólio com estado identificado; não são registos do corpus de políticas de produção.',
   },
   'executive.hero.eyebrow': {
-    zh: '高管简报 · 2026年8月7日',
-    es: 'Informe ejecutivo · 7 de agosto de 2026',
-    pt: 'Briefing executivo · 7 de agosto de 2026',
+    zh: '高管简报 · 2026年8月13日',
+    es: 'Informe ejecutivo · 13 de agosto de 2026',
+    pt: 'Briefing executivo · 13 de agosto de 2026',
   },
   'executive.hero.title': {
     zh: '全球智能体 AI 上线准备度',
@@ -1284,9 +1420,9 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
     pt: 'Perfil do sistema e das capacidades confirmado',
   },
   'executive.gates.2': {
-    zh: '当前一手来源已核验',
-    es: 'Fuentes primarias vigentes verificadas',
-    pt: 'Fontes primárias vigentes verificadas',
+    zh: '带日期的一手来源已核验',
+    es: 'Fuentes primarias fechadas verificadas',
+    pt: 'Fontes primárias datadas verificadas',
   },
   'executive.gates.3': {
     zh: '控制已经测试，而非仅有计划',
@@ -1310,9 +1446,9 @@ export const CORE_PAGE_TRANSLATIONS: Record<string, { zh: string; es: string; pt
     pt: 'Os factos deste briefing limitam-se à pré-visualização do Atlas e às fontes oficiais datadas indicadas no',
   },
   'executive.boundary.link': {
-    zh: '当前政策情报简报（英文）',
-    es: 'informe de inteligencia actual (en inglés)',
-    pt: 'briefing de inteligência atual (em inglês)',
+    zh: '带日期的政策情报简报（英文）',
+    es: 'informe de inteligencia fechado (en inglés)',
+    pt: 'briefing de inteligência datado (em inglês)',
   },
   'executive.boundary.suffix': {
     zh: '影响与行动属于分析。本页不构成法律意见或公司建议。',

@@ -4,6 +4,8 @@ test('production routes exclude preview records while public portfolio files ret
   await page.goto('/');
   await expect(page.getByTestId('fixture-banner')).toHaveCount(0);
   await expect(page.getByText('No published content in this profile.')).toBeVisible();
+  await expect(page.locator('.jurisdiction-grid a')).toHaveCount(4);
+  await expect(page.locator('.jurisdiction-count')).toHaveText(Array(4).fill('0 published instruments'));
 
   await page.goto('/instruments');
   await expect(page.getByTestId('fixture-banner')).toHaveCount(0);

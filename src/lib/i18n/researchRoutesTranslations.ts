@@ -1,30 +1,45 @@
 export const RESEARCH_ROUTES_TRANSLATIONS: Record<string, { zh: string; es: string; pt: string }> = {
   // Jurisdiction routes.
   'research.jurisdictions.title': { zh: '司法管辖区', es: 'Jurisdicciones', pt: 'Jurisdições' },
-  'research.jurisdictions.note': {
+  'research.jurisdictions.note.preview': {
+    zh: '研究预览版统计清单范围内的记录；它们的审核中发布状态保持不变。',
+    es: 'La vista previa cuenta registros delimitados por el manifiesto; su estado de publicación en revisión no cambia.',
+    pt: 'A prévia conta registos delimitados pelo manifesto; o seu estado de publicação em revisão não muda.',
+  },
+  'research.jurisdictions.note.fixtures': {
+    zh: '模拟数据统计均为虚构，仅用于测试产品体验。',
+    es: 'Los recuentos de datos ficticios existen solo para probar la experiencia del producto.',
+    pt: 'As contagens de dados fictícios existem apenas para testar a experiência do produto.',
+  },
+  'research.jurisdictions.note.production': {
     zh: '生产环境中的司法管辖区摘要仅展示已发布记录。',
     es: 'En producción, los resúmenes por jurisdicción solo muestran registros publicados.',
     pt: 'Em produção, os resumos por jurisdição apresentam apenas registos publicados.',
   },
-  'research.jurisdictions.count': {
-    zh: '{count} 项已发布政策文件',
-    es: '{count} instrumentos publicados',
-    pt: '{count} instrumentos publicados',
-  },
+  'research.jurisdictions.count.preview': { zh: '{count} 项范围内政策文件', es: '{count} instrumentos delimitados', pt: '{count} instrumentos delimitados' },
+  'research.jurisdictions.count.fixtures': { zh: '{count} 项虚构政策文件', es: '{count} instrumentos ficticios', pt: '{count} instrumentos fictícios' },
+  'research.jurisdictions.count.production': { zh: '{count} 项已发布政策文件', es: '{count} instrumentos publicados', pt: '{count} instrumentos publicados' },
+  'research.jurisdictions.count.preview.one': { zh: '{count} 项范围内政策文件', es: '{count} instrumento delimitado', pt: '{count} instrumento delimitado' },
+  'research.jurisdictions.count.fixtures.one': { zh: '{count} 项虚构政策文件', es: '{count} instrumento ficticio', pt: '{count} instrumento fictício' },
+  'research.jurisdictions.count.production.one': { zh: '{count} 项已发布政策文件', es: '{count} instrumento publicado', pt: '{count} instrumento publicado' },
   'research.jurisdiction.us.name': { zh: '美国', es: 'Estados Unidos', pt: 'Estados Unidos' },
   'research.jurisdiction.eu.name': { zh: '欧盟', es: 'Unión Europea', pt: 'União Europeia' },
   'research.jurisdiction.sg.name': { zh: '新加坡', es: 'Singapur', pt: 'Singapura' },
   'research.jurisdiction.cn.name': { zh: '中国', es: 'China', pt: 'China' },
-  'research.jurisdiction.detail.note': {
-    zh: '▲ 在底层记录发布前，分析摘要会被有意保留。跟踪器提供规范的研究视图。',
-    es: '▲ Los resúmenes analíticos se omiten deliberadamente hasta que se publiquen los registros subyacentes. El rastreador ofrece la vista canónica de investigación.',
-    pt: '▲ Os resumos analíticos são deliberadamente retidos até à publicação dos registos subjacentes. O rastreador fornece a vista canónica da investigação.',
+  'research.jurisdiction.detail.note.preview': {
+    zh: '此研究预览版展示清单范围内的记录，包括仍在审核中的记录。追踪器是规范研究视图。',
+    es: 'Esta vista previa muestra registros delimitados por el manifiesto, incluidos los que siguen en revisión. El rastreador es la vista canónica de investigación.',
+    pt: 'Esta prévia mostra registos delimitados pelo manifesto, incluindo os que permanecem em revisão. O monitor é a vista canónica da investigação.',
   },
-  'research.jurisdiction.detail.empty': {
-    zh: '此司法管辖区没有已发布的政策文件。',
-    es: 'No hay instrumentos publicados para esta jurisdicción.',
-    pt: 'Não há instrumentos publicados para esta jurisdição.',
+  'research.jurisdiction.detail.note.fixtures': { zh: '此配置中的每条记录都是虚构模拟数据。', es: 'Todos los registros de este perfil son datos ficticios.', pt: 'Todos os registos deste perfil são dados fictícios.' },
+  'research.jurisdiction.detail.note.production': {
+    zh: '生产环境仅展示经独立批准并已发布的记录。追踪器是规范研究视图。',
+    es: 'Producción muestra solo registros publicados y aprobados de forma independiente. El rastreador es la vista canónica de investigación.',
+    pt: 'Produção mostra apenas registos publicados e aprovados de forma independente. O monitor é a vista canónica da investigação.',
   },
+  'research.jurisdiction.detail.empty.preview': { zh: '此司法管辖区没有清单范围内的政策文件。', es: 'No hay instrumentos delimitados por el manifiesto para esta jurisdicción.', pt: 'Não há instrumentos delimitados pelo manifesto para esta jurisdição.' },
+  'research.jurisdiction.detail.empty.fixtures': { zh: '此司法管辖区没有虚构政策文件。', es: 'No hay instrumentos ficticios para esta jurisdicción.', pt: 'Não há instrumentos fictícios para esta jurisdição.' },
+  'research.jurisdiction.detail.empty.production': { zh: '此司法管辖区没有已发布的政策文件。', es: 'No hay instrumentos publicados para esta jurisdicción.', pt: 'Não há instrumentos publicados para esta jurisdição.' },
   'research.lifecycle.proposed': { zh: '已提出', es: 'propuesto', pt: 'proposto' },
   'research.lifecycle.adopted_not_yet_applicable': {
     zh: '已通过但尚未适用',

@@ -16,7 +16,7 @@ export default function ExecutiveBriefPage() {
       <section className="page-intro">
         <p className="eyebrow"><LocalizedText id="boundary.eyebrow" fallback="Profile boundary" /></p>
         <h1><LocalizedText id="executive.boundary.title" fallback="Executive policy analysis is available only in the research preview." /></h1>
-        <p><LocalizedText id="executive.boundary.text" fallback="This {profile} application page does not render the preview's current-policy conclusions. Separately downloadable work samples remain public, status-labeled portfolio artifacts; they are not records in the production policy corpus." values={{ profile: ds.profile }} /></p>
+        <p><LocalizedText id="executive.boundary.text" fallback="This {profile} application page does not render the preview's dated policy conclusions. Separately downloadable work samples remain public, status-labeled portfolio artifacts; they are not records in the production policy corpus." values={{ profile: ds.profile }} /></p>
         <div className="hero-actions">
           <Link className="button button-primary" href="/instruments"><LocalizedText id="common.viewRecords" fallback="View profile records" /></Link>
           <Link className="button button-secondary" href="/methodology"><LocalizedText id="common.readMethodology" fallback="Read the methodology" /></Link>
@@ -27,7 +27,7 @@ export default function ExecutiveBriefPage() {
   return (
     <article className="brief-page">
       <header className="brief-header">
-        <p className="eyebrow"><LocalizedText id="executive.hero.eyebrow" fallback="Executive brief · 7 August 2026" /></p>
+        <p className="eyebrow"><LocalizedText id="executive.hero.eyebrow" fallback="Executive brief · 13 August 2026" /></p>
         <h1><LocalizedText id="executive.hero.title" fallback="Global agentic AI launch readiness" /></h1>
         <p className="brief-dek"><LocalizedText id="executive.hero.dek" fallback="A decision memo for a hypothetical customer-facing agent operating across four policy environments." /></p>
         <div className="decision-banner">
@@ -41,9 +41,9 @@ export default function ExecutiveBriefPage() {
         <div className="section-heading compact">
           <div><p className="eyebrow"><LocalizedText id="executive.market.eyebrow" fallback="Market readout" /></p><h2><LocalizedText id="executive.market.title" fallback="One system, four different policy questions" /></h2></div>
         </div>
-        <div className="market-table-wrap">
+        <div className="market-table-wrap" tabIndex={0} role="region" aria-labelledby="executive-market-caption">
           <table className="market-table">
-            <caption className="visually-hidden"><LocalizedText id="executive.caption" fallback="Market-specific signals, implications, and actions in the scoped research preview" /></caption>
+            <caption className="visually-hidden" id="executive-market-caption"><LocalizedText id="executive.caption" fallback="Market-specific signals, implications, and actions in the scoped research preview" /></caption>
             <thead><tr><th scope="col"><LocalizedText id="executive.header.market" fallback="Market" /></th><th scope="col"><LocalizedText id="executive.header.signal" fallback="Verified signal in scope" /></th><th scope="col"><LocalizedText id="executive.header.implication" fallback="Business implication" /></th><th scope="col"><LocalizedText id="executive.header.action" fallback="Action now" /></th></tr></thead>
             <tbody>{EXECUTIVE_MARKETS.map((row) => (
               <tr key={row.market}>
@@ -106,7 +106,7 @@ export default function ExecutiveBriefPage() {
         <ol className="gate-grid">
           {[
             'System and capability profile confirmed',
-            'Current primary sources checked',
+            'Dated primary sources checked',
             'Controls tested, not merely planned',
             'Sensitivity and unresolved questions shown',
             'Qualified human review recorded',
@@ -115,7 +115,7 @@ export default function ExecutiveBriefPage() {
       </section>
 
       <section className="brief-sources">
-        <p><b><LocalizedText id="executive.boundary.label" fallback="Evidence boundary." /></b> <LocalizedText id="executive.boundary.prefix" fallback="Facts in this brief are limited to the Atlas preview and the dated official sources listed in the" /> <a href="/downloads/global-ai-policy-intelligence-brief.md"><LocalizedText id="executive.boundary.link" fallback="current intelligence brief (English)" /></a>. <LocalizedText id="executive.boundary.suffix" fallback="Implications and actions are analysis. This is not legal advice or a company recommendation." /></p>
+        <p><b><LocalizedText id="executive.boundary.label" fallback="Evidence boundary." /></b> <LocalizedText id="executive.boundary.prefix" fallback="Facts in this brief are limited to the Atlas preview and the dated official sources listed in the" /> <a href="/downloads/global-ai-policy-intelligence-brief.md"><LocalizedText id="executive.boundary.link" fallback="dated intelligence brief (English)" /></a>. <LocalizedText id="executive.boundary.suffix" fallback="Implications and actions are analysis. This is not legal advice or a company recommendation." /></p>
         <div className="hero-actions">
           <a className="button button-primary" href="/downloads/executive-brief.md"><LocalizedText id="executive.cta.open" fallback="Open the brief (English)" /></a>
           <Link className="button button-secondary" href="/provisions/eu-gdpr%3Aart22"><LocalizedText id="executive.cta.trace" fallback="Trace a claim" /></Link>

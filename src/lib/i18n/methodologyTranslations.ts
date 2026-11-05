@@ -99,6 +99,16 @@ export const METHODOLOGY_TRANSLATIONS: Record<string, { zh: string; es: string; 
     es: 'Se volvieron a comprobar las fuentes oficiales que sustentan el ciclo legislativo y el artículo 50 de la UE, la transparencia de California y la distinción china entre norma vinculante y orientación de política. Esta verificación acotada de vigencia no es seguimiento exhaustivo ni en tiempo real.',
     pt: 'Foram novamente verificadas as fontes oficiais que sustentam o ciclo legislativo e o artigo 50 da UE, a transparência da Califórnia e a distinção chinesa entre regra vinculativa e orientação de política. Esta verificação delimitada de atualidade não é monitorização abrangente nem em tempo real.',
   },
+  'method.monitoring.2026-08-13.action': {
+    zh: '官方来源范围核验',
+    es: 'actualización acotada de fuentes oficiales',
+    pt: 'atualização delimitada de fontes oficiais',
+  },
+  'method.monitoring.2026-08-13.note': {
+    zh: '重新核验了清单中的欧盟、美国、中国、新加坡、韩国和英国官方来源，截止2026年8月13日。现有跟踪法规在8月7日之后未发现实质性变化；本次核验补充了先前遗漏的官方来源，并将加州 SB 1000 标记为尚待审议的提案，而非现行法。这项选择性审查并非实时或全面监测。',
+    es: 'Se volvieron a comprobar las fuentes oficiales enumeradas de la UE, Estados Unidos, China, Singapur, Corea y el Reino Unido hasta el 13 de agosto de 2026. No se halló ningún cambio sustantivo posterior al 7 de agosto en los instrumentos ya seguidos; la revisión añade fuentes oficiales omitidas anteriormente y señala la SB 1000 de California como propuesta pendiente, no como ley vigente. Esta revisión selectiva no constituye un seguimiento exhaustivo ni en tiempo real.',
+    pt: 'Foram novamente verificadas as fontes oficiais listadas da UE, dos Estados Unidos, da China, de Singapura, da Coreia e do Reino Unido até 13 de agosto de 2026. Não foi encontrada qualquer alteração substancial posterior a 7 de agosto nos instrumentos já acompanhados; a revisão acrescenta fontes oficiais antes omitidas e assinala a SB 1000 da Califórnia como proposta pendente, não como lei vigente. Esta revisão seletiva não constitui monitorização abrangente nem em tempo real.',
+  },
   'method.workflow.title': {
     zh: '研究流程',
     es: 'Flujo de investigación',

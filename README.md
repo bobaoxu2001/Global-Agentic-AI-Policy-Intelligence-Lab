@@ -42,7 +42,7 @@ This is the throughline from policy source to accountable action:
 | Multilingual presentation layer | **Ready in Preview** | Persistent English, Simplified Chinese, Spanish, and Portuguese UI across the research routes; canonical evidence and English downloads remain unchanged |
 | Applied AI risk-management method | **Ready in Preview** | Four-function NIST AI RMF application with public-fact/proposal boundaries, product-surface mapping, accountable roles, metrics, management options, and official sources |
 | Fixture product demo | **Runnable, fictional** | Interaction, calculation, and design testing only; never deploy |
-| Production application path | **Fail-closed** | Structured records render only when `review_status` is `published` |
+| Production application path | **Fail-closed** | Structured records render only when `review_status` is `published` and the latest independent owner approval matches the exact current record-and-source digest |
 | Production corpus | **Not publication-ready** | No structured record is published; human Pass 2 review and owner decisions remain incomplete |
 
 Working documents and preview downloads remain explicitly labeled in the repository. The production data boundary applies to structured application records; it does not turn working artifacts into approved publications.
@@ -149,7 +149,7 @@ Legacy paths `/calculator`, `/policies`, and `/brief` permanently redirect to ca
 
 ## Remaining gaps
 
-1. Complete independent human policy/legal review and record the owner decision for every structured record.
+1. Complete independent human policy/legal review and record a revision-bound owner decision (`record_sha256`) for every structured record; any substantive record or referenced-source edit requires a new decision.
 2. Deepen provision-level coverage, especially outside the current four-jurisdiction structured preview.
 3. Add real stakeholder engagement and cross-functional outcomes only when they actually occur; do not simulate experience as fact.
 4. Re-run production validation and browser checks only after records are eligible for publication.

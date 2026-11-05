@@ -9,8 +9,8 @@ import {
 } from '@/lib/portfolio/policySignals';
 
 export const metadata: Metadata = {
-  title: 'Policy Refresh — 7 August 2026',
-  description: 'A source-traceable change brief covering the EU AI Act lifecycle, EU and California transparency duties, and China agent-policy signals.',
+  title: 'Policy Refresh — 13 August 2026',
+  description: 'A source-traceable 13 August brief separating current policy, pending California SB 1000, and official-source coverage corrections.',
 };
 
 export default function PolicyRefreshPage() {
@@ -19,7 +19,7 @@ export default function PolicyRefreshPage() {
     return (
       <section className="page-intro">
         <p className="eyebrow"><LocalizedText id="boundary.eyebrow" fallback="Profile boundary" /></p>
-        <h1><LocalizedText id="refresh.boundary.title" fallback="The current policy refresh is available only in the research preview." /></h1>
+        <h1><LocalizedText id="refresh.boundary.title" fallback="The dated policy refresh is available only in the research preview." /></h1>
         <p><LocalizedText id="refresh.boundary.text" fallback="This {profile} profile does not render preview-only monitoring conclusions. Production publication remains gated by documented human review." values={{ profile: ds.profile }} /></p>
         <div className="hero-actions">
           <Link className="button button-primary" href="/instruments"><LocalizedText id="common.viewRecords" fallback="View profile records" /></Link>
@@ -35,8 +35,8 @@ export default function PolicyRefreshPage() {
     <article className="refresh-page">
       <header className="refresh-header">
         <p className="eyebrow"><LocalizedText id="refresh.hero.eyebrow" fallback="Policy change brief" /> · {PORTFOLIO_SIGNAL_AS_OF}</p>
-        <h1><LocalizedText id="refresh.hero.title" fallback="Four changes. One operating question." /></h1>
-        <p className="refresh-dek"><LocalizedText id="refresh.hero.dek" fallback="What changed in the law or policy signal, what changed in the decision, and what evidence should a global AI team be able to produce now?" /></p>
+        <h1><LocalizedText id="refresh.hero.title" fallback="Current law, one pending trigger, and coverage corrections." /></h1>
+        <p className="refresh-dek"><LocalizedText id="refresh.hero.dek" fallback="The 13 August pass found no post-7 August substantive change in the tracked instruments. It re-verifies the baseline, adds omitted official coverage, and keeps California SB 1000 visibly pending." /></p>
         <p className="visually-hidden" id="refresh-posture-label"><LocalizedText id="refresh.posture.label" fallback="Change in operating posture" /></p>
         <div className="refresh-posture" aria-labelledby="refresh-posture-label">
           <div>
@@ -45,9 +45,9 @@ export default function PolicyRefreshPage() {
             <p><LocalizedText id="refresh.posture.before.text" fallback="Deadline readiness and an open Official Journal trigger." /></p>
           </div>
           <div>
-            <span><LocalizedText id="refresh.posture.now.label" fallback="7 August posture" /></span>
-            <strong><LocalizedText id="refresh.posture.now.title" fallback="Correct the lifecycle and test operating evidence now." /></strong>
-            <p><LocalizedText id="refresh.posture.now.text" fallback="Product scope, applicable rule, working control, owner, proof, and decision expiry." /></p>
+            <span><LocalizedText id="refresh.posture.now.label" fallback="13 August posture" /></span>
+            <strong><LocalizedText id="refresh.posture.now.title" fallback="Apply current law and track SB 1000 separately." /></strong>
+            <p><LocalizedText id="refresh.posture.now.text" fallback="Re-verified baseline, restored source coverage, operating evidence, and a next-day pending-bill trigger." /></p>
           </div>
         </div>
       </header>
@@ -55,10 +55,10 @@ export default function PolicyRefreshPage() {
       <section className="brief-section">
         <div className="section-heading">
           <div>
-            <p className="eyebrow"><LocalizedText id="refresh.log.eyebrow" fallback="Verified change log" /></p>
+            <p className="eyebrow"><LocalizedText id="refresh.log.eyebrow" fallback="Re-verified change log" /></p>
             <h2><LocalizedText id="refresh.log.title" fallback="Before, now, and the decision consequence" /></h2>
           </div>
-          <p><LocalizedText id="refresh.log.note" fallback="Facts were checked against the linked official sources on 7 August 2026. Questions, implications, and actions are analysis." /></p>
+          <p><LocalizedText id="refresh.log.note" fallback="Facts were checked against the linked official sources on 13 August 2026. Pending proposals and non-binding sources are labeled separately; questions, implications, and actions are analysis." /></p>
         </div>
         <div className="refresh-change-grid">
           {POLICY_REFRESH_CHANGES.map((change, index) => (

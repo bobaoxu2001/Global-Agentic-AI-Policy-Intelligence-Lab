@@ -145,9 +145,9 @@ export const WORK_SAMPLES_TRANSLATIONS: Record<string, { zh: string; es: string;
     pt: ' para verificar o nível da fonte, o ciclo de vida, a confiança, a última verificação e o limite entre fato → inferência → recomendação.',
   },
   'workSamples.sample.policy-refresh.type': {
-    zh: '最新变化',
-    es: 'Último cambio',
-    pt: 'Atualização mais recente',
+    zh: '带日期的变化',
+    es: 'Cambio fechado',
+    pt: 'Mudança datada',
   },
   'workSamples.sample.policy-refresh.title': {
     zh: '7—8 月政策更新',
@@ -155,9 +155,9 @@ export const WORK_SAMPLES_TRANSLATIONS: Record<string, { zh: string; es: string;
     pt: 'Atualização de políticas de julho-agosto',
   },
   'workSamples.sample.policy-refresh.proof': {
-    zh: '一份前后对照的决策简报，涵盖欧盟立法周期修正、已生效的欧盟与加州透明度义务，以及中国具有约束力的拟人化互动规则与不具约束力的智能体政策方向之间的区别。',
-    es: 'Un informe decisorio de antes y después sobre la corrección del ciclo legislativo de la UE, las obligaciones de transparencia ya vigentes en la UE y California, y la distinción entre la norma china vinculante sobre interacción antropomórfica y la orientación no vinculante sobre agentes.',
-    pt: 'Um informe decisório de antes e depois sobre a correção do ciclo legislativo da UE, as obrigações de transparência já vigentes na UE e na Califórnia e a distinção entre a regra chinesa vinculante sobre interação antropomórfica e a orientação não vinculante sobre agentes.',
+    zh: '截至8月13日的官方来源更新，明确区分现行的欧盟、加州和中国规则、待审的 California SB 1000，以及不具约束力的指引、研究、倡议和提案。',
+    es: 'Una actualización de fuentes oficiales al 13 de agosto que separa las normas vigentes de la UE, California y China, California SB 1000 pendiente y la guía, investigación, iniciativas y propuestas no vinculantes.',
+    pt: 'Uma atualização de fontes oficiais até 13 de agosto que separa as regras vigentes da UE, California e China, California SB 1000 pendente e as orientações, investigação, iniciativas e propostas não vinculativas.',
   },
   'workSamples.sample.policy-refresh.limit': {
     zh: '选择性变化说明；产品范围和法律结论仍取决于责任人及法律顾问。',
@@ -180,9 +180,9 @@ export const WORK_SAMPLES_TRANSLATIONS: Record<string, { zh: string; es: string;
     pt: 'Informe de inteligência sobre políticas globais de IA',
   },
   'workSamples.sample.global-intelligence.proof': {
-    zh: '更新带日期的欧盟、美国、中国、新加坡、韩国和英国政策信号，并列出影响、负责人、风险、机会与触发条件。',
-    es: 'Señales actualizadas y fechadas de la UE, Estados Unidos, China, Singapur, Corea y el Reino Unido, con implicaciones, responsables, riesgos, oportunidades y factores desencadenantes.',
-    pt: 'Sinais atualizados e datados da UE, dos Estados Unidos, da China, de Singapura, da Coreia e do Reino Unido, com implicações, responsáveis, riscos, oportunidades e gatilhos.',
+    zh: '欧盟、美国、中国、新加坡、韩国和英国的带日期政策信号，核验截止 2026 年 8 月 13 日，并列出影响、负责人、风险、机会与触发条件。',
+    es: 'Señales fechadas de la UE, Estados Unidos, China, Singapur, Corea y el Reino Unido, verificadas hasta el 13 de agosto de 2026, con implicaciones, responsables, riesgos, oportunidades y factores desencadenantes.',
+    pt: 'Sinais datados da UE, dos Estados Unidos, da China, de Singapura, da Coreia e do Reino Unido, verificados até 13 de agosto de 2026, com implicações, responsáveis, riscos, oportunidades e gatilhos.',
   },
   'workSamples.sample.global-intelligence.limit': {
     zh: '选择性高管扫描；并非全面或实时监测。',

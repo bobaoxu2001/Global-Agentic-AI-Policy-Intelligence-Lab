@@ -5,7 +5,7 @@
  */
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { zodToJsonSchema } from 'zod-to-json-schema';
+import { z } from 'zod';
 import {
   AssessmentSchema, CitationSchema, EpistemicBlockSchema,
   InstrumentSchema, ProvisionSchema, ScenarioSchema, SourceSchema,
@@ -13,8 +13,8 @@ import {
 
 const out = join(process.cwd(), 'schemas');
 mkdirSync(out, { recursive: true });
-const emit = (name: string, schema: Parameters<typeof zodToJsonSchema>[0], id: string) => {
-  const json = zodToJsonSchema(schema, { name, $refStrategy: 'none' });
+const emit = (name: string, schema: z.ZodType, id: string) => {
+  const json = z.toJSONSchema(schema, { target: 'draft-7', io: 'input', unrepresentable: 'any' });
   (json as Record<string, unknown>)['$id'] = id;
   (json as Record<string, unknown>)['$comment'] =
     'GENERATED from src/lib/schemas (Zod is normative — ENG §8/MN-15). Do not edit by hand.';

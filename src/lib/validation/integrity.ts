@@ -5,6 +5,7 @@
  * so an author can fix a batch in one pass (ENG §16).
  */
 import { z } from 'zod';
+import { createHash } from 'node:crypto';
 import ownerSignoffLogJson from '../../../docs/research/OWNER_SIGNOFF_LOG.json';
 import { computeAdrs, type Dims, type JComponents, type MitigationClass } from '../adrs';
 import type {
@@ -168,6 +169,10 @@ const OwnerSignoffDecisionSchema = z
     provision_inheritance: z.boolean(),
     prepared_by: z.string().trim().min(1),
     scope_note: z.string().trim().min(1),
+    // Historical decisions predate revision binding, so the field remains
+    // optional at parse time. A published record still fails closed below
+    // unless its latest approval carries the matching digest.
+    record_sha256: z.string().regex(/^[0-9a-f]{64}$/).optional(),
   })
   .strict();
 
@@ -181,10 +186,55 @@ type PublishedRecordType = OwnerSignoffDecision['record_type'];
 interface PublishedRecord {
   id: string;
   recordType: PublishedRecordType;
+  record: unknown;
+}
+
+function sourceIdsForPublishedRecord(record: PublishedRecord): string[] {
+  const value = record.record as Record<string, unknown>;
+  if (record.recordType === 'instrument') {
+    return Array.isArray(value.source_ids) ? value.source_ids.filter((id): id is string => typeof id === 'string') : [];
+  }
+  if (record.recordType === 'provision') {
+    return [value.source_id, value.translation_source_id].filter((id): id is string => typeof id === 'string');
+  }
+  if (record.recordType === 'changelog') {
+    return typeof value.source_id === 'string' ? [value.source_id] : [];
+  }
+  return [];
 }
 
 const decisionKey = (recordType: PublishedRecordType, recordId: string): string => `${recordType}:${recordId}`;
 const normalizedPerson = (name: string): string => name.trim().toLocaleLowerCase('en-US');
+
+function canonicalizeForPublicationDigest(value: unknown, topLevel = true): unknown {
+  if (Array.isArray(value)) return value.map((entry) => canonicalizeForPublicationDigest(entry, false));
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(
+      Object.entries(value as Record<string, unknown>)
+        .filter(([key, entry]) => entry !== undefined && !(topLevel && key === 'review_status'))
+        .sort(([left], [right]) => left < right ? -1 : left > right ? 1 : 0)
+        .map(([key, entry]) => [key, canonicalizeForPublicationDigest(entry, false)]),
+    );
+  }
+  return value;
+}
+
+/**
+ * Stable digest for the exact record and resolved-source revisions an owner
+ * reviewed. The mutable record-level review_status is intentionally excluded
+ * so an approved in-review row can be promoted without invalidating its
+ * approval. Every substantive record and source field remains bound.
+ */
+export function publicationRecordSha256(record: unknown, resolvedSources: readonly SourceRecord[] = []): string {
+  const sources = [...resolvedSources].sort((left, right) => left.id < right.id ? -1 : left.id > right.id ? 1 : 0);
+  const envelope = {
+    record: canonicalizeForPublicationDigest(record),
+    resolved_sources: sources.map((source) => canonicalizeForPublicationDigest(source)),
+  };
+  return createHash('sha256')
+    .update(JSON.stringify(canonicalizeForPublicationDigest(envelope)))
+    .digest('hex');
+}
 
 /**
  * Rule 8: production renders a partial published subset. Draft and in-review
@@ -263,19 +313,20 @@ export function checkProductionPublicationGate(
   }
 
   const publishedRecords: PublishedRecord[] = [
-    ...publishedInstruments.map((record) => ({ id: record.id, recordType: 'instrument' as const })),
-    ...publishedProvisions.map((record) => ({ id: record.id, recordType: 'provision' as const })),
+    ...publishedInstruments.map((record) => ({ id: record.id, recordType: 'instrument' as const, record })),
+    ...publishedProvisions.map((record) => ({ id: record.id, recordType: 'provision' as const, record })),
     ...ds.assessments
       .filter((record) => record.review_status === 'published')
-      .map((record) => ({ id: record.id, recordType: 'assessment' as const })),
-    ...publishedChangelog.map((record) => ({ id: record.id, recordType: 'changelog' as const })),
+      .map((record) => ({ id: record.id, recordType: 'assessment' as const, record })),
+    ...publishedChangelog.map((record) => ({ id: record.id, recordType: 'changelog' as const, record })),
     ...controls
       .filter((record) => record.review_status === 'published')
-      .map((record) => ({ id: record.id, recordType: 'control' as const })),
+      .map((record) => ({ id: record.id, recordType: 'control' as const, record })),
     ...controlMaps
       .filter((record) => record.review_status === 'published')
-      .map((record) => ({ id: record.id, recordType: 'control_provision_map' as const })),
+      .map((record) => ({ id: record.id, recordType: 'control_provision_map' as const, record })),
   ];
+  const sourcesById = new Map(ds.sources.map((source) => [source.id, source]));
 
   for (const record of publishedRecords) {
     const decision = latestDecisions.get(decisionKey(record.recordType, record.id));
@@ -296,6 +347,22 @@ export function checkProductionPublicationGate(
           'R8-reviewer-independence',
           record.id,
           `owner_reviewer "${decision.owner_reviewer}" must differ from prepared_by "${decision.prepared_by}"`,
+        ),
+      );
+    }
+    const resolvedSources = sourceIdsForPublishedRecord(record)
+      .map((sourceId) => sourcesById.get(sourceId))
+      .filter((source): source is SourceRecord => source !== undefined);
+    const currentRecordSha256 = publicationRecordSha256(record.record, resolvedSources);
+    if (decision.record_sha256 !== currentRecordSha256) {
+      const detail = decision.record_sha256
+        ? `approved digest ${decision.record_sha256} does not match current digest ${currentRecordSha256}`
+        : `approval has no record_sha256; current digest is ${currentRecordSha256}`;
+      errors.push(
+        err(
+          'R8-stale-approval',
+          record.id,
+          `published ${record.recordType} requires owner approval for the exact current record and resolved-source revisions; ${detail}`,
         ),
       );
     }

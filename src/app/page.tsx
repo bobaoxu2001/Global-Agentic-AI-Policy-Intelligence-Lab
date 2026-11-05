@@ -4,6 +4,15 @@ import { getPageDataset } from '@/lib/validation/pageData';
 import { derivePreviewSummary } from '@/lib/validation/previewSummary';
 import { PORTFOLIO_SIGNAL_AS_OF, PORTFOLIO_SIGNALS, PORTFOLIO_SOURCES } from '@/lib/portfolio/policySignals';
 import { LocalizedText } from '@/components/LocalizedText';
+import { EvidenceFreshnessPanel } from '@/components/EvidenceFreshnessPanel';
+import { BUILD_DATE } from '@/lib/validation/applicability';
+
+const JURISDICTIONS = [
+  ['us', 'United States'],
+  ['eu', 'European Union'],
+  ['sg', 'Singapore'],
+  ['cn', 'China'],
+] as const;
 
 export const metadata: Metadata = {
   title: 'Global AI Policy Intelligence',
@@ -16,21 +25,27 @@ export default function DashboardPage() {
   const isPreview = ds.profile === 'preview';
   const isFixture = ds.profile === 'fixtures';
   const profileLabel = ds.profile === 'preview' ? 'Curated research snapshot' : ds.profile === 'fixtures' ? 'Illustrative fixture demo' : 'Publication-gated corpus';
+  const jurisdictionCountCopy = ds.profile === 'preview'
+    ? { id: 'research.jurisdictions.count.preview', fallback: '{count} scoped instruments' }
+    : ds.profile === 'fixtures'
+      ? { id: 'research.jurisdictions.count.fixtures', fallback: '{count} fictional instruments' }
+      : { id: 'research.jurisdictions.count.production', fallback: '{count} published instruments' };
+  const freshnessReviews = PORTFOLIO_SOURCES.map(({ lastVerified, nextReview }) => ({ lastVerified, nextReview }));
   const hero = isPreview
     ? {
         translationPrefix: 'home.preview',
-        eyebrow: 'Global AI policy intelligence · 7 August 2026',
+        eyebrow: 'Global AI policy intelligence · 13 August 2026',
         title: 'From policy change to product decision.',
         lede: 'A source-traceable policy lab for agentic AI, cloud, and emerging technology—built to show what changed, why it matters, who owns the response, and what evidence is still missing.',
         primaryHref: '/executive-brief',
         primaryLabel: 'Read the executive decision',
         secondaryHref: '/policy-refresh',
-        secondaryLabel: 'See the current policy update',
+        secondaryLabel: 'See the dated policy update',
         footnote: 'Independent work sample · Facts, inferences, and recommendations are visibly separated · No launch or legal conclusion is automated.',
-        postureLabel: 'Current executive posture',
+        postureLabel: 'Snapshot executive posture',
         postureTitle: 'Build the control layer. Hold the universal launch decision.',
         postureText: 'The present evidence supports reusable identity, authorization, disclosure, logging, approval, testing, and redress controls. It does not support one global legal conclusion.',
-        gate: 'Product facts + current primary law + operating control evidence + qualified human review',
+        gate: 'Product facts + checked primary law + operating control evidence + qualified human review',
       }
     : isFixture
       ? {
@@ -90,23 +105,52 @@ export default function DashboardPage() {
 
       <p className="visually-hidden" id="home-metrics-label"><LocalizedText id="home.metrics.label" fallback="Research profile metrics" /></p>
       <dl className="metric-grid" aria-labelledby="home-metrics-label">
-        <div><dd>{preview.jurisdictionCount}</dd><dt><LocalizedText id="home.metric.jurisdictions" fallback="jurisdictions in curated snapshot" /></dt></div>
-        <div><dd>{preview.instrumentCount}</dd><dt><LocalizedText id="home.metric.instruments" fallback="scoped instruments in curated snapshot" /></dt></div>
-        <div><dd>{ds.sources.length}</dd><dt><LocalizedText id="home.metric.structuredSources" fallback="structured-corpus sources" /></dt></div>
-        <div><dd>{PORTFOLIO_SOURCES.length}</dd><dt><LocalizedText id="home.metric.monitoringSources" fallback="monitoring source records" /></dt></div>
-        <div><dd>{PORTFOLIO_SIGNAL_AS_OF}</dd><dt><LocalizedText id="home.metric.checked" fallback="portfolio monitoring checked" /></dt></div>
+        <div><dt><LocalizedText id="home.metric.jurisdictions" fallback="jurisdictions in curated snapshot" /></dt><dd>{preview.jurisdictionCount}</dd></div>
+        <div><dt><LocalizedText id="home.metric.instruments" fallback="scoped instruments in curated snapshot" /></dt><dd>{preview.instrumentCount}</dd></div>
+        <div><dt><LocalizedText id="home.metric.structuredSources" fallback="structured-corpus sources" /></dt><dd>{ds.sources.length}</dd></div>
+        <div><dt><LocalizedText id="home.metric.monitoringSources" fallback="monitoring source records" /></dt><dd>{PORTFOLIO_SOURCES.length}</dd></div>
+        <div><dt><LocalizedText id="home.metric.checked" fallback="portfolio snapshot date" /></dt><dd>{PORTFOLIO_SIGNAL_AS_OF}</dd></div>
       </dl>
+
+      {isPreview ? <EvidenceFreshnessPanel checkedThrough={PORTFOLIO_SIGNAL_AS_OF} initialReferenceDate={BUILD_DATE} reviews={freshnessReviews} /> : null}
+
+      <section className="section-block jurisdiction-entry" aria-labelledby="home-jurisdictions-title">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow"><LocalizedText id="home.jurisdictions.eyebrow" fallback="Jurisdiction coverage" /></p>
+            <h2 id="home-jurisdictions-title"><LocalizedText id="home.jurisdictions.title" fallback="Explore policy by jurisdiction" /></h2>
+          </div>
+          <p><LocalizedText id={`home.jurisdictions.intro.${ds.profile}`} fallback={ds.profile === 'preview' ? 'Open the manifest-scoped research view for each jurisdiction. Counts include records still in review.' : ds.profile === 'fixtures' ? 'Open each fictional jurisdiction view used to test the Atlas experience.' : 'Open each jurisdiction view. Production counts include published records only.'} /></p>
+        </div>
+        <ul className="jurisdiction-grid">
+          {JURISDICTIONS.map(([id, name]) => {
+            const count = ds.instruments.filter((instrument) => instrument.jurisdiction_id === id).length;
+            const countId = count === 1 ? `${jurisdictionCountCopy.id}.one` : jurisdictionCountCopy.id;
+            const countFallback = count === 1 ? jurisdictionCountCopy.fallback.replace('instruments', 'instrument') : jurisdictionCountCopy.fallback;
+            return (
+              <li key={id}>
+                <Link href={`/jurisdictions/${id}`}>
+                  <span className="jurisdiction-code" aria-hidden="true">{id.toUpperCase()}</span>
+                  <span className="jurisdiction-name"><LocalizedText id={`research.jurisdiction.${id}.name`} fallback={name} /></span>
+                  <span className="jurisdiction-count"><LocalizedText id={countId} fallback={countFallback} values={{ count }} /></span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+        <Link className="text-link jurisdiction-index-link" href="/jurisdictions"><LocalizedText id="home.jurisdictions.all" fallback="View all jurisdiction coverage" /> <span aria-hidden="true">→</span></Link>
+      </section>
 
       {isPreview ? <section className="section-block" id="policy-refresh">
         <div className="section-heading">
           <div>
-            <p className="eyebrow"><LocalizedText id="home.refresh.eyebrow" fallback="Policy refresh · 7 August 2026" /></p>
+            <p className="eyebrow"><LocalizedText id="home.refresh.eyebrow" fallback="Policy refresh · 13 August 2026" /></p>
             <h2><LocalizedText id="home.refresh.title" fallback="What changed across the July-August policy transition" /></h2>
           </div>
-          <p><LocalizedText id="home.refresh.intro" fallback="The refresh corrects the EU legislative lifecycle, records operative EU/California duties, and separates China's scoped binding rule from broader policy direction. Other signals retain their own verification dates." /></p>
+          <p><LocalizedText id="home.refresh.intro" fallback="The 13 August pass found no post-7 August substantive change in the tracked instruments. It re-verifies the full source set, adds omitted official coverage, and keeps California SB 1000 visibly pending rather than treating it as current law." /></p>
         </div>
         <div className="signal-grid">
-          {PORTFOLIO_SIGNALS.slice(0, 4).map((signal) => (
+          {PORTFOLIO_SIGNALS.map((signal) => (
             <article className="signal-card" key={signal.title}>
               <p className="signal-market"><LocalizedText id={`signal.${signal.id}.market`} fallback={signal.market} /></p>
               <h3><LocalizedText id={`signal.${signal.id}.title`} fallback={signal.title} /></h3>
@@ -157,7 +201,7 @@ export default function DashboardPage() {
         <div>
           <p className="eyebrow"><LocalizedText id="home.practice.eyebrow" fallback="Policy practice" /></p>
           <h2><LocalizedText id="home.practice.title" fallback="A cross-functional AI policy research practice" /></h2>
-          <p><LocalizedText id="home.practice.text" fallback="The portfolio now includes a current intelligence brief, semiconductor/compute/cloud radar, business implications matrix, policy-position sample, stakeholder landscape, meeting brief, and an ADRS sensitivity note." /></p>
+          <p><LocalizedText id="home.practice.text" fallback="The portfolio includes a dated intelligence brief, semiconductor/compute/cloud radar, business implications matrix, policy-position sample, stakeholder landscape, meeting brief, and an ADRS sensitivity note." /></p>
           <Link className="text-link" href="/work-samples"><LocalizedText id="home.practice.link" fallback="Review every work sample" /> <span aria-hidden="true">→</span></Link>
         </div>
         <ul className="capability-list">

@@ -8,13 +8,13 @@ export const metadata: Metadata = {
 };
 
 const PREVIEW_FILES = [
-  ['policy-refresh', 'July-August policy refresh', '/downloads/policy-refresh-2026-08-06.md', 'EU lifecycle, EU/California transparency, and China anthropomorphic/agentic policy'],
-  ['portfolio-pack', 'Global AI policy portfolio pack', '/downloads/global-ai-policy-portfolio-pack.md', 'Current monitoring, business implications, policy position, engagement, and limits'],
+  ['policy-refresh', 'July-August policy refresh', '/downloads/policy-refresh-2026-08-06.md', 'Current law, pending California SB 1000, and official-source coverage corrections through 13 August 2026'],
+  ['portfolio-pack', 'Global AI policy portfolio pack', '/downloads/global-ai-policy-portfolio-pack.md', 'Dated monitoring, business implications, policy position, engagement, and limits'],
   ['executive-brief', 'Executive decision brief', '/downloads/executive-brief.md', 'Control investment now; market launch only after qualified review'],
   ['policy-memo', 'Policy memo', '/downloads/policy-memo-human-oversight-and-disclosure.md', 'Human oversight and disclosure architecture across a bounded four-market scan'],
   ['executive-deck', 'Executive briefing deck', '/downloads/Global_AI_Policy_Executive_Briefing.pptx', 'Editable six-slide policy briefing for leadership discussion'],
-  ['intelligence-brief', 'Global AI policy intelligence brief', '/downloads/global-ai-policy-intelligence-brief.md', 'Updated international signals with owners and triggers'],
-  ['technology-radar', 'Emerging-technology policy radar', '/downloads/emerging-tech-policy-radar.md', 'Agentic AI, semiconductors, compute, cloud, data centers, and standards'],
+  ['intelligence-brief', 'Global AI policy intelligence brief', '/downloads/global-ai-policy-intelligence-brief.md', 'Dated international signals checked through 13 August 2026, with owners and triggers'],
+  ['technology-radar', 'Emerging-technology policy radar', '/downloads/emerging-tech-policy-radar.md', 'Agentic AI, AI cybersecurity, semiconductors, compute, cloud, data centers, and standards'],
   ['business-matrix', 'Business implications matrix', '/downloads/business-implications-matrix.md', 'Six product surfaces mapped to risks, opportunities, actions, and evidence'],
   ['tencent-brief', 'Tencent public-information implications brief', '/downloads/tencent-public-information-implications-brief.md', 'Publicly described business surfaces mapped to questions and evidence gates'],
   ['position-note', 'Policy position note', '/downloads/policy-position-note-sample.md', 'Secure and interoperable agents: asks, trade-offs, and red lines'],

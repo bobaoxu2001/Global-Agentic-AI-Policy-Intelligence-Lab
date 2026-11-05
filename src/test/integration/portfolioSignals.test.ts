@@ -7,6 +7,9 @@ import {
   PORTFOLIO_SIGNALS,
   PORTFOLIO_SOURCES,
 } from '../../lib/portfolio/policySignals';
+import { deriveEvidenceFreshness } from '../../lib/portfolio/freshness';
+import { parseInstrumentSummary } from '../../lib/portfolio/instrumentSummary';
+import { loadAndValidate } from '../../lib/validation/loadDataset';
 
 describe('role-facing policy signal governance', () => {
   it('uses unique HTTPS Tier 1 source records with honest, bounded review dates', () => {
@@ -43,11 +46,56 @@ describe('role-facing policy signal governance', () => {
   });
 
   it('keeps a dated, non-backfilled monitoring log that covers the current signals', () => {
-    expect(PORTFOLIO_MONITORING_LOG).toHaveLength(3);
+    expect(PORTFOLIO_MONITORING_LOG).toHaveLength(4);
     const logged = new Set(PORTFOLIO_MONITORING_LOG.flatMap((entry) => entry.signalIds));
     expect(PORTFOLIO_SIGNALS.every((signal) => logged.has(signal.id))).toBe(true);
     expect(PORTFOLIO_MONITORING_LOG[0]!.note).toContain('no historical cadence is claimed');
     expect(PORTFOLIO_MONITORING_LOG.at(-1)!.date).toBe(PORTFOLIO_SIGNAL_AS_OF);
     expect(PORTFOLIO_MONITORING_LOG.at(-1)!.note).toContain('not real-time or comprehensive monitoring');
+  });
+
+  it('classifies the authored review window against an explicit reference date', () => {
+    const dueSoon = deriveEvidenceFreshness(PORTFOLIO_SOURCES, PORTFOLIO_SIGNAL_AS_OF, '2026-08-13');
+    expect(dueSoon).toMatchObject({
+      status: 'due_soon',
+      earliestNextReview: '2026-08-14',
+      daysUntilEarliestReview: 1,
+      dueSoonCount: 1,
+      overdueCount: 0,
+      oldestVerification: '2026-08-13',
+      newestVerification: '2026-08-13',
+    });
+
+    const overdue = deriveEvidenceFreshness(PORTFOLIO_SOURCES, PORTFOLIO_SIGNAL_AS_OF, '2026-08-15');
+    expect(overdue).toMatchObject({
+      status: 'overdue',
+      earliestNextReview: '2026-08-14',
+      daysUntilEarliestReview: -1,
+      overdueCount: 1,
+    });
+  });
+
+  it('rejects calendar dates that Date.parse would otherwise normalize', () => {
+    expect(() => deriveEvidenceFreshness(
+      [{ lastVerified: '2026-02-28', nextReview: '2026-02-30' }],
+      '2026-02-28',
+      '2026-02-28',
+    )).toThrow('Invalid ISO date');
+  });
+
+  it('keeps instrument-level fact and inference markers renderable as separate blocks', () => {
+    const instruments = loadAndValidate('production').dataset.instruments;
+    for (const instrument of instruments) {
+      const blocks = parseInstrumentSummary(instrument.summary_md);
+      expect(blocks.some((block) => block.kind === 'fact'), `${instrument.id}:fact`).toBe(true);
+      expect(blocks.some((block) => block.kind === 'inference'), `${instrument.id}:inference`).toBe(true);
+      expect(blocks.every((block) => block.text.length > 0), `${instrument.id}:text`).toBe(true);
+    }
+  });
+
+  it('does not promote unmarked fixture copy to a fact', () => {
+    expect(parseInstrumentSummary('Fixture note only.')).toEqual([
+      { kind: 'unclassified', text: 'Fixture note only.' },
+    ]);
   });
 });

@@ -1,74 +1,98 @@
 # Global AI Policy Intelligence Brief
 
-**As of:** 2026-08-07
-**Audience:** hypothetical global AI, cloud, product, legal, compliance, and public-affairs leadership
+**As of:** 2026-08-13
+
+**Review window:** official sources checked through 13 August 2026
+
+**Audience:** hypothetical global AI, cloud, product, legal, compliance, security, and public-affairs leadership
+
 **Status:** independent portfolio work sample; AI-assisted primary-source research; not legal advice; not affiliated with any company
 
 ## Executive readout
 
-The refresh found both a factual lifecycle correction and new operating duties. **Regulation (EU) 2026/1744 is now published and in force; EU AI Act Article 50 transparency duties and the core covered-provider provisions of California's AI Transparency Act have applied since 2 August 2026.** China also brought a scoped anthropomorphic-interaction rule into force on 15 July. Shared control themes should not obscure different legal forms, definitions, roles, modalities, exceptions, and evidence expectations.
+The bounded 13 August review did **not** identify a substantive post-7 August amendment to the existing tracked EU, US, China, Singapore, Korea, or UK instruments. It did identify one live legislative trigger and several omissions in the prior source register:
 
-Three actions are defensible across this selective scan:
+- **California SB 1000 is pending, not law.** On 13 August it was an active urgency bill on the Assembly third-reading file. Its current text would remove the one-million-user threshold and revise several Chapter 25 controls if enacted. Current codified Chapter 25 remains the operating baseline.
+- **EU implementation evidence is broader than the prior snapshot showed.** The Commission and AI Board assessed the voluntary Article 50 code as adequate, but adherence is not conclusive proof of compliance. Article 4 still requires contextual AI-literacy measures, with national supervision and enforcement beginning in early August.
+- **US compute and cyber implementation need distinct treatment.** A July BIS final rule creates narrow approved-entity pathways for specified UAE transactions; it is not general deregulation. EO 14409 directs federal AI cybersecurity work, and Gold Eagle is an operational vulnerability-coordination initiative; neither creates a general private-sector licensing mandate.
+- **Agent-policy coverage is now more current.** Singapore's authoritative voluntary framework is v1.5; the UK CMA published separate business guidance alongside its research; and China's July interoperability initiative is non-binding policy direction, not a regulation.
 
-1. **Move from readiness to evidence:** identify the product surface and role, record the applicable provision, and retain proof that the chosen disclosure, marking, detection, provenance, or escalation control works.
-2. **Build reusable controls without forcing one legal conclusion:** identity, authorization, disclosure, provenance, logs, approval, incident response, and redress can be shared; product-market scope remains separate.
-3. **Classify each signal by legal form:** enacted law, administrative direction, standards activity, voluntary guidance, and proposal should not be translated into the same launch gate.
+The operating recommendation is stable: build reusable identity, authorization, disclosure, provenance, logging, testing, incident, and redress evidence, while keeping each product-market legal conclusion separate and expiring.
 
-## What changed since 14 July
+## Decision table
 
-| Signal | Verified fact | Evidence IDs | Business implication - analysis | Risk / opportunity | Owner and next action |
-|---|---|---|---|---|---|
-| **EU Digital Omnibus moved from pending to in force** | Regulation (EU) 2026/1744 was published on 24 July and entered into force on 27 July. It defers Annex III high-risk obligations to 2 December 2027 and Annex I-embedded obligations to 2 August 2028, with a limited transition for Article 50(2) marking by systems already on the market. | S01 | The old "pending OJ publication" record was stale. High-risk and transparency workstreams now have settled but different dates. | **Risk:** continuing to brief from an adoption-stage source. **Opportunity:** show a traceable lifecycle correction. | EU Policy: replace the old status and CELEX, record both conditional Article 14 timelines, and preserve the Article 50(2) transition's narrow scope. |
-| **EU Article 50 is now applicable** | The Commission published final Article 50 transparency guidelines on 20 July 2026. Relevant Article 50 obligations have applied since 2 August 2026. A targeted transition to 2 December 2026 applies only to Article 50(2) marking by qualifying systems placed on the market before 2 August; it did not postpone the other Article 50 duties. | S02, S13 | Interaction disclosure, machine-readable marking, and deployer labeling are current, separate, scope-dependent workstreams. | **Risk:** a countdown plan survives after the deadline. **Opportunity:** one evidence model can support multiple product surfaces. | EU Policy + Product Counsel: record role, relevant paragraph, product facts, control, exception analysis, and operating evidence. |
-| **California's core covered-provider duties are operative** | Business and Professions Code chapter 25 became operative on 2 August 2026. It defines a covered provider using a system-wide threshold of more than one million monthly visitors or users plus public accessibility within California; core duties address detection, disclosure, provenance, feedback, and licensing controls for covered modalities. Platform and hosting provisions begin in 2027, and capture-device provisions in 2028. | S14 | California's shared date with the EU does not create shared scope. Provider scale, product type, modality, and platform role can change the result. | **Risk:** copying an EU control map into a California conclusion. **Opportunity:** build a staged content-authenticity roadmap. | US State Policy + Product Counsel: classify provider/platform role, threshold, modality, product category, and applicable date. |
-| **China anthropomorphic-interaction rule is in force** | A binding departmental rule took effect on 15 July for public-facing services in China that simulate a natural person and provide continuous emotional interaction. It excludes customer service, Q&A, work assistants, education, and research when they lack continuous emotional interaction. | S15 | Companion/social use cases need a targeted scope screen; the rule should not be generalized to every chatbot. | **Risk:** missing a high-relevance consumer rule or over-scoping ordinary assistants. **Opportunity:** build safer, bounded interaction patterns. | China Policy + Product Counsel: screen continuous emotional interaction, then map disclosure, content/safety, privacy, minors, dependency prompts, exit, assessment, and filing. |
-| **China has separate agent-policy direction** | CAC, NDRC, and MIIT issued a May 2026 implementation opinion on standardized application and innovative development of AI agents, covering safety, lifecycle governance, privacy, anomaly detection, audit, platforms, and industry development. | S16 | The opinion supplies agent-specific policy vocabulary, but it is not treated here as a new binding generative-AI regulation. | **Risk:** collapsing policy direction into a legal duty. **Opportunity:** anticipate standards and assurance expectations. | China Policy + Local Counsel: track implementing standards while sourcing binding duties to their own instruments. |
+| Market / domain | Verified official-source fact | Legal form | Decision implication — analysis | Owner and next action |
+|---|---|---|---|---|
+| **EU transparency and literacy** | Article 50 has applied since 2 August 2026. The voluntary code was assessed as an adequate compliance tool, but adherence is not conclusive evidence. Article 4 still requires providers and deployers to take contextual AI-literacy measures; the Commission Q&A describes national supervision and enforcement as beginning in early August. | Binding regulation + non-binding guidelines + voluntary code | Product evidence and role/risk-sensitive staff preparation are parallel operating workstreams. | EU Policy + Product Counsel + Learning: record the applicable Article 50 paragraph, control evidence, relevant users, context, risk, and literacy measures. |
+| **California current law** | Core covered-provider Chapter 25 duties have operated since 2 August 2026. The current law still uses the system-level threshold of more than one million monthly visitors or users plus public accessibility in California. | Binding state statute | Do not substitute pending bill text for the current threshold or controls. | US State Policy + Product Counsel: classify current role, threshold, accessibility, modality, exclusion, and staged date. |
+| **California SB 1000** | As of 13 August, SB 1000 was an active urgency bill in the Assembly floor process and on the third-reading file. Its current text would remove the user threshold and revise disclosure-verification, latent-disclosure, privacy, and licensee rules. | Pending urgency bill; not enacted | Maintain a separate implementation scenario because chaptering could change scope quickly. | US State Policy: check the next legislative action; rerun the scope and control map only after official amendment, passage, enrollment, veto, or chaptering evidence. |
+| **China agent policy** | The binding anthropomorphic-interaction rule has applied since 15 July for scoped continuous emotional interaction. The May agent opinion and July interoperability initiative are separate policy-direction signals. | Binding departmental rule + non-binding opinion and initiative | Run the narrow binding scope screen without turning each recommendation or cooperation ask into a legal duty. | China Policy + Local Counsel: separate rule mapping, standards monitoring, and direction-of-travel analysis. |
+| **Singapore agent governance** | IMDA's current Model AI Governance Framework for Agentic AI is v1.5, published 20 May, with multi-agent, third-party-agent, automation-bias, and case-study additions. Sandbox findings remain guidance. | Voluntary governance framework + sandbox guidance | Use the framework as an assurance playbook, not legal authorization. | APAC Policy + Security: crosswalk one bounded use case and preserve operating evidence. |
+| **Korea implementation** | The amended AI Basic Act and Presidential Decree No. 36506 remain in force from 21 July; no later amendment was identified through 13 August. | Binding act and decree | Keep Korea-specific classification and local-language monitoring; do not present an industrial-support announcement as a general AI duty. | Korea Policy + Local Counsel: retain quarterly statutory review and product-specific classification. |
+| **UK consumer agents** | The CMA's 9 March research is accompanied by separate business guidance stating that existing consumer law still applies and businesses remain responsible for agents they use. | Guidance on existing consumer law | Responsibility, confirmation, cancellation, redress, disclosure, testing, and oversight must be evaluated across the full journey. | UK Consumer Policy + Product Design: test one end-to-end transaction and remediation path. |
+| **US AI cybersecurity** | EO 14409 directs federal cyber-defense upgrades, frontier-model benchmarking, and a voluntary developer framework. Gold Eagle is reported as an operating public-private vulnerability-coordination clearinghouse. The order does not authorize mandatory model licensing or preclearance. | Executive direction to agencies + voluntary industry channel + implementation initiative | Treat it as a government-facing assurance and coordination channel, not a general private-sector compliance mandate. | Federal Policy + Security: map evaluation, vulnerability intake, remediation, and information-sharing evidence. |
+| **Advanced compute and cloud capacity** | BIS guidance still requires ownership, destination, end-use, and end-user screening. The July UAE final rule creates narrow approved-entity pathways while preserving other EAR restrictions. The EU CADA remains proposal COM(2026) 502 in an ongoing procedure. | Binding export-control rules + guidance + EU legislative proposal | Destination alone is not enough, and the CADA must not be presented as enacted. | Export Compliance + Cloud Strategy: screen ownership, consignee, end user, chip class, end use, approval status, region, and supplier. |
 
-## Continuing signals - verification dates preserved
+## What changed in this refresh
 
-| Signal | Official-source fact | Last checked | Business implication - analysis | Next action |
-|---|---|---:|---|---|
-| **EU cloud and AI capacity** | The Commission proposed the Cloud and AI Development Act on 3 June 2026, combining capacity expansion with sustainability and sovereignty policy. | 2026-07-14 | Infrastructure choices may create both capacity opportunities and harder-to-reverse procurement or sovereignty exposure. | Scenario-test regions, critical-sector access, sustainability, and procurement assumptions. |
-| **US advanced-compute controls** | BIS's January, May, and June 2026 materials describe licensing and diligence expectations for specified advanced-computing items, ownership, destinations, and end uses. | 2026-07-14 | Customer ownership and use can affect cloud capacity and supply decisions, not only shipment destination. | Keep ultimate-parent, end-use, chip-class, and counsel-owned license decisions in the workflow. |
-| **US agent standards** | NIST's AI Agent Standards Initiative focuses on secure identity, authorization, interoperability, open protocols, evaluations, and research. | 2026-07-14 | Architecture choices are becoming standards and public-policy questions. | Prepare a non-confidential evidence pack on identity, authority, logging, and prompt-injection controls. |
-| **Singapore agent governance** | IMDA's agentic-AI framework and sandbox material emphasize bounded powers, meaningful accountability, lifecycle controls, and user responsibility. | 2026-07-14 | Voluntary guidance can be an assurance playbook without being mislabeled as law. | Crosswalk the control catalog and choose a low-risk, evidence-rich sandbox case. |
-| **Korea AI implementation** | Korea's AI Basic Act and initial Enforcement Decree took effect on 22 January 2026. Amended Act and Decree provisions took effect on 21 July, adding implementation changes that include public-sector, inclusion, research, startup, and data-access support. | 2026-08-06 | APAC launch planning needs Korea-specific classification, amendment tracking, and local-language monitoring. | Assign a Korean-source owner and validate product-by-product classification and amendment relevance. |
-| **UK consumer agents** | The CMA's March 2026 work examines agentic AI through consumer opportunities, risks, existing law, and trust-building practices. | 2026-07-14 | Existing consumer law can govern agent journeys before agent-specific legislation appears. | Test disclosure, confirmation, cancellation, redress, and conflicts across one end-to-end journey. |
+This section distinguishes **new post-cutoff events** from **coverage corrections**.
 
-The continuing rows are **not represented as freshly re-verified on 7 August**. Their dates remain visible so that old evidence is not silently relabeled as current research.
-
-## Dated watchlist
-
-| Horizon | Trigger | Owner | Escalate when |
+| Classification | Item | What changed in the Atlas | What did not change |
 |---|---|---|---|
-| **Now** | EU Article 50 and California core covered-provider duties are operative | EU/US policy + product counsel | A potentially in-scope surface lacks a documented classification, control owner, or evidence record |
-| **Monthly** | BIS advanced-compute guidance, EAR updates, and license-policy changes | Export compliance | A chip, customer owner, end use, supply route, or cloud offer moves into a new review path |
-| **Quarterly** | NIST/CAISI agent standards outputs and convenings | Standards + security policy | A draft affects identity, authorization, interoperability, evaluation, or audit evidence |
-| **Quarterly** | China agent standards and sector implementation | China policy + local counsel | An implementation opinion is converted into a standard, sector rule, or product-specific requirement |
-| **On product change** | China anthropomorphic-interaction scope | China policy + consumer/social product | A service begins simulating natural-person characteristics with continuous emotional interaction |
-| **2027-01-01** | California large-online-platform and GenAI-hosting-platform provisions | US state policy + platform product | A platform role or content flow requires a separate 2027 control owner |
-| **2028-01-01** | California capture-device provisions | Hardware policy + product | A covered device roadmap needs an embedded provenance or disclosure decision |
+| **Live status trigger** | California SB 1000 | Added a separate pending-legislation signal and next-day review date. | Current Chapter 25 remains law; proposed changes are not treated as operative. |
+| **Coverage correction** | EU Article 50 code assessment | Added the Commission/AI Board assessment and its explicit limit that adherence is not conclusive evidence. | The code remains voluntary; Article 50 obligations come from the regulation. |
+| **Coverage correction** | EU AI literacy | Added the Commission's updated Article 4 Q&A and the early-August enforcement posture. | No single training level or universal curriculum is inferred. |
+| **Coverage correction** | EU CADA legal status | Added COM(2026) 502 and procedure 2026/0138(COD). | CADA remains an unadopted proposal. |
+| **Coverage correction** | BIS UAE final rule | Added the destination/entity-specific July final rule. | It is not a general removal of advanced-compute controls. |
+| **Coverage correction** | NIST AI 800-5 | Added the RFI-response analysis as agent-security research. | It is not a final standard or binding requirement. |
+| **Coverage correction** | EO 14409 and Gold Eagle | Added a separate federal AI-cybersecurity signal. | Gold Eagle is not a regulation; the developer framework is voluntary. |
+| **Coverage correction** | Singapore v1.5, UK CMA guidance, China interoperability initiative | Updated the current voluntary framework and added omitted guidance and policy-direction sources. | None is presented as a new binding general agent rule. |
+| **No-change verification** | Existing EU, US, China, Singapore, Korea, and UK anchors | Advanced source-level verification dates to 13 August after bounded official-source checks. | No post-7 August substantive amendment was identified in the tracked anchors. |
+
+## Watchlist and review triggers
+
+| Review | Trigger | Owner | Escalate when |
+|---|---|---|---|
+| **Next legislative day** | California SB 1000 | US State Policy | Official text, vote, enrollment, Governor action, or chaptering status changes |
+| **Monthly** | EU Article 50 / Article 4 implementation | EU Policy | New Commission, AI Board, or national-authority material changes scope, evidence, or enforcement posture |
+| **Monthly** | BIS advanced-compute rules and guidance | Export Compliance | Ownership, destination, end use, end user, ECCN, license route, or approved-entity status changes |
+| **Monthly** | NIST agent and federal AI-cyber outputs | Standards + Security Policy | Drafts, agency directives, participation terms, or procurement requirements change evidence expectations |
+| **Monthly** | China agent standards and sector measures | China Policy | A non-binding opinion or initiative becomes a standard, sector rule, or product-specific requirement |
+| **Quarterly** | Singapore and Korea | APAC Policy | Framework revision, statute/decree amendment, or regulator implementation guidance changes |
+| **On product change** | China continuous emotional interaction | China Policy + Consumer Product | A service adds simulated natural-person characteristics plus continuous emotional interaction |
 
 ## Confidence and limits
 
-- The five current EU, California, and China change rows were checked against the official sources below on 2026-08-07; all other rows retain their earlier verification dates.
-- Facts are paraphrases. Implications, risks, opportunities, actions, and company questions are analytical work product.
-- This is a selective executive scan and a bounded dated snapshot, not a comprehensive survey, continuous monitoring service, legal opinion, or claim of company compliance.
-- Product scope, exceptions, enforcement, and launch conclusions require complete facts and qualified local review.
+- All portfolio source records listed below were individually re-checked against official pages through 2026-08-13. This does not establish exhaustive jurisdictional coverage.
+- The Article 4 Commission Q&A contains inconsistent references to 2 and 3 August for the start of supervision and enforcement. This brief therefore says **early August** and leaves national implementation to local review.
+- Facts are paraphrases. Implications, actions, risks, opportunities, and product questions are analysis.
+- This is a selective dated snapshot, not continuous monitoring, a legal opinion, a company-compliance finding, or launch authorization.
 
 ## Primary sources
 
-1. **S01 / `PS-EU-OMNIBUS-2026`** - EUR-Lex, [Regulation (EU) 2026/1744](https://eur-lex.europa.eu/eli/reg/2026/1744/oj/eng), published 2026-07-24.
-2. **S02 / `PS-EU-ART50-CODE-2026`** - European Commission, [Code of Practice on Transparency of AI-Generated Content](https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content), final code published 2026-06-10.
-3. **S13 / `PS-EU-ART50-GUIDELINES-2026`** - European Commission, [Guidelines on transparency obligations for providers and deployers of AI systems](https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems), published 2026-07-20.
-4. **S14 / `PS-US-CA-AI-TRANSPARENCY-2026`** - California Legislative Information, [Business and Professions Code chapter 25 - AI Transparency Act](https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?article=&chapter=25.&division=8.&lawCode=BPC&part=&title=), including staggered operative dates.
-5. **S15 / `PS-CN-ANTHROPOMORPHIC-2026`** - CAC and four other authorities, [人工智能拟人化互动服务管理暂行办法](https://www.cac.gov.cn/2026-04/10/c_1777558395078289.htm), issued 2026-04-10 and effective 2026-07-15.
-6. **S16 / `PS-CN-AGENTIC-OPINION-2026`** - CAC, NDRC, and MIIT, [智能体规范应用与创新发展实施意见](https://www.cac.gov.cn/2026-05/08/c_1779979789523320.htm), published 2026-05-08.
-7. **S03 / `PS-EU-CADA-2026`** - European Commission, [Proposal for the Cloud and AI Development Act](https://digital-strategy.ec.europa.eu/en/library/proposal-cloud-and-ai-development-act-cada), 2026-06-03.
-8. **S04-S06** - US Bureau of Industry and Security, [May 2026 advanced-computing guidance](https://media.bis.gov/media/documents/bis-guidance-may-31-2026.pdf), [updated FAQ](https://www.bis.gov/media/documents/May-31-FAQ.pdf), and [January 2026 semiconductor license-review policy](https://www.bis.gov/sites/default/files/documents/DoC%20Revises%20License%20Review%20Policy%20for%20Semiconductors%20Exports.pdf).
-9. **S07** - NIST, [AI Agent Standards Initiative](https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative).
-10. **S08-S09** - Singapore IMDA, [Model AI Governance Framework for Agentic AI](https://www.imda.gov.sg/resources/press-releases-factsheets-and-speeches/press-releases/2026/new-model-ai-governance-framework-for-agentic-ai) and [AI Agents Sandbox insights](https://www.imda.gov.sg/resources/press-releases-factsheets-and-speeches/factsheets/2026/ai-agents-insights-from-the-singapore-government-and-google-sandbox).
-11. **S10** - Republic of Korea MSIT, [AI Basic Act and Enforcement Decree come into force](https://www.msit.go.kr/eng/bbs/view.do%3Bjsessionid%3DR15sRn4EJvYb4ya9k4Roiy9k6Ci-tgMefxkNeVIs.AP_msit_1?bbsSeqNo=42&mId=4&mPid=2&nttSeqNo=1214&sCode=eng).
-12. **S11** - UK CMA, [Agentic AI and consumers](https://www.gov.uk/government/publications/agentic-ai-and-consumers).
-13. **S17** - Republic of Korea National Law Information Center, [amended AI Basic Act](https://www.law.go.kr/lsInfoP.do?chrClsCd=010102&lsiSeq=282791&viewCls=lsRvsDocInfoR), effective 2026-07-21.
-14. **S18** - Republic of Korea National Law Information Center, [amended AI Basic Act Enforcement Decree](https://www.law.go.kr/LSW/lsLinkCommonInfo.do?chrClsCd=010202&lspttninfSeq=198009), effective 2026-07-21.
+### European Union
+
+1. `PS-EU-OMNIBUS-2026` — EUR-Lex, [Regulation (EU) 2026/1744](https://eur-lex.europa.eu/eli/reg/2026/1744/oj/eng).
+2. `PS-EU-ART50-GUIDELINES-2026` — European Commission, [Article 50 transparency guidelines](https://digital-strategy.ec.europa.eu/en/policies/guidelines-ai-transparency-obligations).
+3. `PS-EU-ART50-CODE-2026` — European Commission, [Code of Practice on Transparency of AI-Generated Content](https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content).
+4. `PS-EU-ART50-CODE-ASSESSMENT-2026` — European Commission, [Commission and AI Board assessment of the code](https://digital-strategy.ec.europa.eu/en/library/commission-opinion-assessment-code-practice-transparency-ai-generated-content).
+5. `PS-EU-AI-LITERACY-QA-2026` — European Commission, [AI Literacy — Questions & Answers](https://digital-strategy.ec.europa.eu/en/faqs/ai-literacy-questions-answers).
+6. `PS-EU-CADA-2026` and `PS-EU-CADA-PROCEDURE-2026` — European Commission, [CADA proposal](https://digital-strategy.ec.europa.eu/en/library/proposal-cloud-and-ai-development-act-cada); EUR-Lex, [procedure 2026/0138(COD)](https://eur-lex.europa.eu/procedure/EN/2026_138).
+
+### United States
+
+7. `PS-US-CA-AI-TRANSPARENCY-2026` — California Legislative Information, [codified Chapter 25](https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?article=&chapter=25.&division=8.&lawCode=BPC&part=&title=).
+8. `PS-US-CA-SB1000-2026` — California Legislative Information, [SB 1000 status](https://leginfo.legislature.ca.gov/faces/billStatusClient.xhtml?bill_id=202520260SB1000) and [current bill text](https://leginfo.legislature.ca.gov/faces/billNavClient.xhtml?bill_id=202520260SB1000).
+9. `PS-US-BIS-GUIDANCE-2026-05`, `PS-US-BIS-FAQ-2026-06`, and `PS-US-BIS-REVIEW-2026-01` — BIS, [May enforcement guidance](https://media.bis.gov/media/documents/bis-guidance-may-31-2026.pdf), [June FAQ](https://www.bis.gov/media/documents/May-31-FAQ.pdf), and [January final rule](https://www.federalregister.gov/documents/2026/01/15/2026-00789/revision-to-license-review-policy-for-advanced-computing-commodities).
+10. `PS-US-BIS-UAE-2026-07` — BIS, [UAE final rule, 91 FR 43034](https://www.federalregister.gov/documents/2026/07/14/2026-14132/enhanced-favorable-treatment-for-the-united-arab-emirates-under-the-export-administration).
+11. `PS-US-NIST-AGENTS-2026` and `PS-US-NIST-AGENT-RFI-800-5` — NIST, [AI Agent Standards Initiative](https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative) and [NIST AI 800-5 RFI analysis](https://www.nist.gov/publications/summary-analysis-responses-request-information-regarding-security-considerations-ai).
+12. `PS-US-EO-14409-AI-CYBER` and `PS-US-GOLD-EAGLE-2026` — White House, [EO 14409](https://www.whitehouse.gov/presidential-actions/2026/06/promoting-advanced-artificial-intelligence-innovation-and-security/) and [Gold Eagle announcement](https://www.whitehouse.gov/releases/2026/07/white-house-launches-gold-eagle-initiative-for-unprecedented-cybersecurity-vulnerability-coordination/).
+13. `PS-US-DATACENTER-EO-14318` — White House, [EO 14318 on data-center permitting](https://www.whitehouse.gov/presidential-actions/2025/07/accelerating-federal-permitting-of-data-center-infrastructure/).
+
+### Asia-Pacific and United Kingdom
+
+14. `PS-CN-CAC-GENAI-2023`, `PS-CN-CAC-LABELING-2025`, `PS-CN-ANTHROPOMORPHIC-2026`, and `PS-CN-AGENTIC-OPINION-2026` — CAC and relevant authorities: [GenAI measures](https://www.cac.gov.cn/2023-07/13/c_1690898327029107.htm), [labeling measures](https://www.cac.gov.cn/2025-03/14/c_1743654684782215.htm), [anthropomorphic-interaction measures](https://www.cac.gov.cn/2026-04/10/c_1777558395078289.htm), and [agent implementation opinion](https://www.cac.gov.cn/2026-05/08/c_1779979789523320.htm).
+15. `PS-CN-AGENT-INTEROP-2026` — CAC, [Global Cooperation Initiative on Agent Mutual Trust, Connectivity, and Interoperability](https://www.cac.gov.cn/2026-07/17/c_1786032877362241.htm).
+16. `PS-SG-IMDA-AGENTS-2026`, `PS-SG-IMDA-AGENTS-V15-2026`, and `PS-SG-IMDA-SANDBOX-2026` — IMDA, [launch edition](https://www.imda.gov.sg/resources/press-releases-factsheets-and-speeches/press-releases/2026/new-model-ai-governance-framework-for-agentic-ai), [v1.5 update](https://www.imda.gov.sg/resources/press-releases-factsheets-and-speeches/factsheets/2026/updated-model-ai-governance-framework-for-agentic-ai), and [sandbox insights](https://www.imda.gov.sg/resources/press-releases-factsheets-and-speeches/factsheets/2026/ai-agents-insights-from-the-singapore-government-and-google-sandbox).
+17. `PS-KR-MSIT-AI-ACT-2026`, `PS-KR-AI-ACT-AMENDED-2026`, and `PS-KR-AI-DECREE-AMENDED-2026` — Korea MSIT and National Law Information Center: [implementation announcement](https://www.msit.go.kr/eng/bbs/view.do%3Bjsessionid%3DR15sRn4EJvYb4ya9k4Roiy9k6Ci-tgMefxkNeVIs.AP_msit_1?bbsSeqNo=42&mId=4&mPid=2&nttSeqNo=1214&sCode=eng), [Act No. 21311](https://www.law.go.kr/lsInfoP.do?chrClsCd=010102&lsiSeq=282791&viewCls=lsRvsDocInfoR), and [Presidential Decree No. 36506](https://www.law.go.kr/lsStmdInfoP.do?ancYnChk=0&lsiSeq=282879).
+18. `PS-UK-CMA-AGENTS-2026` and `PS-UK-CMA-AGENT-GUIDANCE-2026` — CMA, [Agentic AI and consumers](https://www.gov.uk/government/publications/agentic-ai-and-consumers) and [Using AI agents: complying with consumer law](https://www.gov.uk/government/publications/complying-with-consumer-law-when-using-ai-agents).

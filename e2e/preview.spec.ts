@@ -1,6 +1,11 @@
 import { expect, test } from '@playwright/test';
 import fs from 'node:fs';
 import path from 'node:path';
+import previewInstruments from '../src/data/content/instruments.json';
+
+const PREVIEW_INSTRUMENTS = previewInstruments.filter((instrument) =>
+  ['eu-gdpr', 'us-co-sb26-189', 'us-eo-14179', 'cn-ai-labeling-measures', 'cn-genai-interim-measures', 'sg-mgf-genai'].includes(instrument.id),
+);
 
 const routes = [
   '/', '/instruments', '/instruments/eu-gdpr', '/provisions/eu-gdpr%3Aart22',
@@ -27,11 +32,21 @@ test('curated snapshot content, dependencies, sources, and exports are complete'
   await expect(page.getByTestId('preview-summary')).toContainText('Curated research snapshot');
   await expect(page.getByTestId('preview-summary')).toContainText('last verified 2026-08-07');
   await expect(page.locator('main')).not.toContainText('Golden 8');
+  const jurisdictionLinks = page.locator('.jurisdiction-grid a');
+  await expect(jurisdictionLinks).toHaveCount(4);
+  expect(await jurisdictionLinks.evaluateAll((links) => links.map((link) => link.getAttribute('href')))).toEqual(['/jurisdictions/us', '/jurisdictions/eu', '/jurisdictions/sg', '/jurisdictions/cn']);
+  for (const [index, jurisdiction] of ['us', 'eu', 'sg', 'cn'].entries()) {
+    const count = PREVIEW_INSTRUMENTS.filter((instrument) => instrument.jurisdiction_id === jurisdiction).length;
+    await expect(jurisdictionLinks.nth(index)).toContainText(`${count} scoped ${count === 1 ? 'instrument' : 'instruments'}`);
+  }
+  await expect(page.locator('.signal-card')).toHaveCount(7);
+  await expect(page.getByRole('heading', { name: 'California transparency scope could expand immediately if SB 1000 passes' })).toBeVisible();
+  await expect(page.getByText('It is not current law.', { exact: false })).toBeVisible();
 
   await page.goto('/instruments');
   await expect(page.locator('tbody tr')).toHaveCount(6);
   await page.goto('/instruments/eu-gdpr');
-  const official = page.getByRole('heading', { name: 'Official sources' }).locator('..').getByRole('link');
+  const official = page.getByRole('heading', { name: 'Official sources' }).locator('xpath=following-sibling::ul[1]').getByRole('link');
   await expect(official.first()).toHaveAttribute('href', /^https:\/\//);
 
   await page.goto('/provisions/eu-gdpr%3Aart22');
@@ -67,7 +82,7 @@ test('curated snapshot content, dependencies, sources, and exports are complete'
 
   await page.goto('/compare');
   await expect(page.locator('.decision-comparison-table tbody tr')).toHaveCount(4);
-  await expect(page.getByText('Binding departmental rule + non-binding implementation opinion')).toBeVisible();
+  await expect(page.getByText('Binding departmental rule + non-binding opinion and cooperation initiative')).toBeVisible();
   await expect(page.getByText('Structured coverage appendix')).toBeVisible();
   await expect(page.getByText('— means no currently applicable binding provision identified in the scoped corpus; this does not mean no applicable legal obligation exists.')).toBeVisible();
   const unmapped = page.getByTestId('unmapped-provision');
@@ -84,16 +99,18 @@ test('curated snapshot content, dependencies, sources, and exports are complete'
   await expect(page.getByText('Policy rationale / derived governance mapping:', { exact: true }).first()).toBeVisible();
 
   await page.goto('/policy-refresh');
-  await expect(page.getByRole('heading', { name: 'Four changes. One operating question.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Current law, one pending trigger, and coverage corrections.' })).toBeVisible();
   await expect(page.locator('.refresh-card')).toHaveCount(4);
   await expect(page.getByText('Regulation (EU) 2026/1744 published and in force')).toBeVisible();
   await expect(page.getByText('A scoped rule is in force; a separate agent opinion signals direction')).toBeVisible();
-  await expect(page.locator('.refresh-card .signal-source a')).toHaveCount(7);
+  await expect(page.locator('.refresh-card .signal-source a')).toHaveCount(10);
 
   await page.goto('/methodology');
   await expect(page.locator('.trust-model-grid li')).toHaveCount(4);
   await expect(page.getByText('2026-08-06 · change refresh', { exact: false })).toBeVisible();
   await expect(page.getByText('2026-08-07 · targeted verification pass', { exact: false })).toBeVisible();
+  await expect(page.getByText('2026-08-13 · bounded official-source refresh', { exact: false })).toBeVisible();
+  await expect(page.getByText('SB 1000 as a pending proposal, not current law', { exact: false })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Open the applied AI RMF', exact: false })).toHaveAttribute('href', '/risk-management');
   const knownLimitsHeading = page.getByRole('heading', { level: 2, name: 'Known limits' });
   const appendixHeading = page.getByRole('heading', { level: 2, name: 'ADRS prioritization model' });
@@ -147,19 +164,21 @@ test('language selection localizes core routes and persists without changing evi
 
   await selector.selectOption('zh');
   await expect(page.locator('html')).toHaveAttribute('lang', 'zh-CN');
+  await expect(page.getByRole('navigation', { name: '主要导航' })).toBeVisible();
   await expect(page.getByRole('heading', { level: 1, name: '从政策变化到产品决策。' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 2, name: '按司法管辖区探索政策' })).toBeVisible();
   await page.reload();
   await expect(selector).toHaveValue('zh');
   await expect(page.locator('html')).toHaveAttribute('lang', 'zh-CN');
 
-  await page.getByRole('link', { name: '最新更新', exact: true }).click();
+  await page.getByRole('link', { name: '带日期更新', exact: true }).click();
   await expect(page).toHaveURL(/\/policy-refresh$/);
-  await expect(page.getByRole('heading', { level: 1, name: '四项变化，一个运营问题。' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: '现行法、一个待审触发点，以及来源覆盖修正。' })).toBeVisible();
   await expect(page.getByText('PS-EU-OMNIBUS-2026', { exact: true }).first()).toBeVisible();
 
   await selector.selectOption('es');
   await expect(page.locator('html')).toHaveAttribute('lang', 'es');
-  await expect(page.getByRole('heading', { level: 1, name: 'Cuatro cambios. Una pregunta operativa.' })).toBeVisible();
+  await expect(page.getByRole('heading', { level: 1, name: 'Ley vigente, un desencadenante pendiente y correcciones de cobertura.' })).toBeVisible();
   await page.getByRole('link', { name: 'Comparar', exact: true }).click();
   await expect(page).toHaveURL(/\/compare$/);
   await expect(page.locator('.decision-comparison-table tbody tr')).toHaveCount(4);

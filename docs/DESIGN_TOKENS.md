@@ -1,6 +1,6 @@
 # AI Policy Atlas — Design Tokens
 
-**Derived from** the approved `AI Policy Atlas.dc.html` (values are lifted verbatim from its stylesheet). Names are proposed token names for engineering; hex values are authoritative. The prototype uses inline literals; production should promote these to tokens.
+**Derived from** the approved `AI Policy Atlas.dc.html`, with documented accessibility corrections to low-contrast text tokens. Names are proposed token names for engineering; hex values are authoritative. The prototype uses inline literals; production should promote these to tokens.
 
 **Hard rule:** the **five semantic color systems never share a hue** — epistemic, lifecycle, bindingness, source-tier, ADRS-tier. **Confidence** uses neutral fill-density only. No token below may be repurposed across systems.
 
@@ -29,7 +29,7 @@
 |---|---|---|
 | `--ink` | `#23211c` | Primary text |
 | `--ink-muted` | `#6b6350` | Secondary text |
-| `--ink-eyebrow` | `#a08b63` | Eyebrows, meta labels |
+| `--ink-eyebrow` | `#725f3e` | Eyebrows, meta labels; WCAG AA correction on paper/page surfaces |
 | `--ink-on-dark` | `#c3cbd6` / `#dbe2ea` | Text on ink surfaces |
 
 ## 3. Typography
@@ -66,7 +66,7 @@ Dot + text (+ attained date). Distinct from bindingness and from ADRS tier.
 | adopted (not yet applicable) | `#92600b` | `#fdf1dd` | `#c17d0a` |
 | in force — partial | `#4d6b1e` | `#eef6e6` | `#6f9c2e` |
 | fully applicable | `#1f6b34` | `#e3f2e4` | `#1f8a43` |
-| historical / rescinded | `#71717a` | `#f1f1f2` | `#a1a1aa` (label struck-through) |
+| historical / rescinded | `#62626b` | `#f1f1f2` | `#8b8b94` (label struck-through) |
 
 Tokens: `--lc-{prop,adopt,partial,full,hist}` (+ `-bg`, `-dot`).
 
@@ -78,7 +78,7 @@ Deliberately non-chromatic so it can never be confused with lifecycle or risk.
 |---|---|
 | Binding | solid dark fill `#20242b`, white text |
 | Conditional / mixed | white bg, **dashed** border `#6b7280`, `#374151` text |
-| Non-binding | light bg `#f4f4f5`, solid border `#d4d4d8`, `#6b7280` text |
+| Non-binding | light bg `#f4f4f5`, solid border `#d4d4d8`, `#59616e` text |
 
 Tokens: `--bind-b`, `--bind-c` (dashed), `--bind-n`.
 

@@ -2,7 +2,7 @@
   "name": "ai-policy-atlas",
   "version": "0.1.0",
   "private": true,
-  "description": "AI Policy Atlas — Agentic AI Governance Intelligence. Independent, source-traceable policy research; not legal advice.",
+  "description": "AI Policy Atlas \u2014 Agentic AI Governance Intelligence. Independent, source-traceable policy research; not legal advice.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -28,13 +28,14 @@
     "check:portfolio-exports": "tsx scripts/generate-portfolio-exports.ts --check",
     "generate:corpus-analysis": "tsx scripts/generate-corpus-analysis.ts",
     "check:corpus-analysis": "tsx scripts/generate-corpus-analysis.ts --check",
+    "owner:digest": "tsx scripts/generate-owner-approval-digest.ts",
     "build:vercel": "tsx scripts/build-vercel.ts"
   },
   "dependencies": {
-    "next": "15.5.20",
+    "next": "15.5.29",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "zod": "3.25.67"
+    "zod": "4.6.7"
   },
   "devDependencies": {
     "@eslint/eslintrc": "3.3.1",
@@ -44,13 +45,13 @@
     "@types/react-dom": "19.1.6",
     "cross-env": "7.0.3",
     "eslint": "9.29.0",
-    "eslint-config-next": "15.5.20",
+    "eslint-config-next": "15.5.29",
     "tsx": "4.20.3",
     "typescript": "5.8.3",
-    "vitest": "3.2.7",
-    "zod-to-json-schema": "3.24.5"
+    "vitest": "3.2.7"
   },
   "overrides": {
-    "postcss": "8.5.10"
+    "postcss": "8.5.32",
+    "tinypool": "2.2.0"
   }
 }

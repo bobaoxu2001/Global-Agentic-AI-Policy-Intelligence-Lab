@@ -21,6 +21,7 @@ import {
   type MitigationClass,
 } from '@/lib/adrs';
 import { CALC_DEFAULT, decodeCalcState, encodeCalcState, type CalcState } from '@/lib/adrs/urlState';
+import { LocalizedText } from './LocalizedText';
 import { TierBadge } from './semantic';
 
 const DIMS: Dimension[] = ['A', 'T', 'D', 'E', 'R'];
@@ -111,7 +112,7 @@ export function AdrsCalculator() {
       {DIMS.map((d) => (
         <fieldset key={d}>
           <legend>
-            <b>{d} · {DIM_NAME[d]}</b> <span className="mono" style={{ fontSize: 11 }}>weight {WEIGHTS[d]}</span> — integer anchors only
+            <b>{d} · <LocalizedText id={`adrs.dimension.${d}`} fallback={DIM_NAME[d]} /></b> <span className="mono" style={{ fontSize: 11 }}><LocalizedText id="adrs.weight" fallback="weight" /> {WEIGHTS[d]}</span> — <LocalizedText id="adrs.integerAnchors" fallback="integer anchors only" />
           </legend>
           {([0, 1, 2, 3, 4] as DimScore[]).map((v) => (
             <label key={v} style={{ marginRight: 8 }}>
@@ -120,71 +121,71 @@ export function AdrsCalculator() {
               {v}
             </label>
           ))}
-          <div className="eyebrow" style={{ marginTop: 6 }}>anchor {state.dims[d]}</div>
+          <div className="eyebrow" style={{ marginTop: 6 }}><LocalizedText id="adrs.anchor" fallback="anchor" /> {state.dims[d]}</div>
           <div data-testid={`anchor-${d}`} style={{ fontSize: 12.5, color: 'var(--ink-muted)' }}>
-            {ANCHORS[d][state.dims[d]]}
+            <LocalizedText id={`adrs.anchor.${d}.${state.dims[d]}`} fallback={ANCHORS[d][state.dims[d]]} />
           </div>
         </fieldset>
       ))}
 
       <fieldset>
-        <legend><b>Mitigations</b> — evidence required to claim; credit capped at 0.40 (§13.4)</legend>
+        <legend><b><LocalizedText id="adrs.mitigations" fallback="Mitigations" /></b> — <LocalizedText id="adrs.mitigations.note" fallback="evidence required to claim; credit capped at 0.40" /> (§13.4)</legend>
         {(Object.keys(MITIGATION_CREDITS) as MitigationClass[]).map((m) => (
           <label key={m} style={{ display: 'block', fontSize: 12.5, margin: '3px 0' }}>
             <input type="checkbox" data-testid={`mit-${m}`} checked={state.mits.includes(m)}
               onChange={() => setState((s) => ({ ...s, mits: s.mits.includes(m) ? s.mits.filter((x) => x !== m) : [...s.mits, m] }))} />
-            {' '}<b className="mono">{m}</b> (+{MITIGATION_CREDITS[m]}) — {MIT_LABEL[m]}
+            {' '}<b className="mono">{m}</b> (+{MITIGATION_CREDITS[m]}) — <LocalizedText id={`adrs.mitigation.${m}`} fallback={MIT_LABEL[m]} />
           </label>
         ))}
-        {r.creditCapped ? <p data-testid="cap-notice" style={{ color: 'var(--stale)' }}><b>Mitigation credit capped at 40%</b> — residual cannot fall below 60% of inherent (MD-9).</p> : null}
+        {r.creditCapped ? <p data-testid="cap-notice" style={{ color: 'var(--stale)' }}><b><LocalizedText id="adrs.cap.title" fallback="Mitigation credit capped at 40%" /></b> — <LocalizedText id="adrs.cap.text" fallback="residual cannot fall below 60% of inherent" /> (MD-9).</p> : null}
       </fieldset>
 
       <fieldset>
-        <legend><b>Jurisdiction</b> — reference material only; never auto-sets J (CB-3)</legend>
+        <legend><b><LocalizedText id="adrs.jurisdiction" fallback="Jurisdiction" /></b> — <LocalizedText id="adrs.jurisdiction.note" fallback="reference material only; never auto-sets J" /> (CB-3)</legend>
         <select aria-label="Jurisdiction reference" value={jurisdiction}
           onChange={(e) => setJurisdiction(e.target.value)} data-testid="jurisdiction-select">
           {JURS.map((x) => <option key={x} value={x}>{x}</option>)}
         </select>
         <div data-testid="jurisdiction-ref" style={{ fontSize: 12, color: 'var(--ink-muted)', marginTop: 6 }}>
           {jurisdiction === 'none'
-            ? 'No jurisdiction selected. The four J components below are always set manually by the analyst.'
-            : `Reference for ${jurisdiction.toUpperCase()}: jurisdiction-specific component examples appear only after reviewed research is published (OD-11). Selecting a jurisdiction changed nothing on the toggles below — set them yourself against the definitions shown.`}
+            ? <LocalizedText id="adrs.jurisdiction.none" fallback="No jurisdiction selected. The four J components below are always set manually by the analyst." />
+            : <LocalizedText id="adrs.jurisdiction.selected" fallback="Reference for {jurisdiction}: jurisdiction-specific component examples appear only after reviewed research is published (OD-11). Selecting a jurisdiction changed nothing on the toggles below — set them yourself against the definitions shown." values={{ jurisdiction: jurisdiction.toUpperCase() }} />}
         </div>
       </fieldset>
 
       <fieldset>
-        <legend><b>J components</b> — set manually (0/1), each with its §13.5 definition</legend>
+        <legend><b><LocalizedText id="adrs.jComponents" fallback="J components" /></b> — <LocalizedText id="adrs.jComponents.note" fallback="set manually (0/1), each with its §13.5 definition" /></legend>
         {(Object.keys(J_COMPONENT_WEIGHTS) as JComponentName[]).map((k) => (
           <label key={k} style={{ display: 'block', fontSize: 12.5, margin: '3px 0' }}>
             <input type="checkbox" checked={state.j[k] === 1} data-testid={`j-${k}`}
               onChange={() => setState((s) => ({ ...s, j: { ...s.j, [k]: s.j[k] === 1 ? 0 : 1 } }))} />
-            {' '}<b className="mono">{k}</b> (+{J_COMPONENT_WEIGHTS[k]}) — {J_DEF[k]}
+            {' '}<b className="mono">{k}</b> (+{J_COMPONENT_WEIGHTS[k]}) — <LocalizedText id={`adrs.j.${k}`} fallback={J_DEF[k]} />
           </label>
         ))}
       </fieldset>
 
-      <h2>Live arithmetic <span className="eyebrow">full precision · display 1 dp · tier from raw (§13.7)</span></h2>
+      <h2><LocalizedText id="adrs.live.title" fallback="Live arithmetic" /> <span className="eyebrow"><LocalizedText id="adrs.live.note" fallback="full precision · display 1 dp · tier from raw" /> (§13.7)</span></h2>
       <table data-testid="arithmetic">
         <tbody>
           {DIMS.map((d) => (
-            <tr key={d}><td>contribution {d} <span className="mono" style={{ fontSize: 11 }}>(w·s·25)</span></td><td className="mono">{r.contributions[d].toFixed(2)}</td></tr>
+            <tr key={d}><td><LocalizedText id="adrs.output.contribution" fallback="contribution" /> {d} <span className="mono" style={{ fontSize: 11 }}>(w·s·25)</span></td><td className="mono">{r.contributions[d].toFixed(2)}</td></tr>
           ))}
-          <tr><td>InherentRisk</td><td className="mono" data-testid="out-inherent">{r.inherent.toFixed(2)}</td></tr>
-          <tr><td>MitigationCredit</td><td className="mono" data-testid="out-credit">{r.credit.toFixed(2)}</td></tr>
-          <tr><td>ResidualRisk (raw)</td><td className="mono" data-testid="out-residual">{r.residual.toFixed(4)}</td></tr>
+          <tr><td><LocalizedText id="adrs.output.inherent" fallback="InherentRisk" /></td><td className="mono" data-testid="out-inherent">{r.inherent.toFixed(2)}</td></tr>
+          <tr><td><LocalizedText id="adrs.output.credit" fallback="MitigationCredit" /></td><td className="mono" data-testid="out-credit">{r.credit.toFixed(2)}</td></tr>
+          <tr><td><LocalizedText id="adrs.output.residual" fallback="ResidualRisk (raw)" /></td><td className="mono" data-testid="out-residual">{r.residual.toFixed(4)}</td></tr>
           <tr><td>J</td><td className="mono" data-testid="out-j">{r.j.toFixed(2)}</td></tr>
-          <tr><td>ADRS (display)</td><td className="mono" data-testid="out-final">{displayScore(r.final).toFixed(1)}</td></tr>
-          <tr><td>Tier</td><td data-testid="out-tier"><TierBadge tier={r.tier} raw={r.final} /></td></tr>
+          <tr><td><LocalizedText id="adrs.output.display" fallback="ADRS (display)" /></td><td className="mono" data-testid="out-final">{displayScore(r.final).toFixed(1)}</td></tr>
+          <tr><td><LocalizedText id="adrs.output.tier" fallback="Tier" /></td><td data-testid="out-tier"><TierBadge tier={r.tier} raw={r.final} /></td></tr>
         </tbody>
       </table>
       <p>
         <button type="button" data-testid="copy-link"
           onClick={() => { navigator.clipboard?.writeText(window.location.href).then(() => setCopied(true)); }}>
-          Copy permalink
+          <LocalizedText id="adrs.copy" fallback="Copy permalink" />
         </button>
-        {copied ? <span style={{ fontSize: 12, marginLeft: 8 }}>copied ✓</span> : null}
+        {copied ? <span style={{ fontSize: 12, marginLeft: 8 }}><LocalizedText id="adrs.copied" fallback="copied" /> ✓</span> : null}
       </p>
-      <p style={{ fontSize: 12 }}>This is not a compliance determination.</p>
+      <p style={{ fontSize: 12 }}><LocalizedText id="adrs.disclaimer" fallback="This is not a compliance determination." /></p>
     </div>
   );
 }

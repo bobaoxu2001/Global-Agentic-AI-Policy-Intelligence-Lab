@@ -1,6 +1,6 @@
 # Tencent Public-Information AI Policy Implications Brief
 
-**As of:** 2026-07-14
+**Source cut-off:** 2026-08-07
 **Status:** independent portfolio analysis based only on public information
 **Evidence rule:** “Tencent public disclosure” states what the cited company source says; “policy implication” is the author’s analytical inference, not a compliance finding or Tencent position.
 
@@ -58,7 +58,7 @@ The appropriate near-term posture is to build on the responsible-AI, privacy, se
 | Cloud sovereignty and data policy | New localisation, transfer, procurement, certification, or sovereign-cloud requirement | What architecture and evidence preserve market access without overstating certification or residency? |
 | AI infrastructure sustainability | New permitting, energy, water, emissions, or reporting requirement | Are facility metrics, boundaries, methods, and claims current and decision-ready? |
 
-## Interview-safe conclusions
+## Evidence-bound conclusions
 
 1. Tencent’s disclosed portfolio makes global AI policy a cross-product operating function, not a single regulation-tracking task.
 2. A reusable technical baseline can preserve options, but product-market legal conclusions should remain separate.
@@ -77,7 +77,8 @@ The appropriate near-term posture is to build on the responsible-AI, privacy, se
 
 ## Evidence limitations
 
-- This brief uses only Tencent public disclosures and public policy sources available as of 14 July 2026.
+- This brief's Tencent and public-policy source cut-off is 7 August 2026.
+- Tencent's official investor page still listed Q1 2026 as the latest results at the cut-off; Q2 2026 results were scheduled for 12 August 2026 and were not yet available.
 - Company disclosures describe selected activities and risks; they do not provide all product, market, control, or legal facts needed for a launch decision.
 - Revenue, user, capital-expenditure, and sustainability figures retain the definitions and scope of the cited reports.
 - Forward-looking statements are identified as such and are not treated as deployed-product facts.
@@ -85,4 +86,4 @@ The appropriate near-term posture is to build on the responsible-AI, privacy, se
 
 ## Disclaimer
 
-Independent portfolio analysis based solely on Tencent public disclosures and public policy sources as of 14 July 2026. It was not commissioned by Tencent, is not affiliated with Tencent, and is not based on non-public information. It does not represent Tencent’s views and is not legal, compliance, investment, or business advice.
+Independent portfolio analysis based solely on Tencent public disclosures and public policy sources with a 7 August 2026 source cut-off. It was not commissioned by Tencent, is not affiliated with Tencent, and is not based on non-public information. It does not represent Tencent’s views and is not legal, compliance, investment, or business advice.

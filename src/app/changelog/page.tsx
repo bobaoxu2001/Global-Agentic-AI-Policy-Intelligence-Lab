@@ -1,4 +1,5 @@
 import { LifecycleChip } from '@/components/semantic';
+import { LocalizedText } from '@/components/LocalizedText';
 import { PORTFOLIO_MONITORING_LOG } from '@/lib/portfolio/policySignals';
 import { getPageDataset } from '@/lib/validation/pageData';
 
@@ -9,13 +10,13 @@ export default function ChangelogPage() {
   const instrumentsById = new Map(ds.instruments.map((i) => [i.id, i]));
   return (
     <>
-      <h1>Changelog</h1>
-      <p className="status-note">Dated record of instrument-status updates and regulatory-drift events observed during the project period (§19.5). Policy moves; this product is built to be corrected in public.</p>
-      {entries.length === 0 ? <p>No status changes recorded in this period.</p> : (
+      <h1><LocalizedText id="support.changelog.title" fallback="Changelog" /></h1>
+      <p className="status-note"><LocalizedText id="support.changelog.note" fallback="Dated record of instrument-status updates and regulatory-drift events observed during the project period (§19.5). Policy moves; this product is built to be corrected in public." /></p>
+      {entries.length === 0 ? <p><LocalizedText id="support.changelog.empty" fallback="No status changes recorded in this period." /></p> : (
         <ul style={{ listStyle: 'none', padding: 0 }}>
           {entries.map((c) => (
             <li key={c.id} style={{ borderBottom: '1px solid var(--border-rule)', padding: '10px 0' }}>
-              <div className="mono" style={{ fontSize: 12 }}>{c.entry_date} · analyst: {c.analyst}</div>
+              <div className="mono" style={{ fontSize: 12 }}>{c.entry_date} · <LocalizedText id="support.changelog.analyst" fallback="analyst" />: {c.analyst}</div>
               <div style={{ margin: '4px 0' }}>
                 <b>{instrumentsById.get(c.instrument_id)?.title_en ?? c.instrument_id}</b>
                 {c.old_status && c.new_status ? (
@@ -30,8 +31,8 @@ export default function ChangelogPage() {
         </ul>
       )}
       {ds.profile === 'preview' ? <section className="section-block">
-        <h2>Portfolio monitoring log</h2>
-        <p className="status-note">This is a transparent start-of-series log, not a backfilled weekly track record.</p>
+        <h2><LocalizedText id="support.changelog.monitoring.title" fallback="Portfolio monitoring log" /></h2>
+        <p className="status-note"><LocalizedText id="support.changelog.monitoring.note" fallback="This is a transparent start-of-series log, not a backfilled weekly track record." /></p>
         <ul className="plain-record-list">{PORTFOLIO_MONITORING_LOG.map((entry) => <li key={`${entry.date}-${entry.action}`}><b>{entry.date} · {entry.action}</b><p>{entry.note}</p><small>{entry.signalIds.join(' · ')}</small></li>)}</ul>
       </section> : null}
     </>

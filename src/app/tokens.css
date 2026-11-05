@@ -9,7 +9,7 @@
   --surface-panel: #f4f1e8; --surface-rail: #efece3; --surface-ink: #20242b;
   --border-frame: #cdc7b8; --border-rule: #e3ddd0; --border-rule-soft: #ededed;
   /* text */
-  --ink: #23211c; --ink-muted: #6b6350; --ink-eyebrow: #a08b63;
+  --ink: #23211c; --ink-muted: #6b6350; --ink-eyebrow: #725f3e;
   --ink-on-dark: #c3cbd6;
   /* type */
   --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
@@ -24,10 +24,10 @@
   --lc-adopt: #92600b; --lc-adopt-bg: #fdf1dd; --lc-adopt-dot: #c17d0a;
   --lc-partial: #4d6b1e; --lc-partial-bg: #eef6e6; --lc-partial-dot: #6f9c2e;
   --lc-full: #1f6b34; --lc-full-bg: #e3f2e4; --lc-full-dot: #1f8a43;
-  --lc-hist: #71717a; --lc-hist-bg: #f1f1f2; --lc-hist-dot: #a1a1aa;
+  --lc-hist: #62626b; --lc-hist-bg: #f1f1f2; --lc-hist-dot: #8b8b94;
   /* system 3 — bindingness (shape/weight, not hue) */
   --bind-b: #20242b; --bind-c-border: #6b7280; --bind-c-ink: #374151;
-  --bind-n-bg: #f4f4f5; --bind-n-border: #d4d4d8; --bind-n-ink: #6b7280;
+  --bind-n-bg: #f4f4f5; --bind-n-border: #d4d4d8; --bind-n-ink: #59616e;
   /* system 4 — source tier */
   --tier1: #0f172a; --tier2: #e2e8f0; --tier2-ink: #334155;
   --tier3-border: #cbd5e1; --tier3-ink: #64748b;

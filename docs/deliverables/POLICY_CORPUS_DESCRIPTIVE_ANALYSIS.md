@@ -1,12 +1,12 @@
 # Structured Policy Corpus — Descriptive Analysis
 
-**Generated:** 2026-07-14
+**Generated:** 2026-08-07
 **Data basis:** `src/data/content/*.json` working corpus
 **Status:** reproducible descriptive portfolio analysis; not a legal-coverage or compliance study
 
 ## Executive readout
 
-The working corpus contains **17 sources, 15 instruments, 9 provisions, 13 controls, 10 control mappings, and 2 change records**. It is useful for demonstrating structured policy research and policy-to-control analysis, but it is not the full MVP originally described in the specification: the provision sample reaches only **7.5% of the lower-bound target**. No reviewable record is published, so the production application correctly renders an empty structured corpus.
+The working corpus contains **18 sources, 15 instruments, 9 provisions, 13 controls, 10 control mappings, and 3 change records**. It is useful for demonstrating structured policy research and policy-to-control analysis, but it is not the full MVP originally described in the specification: the provision sample reaches only **7.5% of the lower-bound target**. No reviewable record is published, so the production application correctly renders an empty structured corpus.
 
 ## 1. Coverage by jurisdiction
 
@@ -61,15 +61,15 @@ The high mapping percentages describe completeness **within the nine selected pr
 
 | Group | Count | Share |
 |---|---:|---:|
-| 1 | 14 | 82.4% |
-| 2 | 3 | 17.6% |
+| 1 | 15 | 83.3% |
+| 2 | 3 | 16.7% |
 
 ### By language
 
 | Group | Count | Share |
 |---|---:|---:|
-| en | 12 | 70.6% |
-| zh | 5 | 29.4% |
+| en | 13 | 72.2% |
+| zh | 5 | 27.8% |
 
 Tier is a provenance category, not a confidence score. Chinese-language records carry translation and reviewer limits described in the underlying data.
 
@@ -77,11 +77,11 @@ Tier is a provenance category, not a confidence score. Chinese-language records 
 
 | Measure | Result |
 |---|---:|
-| Reviewable records across instruments, provisions, controls, mappings, and changelog | 49 |
+| Reviewable records across instruments, provisions, controls, mappings, and changelog | 50 |
 | Published records | 0 |
 | Published share | 0.0% |
-| Latest structured-record verification date | 2026-07-13 |
-| Logged change events | 2 |
+| Latest structured-record verification date | 2026-08-07 |
+| Logged change events | 3 |
 
 The published share is intentionally zero. An owner approval for one instrument does not publish it, approve its provisions, or authorize the rest of the corpus.
 

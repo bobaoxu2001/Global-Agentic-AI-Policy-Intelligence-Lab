@@ -5,8 +5,9 @@ const root = process.cwd();
 const exports = new Map([
   ['docs/deliverables/GLOBAL_AI_POLICY_PORTFOLIO_PACK.md', 'public/downloads/global-ai-policy-portfolio-pack.md'],
   ['docs/deliverables/EXECUTIVE_DECISION_BRIEF.md', 'public/downloads/executive-brief.md'],
+  ['docs/deliverables/POLICY_REFRESH_2026-08-06.md', 'public/downloads/policy-refresh-2026-08-06.md'],
   ['docs/deliverables/POLICY_MEMO_HUMAN_OVERSIGHT_AND_DISCLOSURE.md', 'public/downloads/policy-memo-human-oversight-and-disclosure.md'],
-  ['docs/deliverables/GLOBAL_AI_POLICY_INTELLIGENCE_BRIEF_2026-07-14.md', 'public/downloads/global-ai-policy-intelligence-brief.md'],
+  ['docs/deliverables/GLOBAL_AI_POLICY_INTELLIGENCE_BRIEF_2026-08-06.md', 'public/downloads/global-ai-policy-intelligence-brief.md'],
   ['docs/deliverables/EMERGING_TECH_POLICY_RADAR.md', 'public/downloads/emerging-tech-policy-radar.md'],
   ['docs/deliverables/BUSINESS_IMPLICATIONS_MATRIX.md', 'public/downloads/business-implications-matrix.md'],
   ['docs/deliverables/POLICY_POSITION_NOTE_SAMPLE.md', 'public/downloads/policy-position-note-sample.md'],
@@ -18,7 +19,6 @@ const exports = new Map([
   ['docs/deliverables/INDUSTRY_INITIATIVES_TRACKER.md', 'public/downloads/industry-initiatives-tracker.md'],
   ['docs/deliverables/POLICY_CORPUS_DESCRIPTIVE_ANALYSIS.md', 'public/downloads/policy-corpus-descriptive-analysis.md'],
   ['docs/deliverables/TENCENT_PUBLIC_INFORMATION_IMPLICATIONS_BRIEF.md', 'public/downloads/tencent-public-information-implications-brief.md'],
-  ['docs/deliverables/TENCENT_ROLE_ALIGNMENT.md', 'public/downloads/tencent-role-alignment.md'],
   ['docs/deliverables/Global_AI_Policy_Executive_Briefing.pptx', 'public/downloads/Global_AI_Policy_Executive_Briefing.pptx'],
 ]);
 

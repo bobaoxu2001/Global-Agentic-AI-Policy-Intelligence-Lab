@@ -25,6 +25,17 @@ test('every route shell renders with the fixture banner and no console errors', 
   expect(errors).toEqual([]);
 });
 
+test('home exposes all jurisdiction routes with fixture-aware counts', async ({ page }) => {
+  await page.goto('/');
+  const jurisdictionLinks = page.locator('.jurisdiction-grid a');
+  await expect(jurisdictionLinks).toHaveCount(4);
+  expect(await jurisdictionLinks.evaluateAll((links) => links.map((link) => link.getAttribute('href')))).toEqual(['/jurisdictions/us', '/jurisdictions/eu', '/jurisdictions/sg', '/jurisdictions/cn']);
+  for (const [index, jurisdiction] of ['us', 'eu', 'sg', 'cn'].entries()) {
+    const count = countBy((instrument) => instrument.jurisdiction_id === jurisdiction);
+    await expect(jurisdictionLinks.nth(index)).toContainText(`${count} fictional ${count === 1 ? 'instrument' : 'instruments'}`);
+  }
+});
+
 test('scenario page renders per-jurisdiction tiers computed from fixtures (MJ-10)', async ({ page }) => {
   const first = scenarios[0]!;
   await page.goto(`/scenarios/${first.id}`);
@@ -83,6 +94,14 @@ test('tracker filters: OR within axis, AND across axes, URL state, empty state (
   await page.goto('/instruments');
   const total = await page.locator('tbody tr').count();
   expect(total).toBe(ALL_INSTRUMENTS.length);
+  const titleHeader = page.getByRole('columnheader', { name: 'Instrument' });
+  const titleSort = titleHeader.getByRole('button', { name: 'Instrument' });
+  await expect(titleHeader).toHaveAttribute('aria-sort', 'none');
+  await titleSort.focus();
+  await titleSort.press('Enter');
+  await expect(titleHeader).toHaveAttribute('aria-sort', 'ascending');
+  await titleSort.press('Space');
+  await expect(titleHeader).toHaveAttribute('aria-sort', 'descending');
   // AND across axes: jurisdiction=eu AND type=enacted_law
   await page.getByTestId('f-jur-eu').check();
   await page.getByTestId('f-type-enacted_law').check();
@@ -104,4 +123,5 @@ test('tracker filters: OR within axis, AND across axes, URL state, empty state (
   await page.goto('/instruments?jur=cn');
   const cn = countBy((i) => i.jurisdiction_id === 'cn');
   await expect(page.getByTestId('result-count')).toContainText(`${cn} of`);
+  await expect(page).toHaveURL(/\?jur=cn$/);
 });

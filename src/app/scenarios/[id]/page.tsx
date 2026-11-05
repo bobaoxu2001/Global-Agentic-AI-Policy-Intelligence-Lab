@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { LocalizedText } from '@/components/LocalizedText';
 import { TierBadge } from '@/components/semantic';
 import { encodeCalcState } from '@/lib/adrs/urlState';
 import type { MitigationClass, Dims, JComponents } from '@/lib/adrs';
@@ -17,18 +18,18 @@ export default async function ScenarioPage({ params }: { params: Promise<{ id: s
   const { id } = await params;
   const ds = getPageDataset();
   const s = ds.scenarios.find((x) => x.id === id);
-  if (!s) return <p>Not found.</p>;
+  if (!s) return <p><LocalizedText id="research.scenario.notFound" fallback="Not found." /></p>;
   const rows = ds.assessments.filter((a) => a.scenario_id === s.id);
   return (
     <>
-      <p><span className="hypo-tag">HYPOTHETICAL SCENARIO</span> <span style={{ fontSize: 12 }}>fictional composite (SPEC §14)</span></p>
+      <p><span className="hypo-tag"><LocalizedText id="research.scenario.hypothetical" fallback="HYPOTHETICAL SCENARIO" /></span> <span style={{ fontSize: 12 }}><LocalizedText id="research.scenario.composite" fallback="fictional composite" /> (SPEC §14)</span></p>
       <h1>{s.name}</h1>
       <p>{s.narrative_md}</p>
-      <h2>Capability profile <span className="eyebrow">§10 intensities</span></h2>
+      <h2><LocalizedText id="research.scenario.capabilityProfile" fallback="Capability profile" /> <span className="eyebrow"><LocalizedText id="research.scenario.intensities" fallback="§10 intensities" /></span></h2>
       <ul>{s.capability_profile.map((c) => <li key={c.capability_id}><b className="mono">{c.capability_id} = {c.intensity}</b> — {c.note}</li>)}</ul>
-      <h2>ADRS per jurisdiction <span className="eyebrow">not a compliance determination</span></h2>
+      <h2><LocalizedText id="research.scenario.adrsTitle" fallback="ADRS per jurisdiction" /> <span className="eyebrow"><LocalizedText id="research.notCompliance" fallback="not a compliance determination" /></span></h2>
       <table data-testid="adrs-worksheets">
-        <thead><tr><th>Jurisdiction</th><th>Inherent</th><th>Credit</th><th>Residual (raw)</th><th>J</th><th>Tier</th><th></th></tr></thead>
+        <thead><tr><th><LocalizedText id="research.table.jurisdiction" fallback="Jurisdiction" /></th><th><LocalizedText id="research.table.inherent" fallback="Inherent" /></th><th><LocalizedText id="research.table.credit" fallback="Credit" /></th><th><LocalizedText id="research.table.residual" fallback="Residual (raw)" /></th><th>J</th><th><LocalizedText id="research.table.tier" fallback="Tier" /></th><th></th></tr></thead>
         <tbody>
           {rows.map((a) => {
             const r = scoreAssessment(a);
@@ -45,15 +46,15 @@ export default async function ScenarioPage({ params }: { params: Promise<{ id: s
                 <td className="mono">{r.residual.toFixed(4)}</td>
                 <td className="mono">{r.j.toFixed(2)}</td>
                 <td><TierBadge tier={r.tier} raw={r.final} /></td>
-                <td><Link href={`/calculator?${deep}`}>open in calculator</Link></td>
+                <td><Link href={`/calculator?${deep}`}><LocalizedText id="research.scenario.openCalculator" fallback="open in calculator" /></Link></td>
               </tr>
             );
           })}
         </tbody>
       </table>
-      <p style={{ fontSize: 12, color: 'var(--ink-muted)' }}>J components in fixtures are FICTIONAL and illustrative pending reviewed research (OD-11/MD-3). Deep links pre-populate the calculator from this assessment (AC-ADRS-11); every toggle stays editable.</p>
+      <p style={{ fontSize: 12, color: 'var(--ink-muted)' }}><LocalizedText id="research.scenario.fixtureNote" fallback="J components in fixtures are FICTIONAL and illustrative pending reviewed research (OD-11/MD-3). Deep links pre-populate the calculator from this assessment (AC-ADRS-11); every toggle stays editable." /></p>
 
-      <h2>Provisions touching this capability profile <span className="eyebrow">▲ inference — capability overlap, reference date {BUILD_DATE}</span></h2>
+      <h2><LocalizedText id="research.scenario.provisionsTitle" fallback="Provisions touching this capability profile" /> <span className="eyebrow"><LocalizedText id="research.scenario.provisionsEyebrow" fallback="▲ inference — capability overlap, reference date" /> {BUILD_DATE}</span></h2>
       {(() => {
         const instrumentsById = new Map(ds.instruments.map((i) => [i.id, i]));
         const profileCaps = new Set(s.capability_profile.filter((c) => c.intensity >= 1).map((c) => c.capability_id));
@@ -62,16 +63,16 @@ export default async function ScenarioPage({ params }: { params: Promise<{ id: s
           .filter((x) => x.caps.length > 0)
           .map((x) => ({ ...x, inst: instrumentsById.get(x.p.instrument_id), bindingNow: isCurrentlyApplicableBinding(x.p, instrumentsById, BUILD_DATE) }))
           .sort((a, b) => Number(b.bindingNow) - Number(a.bindingNow));
-        if (hits.length === 0) return <p style={{ fontSize: 12.5, color: 'var(--ink-muted)' }}>No corpus provisions map onto this profile yet.</p>;
+        if (hits.length === 0) return <p style={{ fontSize: 12.5, color: 'var(--ink-muted)' }}><LocalizedText id="research.scenario.noProvisions" fallback="No corpus provisions map onto this profile yet." /></p>;
         const JURS = ['us', 'eu', 'sg', 'cn'] as const;
         return (
           <>
             <p data-testid="cross-jur-strip" style={{ fontSize: 12.5 }}>
-              Currently-applicable binding hits by jurisdiction:{' '}
+              <LocalizedText id="research.scenario.bindingHits" fallback="Currently-applicable binding hits by jurisdiction" />:{' '}
               {JURS.map((j) => `${j.toUpperCase()} ${hits.filter((h) => h.inst?.jurisdiction_id === j && h.bindingNow).length}`).join(' · ')}
             </p>
             <table data-testid="scenario-provisions">
-              <thead><tr><th>Provision</th><th>Jur</th><th>Overlap</th><th>Bindingness</th><th>Applies from</th><th>Binding now?</th></tr></thead>
+              <thead><tr><th><LocalizedText id="research.table.provision" fallback="Provision" /></th><th><LocalizedText id="research.table.jurisdictionShort" fallback="Jur" /></th><th><LocalizedText id="research.table.overlap" fallback="Overlap" /></th><th><LocalizedText id="research.table.bindingness" fallback="Bindingness" /></th><th><LocalizedText id="research.table.appliesFrom" fallback="Applies from" /></th><th><LocalizedText id="research.table.bindingNow" fallback="Binding now?" /></th></tr></thead>
               <tbody>
                 {hits.map(({ p, caps, inst, bindingNow }) => (
                   <tr key={p.id}>
@@ -80,7 +81,7 @@ export default async function ScenarioPage({ params }: { params: Promise<{ id: s
                     <td className="mono" style={{ fontSize: 11 }}>{caps.join(', ')}</td>
                     <td><BindingnessChip level={effectiveBindingness(p, instrumentsById) ?? 'non_binding'} /></td>
                     <td className="mono" style={{ fontSize: 12 }}>{p.applies_from ?? '—'}</td>
-                    <td>{bindingNow ? '✓ yes' : '— not yet / not binding'}</td>
+                    <td>{bindingNow ? <><span aria-hidden="true">✓ </span><LocalizedText id="research.yes" fallback="yes" /></> : <><span aria-hidden="true">— </span><LocalizedText id="research.notYetBinding" fallback="not yet / not binding" /></>}</td>
                   </tr>
                 ))}
               </tbody>

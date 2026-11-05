@@ -1,40 +1,44 @@
 # Emerging Technology Policy Radar
 
-**As of:** 2026-07-14
-**Scope:** agentic AI, semiconductors/compute, cloud/data centers, standards, and APAC implementation
-**Status:** independent portfolio work sample; not legal advice; no company affiliation
+**As of:** 2026-08-13
+
+**Scope:** agentic AI, AI cybersecurity, semiconductors/compute, cloud/data centers, standards, and APAC implementation
+
+**Status:** selective official-source snapshot; independent portfolio work sample; not legal advice
+
+**Refresh discipline:** the full listed source set was checked through 13 August 2026. No substantive post-7 August amendment was found in the existing tracked instruments. New rows below are labeled as a **pending trigger**, **coverage correction**, or **implementation signal** rather than being misrepresented as newly enacted law.
 
 ## Radar
 
-| Domain | Current official signal | Evidence IDs | Direction | Business risk | Business opportunity | 30/90-day monitor |
-|---|---|---|---|---|---|---|
-| **Agent identity & authorization** | NIST’s 2026 AI Agent Standards Initiative focuses on secure identity, authorization, interoperability, open protocols, and evaluations. | S07 | Voluntary standards formation | Incompatible protocols; over-broad agent authority; weak non-repudiation | Shape implementable standards; productize identity and audit controls | **30d:** capture new CAISI/NCCoE outputs. **90d:** map emerging requirements to K02/K04/K06 controls. |
-| **Agent accountability** | Singapore’s 2026 MGF for Agentic AI emphasizes bounding powers, meaningful human accountability, lifecycle controls, and end-user responsibility. | S08, S09 | Voluntary deployment guidance | False equivalence between guidance and law; insufficient evidence of control operation | Use the framework as an assurance and sandbox playbook | **30d:** complete control crosswalk. **90d:** select a low-risk sandbox case and evidence plan. |
-| **Consumer agents** | The UK CMA’s March 2026 work applies consumer-protection thinking to agentic AI, including trust, redress, and business practices. | S11 | Existing-law application and market study | Hidden delegation, weak cancellation/redress, conflicts of interest | Trustworthy UX and transaction controls as differentiation | **30d:** red-team a shopping/payment journey. **90d:** publish internal consumer-agent design principles. |
-| **Advanced semiconductors** | BIS’s January, May, and June 2026 materials combine conditional case-by-case review for specified chips with clarified licensing expectations for advanced-compute items involving certain ownership and destination profiles. | S04, S05, S06 | Security-led managed access | Supply, licensing, re-export, ultimate-parent, and diversion exposure | Documented authorized pathways and stronger customer trust | **30d:** refresh chip/customer/end-use matrix. **90d:** audit reseller and cloud-capacity workflows. |
-| **US data-center buildout** | Executive Order 14318 directs faster federal permitting and support for qualifying AI data-center infrastructure, including projects above a defined load threshold. | S12 | Capacity acceleration | Energy, environmental, community, permitting, and policy-reversal risk | Faster capacity deployment and infrastructure partnerships | **30d:** identify threshold-relevant projects. **90d:** integrate energy/community and permitting risk into site strategy. |
-| **EU cloud & AI capacity** | The Commission’s June 2026 CADA proposal targets capacity, innovation, sustainability, and an EU-wide sovereignty assessment framework. | S03 | Capacity expansion plus sovereignty policy | Architecture/procurement lock-in; critical-sector access constraints | AI-factory/gigafactory ecosystem, partnerships, public-sector routes | **30d:** assign legislative owner. **90d:** scenario-test sovereignty and procurement outcomes. |
-| **EU product transparency** | Article 50 transparency obligations apply from 2026-08-02; the final implementation code was published on 2026-06-10, and the Commission page last updated on 2026-07-09 records confirmation by the Commission and AI Board. Specified high-risk timelines moved later under the omnibus. | S01, S02 | Near-term product obligation | Misreading the high-risk delay as a general delay | Reusable disclosure, labeling, and provenance layer | **30d:** finish product inventory and gap test. **90d:** collect evidence of control effectiveness. |
-| **Korea AI implementation** | The AI Basic Act and Enforcement Decree took effect on 2026-01-22 with promotion, transparency, safety, and high-impact-AI mechanisms. | S10 | Comprehensive implementation with innovation support | Classification/localization error; stale English-only monitoring | Testing/certification support and market confidence | **30d:** nominate Korean-source owner. **90d:** validate product-by-product classification with local expertise. |
+| Domain | Current official signal | Classification | Business risk | Business opportunity | Next review / trigger |
+|---|---|---|---|---|---|
+| **California content authenticity** | Codified Chapter 25 remains operative with its current covered-provider threshold. SB 1000 is a pending urgency bill on the Assembly third-reading file; its text would remove the threshold and revise several controls if enacted. | Binding current law + **pending trigger** | Implementing bill text as if it were law; failing to prepare for rapid scope change | Maintain current compliance mapping plus a ready-to-run alternative scenario | **Next legislative day:** official amendment, vote, enrollment, Governor action, or chaptering |
+| **EU product transparency** | Article 50 applies. The voluntary code was assessed as adequate, but adherence is not conclusive evidence. | Binding duties + non-binding guidance + voluntary tool | Treating the code as the law or as proof of compliance | Reusable disclosure, labeling, provenance, and effectiveness evidence | **30d:** Commission, AI Board, and national-authority implementation material |
+| **EU AI literacy** | Article 4 continues to require contextual AI-literacy measures; national supervision and enforcement began in early August. | Binding duty + Commission Q&A | Universal one-size-fits-all training; no record of users, context, or risk | Role- and risk-sensitive training evidence integrated into governance | **30d:** AI Board recommendations and national implementation |
+| **Agent identity and authorization** | NIST's initiative and AI 800-5 are non-binding standards/research activity. Singapore's current framework is v1.5. China's July interoperability initiative calls for identity, mutual recognition, open standards, lifecycle security, and data cooperation but is non-binding. | **Coverage correction** across voluntary and policy-direction sources | Calling research or initiatives mandatory; incompatible protocols; excessive authority | Implement identity, authorization, audit, lifecycle, and interoperability evidence before standards settle | **30d:** new NIST/IMDA/CAC outputs or implementing standards |
+| **US AI cybersecurity** | EO 14409 directs agency work and a voluntary developer framework; Gold Eagle is reported as an operating public-private vulnerability-coordination clearinghouse. | Executive direction + voluntary channel + **implementation signal** | Calling Gold Eagle a regulation or assuming private participation is mandatory | Mature model evaluation, vulnerability intake, remediation, and information-sharing evidence | **30d:** agency directives, rulemaking, participation terms, or procurement conditions |
+| **Advanced semiconductors** | BIS ownership/end-use guidance remains current. A July final rule creates narrow approved-entity pathways for specified UAE transactions without displacing other end-use and end-user controls. | Binding export-control rules + guidance + **coverage correction** | Treating destination as sufficient or describing the rule as general deregulation | Better authorized-pathway screening and auditable customer/supply decisions | **30d:** EAR changes; ultimate parent, ECCN, end use, end user, consignee, or approved-entity status changes |
+| **EU cloud and AI capacity** | CADA is proposal COM(2026) 502 in ongoing procedure 2026/0138(COD). | Legislative proposal; not enacted | Building an architecture on assumed final sovereignty or procurement rules | Scenario planning for capacity, sustainability, critical-sector access, and procurement | **30d:** Parliament/Council procedure movement or amended text |
+| **US data-center buildout** | EO 14318 remains the federal permitting direction; no post-7 August White House policy change was identified. | Executive direction; **no-change verification** | Overstating a project milestone as a general legal change | Reversible site, energy, community, and permitting strategy | **Quarterly:** new agency rules, guidance, or material implementation changes |
+| **China anthropomorphic interaction** | The scoped binding rule has applied since 15 July for public-facing services with continuous emotional interaction. | Binding departmental rule; **no-change verification** | Missing companion-AI duties or over-scoping ordinary assistants | Safer interaction, minors, dependency, exit, disclosure, and assessment patterns | **On product change:** continuous emotional interaction or natural-person simulation added |
+| **China agent policy direction** | The May opinion and July interoperability initiative address identity, scoped authority, lifecycle safety, interoperability, and data cooperation. | Non-binding opinion and initiative; **coverage correction** | Converting direction-of-travel language into a current legal duty | Anticipate standards and assurance needs while preserving bindingness labels | **30d:** standard, sector rule, or product-specific implementation measure |
+| **Singapore agent accountability** | IMDA v1.5 adds multi-agent, third-party-agent, automation-bias, and case-study material; sandbox insights remain guidance. | Voluntary guidance; **current-edition correction** | Using an older edition or calling assurance evidence legal authorization | More complete assurance crosswalk and sandbox preparation | **Quarterly:** framework or sandbox update |
+| **Korea AI implementation** | Act No. 21311 and Presidential Decree No. 36506 remain in force from 21 July; no later amendment was found. | Binding act/decree; **no-change verification** | Confusing industrial support or procurement announcements with general AI duties | Korea-specific classification and implementation monitoring | **Quarterly:** Act, decree, or regulator guidance changes |
+| **UK consumer agents** | CMA research is accompanied by separate guidance stating that existing consumer law applies and businesses remain responsible for agents they use. | Existing-law guidance; **coverage correction** | Weak disclosure, confirmation, cancellation, oversight, or redress | Trusted transaction design and documented testing | **Quarterly or product change:** material CMA update or autonomous consumer commitment |
 
-## Monitoring protocol
+## Cross-functional asks
 
-1. Use official primary sources first; record publication date, access date, status, and stable reference.
-2. Separate **fact** (what changed) from **inference** (why it matters) and **recommendation** (what to do).
-3. Trigger an escalation only when a verified change affects product scope, launch timing, compute availability, customer eligibility, external positioning, or required evidence.
-4. Preserve the prior record and explain corrections; do not silently overwrite a policy position.
+1. **Policy + Legal:** maintain a current-law baseline and a separate pending-proposal scenario; never merge them.
+2. **Product + Engineering:** preserve identity, authority, disclosure, provenance, logging, testing, incident, and redress evidence as reusable capabilities.
+3. **Security:** connect agent and model evaluation to vulnerability intake, remediation, and information-sharing controls without presenting voluntary programs as mandates.
+4. **Cloud + Procurement:** keep region, supplier, ownership, consignee, end user, chip class, end use, and approved-entity assumptions reversible and reviewable.
+5. **Leadership:** require dated sources, legal form, product facts, an accountable owner, unresolved questions, and an expiry trigger before acting.
 
-## Source register
+## Limits
 
-- **S01** — [Council AI omnibus approval](https://www.consilium.europa.eu/en/press/press-releases/2026/06/29/artificial-intelligence-council-gives-final-green-light-to-simplify-and-streamline-rules/)
-- **S02** — [European Commission Article 50 transparency code](https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content)
-- **S03** — [European Commission CADA proposal](https://digital-strategy.ec.europa.eu/en/library/proposal-cloud-and-ai-development-act-cada)
-- **S04** — [BIS May 2026 Advanced Computing guidance](https://media.bis.gov/media/documents/bis-guidance-may-31-2026.pdf)
-- **S05** — [BIS updated FAQ](https://www.bis.gov/media/documents/May-31-FAQ.pdf)
-- **S06** — [BIS January 2026 semiconductor license-review policy](https://www.bis.gov/sites/default/files/documents/DoC%20Revises%20License%20Review%20Policy%20for%20Semiconductors%20Exports.pdf)
-- **S07** — [NIST AI Agent Standards Initiative](https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative)
-- **S08** — [Singapore Model AI Governance Framework for Agentic AI](https://www.imda.gov.sg/resources/press-releases-factsheets-and-speeches/press-releases/2026/new-model-ai-governance-framework-for-agentic-ai)
-- **S09** — [Singapore AI Agents Sandbox insights](https://www.imda.gov.sg/resources/press-releases-factsheets-and-speeches/factsheets/2026/ai-agents-insights-from-the-singapore-government-and-google-sandbox)
-- **S10** — [Korea MSIT: AI Basic Act comes into force](https://www.msit.go.kr/eng/bbs/view.do%3Bjsessionid%3DR15sRn4EJvYb4ya9k4Roiy9k6Ci-tgMefxkNeVIs.AP_msit_1?bbsSeqNo=42&mId=4&mPid=2&nttSeqNo=1214&sCode=eng)
-- **S11** — [UK CMA: Agentic AI and consumers](https://www.gov.uk/government/publications/agentic-ai-and-consumers)
-- **S12** — [White House EO 14318: Accelerating Federal Permitting of Data Center Infrastructure](https://www.whitehouse.gov/presidential-actions/2025/07/accelerating-federal-permitting-of-data-center-infrastructure/)
+- The radar is selective and does not claim exhaustive global coverage or continuous monitoring.
+- A checked official source can confirm no identified change; it cannot prove that no relevant development exists anywhere.
+- Facts are paraphrases; business risks, opportunities, and actions are analysis.
+- Product applicability and legal conclusions require complete facts and qualified review.
+
+Source IDs and links are maintained in [Global AI Policy Intelligence Brief](global-ai-policy-intelligence-brief.md#primary-sources).

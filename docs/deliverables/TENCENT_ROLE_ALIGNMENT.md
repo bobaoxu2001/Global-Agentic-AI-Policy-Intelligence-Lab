@@ -1,12 +1,12 @@
 # Role Alignment — Associate, Global AI Policy
 
 **Target role:** Tencent, Associate, Global AI Policy (Req. R107663)
-**Prepared:** 2026-07-14
+**Prepared:** 2026-08-06
 **Disclosure:** this is an independent application portfolio artifact. It is not affiliated with, endorsed by, or representative of Tencent.
 
 ## 90-second reviewer path
 
-1. Read the [current intelligence brief](GLOBAL_AI_POLICY_INTELLIGENCE_BRIEF_2026-07-14.md) for monitoring, synthesis, risks, opportunities, and next actions.
+1. Read the [July-August policy refresh](POLICY_REFRESH_2026-08-06.md) and [current intelligence brief](GLOBAL_AI_POLICY_INTELLIGENCE_BRIEF_2026-08-06.md) for lifecycle correction, monitoring, synthesis, risks, opportunities, and next actions.
 2. Open the Atlas preview and trace GDPR Article 22 from primary text → scoped inference → engineering controls.
 3. Review the [emerging-tech radar](EMERGING_TECH_POLICY_RADAR.md) for agentic AI, semiconductors, cloud/data centers, standards, and APAC coverage.
 4. Read the [business implications matrix](BUSINESS_IMPLICATIONS_MATRIX.md), [Tencent public-information implications brief](TENCENT_PUBLIC_INFORMATION_IMPLICATIONS_BRIEF.md), and [policy position sample](POLICY_POSITION_NOTE_SAMPLE.md).

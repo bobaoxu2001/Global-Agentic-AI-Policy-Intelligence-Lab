@@ -1,7 +1,7 @@
 # Global AI Policy Portfolio Pack
 
-**As of:** 2026-07-14
-**Prepared for:** hiring-manager review of an Associate, Global AI Policy work sample
+**As of:** 2026-08-13
+**Prepared for:** public review of an applied global AI policy research portfolio
 **Status:** independent, AI-assisted portfolio research; not legal advice; no company affiliation
 
 ## Executive readout
@@ -16,14 +16,16 @@ This is a reversible operating recommendation, not a legal conclusion or launch 
 
 | Signal | Verified fact | Business meaning | Next move |
 |---|---|---|---|
-| EU transparency | Article 50 transparency duties apply from 2 August 2026; specified high-risk timelines moved later | Disclosure and output-provenance work should not wait for the later high-risk workstream | Complete the covered-surface inventory and test notices, labels, and metadata |
-| EU cloud capacity | The European Commission proposed the Cloud and AI Development Act in June 2026 | Capacity, sustainability, procurement, and sovereignty policy can affect infrastructure strategy | Keep region and supplier architecture reversible; track the legislative path |
-| US advanced compute | BIS guidance ties advanced-compute licensing analysis to item, ownership, end use, destination, and authorization | Customer and transaction screening can become a product and sales-process constraint | Put export-screening questions before capacity commitment or delivery |
-| Agent standards | NIST and IMDA focus on identity, authorization, bounded agency, lifecycle controls, and accountability | Technical controls can become reusable assurance evidence | Crosswalk the control layer to standards and sandbox evidence needs |
-| APAC implementation | China, Singapore, and Korea use different bindingness, scope, and implementation models | “APAC” is not one launch classification | Assign authoritative-language owners and issue market-specific decisions |
-| UK consumer agents | The CMA applies existing consumer-law analysis to agentic journeys | Agent-specific legislation is not required for current exposure | Test disclosure, confirmation, cancellation, commercial influence, and redress end to end |
+| California current law / SB 1000 | Current Chapter 25 remains operative; SB 1000 was a pending urgency bill on the Assembly third-reading file on 13 August | A fast-moving proposal must not silently replace current law | Apply the current threshold and controls; maintain a separate bill scenario; re-check on the next legislative day |
+| EU transparency and literacy | Article 50 applies; code adherence is not conclusive proof. Article 4 still requires contextual AI-literacy measures | Product evidence and staff preparation are parallel operating workstreams | Record the applicable paragraph, control evidence, users, context, risk, and literacy measures |
+| China agent policy | A scoped binding rule applies to continuous emotional interaction; the May opinion and July interoperability initiative are non-binding direction | Binding duties and standards direction must stay separate | Screen product scope, then track implementing standards without inventing duties |
+| Singapore agent governance | IMDA's current voluntary framework is v1.5 | Older framework editions can omit multi-agent, third-party-agent, and automation-bias material | Use v1.5 for assurance and sandbox crosswalks |
+| UK consumer agents | Separate CMA guidance states that existing consumer law applies and businesses remain responsible for agents they use | Exposure exists without agent-specific legislation | Test disclosure, confirmation, cancellation, oversight, commercial influence, and redress end to end |
+| US advanced compute | A July BIS final rule adds narrow approved-entity pathways for specified UAE transactions while other EAR controls remain | Destination alone cannot determine the licensing route | Screen ownership, consignee, end user, ECCN, end use, destination, and approval status |
+| US AI cybersecurity | EO 14409 directs agency work and a voluntary developer framework; Gold Eagle is an operational coordination initiative, not regulation | Model-security evidence can support government coordination without becoming a universal mandate | Mature evaluation, vulnerability intake, remediation, and information-sharing evidence |
+| EU cloud capacity | CADA remains proposal COM(2026) 502 in ongoing procedure 2026/0138(COD) | Proposal-stage outcomes should remain scenario inputs | Keep region and supplier architecture reversible; track Parliament and Council movement |
 
-The full dated record, source links, verification dates, owners, and triggers are in `GLOBAL_AI_POLICY_INTELLIGENCE_BRIEF_2026-07-14.md`.
+The full dated record, source links, verification dates, owners, and triggers are in `GLOBAL_AI_POLICY_INTELLIGENCE_BRIEF_2026-08-06.md`. The complete listed portfolio-source set was rechecked through 13 August. The review found no substantive post-7 August amendment in the existing tracked instruments; it adds omitted coverage and a live pending-legislation trigger without presenting either as newly enacted law.
 
 ## Decision architecture
 
@@ -91,8 +93,8 @@ The score is an author-designed heuristic. It is not a probability, compliance s
 
 | Layer | Current state | Permitted claim |
 |---|---|---|
-| Role-facing work samples | Final as independent portfolio artifacts | Demonstrates research, synthesis, writing, operating design, and judgment |
-| Golden 8 structured preview | AI-assisted, source-traceable, non-production | Demonstrates a bounded policy evidence workflow |
+| Applied work samples | Final as independent portfolio artifacts | Demonstrates research, synthesis, writing, operating design, and judgment |
+| Curated structured research snapshot | AI-assisted, source-traceable, non-production | Demonstrates a bounded policy evidence workflow |
 | Working corpus | All reviewable records remain `in_review` | Demonstrates data structure and review operations, not publication completion |
 | Production application | Fail-closed when no eligible instrument is published | Demonstrates publication controls; currently no structured policy content is presented |
 
@@ -100,9 +102,9 @@ The repository does not claim completed independent legal review, a stakeholder 
 
 ## Ten-minute reviewer path
 
-1. Read [the executive decision brief](EXECUTIVE_DECISION_BRIEF.md) for the decision and evidence gate.
-2. Review the [six-slide executive briefing](Global_AI_Policy_Executive_Briefing.pptx).
-3. Open [the dated intelligence brief](GLOBAL_AI_POLICY_INTELLIGENCE_BRIEF_2026-07-14.md) and challenge one source-to-implication chain.
+1. Read the [July-August policy refresh](POLICY_REFRESH_2026-08-06.md) and challenge the EU lifecycle correction.
+2. Read [the executive decision brief](EXECUTIVE_DECISION_BRIEF.md) for the decision and evidence gate.
+3. Open [the dated intelligence brief](GLOBAL_AI_POLICY_INTELLIGENCE_BRIEF_2026-08-06.md) and challenge one source-to-implication chain.
 4. Use [the business implications matrix](BUSINESS_IMPLICATIONS_MATRIX.md) and [Tencent public-information implications brief](TENCENT_PUBLIC_INFORMATION_IMPLICATIONS_BRIEF.md) to test business translation and evidence boundaries.
 5. Read [the consultation response sample](CONSULTATION_RESPONSE_SAMPLE.md) or [speaking brief sample](SPEAKING_BRIEF_SAMPLE.md) for external-policy craft.
 6. Open the application’s GDPR Article 22 provision and trace primary text → scoped inference → capability/risk map → controls.
@@ -110,8 +112,10 @@ The repository does not claim completed independent legal review, a stakeholder 
 
 ## Primary-source register
 
-- [Council of the European Union — AI rules simplification final approval](https://www.consilium.europa.eu/en/press/press-releases/2026/06/29/artificial-intelligence-council-gives-final-green-light-to-simplify-and-streamline-rules/)
+- [EUR-Lex — Regulation (EU) 2026/1744](https://eur-lex.europa.eu/eli/reg/2026/1744/oj/eng)
+- [European Commission — Article 50 transparency guidelines](https://digital-strategy.ec.europa.eu/en/library/guidelines-transparency-obligations-providers-and-deployers-ai-systems)
 - [European Commission — Code of Practice on Transparency of AI-Generated Content](https://digital-strategy.ec.europa.eu/en/policies/code-practice-ai-generated-content)
+- [California Legislative Information — AI Transparency Act](https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?article=&chapter=25.&division=8.&lawCode=BPC&part=&title=)
 - [European Commission — Cloud and AI Development Act proposal](https://digital-strategy.ec.europa.eu/en/library/proposal-cloud-and-ai-development-act-cada)
 - [U.S. Bureau of Industry and Security — May 2026 advanced-computing guidance](https://media.bis.gov/media/documents/bis-guidance-may-31-2026.pdf)
 - [NIST — AI Agent Standards Initiative](https://www.nist.gov/artificial-intelligence/ai-agent-standards-initiative)
@@ -120,13 +124,16 @@ The repository does not claim completed independent legal review, a stakeholder 
 - [UK Competition and Markets Authority — Agentic AI and consumers](https://www.gov.uk/government/publications/agentic-ai-and-consumers)
 - [Cyberspace Administration of China — Interim Measures for Generative AI Services](https://www.cac.gov.cn/2023-07/13/c_1690898327029107.htm)
 - [Cyberspace Administration of China — Measures for Labeling AI-Generated Synthetic Content](https://www.cac.gov.cn/2025-03/14/c_1743654684782215.htm)
+- [Cyberspace Administration of China — Interim Measures for Anthropomorphic AI Interaction Services](https://www.cac.gov.cn/2026-04/10/c_1777558395078289.htm)
+- [CAC, NDRC, and MIIT — Implementation Opinion on AI Agents](https://www.cac.gov.cn/2026-05/08/c_1779979789523320.htm)
 
 ## Artifact index
 
 - [Executive decision brief](EXECUTIVE_DECISION_BRIEF.md)
 - [Executive briefing deck](Global_AI_Policy_Executive_Briefing.pptx)
 - [Policy memo](POLICY_MEMO_HUMAN_OVERSIGHT_AND_DISCLOSURE.md)
-- [Global AI policy intelligence brief](GLOBAL_AI_POLICY_INTELLIGENCE_BRIEF_2026-07-14.md)
+- [July-August policy refresh](POLICY_REFRESH_2026-08-06.md)
+- [Global AI policy intelligence brief](GLOBAL_AI_POLICY_INTELLIGENCE_BRIEF_2026-08-06.md)
 - [Emerging-technology policy radar](EMERGING_TECH_POLICY_RADAR.md)
 - [Business implications matrix](BUSINESS_IMPLICATIONS_MATRIX.md)
 - [Tencent public-information implications brief](TENCENT_PUBLIC_INFORMATION_IMPLICATIONS_BRIEF.md)
@@ -138,7 +145,6 @@ The repository does not claim completed independent legal review, a stakeholder 
 - [Industry initiatives tracker](INDUSTRY_INITIATIVES_TRACKER.md)
 - [ADRS sensitivity note](ADRS_SENSITIVITY_NOTE.md)
 - [Structured corpus descriptive analysis](POLICY_CORPUS_DESCRIPTIVE_ANALYSIS.md)
-- [Tencent role-alignment map](TENCENT_ROLE_ALIGNMENT.md)
 
 ## Disclaimer
 

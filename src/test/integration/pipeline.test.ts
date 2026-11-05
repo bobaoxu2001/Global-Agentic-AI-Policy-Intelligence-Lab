@@ -15,6 +15,7 @@ import {
   checkProductionPublicationGate,
   checkVersionUniqueness,
   currentVersions,
+  publicationRecordSha256,
   runIntegrity,
   type Dataset,
 } from '../../lib/validation/integrity';
@@ -90,17 +91,37 @@ describe('production profile publication gate (CB-4, rules 7–8)', () => {
     ]);
   });
 
-  it('allows in-review rows to coexist with a partial, independently approved published subset', () => {
+  it('allows in-review rows to coexist with a partial subset approved for the exact record revision', () => {
     const r = loadAndValidate('production');
+    const reviewedRecord = r.dataset.instruments.find((record) => record.id === 'eu-gdpr')!;
+    const reviewedSources = r.dataset.sources.filter((source) => reviewedRecord.source_ids.includes(source.id));
     const ds: Dataset = {
       ...r.dataset,
       instruments: r.dataset.instruments.map((record) =>
         record.id === 'eu-gdpr' ? { ...record, review_status: 'published' as const } : record,
       ),
     };
+    const revisionBoundLog = {
+      decisions: [{
+        record_id: 'eu-gdpr',
+        record_type: 'instrument',
+        owner_reviewer: 'Independent Human Owner',
+        owner_decision: 'approved',
+        owner_reviewed_at: '2026-08-07T09:00:00+09:00',
+        official_source: 'https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32016R0679',
+        source_reference: 'EUR-Lex CELEX 32016R0679',
+        provision_inheritance: false,
+        prepared_by: 'Codex',
+        scope_note: 'Test approval scoped only to the exact eu-gdpr instrument revision.',
+        record_sha256: publicationRecordSha256(reviewedRecord, reviewedSources),
+      }],
+    };
     expect(ds.instruments.some((record) => record.review_status === 'in_review')).toBe(true);
     expect(ds.provisions.some((record) => record.review_status === 'in_review')).toBe(true);
-    expect(checkProductionPublicationGate(ds, r.controls, r.controlMaps, 'production')).toEqual([]);
+    expect(checkProductionPublicationGate(ds, r.controls, r.controlMaps, 'production')).toContainEqual(
+      expect.objectContaining({ rule: 'R8-stale-approval', entity: 'eu-gdpr' }),
+    );
+    expect(checkProductionPublicationGate(ds, r.controls, r.controlMaps, 'production', revisionBoundLog)).toEqual([]);
     expect(checkProductionPublicationGate(ds, r.controls, r.controlMaps, 'preview')).toEqual([]);
   });
 });

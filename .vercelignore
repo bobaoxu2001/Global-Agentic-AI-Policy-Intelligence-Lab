@@ -1,0 +1,21 @@
+node_modules/
+.next/
+.git/
+.vercel/
+out/
+dist/
+coverage/
+playwright-report/
+test-results/
+*.log
+.DS_Store
+.env
+.env.local
+tsconfig.tsbuildinfo
+
+# Keep the deployment source focused on the web app and its generated public
+# artifacts. Local visual QA and presentation media are not used by the build.
+design/screenshots/
+docs/deliverables/*.mp4
+docs/deliverables/*.srt
+docs/deliverables/*.inspect.ndjson

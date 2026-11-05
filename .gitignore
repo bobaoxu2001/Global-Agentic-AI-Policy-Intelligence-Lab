@@ -10,4 +10,12 @@ coverage/
 playwright-report/
 test-results/
 tsconfig.tsbuildinfo
+
+# Local visual QA and private presentation media
+design/screenshots/
+docs/deliverables/*.mp4
+docs/deliverables/*.srt
+docs/deliverables/*.inspect.ndjson
+docs/deliverables/AI_POLICY_ATLAS_VIDEO_TALK_TRACK.md
+docs/deliverables/SECOND_ROUND_INTERVIEW_QA_*.md
 .vercel

@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import type { Control, ControlProvisionMap } from '../../lib/schemas';
 import {
   checkProductionPublicationGate,
+  publicationRecordSha256,
   type Dataset,
 } from '../../lib/validation/integrity';
 import { loadAndValidate } from '../../lib/validation/loadDataset';
@@ -13,6 +14,7 @@ interface ApprovalOverrides {
   owner_decision?: 'approved' | 'returned_for_revision' | 'blocked';
   owner_reviewed_at?: string;
   prepared_by?: string;
+  record_sha256?: string;
 }
 
 const approvedDecision = (recordId: string, recordType: RecordType, overrides: ApprovalOverrides = {}) => ({
@@ -174,6 +176,88 @@ describe('independent owner approval gate', () => {
     );
 
     expect(errors.some((error) => error.rule === 'R8-owner-log')).toBe(true);
+  });
+
+  it('rejects a historical approval that is not bound to a record revision', () => {
+    const production = loadAndValidate('production');
+    const dataset = withPublishedInstrument(production.dataset);
+    const log = { decisions: [approvedDecision('eu-gdpr', 'instrument')] };
+
+    expect(checkProductionPublicationGate(dataset, production.controls, production.controlMaps, 'production', log)).toContainEqual(
+      expect.objectContaining({ rule: 'R8-stale-approval', entity: 'eu-gdpr' }),
+    );
+  });
+
+  it('accepts an independent approval bound to the exact current record revision', () => {
+    const production = loadAndValidate('production');
+    const reviewedRecord = production.dataset.instruments.find((record) => record.id === 'eu-gdpr')!;
+    const reviewedSources = production.dataset.sources.filter((source) => reviewedRecord.source_ids.includes(source.id));
+    const dataset = withPublishedInstrument(production.dataset);
+    const log = {
+      decisions: [
+        approvedDecision('eu-gdpr', 'instrument', {
+          record_sha256: publicationRecordSha256(reviewedRecord, reviewedSources),
+        }),
+      ],
+    };
+
+    expect(checkProductionPublicationGate(dataset, production.controls, production.controlMaps, 'production', log)).toEqual([]);
+  });
+
+  it('invalidates approval when substantive content changes after review', () => {
+    const production = loadAndValidate('production');
+    const reviewedRecord = production.dataset.instruments.find((record) => record.id === 'eu-gdpr')!;
+    const reviewedSources = production.dataset.sources.filter((source) => reviewedRecord.source_ids.includes(source.id));
+    const dataset = withPublishedInstrument({
+      ...production.dataset,
+      instruments: production.dataset.instruments.map((record) =>
+        record.id === 'eu-gdpr'
+          ? { ...record, summary_md: `${record.summary_md} Post-review edit.` }
+          : record,
+      ),
+    });
+    const log = {
+      decisions: [
+        approvedDecision('eu-gdpr', 'instrument', {
+          record_sha256: publicationRecordSha256(reviewedRecord, reviewedSources),
+        }),
+      ],
+    };
+
+    expect(checkProductionPublicationGate(dataset, production.controls, production.controlMaps, 'production', log)).toContainEqual(
+      expect.objectContaining({ rule: 'R8-stale-approval', entity: 'eu-gdpr' }),
+    );
+  });
+
+  it('produces a stable digest independent of object key order and review status', () => {
+    expect(publicationRecordSha256({ id: 'x', nested: { b: 2, a: 1 }, review_status: 'in_review' })).toBe(
+      publicationRecordSha256({ review_status: 'published', nested: { a: 1, b: 2 }, id: 'x' }),
+    );
+  });
+
+  it('invalidates approval when a referenced source changes after review', () => {
+    const production = loadAndValidate('production');
+    const reviewedRecord = production.dataset.instruments.find((record) => record.id === 'eu-gdpr')!;
+    const reviewedSources = production.dataset.sources.filter((source) => reviewedRecord.source_ids.includes(source.id));
+    const changedDataset: Dataset = {
+      ...withPublishedInstrument(production.dataset),
+      sources: production.dataset.sources.map((source) =>
+        reviewedRecord.source_ids.includes(source.id) ? { ...source, title: `${source.title} changed` } : source,
+      ),
+    };
+    const log = { decisions: [approvedDecision('eu-gdpr', 'instrument', {
+      record_sha256: publicationRecordSha256(reviewedRecord, reviewedSources),
+    })] };
+
+    expect(checkProductionPublicationGate(changedDataset, production.controls, production.controlMaps, 'production', log)).toContainEqual(
+      expect.objectContaining({ rule: 'R8-stale-approval', entity: 'eu-gdpr' }),
+    );
+  });
+
+  it('has a fixed digest vector across runtimes', () => {
+    expect(publicationRecordSha256({ id: 'x', nested: { b: 2, a: 1 }, review_status: 'in_review' })).toBe(
+      '612b0c8701a9315009a222526adc7d9db7bbef603c730e3a1c73a8bea873b96a',
+    );
   });
 });
 
